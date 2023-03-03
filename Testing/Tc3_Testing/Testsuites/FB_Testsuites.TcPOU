@@ -9,7 +9,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	bSave: 				BOOL;
-	sFilePathName:		STRING(255):= 'C:\temp\report.xml';
+	sFilePathName:		STRING(255):= 'C:\agent\_work\report.xml';
 	nTests:				INT;						// Total number of tests in this file
 	nFailures:			INT;						// Total number of failed tests in this file
 	nErrors:			INT;						// Total number of errored tests in this file

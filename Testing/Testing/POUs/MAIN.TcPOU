@@ -1,13 +1,68 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1">
-  <POU Name="MAIN" Id="{7ed92e28-f607-4594-a650-b3f0512f7813}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbTestsuites:	FB_Testsuites;
+	fbTestsuite:	FB_Testsuite(fbTestsuites);
 END_VAR
-]]>
-    </Declaration>
+]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[fbTestsuites();
+fbTestsuite();
+
+CASE fbTestsuite.M_Number() OF
+	E_Testcase.Execute:
+		fbTestsuite.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
+		fbTestsuite.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 1);
+		
+	1:
+		fbTestsuite.P_Assert.M_Equals_REAL(22.11, 22.11, 0.0, 'Equals real 1')
+							.M_Equals_REAL(22.11, 22.22, 0.0, 'Equals real 2');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 2);
+		
+	2:
+		fbTestsuite.P_Assert.M_Equals_BYTE(2#00001111,2#00001111,'Equals byte 1')
+							.M_Equals_BYTE(2#11110000,2#11110000,'Equals byte 2');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 3);
+	
+	3:
+		fbTestsuite.P_Assert.M_Equals_INT(3333,3333,'Equals int 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 4);
+		
+	4:
+		fbTestsuite.P_Assert.M_Equals_DINT(333333,333333,'Equals dint 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 5);
+		
+	5:
+		fbTestsuite.P_Assert.M_Equals_LINT(333333333,333333333,'Equals dint 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 6);
+		
+	6:
+		fbTestsuite.P_Assert.M_Equals_LREAL(22.11, 22.11, 0.0, 'Equals real 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 7);
+		
+	7:
+		fbTestsuite.P_Assert.M_Equals_ANY(fbTestsuite, fbTestsuite, 'Equals any 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 8);
+		
+	8:
+		fbTestsuite.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, 9);
+		
+	9:
+		fbTestsuite.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
+		fbTestsuite.M_Testcase('FB_Assert', 0.01, E_Testcase.Done);
+	
+	E_Testcase.Done:;
+	
+END_CASE]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="498" Count="1" />
+      <LineId Id="501" Count="46" />
+      <LineId Id="80" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

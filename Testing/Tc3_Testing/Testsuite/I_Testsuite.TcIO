@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Testsuite" Id="{be1b8503-88c7-00d0-316f-5b2753f7b610}">
+    <Declaration><![CDATA[INTERFACE I_Testsuite EXTENDS I_Testbase
+]]></Declaration>
+    <Property Name="P_Assertions" Id="{592ea10d-e304-0be1-2ca9-b718e1bb8709}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
+      <Get Name="Get" Id="{167fc972-868f-07ff-0df6-5c8fbbafb0ec}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Errors" Id="{d81823f9-f404-01b7-05bf-8e15a401d543}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Errors : int]]></Declaration>
+      <Get Name="Get" Id="{66593c04-dc5d-025c-2e4b-d15d0cd4d037}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Failures" Id="{917df731-91c8-009f-256a-584de2d1943f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Failures : int]]></Declaration>
+      <Get Name="Get" Id="{13e47927-db5e-0662-033a-00390df5b562}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_File" Id="{bb667d1a-7641-01af-115e-dad5d58eeeb6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_File : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{0987e319-b31e-02d0-11f9-c85c651a4a3a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{8d03ead8-bfec-0c00-3960-89537ab0d853}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Skipped" Id="{39fbdb3e-86fe-0711-31f2-83215633aa4f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : int]]></Declaration>
+      <Get Name="Get" Id="{30715938-b42c-02a4-25f6-1f41efc18665}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Tests" Id="{39a38ba9-e262-08af-172f-beb45ec34a85}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Tests : int]]></Declaration>
+      <Get Name="Get" Id="{215f9cb0-0610-001b-059c-7a303c71b9aa}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Testsuites" Id="{ce596137-6309-09c7-2963-0034078d2ff5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Testsuites : I_Testsuites]]></Declaration>
+      <Get Name="Get" Id="{75a0f9d5-da48-0c4c-1816-fb93837427e3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{5cf58004-cd53-0309-17a5-e0bc7522c4fb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Time" Id="{c6aa324d-dcec-0fb7-29ce-a6a764884bdf}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Time : LREAL]]></Declaration>
+      <Get Name="Get" Id="{724e0ce4-d387-0861-0358-a63e1bba51c3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{3208e591-5717-0959-1457-8475838628e3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Timestamp" Id="{88083642-b2c3-0152-1ed9-0e2fb12145fd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Timestamp : String(39)]]></Declaration>
+      <Get Name="Get" Id="{1f62dac4-2539-0718-378b-6b2a098b196c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{56bdb73c-92ec-0add-0b26-48a44ae6f8ee}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

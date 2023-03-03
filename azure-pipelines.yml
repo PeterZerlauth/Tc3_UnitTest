@@ -3,17 +3,26 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
 
-pool:
-  vmImage: ubuntu-latest
+trigger:
+- '*'
+
+pool: 'Default'    # self-hosted agent  
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- checkout: self
+  displayName: 'Checkout'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: CmdLine@2
+  displayName: Build twincat 3 library 
+  condition: succeeded()
+  inputs:
+        failOnStderr: true
+        script: '"C:\source\repos\TcRelease\TcRelease.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(System.DefaultWorkingDirectory)"'
+        
+- task: PublishTestResults@2
+  displayName: Publish results
+  condition: or(succeeded(),failed())
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '"C:\temp\report.xml"'

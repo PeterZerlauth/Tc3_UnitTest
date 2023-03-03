@@ -5,7 +5,7 @@
     <ProjectGuid>{b3eb4a32-4bd3-4997-92f6-694ec306d617}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Testing</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
@@ -15,6 +15,9 @@
     <Implicit_KindOfTask>{6154e8e8-8733-4b52-872b-68feed22484e}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{6c32d92b-9775-4fcc-9958-e64d6d0b3055}</Implicit_Jitter_Distribution>
     <LibraryReferences>{d67c1c95-0f7f-4e60-8530-c7dfae11cfe3}</LibraryReferences>
+    <ObjectRepresentation>base64</ObjectRepresentation>
+    <Released>false</Released>
+    <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
@@ -45,12 +48,27 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Testing">
       <DefaultResolution>Tc3_Testing, * (Zerlauth)</DefaultResolution>
+      <Namespace>Tc3_Testing</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Testing.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="Tc2_Standard">
+      <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_System">
+      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_Module">
+      <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_Testing">
+      <Resolution>Tc3_Testing, * (Zerlauth)</Resolution>
+    </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

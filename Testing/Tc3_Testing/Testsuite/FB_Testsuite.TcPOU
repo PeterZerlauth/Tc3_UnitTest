@@ -48,8 +48,7 @@ VAR_INPUT
 	iTestsuites:		I_Testsuites;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[SUPER^.FB_init(bInitRetains, bInCopyCode);
-THIS^.iTestsuites:= iTestsuites;
+        <ST><![CDATA[THIS^.iTestsuites:= iTestsuites;
 if testsuite = null then
 	fbXml.NewDocument();
 	testsuite:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuite');			//	name        Name of the test suite (e.g. class name or folder name) 
@@ -102,7 +101,7 @@ VAR
 	testcase:			PVOID;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbTestcase.P_Name:= sInstanceName;
+        <ST><![CDATA[fbTestcase.P_Name:= sName;
 fbTestcase.P_Classname:= Classname;
 fbTestcase.P_Assertions:= fbAssert.P_Assertions;
 fbTestcase.P_Line:= fbTestcase.P_Number;
@@ -329,7 +328,6 @@ END_VAR
       <LineId Id="122" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.FB_init">
-      <LineId Id="7" Count="0" />
       <LineId Id="10" Count="0" />
       <LineId Id="41" Count="1" />
       <LineId Id="44" Count="0" />

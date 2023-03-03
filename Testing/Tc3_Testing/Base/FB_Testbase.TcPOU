@@ -11,7 +11,6 @@ VAR
     {attribute 'noinit'}
     {attribute 'hide'} 
     sInstancePath:		STRING(255);
-	sInstanceName:		STRING(255);
 	sName:				STRING(255):= 'test-run'; 	// Name OF the entire test run
 	sTimestamp:			STRING(39);						// timestamp   Date and time of when the test suite was executed (in ISO 8601 format)  
     {attribute 'hide'} 
@@ -35,7 +34,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[sInstanceName:= M_GetName(sInstancePath);
+        <ST><![CDATA[sName:= M_GetName(sInstancePath);
 fbTask();]]></ST>
       </Implementation>
     </Method>

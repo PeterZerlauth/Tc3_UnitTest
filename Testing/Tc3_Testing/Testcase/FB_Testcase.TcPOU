@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Testcase" Id="{8a94cda9-7d7f-4f18-843a-69c57a60ec24}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Testcase IMPLEMENTS I_Testcase
+VAR_INPUT
+	nNumber:			INT:= E_Testcase.Stopped;
+	sName:				STRING(255);	//	name        The name of this test case, often the method name  
+	sClassname:			STRING(255);	//	classname   The name of the parent class/folder, often the same as the suite's name
+	nAssertions:		INT; 			//	assertions  Number of assertions checked during test case execution  
+	fTime:				LREAL;			//	time        Execution time of the test in seconds            
+	sFile:				STRING(255);	//	file        Source code file of this test case              
+	nLine:				INT;			//	line        Source code line number of the start of this test case  	
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Switch" Id="{1c98ed0f-b19e-47ad-9b6d-976810c9e896}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Switch
+VAR_INPUT
+	Next:				INT;			// Next test case
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sName:= '';
+sClassname:= '';
+nAssertions:= 0;
+fTime:= 0.0;
+sFile:= '';
+nLine:= 0;
+nNumber:= Next;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Assertions" Id="{686f81f2-34eb-4b3b-81a3-02e245ca80f9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : INT]]></Declaration>
+      <Get Name="Get" Id="{9617c176-29fa-45a0-b937-39e6e799cde0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Assertions:= nAssertions;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{ad1111a1-fe21-4e8b-9000-85ad29de187a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nAssertions:= P_Assertions;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Classname" Id="{390cee0a-010d-4204-b1b1-9129bc6413c1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Classname : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{2688e1f2-e3e8-4245-80d2-74b152c9ca9c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Classname:= sClassname;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{55b3dd43-1cda-4eae-b750-9bc915384faa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sClassname:= P_Classname;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_File" Id="{b2c2210b-f780-4e46-81e5-f39e00341986}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_File : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{8edcc67f-7ccd-4392-84e3-e6479a44e142}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_File:= sFile;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{5763219c-f732-4b54-8014-5903946a2a6a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sFile:= P_File;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Line" Id="{cc49a74c-be9b-4859-a563-dba1e6ecf2da}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Line : INT]]></Declaration>
+      <Get Name="Get" Id="{c3e11b66-8047-4b92-9339-469885dbdc1b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Line:= nLine;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{42183ec2-002d-43e0-9f41-3cf0c99bb621}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nLine:= P_Line;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Name" Id="{f64f135e-18bc-4bda-a3f6-2563788f034f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Name : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{c2f5088a-1ba2-4d42-83a7-dbed764bd892}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Name:= sName;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d7365e50-2600-4659-b7f7-8e28548f6d09}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sName:= P_Name;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Number" Id="{a5d185c8-a21f-418f-b65c-f3bb459e57ca}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Number : Int]]></Declaration>
+      <Get Name="Get" Id="{3a4e05cd-0a11-46d0-8882-d1094443319f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Number:= nNumber;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c54591f4-5e3a-43eb-a3ff-0ba3a1e50fa1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nNumber:= P_Number;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Time" Id="{2fdcf9da-b796-4097-9b53-b145e25f0025}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Time : Lreal]]></Declaration>
+      <Get Name="Get" Id="{0ce03ffb-e6ea-4959-b011-cc36e6dcb2d1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Time:= fTime;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9d548146-a437-4646-96bb-98cf58cefe79}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[fTime:= P_Time;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_Testcase">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.M_Switch">
+      <LineId Id="5" Count="5" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Assertions.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Assertions.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Classname.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Classname.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_File.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_File.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Line.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Line.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Name.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Name.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Number.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Number.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Time.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testcase.P_Time.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Testcase" Id="{d6aefe59-ca3d-49e1-a6bf-79f867e8333a}">
+    <Declaration><![CDATA[INTERFACE I_Testcase
+]]></Declaration>
+    <Property Name="P_Assertions" Id="{34403173-0a13-48ae-ac84-db35b3854a05}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : INT]]></Declaration>
+      <Get Name="Get" Id="{587bfa9d-0d29-49fc-be20-da9579a65929}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{c685f447-152b-4101-9486-6ccf15cd104a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Classname" Id="{1db564d9-be3b-4750-ad3a-d5299be65e37}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Classname : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{c7b15dd2-08ce-4f2d-8d2c-b4a79b8cd3bd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{794b212c-5360-4f7a-be32-f956c8f0817e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_File" Id="{a36a4876-edee-4a5e-b7c6-05d69ecfd340}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_File : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{95201610-ddd6-4fbd-9f45-4eac45e12201}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{3d7a6e08-40a1-4451-816a-edffd27b0d88}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Line" Id="{4f33ff2f-8151-47c9-aea1-e6a96f64f1cd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Line : INT]]></Declaration>
+      <Get Name="Get" Id="{18e39094-cd66-4fe9-adce-aedb77d76f93}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{0a4686c5-ac45-4db7-aa2b-dac08603737e}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Name" Id="{a9cfe14c-c27f-476a-ba9a-4cd5c32312a5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Name : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{9541b24e-9ffd-4991-b380-cbc6ac841c94}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{f14de536-4cf5-49ae-8677-507c742572c5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_Time" Id="{149a4e6e-6fc5-42b5-9779-2f53e36c6729}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Time : Lreal]]></Declaration>
+      <Get Name="Get" Id="{adaa7ae7-479a-40d2-bd13-8b0a1a902041}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{a3376813-a59c-4e10-a053-6f0b7c2ff0e3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+  </Itf>
+</TcPlcObject>

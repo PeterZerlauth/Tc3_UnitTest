@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Assert" Id="{b4f88ed5-c1d6-0e0a-0598-db946561ba17}">
+    <Declaration><![CDATA[INTERFACE I_Assert
+]]></Declaration>
+    <Method Name="M_Equals_ANY" Id="{3fc096e7-86c9-44f3-a206-472563f4153f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
+VAR_INPUT
+	Expected:			ANY;
+    Actual:				ANY;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_BOOL" Id="{20ff750d-b30d-4f5f-8423-4ded171d3cd6}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_BOOL : I_Assert
+VAR_INPUT
+	Expected:			BOOL;
+    Actual:				BOOL;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_BYTE" Id="{5bd1529d-7a07-437d-997b-293b93a808f6}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_BYTE : I_Assert
+VAR_INPUT
+	Expected:			BYTE;
+    Actual:				BYTE;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_DINT" Id="{90c9be2b-042a-481e-8db3-ec5c48ce047f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_DINT : I_Assert
+VAR_INPUT
+	Expected:			DINT;
+    Actual:				DINT;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_INT" Id="{00f5ca25-961e-40f4-a702-d6bba94686af}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_INT : I_Assert
+VAR_INPUT
+	Expected:			INT;
+    Actual:				INT;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_LINT" Id="{ef90d0f1-9155-4c59-bb8c-00dc044423bf}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_LINT : I_Assert
+VAR_INPUT
+	Expected:			LINT;
+    Actual:				LINT;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_LREAL" Id="{1db37392-f9e3-4e3e-a14c-8919e2dcb561}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_LREAL : I_Assert
+VAR_INPUT
+	Expected:			LREAL;
+    Actual:				LREAL;
+	Tolerance:			LREAL;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_REAL" Id="{e82016a2-5c9d-4289-a11c-c43e561fe18a}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_REAL : I_Assert
+VAR_INPUT
+	Expected:			REAL;
+    Actual:				REAL;
+	Tolerance:			REAL;
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_STRING" Id="{3f101efa-6f27-4e2c-bb04-f19ede1e56d0}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_STRING : I_Assert
+VAR_INPUT
+	Expected:			STRING(255);
+    Actual:				STRING(255);
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

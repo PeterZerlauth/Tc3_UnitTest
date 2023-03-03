@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Testsuites" Id="{f57812b9-99c8-4f64-b54a-807a33ca5cc6}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'} 
+FUNCTION_BLOCK PUBLIC FB_Testsuites EXTENDS FB_Testbase IMPLEMENTS I_Testsuites
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bSave: 				BOOL;
+	sFilePathName:		STRING(255):= 'C:\temp\report.xml';
+	nTests:				INT;						// Total number of tests in this file
+	nFailures:			INT;						// Total number of failed tests in this file
+	nErrors:			INT;						// Total number of errored tests in this file
+	nSkipped:			INT;						// Total number of skipped tests in this file
+	nAssertions:		INT;						// Total number of assertions for all tests in this file
+	fTime:				LREAL;						// Aggregated time of all tests in this file in seconds
+	fbXml:				FB_XmlDomParser;
+	testsuites:			PVOID;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();
+
+fbXml.SaveDocumentToFile(sFilePathName, bSave,);]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{101bd456-7960-4ad1-8758-ca1a188bf587}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[testsuites:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuites');
+fbXml.AppendAttribute(testsuites, 'name', sName);					// name        Name of the entire test run  
+fbXml.AppendAttributeAsInt(testsuites, 'tests', nTests);			// tests       Total number of tests in this file    
+fbXml.AppendAttributeAsInt(testsuites, 'failures', nFailures);		// failures    Total number of failed tests in this file 
+fbXml.AppendAttributeAsInt(testsuites, 'errors', nErrors);			// errors      Total number of errored tests in this file     
+fbXml.AppendAttributeAsInt(testsuites, 'skipped', nSkipped);		// skipped     Total number of skipped tests in this file    
+fbXml.AppendAttributeAsInt(testsuites, 'assertions', nAssertions);	// assertions  Total number of assertions for all tests in this file    
+fbXml.AppendAttributeAsDouble(testsuites, 'time', fTime);			// time        Aggregated time of all tests in this file in seconds     
+fbXml.AppendAttribute(testsuites, 'timestamp', sTimestamp);			// timestamp   Date and time of when the test run was executed (in ISO 8601
+fbGetTime.START:= true;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Save" Id="{fb83c9f4-c3ad-4fc9-8cd4-87aa9bf5750e}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Save : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bSave:= TRUE;
+M_Save:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Update" Id="{769029b6-29b7-4abf-a603-6f457c06dc4a}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Update : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbXml.SetAttribute(fbXml.Attribute(testsuites, 'name'), sName);					
+fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'tests'), nTests);			
+fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'failures'), nFailures);		
+fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'errors'), nErrors);			
+fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'skipped'), nSkipped);		
+fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'assertions'), nAssertions);	
+fbXml.SetAttributeAsDouble(fbXml.Attribute(testsuites, 'time'), fTime);			
+fbXml.SetAttribute(fbXml.Attribute(testsuites, 'timestamp'), sTimestamp);	]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Assertions" Id="{d4fbb760-4981-42de-8df3-8f9cd9af38b9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
+      <Get Name="Get" Id="{779a287e-cbd2-4e91-b15f-d86ea7afd37f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Assertions:= nAssertions;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{49507585-c004-47ba-9acd-02410da8702e}">
+        <Declaration><![CDATA[VAR
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nAssertions:= P_Assertions;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Errors" Id="{b3775d38-9303-4f05-9047-bbc353c3c66e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Errors : int]]></Declaration>
+      <Get Name="Get" Id="{12efaccd-649a-4a75-b9f8-17e37ba0355a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Errors:= nErrors;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d69e0ec4-1abc-42ce-b28a-c1e473c1b83c}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nErrors:= P_Errors;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Failures" Id="{296bf10c-682f-4014-9354-e952e031dad9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Failures : int]]></Declaration>
+      <Get Name="Get" Id="{6785139d-964b-44b1-b9e0-ab18eb685270}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Failures:= nFailures;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b50c8113-1fba-4411-a39a-d9c84aa1fbd5}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nFailures:= P_Failures;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_FilePathName" Id="{fa402641-df59-4c1a-b4ce-7b42e78cc0f8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_FilePathName : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{90935f4c-f87c-41f8-a20e-43d5ca934ee1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_FilePathName:= sFilePathName;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{9b356a4b-4009-483a-9f7a-8121b782df78}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sFilePathName:= P_FilePathName;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Skipped" Id="{6ad8cf88-7e66-4a5c-b681-17a7313fedd6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : int]]></Declaration>
+      <Get Name="Get" Id="{7ae554cf-7aca-487c-8d6a-d51d8b7609a1}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Skipped:= nSkipped;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b0a1535d-2ed2-46e4-8d62-ee38f1acdd65}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nSkipped:= P_Skipped;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Tests" Id="{765fe6b9-03f0-44e3-a4b7-9dfabc59db63}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Tests : int]]></Declaration>
+      <Get Name="Get" Id="{ff1e8598-b587-4bc3-99c9-72ea61b4b81e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Tests:= nTests;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{af5d78b9-ed5a-440d-b94e-c4a18461c9f5}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nTests:= P_Tests;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="P_Testsuites" Id="{f2a6398c-ac69-40e4-8b82-8737a71f106c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Testsuites : PVOID]]></Declaration>
+      <Get Name="Get" Id="{28bbe648-4263-4159-9a6f-7286c530d653}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Testsuites:= testsuites;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Testsuites">
+      <LineId Id="9" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="29" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.FB_init">
+      <LineId Id="10" Count="0" />
+      <LineId Id="26" Count="6" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="38" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.M_Save">
+      <LineId Id="15" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.M_Update">
+      <LineId Id="59" Count="6" />
+      <LineId Id="50" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Assertions.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Assertions.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Errors.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Errors.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Failures.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Failures.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_FilePathName.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_FilePathName.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Skipped.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Skipped.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Tests.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Tests.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Testsuites.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

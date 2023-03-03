@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Testbase" Id="{83180dff-a34f-4cb4-bb72-3f658f1a77bc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Testbase IMPLEMENTS I_Testbase
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	{attribute 'instance-path'} 
+    {attribute 'noinit'}
+    {attribute 'hide'} 
+    sInstancePath:		STRING(255);
+	sInstanceName:		STRING(255);
+	sName:				STRING(255):= 'test-run'; 	// Name OF the entire test run
+	sTimestamp:			STRING(39);						// timestamp   Date and time of when the test suite was executed (in ISO 8601 format)  
+    {attribute 'hide'} 
+	fbTask:				GETCURTASKINDEX;
+	fbGetTime:			NT_GetTime;
+	fCycleTime: 		LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbGetTime();
+fbGetTime.START:= FALSE;
+sTimestamp:= SYSTEMTIME_TO_ISO8601(fbGetTime.TIMESTR, 0, FALSE, 3);
+fCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;
+]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{8cb666de-b09a-4fed-9912-648ece65d792}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sInstanceName:= M_GetName(sInstancePath);
+fbTask();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_GetName" Id="{7644e4a6-816c-4e95-a1be-94a500976a8c}">
+      <Declaration><![CDATA[METHOD INTERNAL M_GetName : STRING(255)
+VAR_INPUT
+	sInstancePath:		STRING(255);
+END_VAR
+VAR
+    sName:				STRING(255);
+    nPosition:			INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sName := CONCAT(TwinCAT_SystemInfoVarList._AppInfo.ProjectName, '.');
+
+nPosition := FIND(sInstancePath, sName);
+
+IF nPosition > 0 THEN
+    M_GetName:= DELETE(sInstancePath, nPosition-1 + LEN(sName), 1);
+END_IF
+
+nPosition := FIND(sInstancePath, sName);
+
+IF nPosition > 0 THEN
+    M_GetName:= DELETE(M_GetName, nPosition - 1 + LEN(sName), 1);
+END_IF
+
+nPosition:= FIND(STR1 := M_GetName, '.');
+M_GetName:= RIGHT(STR := M_GetName, LEN(STR := M_GetName) - nPosition);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Name" Id="{c5aac273-51f0-4149-8f97-3d72a5185d55}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Name : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{eebe96a7-e04a-4029-8470-d5af4885b0b7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Name:= sName;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{f57ff526-3c66-4684-8e36-c365a8fe42f2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sName:= P_Name;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_Testbase">
+      <LineId Id="25" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="44" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Testbase.FB_init">
+      <LineId Id="7" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Testbase.M_GetName">
+      <LineId Id="10" Count="14" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testbase.P_Name.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testbase.P_Name.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -18,11 +18,11 @@ steps:
   condition: succeeded()
   inputs:
         failOnStderr: true
-        script: '"C:\source\repos\TcRelease\TcRelease.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(System.DefaultWorkingDirectory)"'
+        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(System.DefaultWorkingDirectory)"'
         
 - task: PublishTestResults@2
   displayName: Publish results
   condition: or(succeeded(),failed())
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '"C:\temp\report.xml"'
+    testResultsFiles: '"$(System.DefaultWorkingDirectory)\report.xml"'

@@ -107,6 +107,7 @@ END_VAR]]></Declaration>
 			nSkipped:= nSkipped + fbList.M_Get(nIndex).P_Skipped;
 			nAssertions:= nAssertions + fbList.M_Get(nIndex).P_Assertions;
 			fTime:= fTime +  fbList.M_Get(nIndex).P_Time;
+			fbXml.AppendCopy(testsuites, fbList.M_Get(nIndex).P_Node);
 			nIndex:= nIndex + 1;
 		END_WHILE
 		nState:= 1;
@@ -316,6 +317,7 @@ END_VAR
       <LineId Id="6" Count="1" />
       <LineId Id="42" Count="0" />
       <LineId Id="49" Count="5" />
+      <LineId Id="73" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="48" Count="0" />

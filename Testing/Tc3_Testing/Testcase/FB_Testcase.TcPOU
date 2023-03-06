@@ -18,22 +18,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="M_Switch" Id="{1c98ed0f-b19e-47ad-9b6d-976810c9e896}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Switch
-VAR_INPUT
-	Next:				INT;			// Next test case
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[sName:= '';
-sClassname:= '';
-nAssertions:= 0;
-fTime:= 0.0;
-sFile:= '';
-nLine:= 0;
-nNumber:= Next;]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="P_Assertions" Id="{686f81f2-34eb-4b3b-81a3-02e245ca80f9}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : INT]]></Declaration>
       <Get Name="Get" Id="{9617c176-29fa-45a0-b937-39e6e799cde0}">
@@ -169,10 +153,6 @@ END_VAR
     </Property>
     <LineIds Name="FB_Testcase">
       <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testcase.M_Switch">
-      <LineId Id="5" Count="5" />
-      <LineId Id="19" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testcase.P_Assertions.Get">
       <LineId Id="2" Count="0" />

@@ -30,6 +30,12 @@
         <Declaration><![CDATA[]]></Declaration>
       </Set>
     </Property>
+    <Property Name="P_Node" Id="{d1da4fb8-4f9d-0cf2-2e8e-cd3cc44c27e2}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Node : PVOID]]></Declaration>
+      <Get Name="Get" Id="{9e7d7a22-e1de-0d81-2218-f4c356b34cb8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="P_Skipped" Id="{39fbdb3e-86fe-0711-31f2-83215633aa4f}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : int]]></Declaration>
       <Get Name="Get" Id="{30715938-b42c-02a4-25f6-1f41efc18665}">

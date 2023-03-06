@@ -15,57 +15,57 @@ fbTestsuites.fbList.M_Add(fbTestsuite2);
 fbTestsuite1();
 fbTestsuite2();
 
-CASE fbTestsuite2.M_Number() OF
+CASE fbTestsuite2.P_Testcase OF
 	E_Number.Start:
 		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite2.M_Testcase('FB_Assert', 0.01, E_Number.Done);
+		fbTestsuite2.M_Testcase('FB_Assert', T#1S, E_Number.Done);
 	E_Number.Done:;
 END_CASE
 
-CASE fbTestsuite1.M_Number() OF
+CASE fbTestsuite1.P_Testcase OF
 	E_Number.Start:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite1.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 1);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 1);
 		
 	1:
 		fbTestsuite1.P_Assert.M_Equals_REAL(22.11, 22.11, 0.0, 'Equals real 1')
 							.M_Equals_REAL(22.11, 22.22, 0.0, 'Equals real 2');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 2);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 2);
 		
 	2:
 		fbTestsuite1.P_Assert.M_Equals_BYTE(2#00001111,2#00001111,'Equals byte 1')
 							.M_Equals_BYTE(2#11110000,2#11110000,'Equals byte 2');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 3);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 3);
 	
 	3:
 		fbTestsuite1.P_Assert.M_Equals_INT(3333,3333,'Equals int 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 4);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 4);
 		
 	4:
 		fbTestsuite1.P_Assert.M_Equals_DINT(333333,333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 5);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 5);
 		
 	5:
 		fbTestsuite1.P_Assert.M_Equals_LINT(333333333,333333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 6);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 6);
 		
 	6:
 		fbTestsuite1.P_Assert.M_Equals_LREAL(22.11, 22.11, 0.0, 'Equals real 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 7);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 7);
 		
 	7:
 		fbTestsuite1.P_Assert.M_Equals_ANY(fbTestsuite1, fbTestsuite1, 'Equals any 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 8);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 8);
 		
 	8:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, 9);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 9);
 		
 	9:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', 0.01, E_Number.Done);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, E_Number.Done);
 	
 	E_Number.Done:;
 	

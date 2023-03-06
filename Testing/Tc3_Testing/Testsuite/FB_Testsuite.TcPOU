@@ -45,6 +45,7 @@ ELSE
 			nAssertions:= nAssertions + fbAssert.P_Assertions;
 			nTests:= nTests + 1;
 			fbTimeout.IN:= FALSE;
+			nTestcase:= fbTestcase.P_Number;
 		ELSE
 			IF fbTimeout.Q THEN
 				testcase:= fbXml.AppendNode(testsuite, 'testcase');
@@ -62,6 +63,7 @@ ELSE
 				nSkipped:= nSkipped + fbAssert.P_Skipped;
 				fbTimeout.IN:= FALSE;
 				nTests:= nTests + 1;
+				nTestcase:= fbTestcase.P_Number;
 			END_IF
 		END_IF
 END_IF
@@ -314,9 +316,12 @@ END_VAR
       <LineId Id="236" Count="2" />
       <LineId Id="240" Count="10" />
       <LineId Id="278" Count="0" />
+      <LineId Id="281" Count="0" />
       <LineId Id="251" Count="14" />
       <LineId Id="279" Count="0" />
-      <LineId Id="266" Count="2" />
+      <LineId Id="266" Count="0" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="267" Count="1" />
       <LineId Id="231" Count="2" />
       <LineId Id="211" Count="0" />
       <LineId Id="122" Count="0" />

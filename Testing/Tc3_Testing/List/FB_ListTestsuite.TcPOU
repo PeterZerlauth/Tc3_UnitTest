@@ -21,6 +21,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[IF pList <> 0 THEN
 	__DELETE(pList);
+	nLength:= 0;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -188,6 +189,7 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_ListTestsuite.FB_exit">
       <LineId Id="3" Count="1" />
+      <LineId Id="9" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Add">

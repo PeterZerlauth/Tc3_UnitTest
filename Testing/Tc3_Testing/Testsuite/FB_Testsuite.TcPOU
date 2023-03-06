@@ -105,7 +105,8 @@ END_VAR]]></Declaration>
 		END_IF
 		
 	1:
-		testsuite:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuite');			//	name        Name of the test suite (e.g. class name or folder name)
+		testsuite:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuite');			
+		fbXml.AppendAttribute(testsuite, 'name', sName);						//	name        Name of the test suite (e.g. class name or folder name)
 		fbXml.AppendAttributeAsInt(testsuite, 'tests', nTests);			//	tests       Total number of tests in this suite          
 		fbXml.AppendAttributeAsInt(testsuite, 'failures', nFailures);	//	failures    Total number of failed tests in this suite   
 		fbXml.AppendAttributeAsInt(testsuite, 'errors', nErrors);		//	errors      Total number of errored tests in this suite 
@@ -341,7 +342,9 @@ END_VAR
       <LineId Id="42" Count="0" />
       <LineId Id="55" Count="0" />
       <LineId Id="39" Count="0" />
-      <LineId Id="94" Count="10" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="95" Count="9" />
       <LineId Id="44" Count="0" />
       <LineId Id="54" Count="0" />
       <LineId Id="43" Count="0" />

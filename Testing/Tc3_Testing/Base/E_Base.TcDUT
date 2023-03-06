@@ -5,11 +5,12 @@
 {attribute 'strict'}
 TYPE E_Base :
 (
+	{attribute 'hide'} 
 	Init 	:= 0,
-	Stopped	:= 1,
 	Starting:= 2,	
 	Started	:= 3,
-	Stopping:= 4
+	Stopping:= 4,
+	Stopped	:= 1
 )USINT;
 END_TYPE
 ]]></Declaration>

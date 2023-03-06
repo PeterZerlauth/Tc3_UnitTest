@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Refactors>
+  <Renames>
+    <RenamedType>
+      <Type guid="7ba18ed6-5c79-0cf4-04b4-5d9d11648e80">E_NUMBER</Type>
+      <From>E_Number</From>
+      <To>E_Testcase</To>
+    </RenamedType>
+  </Renames>
+</Refactors>

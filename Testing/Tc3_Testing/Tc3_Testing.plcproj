@@ -59,7 +59,7 @@
     <Compile Include="List\I_ListTestsuite.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Testcase\E_Number.TcDUT">
+    <Compile Include="Testcase\E_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testcase\FB_Testcase.TcPOU">

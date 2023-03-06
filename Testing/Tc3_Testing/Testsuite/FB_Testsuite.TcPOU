@@ -77,7 +77,7 @@ fbAssert.M_Reset();]]></ST>
 VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Started:= fbTestcase.nNumber = E_Number.Done;
+        <ST><![CDATA[M_Started:= fbTestcase.nNumber = E_Testcase.Done;
 ]]></ST>
       </Implementation>
     </Method>

@@ -16,15 +16,15 @@ fbTestsuite1();
 fbTestsuite2();
 
 CASE fbTestsuite2.P_Testcase OF
-	E_Number.Start:
+	E_Testcase.Start:
 		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite2.M_Testcase('FB_Assert', T#1S, E_Number.Done);
-	E_Number.Done:;
+		fbTestsuite2.M_Testcase('FB_Assert', T#1S, E_Testcase.Done);
+	E_Testcase.Done:;
 END_CASE
 
 CASE fbTestsuite1.P_Testcase OF
-	E_Number.Start:
+	E_Testcase.Start:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite1.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
 		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 1);
@@ -65,9 +65,9 @@ CASE fbTestsuite1.P_Testcase OF
 		
 	9:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, E_Number.Done);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, E_Testcase.Done);
 	
-	E_Number.Done:;
+	E_Testcase.Done:;
 	
 END_CASE]]></ST>
     </Implementation>

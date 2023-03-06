@@ -25,4 +25,4 @@ steps:
   condition: or(succeeded(),failed())
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '"C:\temp\report.xml"'
+    testResultsFiles: '"$(System.DefaultWorkingDirectory)\report.xml"'

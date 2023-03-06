@@ -1,20 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="I_Testsuites" Id="{606cd2f2-cac2-4517-8699-c23aaa0c4b09}">
-    <Declaration><![CDATA[INTERFACE I_Testsuites EXTENDS I_Testbase
+    <Declaration><![CDATA[INTERFACE I_Testsuites EXTENDS I_Base
 ]]></Declaration>
-    <Method Name="M_Save" Id="{743aeeb4-aa89-48de-ade3-4de8b095ba0c}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Save : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_Update" Id="{548eaf7e-6cf5-4fde-902c-7d5be20ae45b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Update : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-    </Method>
     <Property Name="P_Assertions" Id="{2ffb8950-4419-4a69-aabe-41d63563655b}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
       <Get Name="Get" Id="{7784b142-25da-42b8-b970-890654af20b8}">

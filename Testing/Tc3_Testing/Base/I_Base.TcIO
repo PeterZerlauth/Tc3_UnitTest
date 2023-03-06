@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Base" Id="{ada3f4ee-e52c-4b2e-ad47-2676c314edf3}">
+    <Declaration><![CDATA[INTERFACE I_Base extends __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="M_Request" Id="{0f1926ad-fb7a-0886-3826-aeef678c8655}">
+      <Declaration><![CDATA[METHOD M_Request : BOOL
+VAR_INPUT
+	eState:		E_Base;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="P_Name" Id="{28191297-7659-4cca-b8fa-d5c22b1395c0}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Name : STRING(255)]]></Declaration>
+      <Get Name="Get" Id="{bd54a2cd-0fa9-484e-9c8d-9f58bb8389e9}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{fb742643-9971-4b3c-ac1b-cd31488bfda0}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="P_State" Id="{519f0641-a13c-0e6f-16fe-695b8f49bbd7}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_State : E_Base]]></Declaration>
+      <Get Name="Get" Id="{a6309e82-4735-0d58-29bd-fc8c104809a5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

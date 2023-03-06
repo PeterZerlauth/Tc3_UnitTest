@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <Itf Name="I_Testsuite" Id="{be1b8503-88c7-00d0-316f-5b2753f7b610}">
-    <Declaration><![CDATA[INTERFACE I_Testsuite EXTENDS I_Testbase
+    <Declaration><![CDATA[INTERFACE I_Testsuite EXTENDS I_Base
 ]]></Declaration>
     <Property Name="P_Assertions" Id="{592ea10d-e304-0be1-2ca9-b718e1bb8709}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
@@ -41,15 +41,6 @@
       <Get Name="Get" Id="{215f9cb0-0610-001b-059c-7a303c71b9aa}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
-    </Property>
-    <Property Name="P_Testsuites" Id="{ce596137-6309-09c7-2963-0034078d2ff5}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Testsuites : I_Testsuites]]></Declaration>
-      <Get Name="Get" Id="{75a0f9d5-da48-0c4c-1816-fb93837427e3}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-      <Set Name="Set" Id="{5cf58004-cd53-0309-17a5-e0bc7522c4fb}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Set>
     </Property>
     <Property Name="P_Time" Id="{c6aa324d-dcec-0fb7-29ce-a6a764884bdf}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Time : LREAL]]></Declaration>

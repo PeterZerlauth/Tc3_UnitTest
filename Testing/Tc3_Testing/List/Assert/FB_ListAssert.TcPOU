@@ -28,9 +28,7 @@ END_IF]]></ST>
     <Method Name="M_Add" Id="{fc95c475-02ce-0a23-3d94-22fd0ca885a7}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:		ST_Assert;
 END_VAR
 VAR
 	pOldList: 	POINTER TO ST_Assert;
@@ -43,7 +41,7 @@ IF pList = 0 THEN
 	pList:= __NEW(POINTER TO ST_Assert,DINT_TO_UDINT(nLength));
 ELSE
 	// Item already in List
-	IF M_Search(eAssert, sMessage, sType) = -1 THEN
+	IF M_Search(stAssert) = -1 THEN
 		// backup 
 		pOldList:= pList;
 		// new Length
@@ -61,9 +59,9 @@ ELSE
 END_IF
 
 // add new Object
-pList[nLength-1].eAssert:= eAssert;
-pList[nLength-1].sMessage:= sMessage;
-pList[nLength-1].sType:= sType;	
+pList[nLength-1].eAssert:= stAssert.eAssert;
+pList[nLength-1].sMessage:= stAssert.sMessage;
+pList[nLength-1].sType:= stAssert.sType;	
 M_Add:= TRUE;]]></ST>
       </Implementation>
     </Method>
@@ -92,9 +90,7 @@ END_IF]]></ST>
     <Method Name="M_Index" Id="{f499fc6d-d45b-0ca4-2495-d9d9df4f4408}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:	ST_Assert;
 END_VAR
 VAR
 	nIndex: 	DINT;
@@ -103,7 +99,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Index := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex].eAssert = eAssert) AND (pList[nIndex].sMessage = sMessage) AND (pList[nIndex].sType = sType)  THEN
+  IF (pList[nIndex].eAssert = stAssert.eAssert) AND_THEN (pList[nIndex].sMessage = stAssert.sMessage) AND_THEN (pList[nIndex].sType = stAssert.sType) AND_THEN (pList[nIndex].sData = stAssert.sData) THEN
         M_Index := nIndex;
         RETURN;
     END_IF
@@ -115,9 +111,7 @@ END_WHILE
     <Method Name="M_Remove" Id="{e45f8add-9693-0801-3102-f3924d7fbe37}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:			ST_Assert;
 END_VAR
 VAR
 	pOldList:			POINTER TO ST_Assert;
@@ -127,7 +121,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// First Item
 IF nLength >= 0 THEN
 	// Item already in List
-	nPosition:= M_Search(eAssert, sMessage, sType);
+	nPosition:= M_Search(stAssert);
 	IF nPosition <> -1 THEN
 		// backup 
 		pOldList:= pList;
@@ -155,9 +149,7 @@ M_Remove:= TRUE;]]></ST>
     <Method Name="M_Search" Id="{9af81950-5ba8-0340-3e5f-5b6e67170a1c}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:		ST_Assert;
 END_VAR
 VAR
 	nIndex: 	UINT;
@@ -166,7 +158,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Search := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex].eAssert = eAssert) AND (pList[nIndex].sMessage = sMessage) AND (pList[nIndex].sType = sType) THEN
+    IF (pList[nIndex].eAssert = stAssert.eAssert) AND_THEN (pList[nIndex].sMessage = stAssert.sMessage) AND_THEN (pList[nIndex].sType = stAssert.sType) AND_THEN (pList[nIndex].sData = stAssert.sData) THEN
         M_Search := nIndex;
         RETURN;
     END_IF

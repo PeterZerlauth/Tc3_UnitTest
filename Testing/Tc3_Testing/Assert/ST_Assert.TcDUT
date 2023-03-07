@@ -5,7 +5,8 @@
 STRUCT
 	eAssert:		E_Assert;
 	sMessage:		STRING(255);
-	sType:			STRING(255);	
+	sType:			STRING(255);
+	sData:			STRING(255);	
 END_STRUCT
 END_TYPE
 ]]></Declaration>

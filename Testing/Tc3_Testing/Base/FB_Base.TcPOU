@@ -164,7 +164,6 @@ END_VAR
 		M_Starting:= TRUE;
 	END_IF
 ELSE
-	fCycleTime:= 
 	fbGetTime.START:= TRUE;
 END_IF]]></ST>
       </Implementation>
@@ -187,25 +186,6 @@ END_VAR
         <ST><![CDATA[M_Stopping:= True;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Name" Id="{c5aac273-51f0-4149-8f97-3d72a5185d55}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Name : STRING(255)]]></Declaration>
-      <Get Name="Get" Id="{eebe96a7-e04a-4029-8470-d5af4885b0b7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Name:= sName;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{f57ff526-3c66-4684-8e36-c365a8fe42f2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[sName:= P_Name;]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <Property Name="P_State" Id="{d9e0f669-bd46-078f-1943-fa0edc94c5ef}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_State : E_Base]]></Declaration>
       <Get Name="Get" Id="{0e5b7a2d-df5c-054a-30f6-0a2798994d9f}">
@@ -290,9 +270,7 @@ END_VAR]]></Declaration>
       <LineId Id="31" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="28" Count="0" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="26" Count="0" />
+      <LineId Id="25" Count="1" />
       <LineId Id="24" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Stopped">
@@ -300,12 +278,6 @@ END_VAR]]></Declaration>
     </LineIds>
     <LineIds Name="FB_Base.M_Stopping">
       <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.P_Name.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.P_Name.Set">
-      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.P_State.Get">
       <LineId Id="2" Count="0" />

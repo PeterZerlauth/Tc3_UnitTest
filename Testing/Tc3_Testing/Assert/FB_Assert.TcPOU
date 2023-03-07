@@ -7,6 +7,11 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	sData:					STRING(255);
+	nPassed:				DINT;
+	nSkipped:				DINT;
+	nFailures:				DINT;
+	nErrors:				DINT;
 	fbList:					FB_ListAssert;
 END_VAR]]></Declaration>
     <Implementation>
@@ -19,19 +24,42 @@ VAR_INPUT
     Actual:				ANY;
 	Message:			STRING(255);
 END_VAR
+VAR 
+	stAssert:			ST_Assert;
+END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected.diSize <> Actual.diSize THEN
-	fbList.M_Add(E_Assert.Error, Message, 'ArithmeticError');
+	stAssert.eAssert:= E_Assert.Error;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'ArithmeticError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nErrors:= nErrors + 1;
 	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
-	fbList.M_Add(E_Assert.Error, Message, 'ArithmeticError');
+	stAssert.eAssert:= E_Assert.Error;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'ArithmeticError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nErrors:= nErrors + 1;
 	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 	
 ELSE
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 END_IF
 M_Equals_ANY:= THIS^;]]></ST>
       </Implementation>
@@ -42,12 +70,25 @@ VAR_INPUT
 	Expected:			BOOL;
     Actual:				BOOL;
 	Message:			STRING(255);
+END_VAR
+VAR 
+	stAssert:			ST_Assert;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
       </Implementation>
@@ -59,12 +100,24 @@ VAR_INPUT
     Actual:				BYTE;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
       </Implementation>
@@ -76,12 +129,24 @@ VAR_INPUT
     Actual:				DINT;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_DINT:= THIS^;
 ]]></ST>
@@ -94,12 +159,24 @@ VAR_INPUT
     Actual:				INT;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
       </Implementation>
@@ -111,12 +188,24 @@ VAR_INPUT
     Actual:				LINT;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_LINT:= THIS^;
 ]]></ST>
@@ -130,14 +219,27 @@ VAR_INPUT
 	Tolerance:			LREAL;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
-M_Equals_LREAL:= THIS^;]]></ST>
+M_Equals_LREAL:= THIS^;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals_REAL" Id="{d6abdbdc-3ed4-0597-3832-aa884ad8510e}">
@@ -148,12 +250,24 @@ VAR_INPUT
 	Tolerance:			REAL;
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
       </Implementation>
@@ -165,12 +279,24 @@ VAR_INPUT
     Actual:				STRING(255);
 	Message:			STRING(255);
 END_VAR
-]]></Declaration>
+VAR 
+	stAssert:			ST_Assert;
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF Expected = Actual THEN
-	fbList.M_Add(E_Assert.Passed, Message, '');
+	stAssert.eAssert:= E_Assert.Passed;
+	stAssert.sMessage:= '';
+	stAssert.sType:= '';
+	stAssert.sData:= '';
+	fbList.M_Add(stAssert);
+	nPassed:= nPassed + 1;
 ELSE
-	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	stAssert.eAssert:= E_Assert.Failure;
+	stAssert.sMessage:= Message;
+	stAssert.sType:= 'AssertionError';
+	stAssert.sData:= sData;
+	fbList.M_Add(stAssert);
+	nFailures:= nFailures + 1;
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
@@ -182,6 +308,10 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbList.M_Clear();
+nPassed:= 0;
+nSkipped:= 0;
+nFailures:= 0;
+nErrors:= 0;
 M_Reset:= THIS^;]]></ST>
       </Implementation>
     </Method>
@@ -194,14 +324,7 @@ M_Reset:= THIS^;]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Errors:= 0;
-WHILE nIndex < fbList.P_Length DO
-	stAssert:= fbList.M_Get(nIndex);
-	IF stAssert.eAssert = E_Assert.Error THEN
-		P_Errors:= P_Errors + 1;
-	END_IF
-	nIndex:= nIndex + 1;
-END_WHILE]]></ST>
+          <ST><![CDATA[P_Errors:= nErrors;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -214,14 +337,7 @@ END_WHILE]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Failures:= 0;
-WHILE nIndex < fbList.P_Length DO
-	stAssert:= fbList.M_Get(nIndex);
-	IF stAssert.eAssert = E_Assert.Failure THEN
-		P_Failures:= P_Failures + 1;
-	END_IF
-	nIndex:= nIndex + 1;
-END_WHILE]]></ST>
+          <ST><![CDATA[P_Failures:= nFailures;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -240,19 +356,9 @@ END_VAR
       <Declaration><![CDATA[PROPERTY PUBLIC P_Passed : Dint]]></Declaration>
       <Get Name="Get" Id="{986e49f4-9643-0bf4-0a4b-973e66bdc6aa}">
         <Declaration><![CDATA[VAR
-	nIndex: DINT;
-	stAssert: ST_Assert;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Passed:= 0;
-WHILE nIndex < fbList.P_Length DO
-	stAssert:= fbList.M_Get(nIndex);
-	IF stAssert.eAssert = E_Assert.Error THEN
-		P_Passed:= P_Passed + 1;
-	END_IF
-	nIndex:= nIndex + 1;
-END_WHILE]]></ST>
+          <ST><![CDATA[P_Passed:= nPassed;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -265,14 +371,7 @@ END_WHILE]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Skipped:= 0;
-WHILE nIndex < fbList.P_Length DO
-	stAssert:= fbList.M_Get(nIndex);
-	IF stAssert.eAssert = E_Assert.Skipped THEN
-		P_Skipped:= P_Skipped + 1;
-	END_IF
-	nIndex:= nIndex + 1;
-END_WHILE]]></ST>
+          <ST><![CDATA[P_Skipped:= nSkipped;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -281,99 +380,97 @@ END_WHILE]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_ANY">
       <LineId Id="49" Count="0" />
-      <LineId Id="70" Count="1" />
+      <LineId Id="89" Count="3" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="82" Count="1" />
       <LineId Id="58" Count="0" />
+      <LineId Id="93" Count="3" />
       <LineId Id="57" Count="0" />
       <LineId Id="72" Count="0" />
+      <LineId Id="97" Count="0" />
       <LineId Id="54" Count="0" />
-      <LineId Id="73" Count="0" />
+      <LineId Id="99" Count="3" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="84" Count="0" />
       <LineId Id="75" Count="0" />
       <LineId Id="53" Count="0" />
-      <LineId Id="74" Count="0" />
+      <LineId Id="104" Count="4" />
+      <LineId Id="85" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">
       <LineId Id="5" Count="0" />
+      <LineId Id="57" Count="4" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
+      <LineId Id="49" Count="4" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BYTE">
-      <LineId Id="56" Count="3" />
+      <LineId Id="68" Count="13" />
       <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_DINT">
-      <LineId Id="74" Count="3" />
+      <LineId Id="86" Count="13" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_INT">
-      <LineId Id="55" Count="3" />
+      <LineId Id="67" Count="13" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LINT">
-      <LineId Id="74" Count="3" />
+      <LineId Id="86" Count="13" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LREAL">
-      <LineId Id="107" Count="1" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="149" Count="4" />
+      <LineId Id="108" Count="0" />
       <LineId Id="114" Count="0" />
+      <LineId Id="154" Count="4" />
       <LineId Id="113" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
+      <LineId Id="124" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_REAL">
-      <LineId Id="56" Count="3" />
+      <LineId Id="69" Count="13" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_STRING">
-      <LineId Id="53" Count="3" />
+      <LineId Id="65" Count="13" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Reset">
       <LineId Id="15" Count="0" />
-      <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="3" />
+      <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Errors.Get">
       <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="2" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Failures.Get">
-      <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="2" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="27" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_List.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Passed.Get">
       <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="2" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Skipped.Get">
       <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="2" />
-      <LineId Id="21" Count="1" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="2" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

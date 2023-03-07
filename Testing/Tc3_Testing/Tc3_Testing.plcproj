@@ -38,10 +38,16 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assert\E_Assert.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Assert\FB_Assert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Assert\I_Assert.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assert\ST_Assert.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\E_Base.TcDUT">
@@ -53,22 +59,16 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\E_Assert.TcDUT">
+    <Compile Include="List\Assert\FB_ListAssert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\FB_ListTestsuite.TcPOU">
+    <Compile Include="List\Assert\I_ListAssert.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\FB_ListAssert.TcPOU">
+    <Compile Include="List\Testsuite\FB_ListTestsuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\I_ListTestsuite.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\I_ListAssert.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\ST_Assert.TcDUT">
+    <Compile Include="List\Testsuite\I_ListTestsuite.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testcase\E_Testcase.TcDUT">
@@ -100,6 +100,8 @@
     <Folder Include="Assert" />
     <Folder Include="Base" />
     <Folder Include="List" />
+    <Folder Include="List\Assert" />
+    <Folder Include="List\Testsuite" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />

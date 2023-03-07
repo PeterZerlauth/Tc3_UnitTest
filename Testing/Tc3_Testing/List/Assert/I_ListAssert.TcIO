@@ -3,47 +3,39 @@
   <Itf Name="I_ListAssert" Id="{937c5750-ac4a-0c75-3ddd-b288d095682e}">
     <Declaration><![CDATA[INTERFACE I_ListAssert
 ]]></Declaration>
-    <Method Name="M_Add" Id="{3e064770-ed70-0084-0d0c-06375eeb81ec}">
+    <Method Name="M_Add" Id="{6ad16cc7-b017-0bab-2b40-5397ee9c157a}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:		ST_Assert;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Clear" Id="{45d374a7-42f8-0c31-0d94-2816ec7b6d3b}">
+    <Method Name="M_Clear" Id="{bba33587-4635-0e51-34df-6cda40f7b511}">
       <Declaration><![CDATA[METHOD M_Clear
 ]]></Declaration>
     </Method>
-    <Method Name="M_Get" Id="{a1dcf951-8b9f-0ae7-3dea-0f30a026ed8e}">
+    <Method Name="M_Get" Id="{f342f9bb-7e06-045d-31e4-5b65e4eadfc1}">
       <Declaration><![CDATA[METHOD M_Get : ST_Assert
 VAR_INPUT
 	nIndex: 	DINT;
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Index" Id="{6b7196d0-67ec-0128-2e70-383439634955}">
+    <Method Name="M_Index" Id="{9b12220c-002a-035c-16cb-84cf0e599b36}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:	ST_Assert;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Remove" Id="{093efa55-1aa5-0156-0a6b-89b8a5b4082d}">
+    <Method Name="M_Remove" Id="{a984cbbe-fe04-031f-0e29-e85f98a36766}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:			ST_Assert;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Search" Id="{5c4d0ea8-2862-0b5d-1c53-fda70a30859a}">
+    <Method Name="M_Search" Id="{7d4362ed-7c28-0eaf-0d97-952cb2ab460e}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	eAssert:		E_Assert;
-	sMessage:		STRING(255);
-	sType:			STRING(255);
+	stAssert:		ST_Assert;
 END_VAR]]></Declaration>
     </Method>
     <Property Name="P_Length" Id="{dd1a731e-7c76-0405-3a5b-64fd53e98745}">

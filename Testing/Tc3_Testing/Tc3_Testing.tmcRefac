@@ -26,5 +26,15 @@
       <From>ST_Testsuite_1</From>
       <To>ST_Testsuites</To>
     </RenamedType>
+    <RenamedSymbol>
+      <Type guid="bfd95808-de75-4f07-b2d3-c1c63f315ef8">FB_Assert</Type>
+      <From>nError</From>
+      <To>nErrors</To>
+    </RenamedSymbol>
+    <RenamedSymbol>
+      <Type guid="bfd95808-de75-4f07-b2d3-c1c63f315ef8">FB_Assert</Type>
+      <From>nFailed</From>
+      <To>nFailures</To>
+    </RenamedSymbol>
   </Renames>
 </Refactors>

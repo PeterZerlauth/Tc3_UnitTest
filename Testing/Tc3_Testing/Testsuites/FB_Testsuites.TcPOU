@@ -63,14 +63,14 @@ END_VAR]]></Declaration>
 		
 	1:
 		testsuites:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuites');
-		fbXml.AppendAttribute(testsuites, 'name', sName);					// name        Name of the entire test run  
-		fbXml.AppendAttributeAsInt(testsuites, 'tests', nTests);			// tests       Total number of tests in this file    
-		fbXml.AppendAttributeAsInt(testsuites, 'failures', nFailures);		// failures    Total number of failed tests in this file 
-		fbXml.AppendAttributeAsInt(testsuites, 'errors', nErrors);			// errors      Total number of errored tests in this file     
-		fbXml.AppendAttributeAsInt(testsuites, 'skipped', nSkipped);		// skipped     Total number of skipped tests in this file    
-		fbXml.AppendAttributeAsInt(testsuites, 'assertions', nAssertions);	// assertions  Total number of assertions for all tests in this file    
-		fbXml.AppendAttributeAsDouble(testsuites, 'time', fTime);			// time        Aggregated time of all tests in this file in seconds     
-		fbXml.AppendAttribute(testsuites, 'timestamp', sTimestamp);			// timestamp   Date and time of when the test run was executed (in ISO 8601
+		fbXml.AppendAttribute(testsuites, 'name', stTestsuites.sName);					// name        Name of the entire test run  
+		fbXml.AppendAttributeAsInt(testsuites, 'tests', stTestsuites.nTests);			// tests       Total number of tests in this file    
+		fbXml.AppendAttributeAsInt(testsuites, 'failures', stTestsuites.nFailures);		// failures    Total number of failed tests in this file 
+		fbXml.AppendAttributeAsInt(testsuites, 'errors', stTestsuites.nErrors);			// errors      Total number of errored tests in this file     
+		fbXml.AppendAttributeAsInt(testsuites, 'skipped', stTestsuites.nSkipped);		// skipped     Total number of skipped tests in this file    
+		fbXml.AppendAttributeAsInt(testsuites, 'assertions', stTestsuites.nAssertions);	// assertions  Total number of assertions for all tests in this file    
+		fbXml.AppendAttributeAsDouble(testsuites, 'time', stTestsuites.fTime);			// time        Aggregated time of all tests in this file in seconds     
+		fbXml.AppendAttribute(testsuites, 'timestamp', stTestsuites.sTimestamp);			// timestamp   Date and time of when the test run was executed (in ISO 8601
 		nState:= 2;
 	
 	2:
@@ -90,34 +90,35 @@ END_CASE]]></ST>
       <Declaration><![CDATA[METHOD PROTECTED M_Stopping : BOOL
 VAR_INPUT
 END_VAR
-
 VAR
 	nIndex: DINT;
+	stTestsuite: ST_Testsuite;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE nState OF
 	0:
 		WHILE nIndex < fbList.P_Length DO
-			nTests:= nTests + fbList.M_Get(nIndex).P_Tests;
-			nFailures:= nFailures + fbList.M_Get(nIndex).P_Failures;
-			nErrors:= nErrors + fbList.M_Get(nIndex).P_Errors;
-			nSkipped:= nSkipped + fbList.M_Get(nIndex).P_Skipped;
-			nAssertions:= nAssertions + fbList.M_Get(nIndex).P_Assertions;
-			fTime:= fTime +  fbList.M_Get(nIndex).P_Time;
+			stTestsuite:= fbList.M_Get(nIndex).P_Result;
+			stTestsuites.nTests:= stTestsuites.nTests + stTestsuite.nTests;
+			stTestsuites.nFailures:= stTestsuites.nFailures + stTestsuite.nFailures;
+			stTestsuites.nErrors:= stTestsuites.nErrors + stTestsuite.nErrors;
+			stTestsuites.nSkipped:= stTestsuites.nSkipped + stTestsuite.nSkipped;
+			stTestsuites.nAssertions:= stTestsuites.nAssertions + stTestsuite.nAssertions;
+			stTestsuites.fTime:= stTestsuites.fTime +  stTestsuite.fTime;
 			fbXml.AppendCopy(testsuites, fbList.M_Get(nIndex).P_Node);
 			nIndex:= nIndex + 1;
 		END_WHILE
 		nState:= 1;
 		
 	1:
-		fbXml.SetAttribute(fbXml.Attribute(testsuites, 'name'), sName);					
-		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'tests'), nTests);			
-		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'failures'), nFailures);		
-		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'errors'), nErrors);			
-		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'skipped'), nSkipped);		
-		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'assertions'), nAssertions);	
-		fbXml.SetAttributeAsDouble(fbXml.Attribute(testsuites, 'time'), fTime);			
-		fbXml.SetAttribute(fbXml.Attribute(testsuites, 'timestamp'), sTimestamp);
+		fbXml.SetAttribute(fbXml.Attribute(testsuites, 'name'), stTestsuites.sName);					
+		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'tests'), stTestsuites.nTests);			
+		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'failures'), stTestsuites.nFailures);		
+		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'errors'), stTestsuites.nErrors);			
+		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'skipped'), stTestsuites.nSkipped);		
+		fbXml.SetAttributeAsInt(fbXml.Attribute(testsuites, 'assertions'), stTestsuites.nAssertions);	
+		fbXml.SetAttributeAsDouble(fbXml.Attribute(testsuites, 'time'), stTestsuites.fTime);			
+		fbXml.SetAttribute(fbXml.Attribute(testsuites, 'timestamp'), stTestsuites.sTimestamp);
 		nState:= 2;
 	
 	2:
@@ -176,6 +177,7 @@ END_CASE]]></ST>
     <LineIds Name="FB_Testsuites.M_Stopping">
       <LineId Id="6" Count="1" />
       <LineId Id="42" Count="0" />
+      <LineId Id="81" Count="0" />
       <LineId Id="49" Count="5" />
       <LineId Id="73" Count="0" />
       <LineId Id="44" Count="0" />

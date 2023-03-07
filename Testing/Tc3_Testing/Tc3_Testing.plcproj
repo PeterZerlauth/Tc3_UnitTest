@@ -66,10 +66,10 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Builder\FB_StringBuilder.TcPOU">
+    <Compile Include="String\FB_StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Builder\I_StringBuilder.TcIO">
+    <Compile Include="String\I_StringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="File\E_AdsError.TcDUT">
@@ -125,7 +125,7 @@
     <Folder Include="List" />
     <Folder Include="List\String" />
     <Folder Include="List\Testsuite" />
-    <Folder Include="Builder" />
+    <Folder Include="String" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />

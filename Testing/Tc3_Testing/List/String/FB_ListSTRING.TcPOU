@@ -49,7 +49,7 @@ ELSE
 		// new pointer
 		pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
 		// restore
-		Memcpy(pList,pOldList, SIZEOF(POINTER TO STRING(255))*DINT_TO_UDINT(SIZEOF(STRING(255)) *(nLength -1)));
+		Memcpy(pList,pOldList, DINT_TO_UDINT(SIZEOF(STRING(255)) *(nLength -1)));
 		// delete old
 		__DELETE(pOldList);
 	ELSE
@@ -93,6 +93,37 @@ WHILE nIndex < nLength DO
 END_WHILE]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Insert" Id="{6d66fd7b-af1e-0a73-0590-29550cb06d1b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Insert : BOOL
+VAR_INPUT
+	Position:		DINT;
+	Value:			STRING(255);
+END_VAR
+VAR
+	pOldList: 		POINTER TO STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nLength > Position THEN
+	// backup 
+	pOldList:= pList;
+	// new Length
+	nLength:= nLength + 1;
+	// new pointer
+	pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
+	// restore
+	Memcpy(pList, pOldList, DINT_TO_UDINT(SIZEOF(STRING(255)) *(nLength -1)));
+	MemMove(pList + DINT_TO_UDINT(SIZEOF(STRING(255)) * (Position + 1)), pList + DINT_TO_UDINT(SIZEOF(STRING(255)) * Position), DINT_TO_UDINT(SIZEOF(STRING(255)) * (nLength - Position + 1)));
+	// delete old
+	__DELETE(pOldList);
+ELSE
+	M_Insert:= FALSE;	
+	RETURN;
+END_IF
+// add new Object
+pList[Position]:= Value;
+M_Insert:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Item" Id="{29e4159c-eed0-0b05-05f7-6ee207ca7daf}">
       <Declaration><![CDATA[METHOD M_Item : STRING(255)
 VAR_INPUT
@@ -108,34 +139,26 @@ END_IF]]></ST>
     <Method Name="M_Remove" Id="{e45f8add-9693-0801-3102-f3924d7fbe37}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	Value:			STRING(255);
+	nPosition:			DINT;
 END_VAR
 VAR
 	pOldList:			POINTER TO STRING(255);
-	nPosition: 			DINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// First Item
-IF nLength >= 0 THEN
-	// Item already in List
-	nPosition:= M_Search(Value);
-	IF nPosition <> -1 THEN
-		// backup 
-		pOldList:= pList;
-		// new Length
-		nLength:= nLength -1;
-		// new pointer
-		pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
-		// restore lower part
-		Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(nPosition));
-		//pList[nPosition]:= iObject;
-		Memcpy(pList + (SIZEOF(STRING(255))*nPosition),pOldList + (SIZEOF(STRING(255))*(nPosition + 1)), SIZEOF(STRING(255)) * DINT_TO_UDINT(nLength - nPosition));
-		// delete old
-		__DELETE(pOldList);
-	ELSE
-		M_Remove:= FALSE;	
-		RETURN;
-	END_IF
+IF nLength >= nPosition THEN
+	// backup 
+	pOldList:= pList;
+	// new Length
+	nLength:= nLength -1;
+	// new pointer
+	pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
+	// restore lower part
+	Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(nPosition));
+	//pList[nPosition]:= iObject;
+	Memcpy(pList + (SIZEOF(STRING(255))*nPosition),pOldList + (SIZEOF(STRING(255))*(nPosition + 1)), SIZEOF(STRING(255)) * DINT_TO_UDINT(nLength - nPosition));
+	// delete old
+	__DELETE(pOldList);
 ELSE
 	M_Remove:= FALSE;	
 	RETURN;
@@ -196,12 +219,22 @@ END_VAR
     <LineIds Name="FB_ListSTRING.M_Index">
       <LineId Id="45" Count="8" />
     </LineIds>
+    <LineIds Name="FB_ListSTRING.M_Insert">
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="7" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="26" Count="5" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_ListSTRING.M_Item">
       <LineId Id="13" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Remove">
-      <LineId Id="87" Count="24" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="92" Count="11" />
+      <LineId Id="108" Count="3" />
       <LineId Id="72" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Search">

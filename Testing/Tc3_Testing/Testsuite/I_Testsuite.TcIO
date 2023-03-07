@@ -3,11 +3,20 @@
   <Itf Name="I_Testsuite" Id="{be1b8503-88c7-00d0-316f-5b2753f7b610}">
     <Declaration><![CDATA[INTERFACE I_Testsuite EXTENDS I_Base
 ]]></Declaration>
-    <Property Name="P_Node" Id="{d1da4fb8-4f9d-0cf2-2e8e-cd3cc44c27e2}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Node : PVOID]]></Declaration>
-      <Get Name="Get" Id="{9e7d7a22-e1de-0d81-2218-f4c356b34cb8}">
+    <Property Name="P_List" Id="{8c44755e-2744-0f94-1f92-c5697833051a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
+      <Get Name="Get" Id="{1f7d7b47-83e0-07fc-1005-a59bd3ef5268}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
+    </Property>
+    <Property Name="P_Parent" Id="{dec8515c-cb5f-06f1-34a8-4435601bd530}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
+      <Get Name="Get" Id="{bf712599-e9a4-0d4b-2139-f66f32ed9d3c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{a60365dc-68ca-0323-3ca8-1abefc7debdb}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
     </Property>
     <Property Name="P_Result" Id="{d400200d-2272-0b95-2551-15ef7caf4e5d}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Result : ST_Testsuite]]></Declaration>
@@ -16,7 +25,7 @@
       </Get>
     </Property>
     <Property Name="P_Testcase" Id="{4e4b87c6-fedd-0eea-3a95-04aa9817daa1}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : int]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : INT]]></Declaration>
       <Get Name="Get" Id="{e80fe4c8-79ad-0f5d-03c0-493d759378fe}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

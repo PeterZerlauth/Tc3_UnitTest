@@ -3,5 +3,11 @@
   <Itf Name="I_Testsuites" Id="{606cd2f2-cac2-4517-8699-c23aaa0c4b09}">
     <Declaration><![CDATA[INTERFACE I_Testsuites EXTENDS I_Base
 ]]></Declaration>
+    <Property Name="P_List" Id="{2894c1aa-7a7c-0cc9-216c-5c628c5f3c09}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
+      <Get Name="Get" Id="{cf580b2f-d72c-0b8a-01bc-4c4ee7bcbb85}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

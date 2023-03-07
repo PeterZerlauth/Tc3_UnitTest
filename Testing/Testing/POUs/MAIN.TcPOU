@@ -3,30 +3,25 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbBuilder:		FB_StringBuilder;
-	fbList:			FB_ListSTRING;
-	fbAssert:		FB_Assert;
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
-	fbTestsuite2:	FB_Testsuite;
-	sValue:			STRING(255);
-	
+//	fbTestsuite2:	FB_Testsuite;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbTestsuites();
-fbTestsuites.fbList.M_Add(fbTestsuite1);
-fbTestsuites.fbList.M_Add(fbTestsuite2);
+fbTestsuites.M_Add(fbTestsuite1);
+//fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuite1();
-fbTestsuite2();
+//fbTestsuite2();
 
-CASE fbTestsuite2.P_Testcase OF
-	E_Testcase.Start:
-		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
-		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite2.M_Testcase('FB_Assert', T#1S, 'file', 23, E_Testcase.Done);
-	E_Testcase.Done:;
-END_CASE
+//CASE fbTestsuite2.P_Testcase OF
+//	E_Testcase.Start:
+//		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
+//		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
+//		fbTestsuite2.M_Testcase('FB_Assert', T#1S, 'file', 23, E_Testcase.Done);
+//	E_Testcase.Done:;
+//END_CASE
 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:

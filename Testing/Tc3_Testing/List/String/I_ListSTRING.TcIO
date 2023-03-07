@@ -1,41 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <Itf Name="I_ListAssert" Id="{937c5750-ac4a-0c75-3ddd-b288d095682e}">
-    <Declaration><![CDATA[INTERFACE I_ListAssert
+  <Itf Name="I_ListSTRING" Id="{937c5750-ac4a-0c75-3ddd-b288d095682e}">
+    <Declaration><![CDATA[INTERFACE I_ListSTRING
 ]]></Declaration>
-    <Method Name="M_Add" Id="{6ad16cc7-b017-0bab-2b40-5397ee9c157a}">
+    <Method Name="M_Add" Id="{7d041429-e10d-09cb-3fcd-bd535d305c8b}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	stAssert:		ST_Assert;
+	Value:		STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Clear" Id="{bba33587-4635-0e51-34df-6cda40f7b511}">
+    <Method Name="M_Clear" Id="{2568afe7-f1ba-0d49-04c6-4cf7f25a949a}">
       <Declaration><![CDATA[METHOD M_Clear
 ]]></Declaration>
     </Method>
-    <Method Name="M_Get" Id="{f342f9bb-7e06-045d-31e4-5b65e4eadfc1}">
-      <Declaration><![CDATA[METHOD M_Get : ST_Assert
+    <Method Name="M_Index" Id="{4c369575-4541-0c11-19ef-292e554e4ba7}">
+      <Declaration><![CDATA[METHOD M_Index : DINT
+VAR_INPUT
+	Value:	STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Item" Id="{905d8954-1c11-0cee-01d2-ea1e30f0ae14}">
+      <Declaration><![CDATA[METHOD M_Item : STRING(255)
 VAR_INPUT
 	nIndex: 	DINT;
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Index" Id="{9b12220c-002a-035c-16cb-84cf0e599b36}">
-      <Declaration><![CDATA[METHOD M_Index : DINT
-VAR_INPUT
-	stAssert:	ST_Assert;
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Remove" Id="{a984cbbe-fe04-031f-0e29-e85f98a36766}">
+    <Method Name="M_Remove" Id="{3d146390-4ec0-0a33-08ae-7d967444c553}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	stAssert:			ST_Assert;
+	Value:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Search" Id="{7d4362ed-7c28-0eaf-0d97-952cb2ab460e}">
+    <Method Name="M_Search" Id="{5b3ec785-684b-03f5-2c9c-f1a00aa7c91f}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	stAssert:		ST_Assert;
+	Value:		STRING(255);
 END_VAR]]></Declaration>
     </Method>
     <Property Name="P_Length" Id="{dd1a731e-7c76-0405-3a5b-64fd53e98745}">

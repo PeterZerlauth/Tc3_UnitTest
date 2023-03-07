@@ -15,5 +15,11 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="P_Testcase" Id="{4e4b87c6-fedd-0eea-3a95-04aa9817daa1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : int]]></Declaration>
+      <Get Name="Get" Id="{e80fe4c8-79ad-0f5d-03c0-493d759378fe}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

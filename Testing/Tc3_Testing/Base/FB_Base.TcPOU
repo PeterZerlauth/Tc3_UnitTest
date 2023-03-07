@@ -14,10 +14,7 @@ VAR
 	eState: 			E_Base;
 	eRequest: 			E_Base;
 	nState: 			INT;
-    {attribute 'hide'} 
-	fbTask:				GETCURTASKINDEX;
 	fbGetTime:			NT_GetTime;
-	fCycleTime: 		LREAL;	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -82,52 +79,13 @@ END_CASE
 
 eRequest:= eState;]]></ST>
     </Implementation>
-    <Method Name="M_GetCycleTime" Id="{6573b86a-8292-0eb4-2f3a-f84b9cb145c6}">
-      <Declaration><![CDATA[METHOD INTERNAL M_GetCycleTime : LREAL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_GetCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_GetName" Id="{7644e4a6-816c-4e95-a1be-94a500976a8c}">
-      <Declaration><![CDATA[METHOD INTERNAL M_GetName : STRING(255)
-VAR_INPUT
-	sInstancePath:		STRING(255);
-END_VAR
-VAR
-    sName:				STRING(255);
-    nPosition:			INT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[sName := CONCAT(TwinCAT_SystemInfoVarList._AppInfo.ProjectName, '.');
-
-nPosition := FIND(sInstancePath, sName);
-
-IF nPosition > 0 THEN
-    M_GetName:= DELETE(sInstancePath, nPosition-1 + LEN(sName), 1);
-END_IF
-
-nPosition := FIND(sInstancePath, sName);
-
-IF nPosition > 0 THEN
-    M_GetName:= DELETE(M_GetName, nPosition - 1 + LEN(sName), 1);
-END_IF
-
-nPosition:= FIND(STR1 := M_GetName, '.');
-M_GetName:= RIGHT(STR := M_GetName, LEN(STR := M_GetName) - nPosition);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Init" Id="{e2b264db-76f6-0dba-2234-6066426e6914}">
       <Declaration><![CDATA[METHOD PROTECTED M_Init : BOOL
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbTask();
-
-M_Init:= True;]]></ST>
+        <ST><![CDATA[M_Init:= True;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Request" Id="{bfba9944-1884-04d8-1661-c3abe89f49d3}">
@@ -243,16 +201,7 @@ END_VAR]]></Declaration>
       <LineId Id="99" Count="0" />
       <LineId Id="98" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Base.M_GetCycleTime">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_GetName">
-      <LineId Id="10" Count="14" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Base.M_Init">
-      <LineId Id="10" Count="0" />
-      <LineId Id="7" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Request">

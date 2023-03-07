@@ -51,13 +51,14 @@ END_VAR]]></Declaration>
 	0:
 		IF 	SUPER^.M_Starting() THEN
 			fbXml.NewDocument();
-			stTestsuites.sName:= M_GetName(sInstancePath);
+			stTestsuites.sName:= F_GetName(sInstancePath);
 			stTestsuites.nTests:= 0;
 			stTestsuites.nFailures:= 0;
 			stTestsuites.nErrors:= 0;
 			stTestsuites.nSkipped:= 0;
 			stTestsuites.nAssertions:= 0;
 			stTestsuites.fTime:= 0.0;
+			
 			nState:= 1;
 		END_IF
 		
@@ -156,6 +157,7 @@ END_CASE]]></ST>
       <LineId Id="83" Count="3" />
       <LineId Id="41" Count="0" />
       <LineId Id="87" Count="0" />
+      <LineId Id="101" Count="0" />
       <LineId Id="77" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="55" Count="0" />

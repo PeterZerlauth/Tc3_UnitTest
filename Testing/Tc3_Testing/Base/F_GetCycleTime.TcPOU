@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_GetCycleTime" Id="{249fe45c-5437-0e8d-0016-a00ccb17390e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_GetCycleTime : LREAL
+VAR_INPUT
+END_VAR
+VAR
+	fbTask:				GETCURTASKINDEX;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbTask();
+F_GetCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;]]></ST>
+    </Implementation>
+    <LineIds Name="F_GetCycleTime">
+      <LineId Id="14" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

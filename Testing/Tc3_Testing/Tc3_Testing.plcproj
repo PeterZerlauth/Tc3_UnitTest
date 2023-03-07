@@ -56,13 +56,25 @@
     <Compile Include="Base\FB_Base.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\F_GetCycleTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base\F_GetName.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\Assert\FB_ListAssert.TcPOU">
+    <Compile Include="Builder\FB_StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\Assert\I_ListAssert.TcIO">
+    <Compile Include="Builder\I_StringBuilder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\String\FB_ListSTRING.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\String\I_ListSTRING.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="List\Testsuite\FB_ListTestsuite.TcPOU">
@@ -100,8 +112,9 @@
     <Folder Include="Assert" />
     <Folder Include="Base" />
     <Folder Include="List" />
-    <Folder Include="List\Assert" />
+    <Folder Include="List\String" />
     <Folder Include="List\Testsuite" />
+    <Folder Include="Builder" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />
@@ -149,6 +162,17 @@
     <None Include="Tc3_Testing.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="FB_StringBuilder.M_Insert">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_StringBuilder.M_Replace">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_StringBuilder.M_AppendBool" />
+    <SubObject Include="I_StringBuilder.M_AppendInt" />
+    <SubObject Include="I_StringBuilder.M_AppendReal" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

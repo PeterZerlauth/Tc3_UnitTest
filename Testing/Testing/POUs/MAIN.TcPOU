@@ -3,6 +3,7 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbAssert:		FB_Assert;
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
 	fbTestsuite2:	FB_Testsuite;

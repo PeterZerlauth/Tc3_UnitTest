@@ -53,6 +53,12 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="File\FB_File.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="File\I_File.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="List\FB_ListTestsuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -84,6 +90,7 @@
   <ItemGroup>
     <Folder Include="Assert" />
     <Folder Include="Base" />
+    <Folder Include="File" />
     <Folder Include="List" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />

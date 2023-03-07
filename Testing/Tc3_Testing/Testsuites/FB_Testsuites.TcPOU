@@ -11,14 +11,13 @@ END_VAR
 VAR
 	bSave: 				BOOL;
 	sFilePathName:		STRING(255):= 'C:\report.xml';
+	fbFile:				FB_File;
 	nTests:				INT;						// Total number of tests in this file
 	nFailures:			INT;						// Total number of failed tests in this file
 	nErrors:			INT;						// Total number of errored tests in this file
 	nSkipped:			INT;						// Total number of skipped tests in this file
 	nAssertions:		INT;						// Total number of assertions for all tests in this file
 	fTime:				REAL;						// Aggregated time of all tests in this file in seconds
-	fbXml:				FB_XmlDomParser;
-	testsuites:			PVOID;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();

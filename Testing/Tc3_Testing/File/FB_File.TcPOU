@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_File" Id="{54789f62-498b-04f5-3258-42d49534c4a8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_File
+VAR
+    fbCreateDir:	FB_CreateDir;
+	fbOpen:			FB_FileOpen;
+	fbRead:			FB_FileRead;
+	fbLoad:			FB_FileLoad;
+	fbWrite:		FB_FileWrite;
+	fbClose:		FB_FileClose;
+	fbDelete:		FB_FileDelete;
+END_VAR
+VAR_OUTPUT
+	eError:			E_AdsError:= E_AdsError.NOERR;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Append" Id="{1e5af4d0-f329-067d-0bf2-a3973278c0e5}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL
+VAR_INPUT
+	sText:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sText:= Concat(sText, '$R');
+fbWrite();
+IF fbWrite.bExecute THEN
+	IF fbWrite.bError THEN
+		eError:= fbWrite.nErrId;
+	ELSIF fbWrite.bBusy THEN
+		M_Append:= FALSE;
+	ELSE
+		M_Append:= TRUE;
+		fbWrite.bExecute:= FALSE;
+	END_IF
+ELSE
+	fbWrite.bExecute:= TRUE;
+	fbWrite.pWriteBuff:= ADR(sText);
+	fbWrite.cbWriteLen:= INT_TO_UDINT(Len(sText));
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Close" Id="{c0789999-930f-042f-18a5-7eb9b96ad755}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Close : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbClose();
+IF fbClose.bExecute THEN
+	IF fbClose.bError THEN
+		fbClose.bExecute:= FALSE;
+		eError:= fbClose.nErrId;
+	ELSE
+		IF fbClose.bBusy THEN
+			M_Close:= FALSE;
+		ELSE
+			M_Close:= TRUE;
+			eError:= E_AdsError.NOERR;
+			fbClose.bExecute:= FALSE;
+		END_IF
+	END_IF
+ELSE
+	fbClose.bExecute:= TRUE;
+END_IF
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Create" Id="{26efe1d9-595f-0507-2f2f-b4311f718a87}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Create : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR
+VAR
+	nTemp: INT;
+END_VAR
+VAR_INST
+	nPosition: INT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbCreateDir();
+
+nTemp := FIND(RIGHT(sPathName, LEN(sPathName) - nPosition), '\');
+if nTemp <> 0 then
+	IF fbCreateDir.bExecute THEN
+		IF NOT fbCreateDir.bBusy THEN
+			nPosition := nPosition + nTemp;
+			fbCreateDir.bExecute:= FALSE;
+		END_IF
+	ELSE
+		fbCreateDir.bExecute:= TRUE;
+		fbCreateDir.ePath:= PATH_GENERIC;
+		fbCreateDir.sPathName:= Left(sPathName, nPosition + nTemp);
+	END_IF
+ELSE
+	IF M_Open(sPathName) THEN
+		M_Create:= TRUE;
+		nPosition:= 0;
+	END_IF
+END_IF
+
+
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Delete" Id="{35d3c0a5-5d24-0db0-05ee-ad42476ea1e5}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Delete : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR
+
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbDelete();
+IF fbDelete.bExecute THEN
+	IF fbDelete.bError THEN
+		fbDelete.bExecute:= FALSE;
+		eError:= fbDelete.nErrId;
+	ELSIF fbDelete.bBusy THEN
+		;
+	ELSE
+		fbDelete.bExecute:= FALSE;
+		M_Delete:= TRUE;
+	END_IF
+ELSE
+	fbDelete.bExecute:= TRUE;
+	fbDelete.sPathName:= sPathName;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Load" Id="{0b14d214-f7f4-0ddf-2e3e-5b5b47c4b73c}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Load : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+	pData:			PVOID;
+	nData:			UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbLoad();
+IF fbLoad.bExecute THEN
+	IF fbLoad.bError THEN
+		eError:= fbLoad.nErrId;
+	ELSIF fbLoad.bBusy THEN
+		;
+	ELSE
+		M_Load:= TRUE;
+	END_IF
+ELSE
+	fbLoad.sPathName:= sPathName;
+	fbLoad.bExecute:= TRUE;
+	fbLoad.pReadBuff:= pData;
+	fbLoad.cbReadLen:= nData;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Open" Id="{a8dc81cc-e694-069e-3edb-de6efac1c222}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Open : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbOpen();
+IF NOT fbOpen.bExecute THEN
+	fbOpen.bExecute:= TRUE;
+	fbOpen.sPathName:= sPathName;
+	fbOpen.nMode:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);
+ELSE
+	IF fbOpen.bError THEN
+		eError:= fbOpen.nErrId;
+	ELSIF fbOpen.bBusy THEN
+		;
+	ELSE
+		M_Open:= TRUE;
+		fbRead.hFile:= fbOpen.hFile;
+		fbWrite.hFile:= fbOpen.hFile;
+		fbClose.hFile:= fbOpen.hFile;
+		fbOpen.bExecute:= FALSE;
+	END_IF	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Read" Id="{b2e3afdd-1ca1-0d8e-0510-561806c5e056}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Read : BOOL
+VAR_INPUT
+	pData:		PVOID;
+	nData:		udint;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbRead();
+IF fbRead.bExecute THEN
+	IF fbRead.bError THEN
+		eError:= fbRead.nErrId;
+		fbRead.bExecute:= FALSE;
+	ELSIF fbRead.bBusy THEN
+		;
+	ELSE
+		M_Read:= TRUE;
+		fbRead.bExecute:= FALSE;
+	END_IF
+ELSE
+	fbRead.bExecute:= TRUE;
+	fbRead.pReadBuff:= pData;
+	fbRead.cbReadLen:= nData;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Write" Id="{190fc925-5e69-0b04-04d9-e18614960a32}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Write : BOOL
+VAR_INPUT
+	pData:		POINTER TO BYTE;
+	nData:		UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbWrite();
+IF fbWrite.bExecute THEN
+	IF fbWrite.bError THEN
+		eError:= fbWrite.nErrId;
+		fbWrite.bExecute:= FALSE;
+	ELSIF fbWrite.bBusy THEN
+		M_Write:= FALSE;
+	ELSE
+		M_Write:= TRUE;
+		fbWrite.bExecute:= FALSE;
+	END_IF
+ELSE
+	fbWrite.bExecute:= TRUE;
+	fbWrite.pWriteBuff:= pData;
+	fbWrite.cbWriteLen:=nData;
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Error" Id="{9927a2d2-ea1f-036f-17aa-5f8cac81117e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Error : E_AdsError]]></Declaration>
+      <Get Name="Get" Id="{b76e2a5c-1033-4ece-a3ab-d625c7ace7ee}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Error:= eError;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_File">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Append">
+      <LineId Id="3" Count="15" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Close">
+      <LineId Id="3" Count="18" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Create">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Delete">
+      <LineId Id="3" Count="14" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Load">
+      <LineId Id="3" Count="13" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Open">
+      <LineId Id="3" Count="17" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Read">
+      <LineId Id="3" Count="16" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.M_Write">
+      <LineId Id="3" Count="15" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_File.P_Error.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

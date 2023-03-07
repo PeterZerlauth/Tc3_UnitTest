@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_File" Id="{a333c476-be74-00f0-3a80-a82b3c3d9aac}">
+    <Declaration><![CDATA[INTERFACE I_File]]></Declaration>
+    <Method Name="M_Append" Id="{fbb15c1d-2df5-0e39-2358-fb7bc74a9fc3}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL
+VAR_INPUT
+	sText:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Close" Id="{9ca2b871-cea1-0cae-0c40-7f2f8ac18932}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Close : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Create" Id="{62be88b4-a419-01a4-3b43-ca7984336fe9}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Create : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Delete" Id="{e4656072-e375-0752-19f3-361e4f242d1d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Delete : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR
+
+]]></Declaration>
+    </Method>
+    <Method Name="M_Load" Id="{ea60e964-c358-0745-2adc-afecd745c703}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Load : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+	pData:			PVOID;
+	nData:			UDINT;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Open" Id="{050d30ac-1147-020e-09c2-cea6558cdf69}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Open : BOOL
+VAR_INPUT
+	sPathName:		T_MaxString;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Read" Id="{d6544e38-9389-075a-15aa-5bab85948640}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Read : BOOL
+VAR_INPUT
+	pData:		PVOID;
+	nData:		udint;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Write" Id="{ade87bcf-1dc4-0b90-0279-e8b498b630a0}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Write : BOOL
+VAR_INPUT
+	pData:		POINTER TO BYTE;
+	nData:		UDINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Property Name="P_Error" Id="{bc44daab-bd44-0bcc-12e7-c5e0e48215a2}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Error : E_AdsError]]></Declaration>
+      <Get Name="Get" Id="{a52d3697-97be-4baa-bcef-0b8888c9b6b3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

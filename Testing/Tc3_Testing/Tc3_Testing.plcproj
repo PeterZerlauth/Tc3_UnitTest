@@ -36,6 +36,7 @@
     <SelectedLibraryCategories>
       <Id xmlns="">{54581c00-a61d-4d50-81cd-05af51b2074d}</Id>
     </SelectedLibraryCategories>
+    <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assert\E_Assert.TcDUT">

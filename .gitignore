@@ -277,3 +277,4 @@ __pycache__/
 *.library
 *.bak
 *.~u
+/Testing/Tc3_Testing/Tc3_Testing.tmcRefac

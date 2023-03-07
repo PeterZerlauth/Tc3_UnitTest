@@ -8,76 +8,95 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	nTests:				INT;						// tests       Total number of tests in this suite          
-	nFailures:			INT;						// failures    Total number of failed tests in this suite   
-	nErrors:			INT;						// errors      Total number of errored tests in this suite 
-	nSkipped:			INT;						// skipped     Total number of skipped tests in this suite            
-	nAssertions:		INT;						// assertions  Total number of assertions for all tests in this suite  
-	fTime: 				LREAL;						// time        Aggregated time of all tests in this file in seconds  (100ns)     
-	sFile:				STRING(255);				// file        Source code file of this test suite
+	iParent:			I_Testsuites;
+	fCycleTime: 		LREAL;	
+	stTestsuite:		ST_Testsuite;
+	stTestcase:			ST_Testcase;
+	fbBuilder:			FB_StringBuilder;
+	fbList:				FB_ListSTRING;
 	fbAssert:			FB_Assert;
-	fbTestcase:			FB_Testcase;
-	nTestcase:			INT;
-	fbXml:				FB_XmlDomParser;
-	testsuite:			PVOID;
-	testcase:			PVOID;
+	nActual:			INT:=  E_Testcase.Init;
+	nNext:				INT;
 	fbTimeout:			TON;
-	sXml:				STRING(10000);
-	sValue:				STRING(255);	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();
-fbTimeout();
-
-IF fbAssert.P_Assertions = 0 THEN
-;
-ELSE
-		IF fbAssert.P_Errors = 0 AND fbAssert.P_Failures = 0 AND fbAssert.P_Skipped = 0 THEN
-			testcase:= fbXml.AppendNode(testsuite, 'testcase');
-			fbXml.AppendAttribute(testcase, 'name', fbTestcase.sName);					//	name        The name of this test case, often the method name 
-			fbXml.AppendAttribute(testcase, 'classname', fbTestcase.sClassname);		//	classname   The name of the parent class/folder, often the same as the suite's name
-			fbXml.AppendAttributeAsInt(testcase, 'assertions', fbTestcase.nAssertions);	//	assertions  Number of assertions checked during test case execution
-			sValue:= LREAL_TO_FMTSTR(fbTestcase.fTime, 3, TRUE);
-			fbXml.AppendAttribute(testcase, 'time',  sValue);							//	time        Execution time of the test in seconds
-			fbXml.AppendAttribute(testcase, 'file', fbTestcase.sFile);					//	file        Source code file of this test case              
-			fbXml.AppendAttributeAsInt(testcase, 'line', fbTestcase.nLine);				//	line        Source code line number of the start of this test case
-			nAssertions:= nAssertions + fbAssert.P_Assertions;
-			nTests:= nTests + 1;
-			fbTimeout.IN:= FALSE;
-			nTestcase:= fbTestcase.P_Number;
-		ELSE
-			IF fbTimeout.Q THEN
-				testcase:= fbXml.AppendNode(testsuite, 'testcase');
-				fbXml.AppendAttribute(testcase, 'name', fbTestcase.sName);					//	name        The name of this test case, often the method name 
-				fbXml.AppendAttribute(testcase, 'classname', fbTestcase.sClassname);		//	classname   The name of the parent class/folder, often the same as the suite's name
-				fbXml.AppendAttributeAsInt(testcase, 'assertions', fbTestcase.nAssertions);	//	assertions  Number of assertions checked during test case execution 
-				sValue:= LREAL_TO_FMTSTR(fbTestcase.fTime, 3, TRUE); 
-				fbXml.AppendAttribute(testcase, 'time', sValue);							//	time        Execution time of the test in seconds
-				fbXml.AppendAttribute(testcase, 'file', fbTestcase.sFile);					//	file        Source code file of this test case              
-				fbXml.AppendAttributeAsInt(testcase, 'line', fbTestcase.nLine);				//	line        Source code line number of the start of this test case
-					fbXml.AppendCopy(testcase, fbAssert.fbXml.GetRootNode());
-				nAssertions:= nAssertions + fbAssert.P_Assertions;
-				nErrors:= nErrors + fbAssert.P_Errors;
-				nFailures:= nFailures + fbAssert.P_Failures;
-				nSkipped:= nSkipped + fbAssert.P_Skipped;
-				fbTimeout.IN:= FALSE;
-				nTests:= nTests + 1;
-				nTestcase:= fbTestcase.P_Number;
-			END_IF
-		END_IF
-END_IF
-
-
-
-fbAssert.M_Reset();]]></ST>
+      <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
     <Method Name="M_Started" Id="{78e3f5cf-1c2d-00e7-2cad-335430cad839}">
       <Declaration><![CDATA[METHOD PROTECTED M_Started : BOOL
 VAR_INPUT
+END_VAR
+VAR
+	nIndex: DINT;
+	sValue: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Started:= fbTestcase.nNumber = E_Testcase.Done;
+        <ST><![CDATA[stTestcase.nAssertions:= fbAssert.nAssert;
+IF fbAssert.nPassed = fbAssert.nAssert THEN
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('<testcase name="');
+	fbBuilder.M_Append(stTestCase.sName);
+	fbBuilder.M_Append('" classname="');
+	fbBuilder.M_Append(stTestCase.sClassname);
+	fbBuilder.M_Append('" assertions="');
+	fbBuilder.M_AppendInt(stTestCase.nAssertions);
+	fbBuilder.M_Append('" time="');
+	fbBuilder.M_AppendReal(stTestCase.fTime, 5);
+	fbBuilder.M_Append('" file="');
+	fbBuilder.M_Append(stTestCase.sFile);
+	fbBuilder.M_Append('" line="');
+	fbBuilder.M_AppendInt(stTestCase.nLine);
+	fbBuilder.M_Append('" />');
+	fbBuilder.M_Copy(sValue);
+	fbList.M_Add(sValue);
+
+	stTestsuite.nTests:= stTestsuite.nTests + 1;
+	stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
+	stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
+	stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
+	stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
+	stTestsuite.fTime:= stTestsuite.fTime + stTestCase.fTime;
+	stTestCase.fTime:= -fCycleTime;
+	fbTimeout(IN:=FALSE);
+	nActual:= nNext;
+ELSE
+	IF fbTimeout.Q THEN
+		fbBuilder.M_Reset();
+		fbBuilder.M_Append('<testcase name="');
+		fbBuilder.M_Append(stTestCase.sName);
+		fbBuilder.M_Append('" classname="');
+		fbBuilder.M_Append(stTestCase.sClassname);
+		fbBuilder.M_Append('" assertions="');
+		fbBuilder.M_AppendInt(stTestCase.nAssertions);
+		fbBuilder.M_Append('" time="');
+		fbBuilder.M_AppendReal(stTestCase.fTime, 5);
+		fbBuilder.M_Append('" file="');
+		fbBuilder.M_Append(stTestCase.sFile);
+		fbBuilder.M_Append('" line="');
+		fbBuilder.M_AppendInt(stTestCase.nLine);
+		fbBuilder.M_Append('" >');
+		WHILE nIndex < fbAssert.fbList.P_Length DO
+			fbBuilder.M_Append(fbAssert.fbList.M_Item(nIndex));
+			nIndex:= nIndex + 1;
+		END_WHILE
+		fbBuilder.M_Append('</testcase>');
+		fbBuilder.M_Copy(sValue);
+		fbList.M_Add(sValue);
+		stTestsuite.nTests:= stTestsuite.nTests + 1;
+		stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
+		stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
+		stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
+		stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
+		stTestsuite.fTime:= stTestsuite.fTime + stTestCase.fTime;
+		stTestCase.fTime:= -fCycleTime;
+		fbTimeout(IN:=FALSE);
+		nActual:= nNext;
+	END_IF
+END_IF
+stTestcase.fTime:= stTestcase.fTime + fCycleTime;
+fbAssert.M_Reset();
+M_Started:= nActual = E_Testcase.Done;
 ]]></ST>
       </Implementation>
     </Method>
@@ -93,75 +112,87 @@ END_VAR]]></Declaration>
         <ST><![CDATA[CASE nState OF
 	0:
 		IF 	SUPER^.M_Starting() THEN
-			fbXml.NewDocument();
-			nTests:= 0;
-			nFailures:= 0;		
-			nErrors:= 0;	
-			nSkipped:= 0;		
-			nAssertions:= 0;	
-			fTime:= 0.0;
-			sFile:= '';
+			fbList.M_Clear();
+			fCycleTime:= F_GetCycleTime();	
+			stTestsuite.sName:= F_GetName(sInstancePath);
+			stTestsuite.nTests:= 0;
+			stTestsuite.nFailures:= 0;		
+			stTestsuite.nErrors:= 0;	
+			stTestsuite.nSkipped:= 0;		
+			stTestsuite.nAssertions:= 0;	
+			stTestsuite.fTime:= 0.0;
+			stTestsuite.sFile:= '';
 			nState:= 1;
 		END_IF
 		
 	1:
-		testsuite:= fbXml.AppendNode(fbXml.GetDocumentNode(), 'testsuite');			
-		fbXml.AppendAttribute(testsuite, 'name', sName);						//	name        Name of the test suite (e.g. class name or folder name)
-		fbXml.AppendAttributeAsInt(testsuite, 'tests', nTests);			//	tests       Total number of tests in this suite          
-		fbXml.AppendAttributeAsInt(testsuite, 'failures', nFailures);	//	failures    Total number of failed tests in this suite   
-		fbXml.AppendAttributeAsInt(testsuite, 'errors', nErrors);		//	errors      Total number of errored tests in this suite 
-		fbXml.AppendAttributeAsInt(testsuite, 'skipped', nSkipped);	//	skipped     Total number of skipped tests in this suite            
-		fbXml.AppendAttributeAsInt(testsuite, 'assertions', nAssertions);	//	assertions  Total number of assertions for all tests in this suite  
-		fbXml.AppendAttributeAsDouble(testsuite, 'time', fTime);			//	time        Aggregated time of all tests in this file in seconds       
-		fbXml.AppendAttribute(testsuite, 'timestamp', sTimestamp);		//	timestamp   Date and time of when the test suite was executed (in ISO 8601 format)
-		fbXml.AppendAttribute(testsuite, 'file', sFile);			//	file        Source code file of this test suite
-			fbXml.AppendNode(testsuite, 'properties');
-			fbXml.AppendNode(testsuite, 'system-out');
-			fbXml.AppendNode(testsuite, 'system-err');
-		nState:= 2;
-	
-	2:
+		nActual:= E_Testcase.Start;
 		M_Starting:= TRUE;
 	
-		
 END_CASE]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Stopping" Id="{86997241-28ad-050a-3199-6300c2ef6b3b}">
       <Declaration><![CDATA[METHOD PROTECTED M_Stopping : BOOL
 VAR_INPUT
+END_VAR
+VAR
+	sValue: STRING(255);
+	nIndex: DINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbXml.SetAttribute(fbXml.Attribute(testsuite, 'name'), sName);
-fbXml.SetAttributeAsInt(fbXml.Attribute(testsuite, 'tests'), nTests);
-fbXml.SetAttributeAsInt(fbXml.Attribute(testsuite, 'failures'), nFailures);
-fbXml.SetAttributeAsInt(fbXml.Attribute(testsuite, 'errors'), nErrors);
-fbXml.SetAttributeAsInt(fbXml.Attribute(testsuite, 'skipped'), nSkipped);
-fbXml.SetAttributeAsInt(fbXml.Attribute(testsuite, 'assertions'), nAssertions);
-fbXml.SetAttributeAsDouble(fbXml.Attribute(testsuite, 'time'), fTime);
-fbXml.SetAttribute(fbXml.Attribute(testsuite, 'timestamp'), sTimestamp);
-fbXml.SetAttribute(fbXml.Attribute(testsuite, 'file'), sFile);
-
+        <ST><![CDATA[//    <testsuite name="Tests.Registration" tests="8" failures="1" errors="1" skipped="1" assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23" file="tests/registration.code">
+fbBuilder.M_Reset();
+fbBuilder.M_Append('<testsuite name="');
+fbBuilder.M_Append(stTestsuite.sName);
+fbBuilder.M_Append('" tests="');
+fbBuilder.M_AppendInt(stTestsuite.nTests);
+fbBuilder.M_Append('" failures="');
+fbBuilder.M_AppendInt(stTestsuite.nFailures);
+fbBuilder.M_Append('" errors="');
+fbBuilder.M_AppendInt(stTestsuite.nErrors);
+fbBuilder.M_Append('" skipped="');
+fbBuilder.M_AppendInt(stTestsuite.nSkipped);
+fbBuilder.M_Append('" assertions="');
+fbBuilder.M_AppendInt(stTestsuite.nAssertions);	
+fbBuilder.M_Append('" time="');
+fbBuilder.M_AppendReal(stTestsuite.fTime, 4);
+fbBuilder.M_Append('" timestamp="');
+fbBuilder.M_Append(stTestsuite.sTimestamp);
+fbBuilder.M_Append('" file="');
+fbBuilder.M_Append(stTestsuite.sFile);
+fbBuilder.M_Append('">');
+fbBuilder.M_Copy(sValue);
+fbList.M_Insert(0, sValue);
+fbList.M_Add('</testsuite>');
+IF iParent <> 0 THEN
+	WHILE nIndex < fbList.P_Length DO
+		iParent.P_List.M_Add(fbList.M_Item(nIndex));
+		nIndex:= nIndex + 1;
+	END_WHILE
+END_IF
 M_Stopping:= TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Testcase" Id="{6d08bc5e-dc98-0f10-1d34-7f069e37b9d3}">
       <Declaration><![CDATA[METHOD PUBLIC M_Testcase : BOOL
 VAR_INPUT
-	Classname:			STRING(255);			// Classname as string
+	Classname:			STRING(255);	// Classname as string
 	Timeout:			TIME;			// Timeout in ms
+	File:				STRING(255);
+	Line:				DINT;	
 	Next:				INT;			// Next test case
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbTestcase.P_Name:= sName;
-fbTestcase.P_Classname:= Classname;
-fbTestcase.P_Assertions:= fbAssert.P_Assertions;
-fbTestcase.P_Line:= fbTestcase.P_Number;
-fbTestcase.P_Time:= fbTestcase.P_Time + fCycleTime;
-fbTestcase.P_Number:= Next;
-fbTimeout.IN:= TRUE;
-fbTimeout.PT:= Timeout;
-]]></ST>
+        <ST><![CDATA[stTestcase.sName:= CONCAT(CONCAT(CONCAT(stTestsuite.sName,'.'), 'M_Testcase_'), INT_TO_STRING(nActual));
+stTestcase.sClassname:= Classname;
+stTestcase.nAssertions:= fbAssert.fbList.P_Length;
+stTestcase.sFile:= File;
+stTestcase.NLine:= Line;
+IF Timeout <> T#0S THEN
+	fbTimeout(IN:= TRUE, PT:= Timeout);
+END_IF
+nNext:= Next;]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Assert" Id="{e23dc60a-455c-05e0-203b-c87d7f0bf2be}">
@@ -175,238 +206,175 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Assertions" Id="{3242fa33-6704-0ba2-0578-d21e54235634}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
-      <Get Name="Get" Id="{a59aab6f-c374-045a-3ec7-2834f65877da}">
+    <Property Name="P_List" Id="{37feeb7c-033b-03ab-2f25-c1e23d6d59c4}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
+      <Get Name="Get" Id="{00de385f-f60f-01e8-2c65-d740b8aed217}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Assertions:= nAssertions;]]></ST>
+          <ST><![CDATA[P_List:= fbList;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Errors" Id="{f5bcf4b6-2a79-06b7-10a1-4d8c7125c64b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Errors : int]]></Declaration>
-      <Get Name="Get" Id="{bde3766e-f005-0bf6-3e4a-d2c33c1b1372}">
+    <Property Name="P_Parent" Id="{26b3c1be-b48f-0a73-3f11-669666d67824}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
+      <Get Name="Get" Id="{cbeb0dff-5be2-0eeb-3c4b-d2308bd2f226}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Errors:= nErrors;]]></ST>
+          <ST><![CDATA[P_Parent:= iParent;]]></ST>
         </Implementation>
       </Get>
-    </Property>
-    <Property Name="P_Failures" Id="{c20167e8-4351-0a38-12d2-2e2ccc5da9b3}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Failures : int]]></Declaration>
-      <Get Name="Get" Id="{fb71f0ac-ccca-05c3-27de-f85f8fa7cc6c}">
+      <Set Name="Set" Id="{b6a9fa31-34bd-0c5b-2292-21f39b156b39}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Failures:= nFailures;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="P_File" Id="{56f7ee7a-f2c4-0c32-0797-c39ed167674b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_File : STRING(255)]]></Declaration>
-      <Get Name="Get" Id="{294162f5-f208-0375-2ecd-5ce7e75945f7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_File:= sFile;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{cd1e412e-8720-04ba-3961-8cb86ce3eadf}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[sFile:= P_File;]]></ST>
+          <ST><![CDATA[iParent:= P_Parent;]]></ST>
         </Implementation>
       </Set>
     </Property>
-    <Property Name="P_Node" Id="{6af0568a-9c41-026d-21d4-78bcb26131e5}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Node : PVOID]]></Declaration>
-      <Get Name="Get" Id="{68a4e154-91ff-0790-197b-0a5d95fe3317}">
-        <Declaration><![CDATA[
-VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Node:= fbXml.GetRootNode();]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="P_Skipped" Id="{6986d3ea-77f9-0475-154b-f56a55753161}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : int]]></Declaration>
-      <Get Name="Get" Id="{5479282a-9622-0f00-262b-bf0a039445d3}">
+    <Property Name="P_Result" Id="{bc6fd8b0-043c-05d2-0765-58761c6f620a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Result : ST_Testsuite]]></Declaration>
+      <Get Name="Get" Id="{3423e8a5-6264-06ea-335d-82063928e5f1}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Skipped:= nSkipped;]]></ST>
+          <ST><![CDATA[P_Result:= stTestsuite;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Testcase" Id="{da56e34b-7b09-035c-1227-d5154e4bcb54}">
+    <Property Name="P_Testcase" Id="{3b7b6a2e-6d4a-0f0e-2a1d-3d960844879b}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : int]]></Declaration>
-      <Get Name="Get" Id="{7c6d2fee-b29e-0623-1198-204569841f3e}">
+      <Get Name="Get" Id="{854def52-87cb-03f8-22d6-ee5144597bf5}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Testcase:= nTestcase;]]></ST>
+          <ST><![CDATA[P_Testcase:= nActual;]]></ST>
         </Implementation>
       </Get>
-    </Property>
-    <Property Name="P_Tests" Id="{0bc06d10-992a-06c7-0d88-c4087d86c766}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Tests : int]]></Declaration>
-      <Get Name="Get" Id="{0670f841-a52b-067b-3d39-3acf4b6b37cc}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Tests:= nTests;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="P_Time" Id="{21010b58-20cf-0cce-2e5f-c082341d24bc}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Time : LREAL]]></Declaration>
-      <Get Name="Get" Id="{68068607-31ba-09c2-2305-7c2c825a7056}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Time:= fTime;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{65007484-40be-0251-3ecb-bcc2d6ebb134}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[fTime:= P_Time;]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
-    <Property Name="P_Timestamp" Id="{0a02b0d9-07e0-0e8a-3d2f-7cfd41d077ad}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Timestamp : String(39)]]></Declaration>
-      <Get Name="Get" Id="{aa7946a0-1c06-075f-1aa6-3024459073d0}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Timestamp:= sTimestamp;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{508dcd94-0486-050c-0506-fe37cc11ade7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[sTimestamp:= P_Timestamp;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
     <LineIds Name="FB_Testsuite">
       <LineId Id="97" Count="0" />
-      <LineId Id="277" Count="0" />
-      <LineId Id="276" Count="0" />
-      <LineId Id="236" Count="2" />
-      <LineId Id="240" Count="10" />
-      <LineId Id="278" Count="0" />
-      <LineId Id="281" Count="0" />
-      <LineId Id="251" Count="14" />
-      <LineId Id="279" Count="0" />
-      <LineId Id="266" Count="0" />
-      <LineId Id="280" Count="0" />
-      <LineId Id="267" Count="1" />
-      <LineId Id="231" Count="2" />
-      <LineId Id="211" Count="0" />
-      <LineId Id="122" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Started">
-      <LineId Id="12" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="101" Count="4" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="128" Count="2" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="98" Count="1" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="53" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="108" Count="4" />
+      <LineId Id="121" Count="1" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="115" Count="2" />
+      <LineId Id="142" Count="4" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="133" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="57" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Starting">
       <LineId Id="34" Count="0" />
       <LineId Id="37" Count="0" />
       <LineId Id="76" Count="0" />
       <LineId Id="82" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="120" Count="0" />
       <LineId Id="87" Count="5" />
       <LineId Id="77" Count="0" />
       <LineId Id="93" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="55" Count="0" />
       <LineId Id="39" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="112" Count="0" />
-      <LineId Id="95" Count="9" />
-      <LineId Id="44" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="56" Count="0" />
+      <LineId Id="128" Count="0" />
       <LineId Id="67" Count="0" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="69" Count="0" />
+      <LineId Id="135" Count="0" />
       <LineId Id="38" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Stopping">
-      <LineId Id="36" Count="7" />
-      <LineId Id="34" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="53" Count="1" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="57" Count="4" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="64" Count="2" />
+      <LineId Id="70" Count="2" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="84" Count="0" />
       <LineId Id="33" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Testcase">
       <LineId Id="133" Count="2" />
+      <LineId Id="241" Count="0" />
       <LineId Id="137" Count="0" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="207" Count="0" />
-      <LineId Id="222" Count="1" />
-      <LineId Id="221" Count="0" />
+      <LineId Id="236" Count="2" />
+      <LineId Id="229" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Assert.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuite.P_Assertions.Get">
+    <LineIds Name="FB_Testsuite.P_List.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuite.P_Errors.Get">
+    <LineIds Name="FB_Testsuite.P_Parent.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuite.P_Failures.Get">
+    <LineIds Name="FB_Testsuite.P_Parent.Set">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuite.P_File.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_File.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Node.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Skipped.Get">
+    <LineIds Name="FB_Testsuite.P_Result.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Testcase.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Tests.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Time.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Time.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Timestamp.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Timestamp.Set">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

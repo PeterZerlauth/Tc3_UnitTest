@@ -36,12 +36,19 @@
     <SelectedLibraryCategories>
       <Id xmlns="">{54581c00-a61d-4d50-81cd-05af51b2074d}</Id>
     </SelectedLibraryCategories>
+    <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assert\E_Assert.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Assert\FB_Assert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Assert\I_Assert.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Assert\ST_Assert.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\E_Base.TcDUT">
@@ -50,28 +57,37 @@
     <Compile Include="Base\FB_Base.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\F_GetCycleTime.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Base\F_GetName.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="File\FB_File.TcPOU">
+    <Compile Include="Builder\FB_StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="File\I_File.TcIO">
+    <Compile Include="Builder\I_StringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\FB_ListTestsuite.TcPOU">
+    <Compile Include="List\String\FB_ListSTRING.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\I_ListTestsuite.TcIO">
+    <Compile Include="List\String\I_ListSTRING.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\Testsuite\FB_ListTestsuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\Testsuite\I_ListTestsuite.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testcase\E_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Testcase\FB_Testcase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testcase\I_Testcase.TcIO">
+    <Compile Include="Testcase\ST_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuites\FB_Testsuites.TcPOU">
@@ -80,18 +96,26 @@
     <Compile Include="Testsuites\I_Testsuites.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Testsuites\ST_Testsuites.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Testsuite\FB_Testsuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuite\I_Testsuite.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Testsuite\ST_Testsuite.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assert" />
     <Folder Include="Base" />
-    <Folder Include="File" />
     <Folder Include="List" />
+    <Folder Include="List\String" />
+    <Folder Include="List\Testsuite" />
+    <Folder Include="Builder" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />
@@ -139,6 +163,17 @@
     <None Include="Tc3_Testing.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <SubObject Include="FB_StringBuilder.M_Insert">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_StringBuilder.M_Replace">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_StringBuilder.M_AppendBool" />
+    <SubObject Include="I_StringBuilder.M_AppendInt" />
+    <SubObject Include="I_StringBuilder.M_AppendReal" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

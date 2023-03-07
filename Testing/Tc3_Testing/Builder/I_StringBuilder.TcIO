@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_StringBuilder" Id="{df3d4a37-6b19-0224-3a23-50c560e48de6}">
+    <Declaration><![CDATA[INTERFACE I_StringBuilder
+]]></Declaration>
+    <Method Name="M_Append" Id="{ba3dc35a-00e3-0c07-0dfd-8c13ef431e5e}">
+      <Declaration><![CDATA[METHOD M_Append : I_StringBuilder
+VAR_INPUT
+	Value	: STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_AppendBool" Id="{7603f41d-77e0-0877-3137-edeb0957466d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendBool  : I_StringBuilder
+VAR_INPUT
+	Value:			BOOL;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_AppendInt" Id="{14f51f13-e329-0cde-0c9e-a7dc465a3499}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendInt : I_StringBuilder
+VAR_INPUT
+	Value	: LINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_AppendReal" Id="{f057156e-5dae-0fd8-10fe-cc573cd3ed43}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendReal : I_StringBuilder
+VAR_INPUT
+	Value:		LREAL;
+	nDecimals:	SINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Copy" Id="{940c2d63-a99a-009b-232c-ea17ccc23948}">
+      <Declaration><![CDATA[METHOD M_Copy : BOOL
+VAR_INPUT
+	Value:			ANY_STRING;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Reset" Id="{c51c1de9-e242-0e2e-15b4-007d70478885}">
+      <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

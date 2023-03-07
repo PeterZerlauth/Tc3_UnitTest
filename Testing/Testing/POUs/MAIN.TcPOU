@@ -6,67 +6,67 @@ VAR
 	fbAssert:		FB_Assert;
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
-	fbTestsuite2:	FB_Testsuite;
+//	fbTestsuite2:	FB_Testsuite;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbTestsuites();
-fbTestsuites.fbList.M_Add(fbTestsuite1);
-fbTestsuites.fbList.M_Add(fbTestsuite2);
+fbTestsuites.M_Add(fbTestsuite1);
+//fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuite1();
-fbTestsuite2();
+//fbTestsuite2();
 
-CASE fbTestsuite2.P_Testcase OF
-	E_Testcase.Start:
-		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
-		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite2.M_Testcase('FB_Assert', T#1S, E_Testcase.Done);
-	E_Testcase.Done:;
-END_CASE
+//CASE fbTestsuite2.P_Testcase OF
+//	E_Testcase.Start:
+//		fbTestsuite2.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
+//		fbTestsuite2.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
+//		fbTestsuite2.M_Testcase('FB_Assert', T#1S, 'file', 23, E_Testcase.Done);
+//	E_Testcase.Done:;
+//END_CASE
 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite1.P_Assert.M_Equals_BOOL(FALSE,TRUE,'Equals bool false');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 1);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 'file', 23, 1);
 		
 	1:
 		fbTestsuite1.P_Assert.M_Equals_REAL(22.11, 22.11, 0.0, 'Equals real 1')
 							.M_Equals_REAL(22.11, 22.22, 0.0, 'Equals real 2');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 2);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 28, 2);
 		
 	2:
 		fbTestsuite1.P_Assert.M_Equals_BYTE(2#00001111,2#00001111,'Equals byte 1')
 							.M_Equals_BYTE(2#11110000,2#11110000,'Equals byte 2');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 3);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 33, 3);
 	
 	3:
 		fbTestsuite1.P_Assert.M_Equals_INT(3333,3333,'Equals int 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 4);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 27, 4);
 		
 	4:
 		fbTestsuite1.P_Assert.M_Equals_DINT(333333,333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 5);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 41, 5);
 		
 	5:
 		fbTestsuite1.P_Assert.M_Equals_LINT(333333333,333333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 6);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 45, 6);
 		
 	6:
 		fbTestsuite1.P_Assert.M_Equals_LREAL(22.11, 22.11, 0.0, 'Equals real 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 7);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 49, 7);
 		
 	7:
 		fbTestsuite1.P_Assert.M_Equals_ANY(fbTestsuite1, fbTestsuite1, 'Equals any 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 8);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 53, 8);
 		
 	8:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 9);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 57, 9);
 		
 	9:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, E_Testcase.Done);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 61, E_Testcase.Done);
 	
 	E_Testcase.Done:;
 	

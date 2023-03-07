@@ -9,6 +9,8 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	nIndex: 			DINT;
+	fbFile:				FB_File;
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbListTestsuite:	FB_ListTestsuite;
@@ -86,14 +88,13 @@ END_CASE]]></ST>
 VAR_INPUT
 END_VAR
 VAR
-	nIndex: 		DINT;
-	nIndex2:		DINT;
 	stTestsuite: ST_Testsuite;
 	sValue: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE nState OF
 	0:
+		nIndex:= 0;
 		WHILE nIndex < fbListTestsuite.P_Length DO
 			stTestsuite:= fbListTestsuite.M_Get(nIndex).P_Result;
 			stTestsuites.nTests:= stTestsuites.nTests + stTestsuite.nTests;
@@ -130,7 +131,28 @@ END_VAR]]></Declaration>
 		fbBuilder.M_Copy(sValue);
 		fbList.M_Insert(1, sValue);
 		fbList.M_Add('</testsuites>');
-		M_Stopping:= TRUE;
+		nState:= 2;
+		
+	2:
+		IF fbFile.M_Delete(sFilePathName) THEN
+			nState:= 3;
+		END_IF	
+	
+	3:
+		IF fbFile.M_Create(sFilePathName) THEN
+			nState:= 4;
+			nIndex:= 0;
+		END_IF
+	
+	4:
+			IF fbFile.M_Append(fbList.M_Item(nIndex)) THEN
+				IF nIndex > fbList.P_Length THEN
+					nState:= 5;
+				END_IF
+				nIndex:= nIndex +1;
+			END_IF	
+	5:
+		M_Stopping:= fbFile.M_Close();	
 		
 END_CASE]]></ST>
       </Implementation>
@@ -180,7 +202,9 @@ END_VAR
       <LineId Id="38" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Stopping">
-      <LineId Id="141" Count="14" />
+      <LineId Id="141" Count="1" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="143" Count="12" />
       <LineId Id="172" Count="0" />
       <LineId Id="202" Count="0" />
       <LineId Id="168" Count="2" />
@@ -201,7 +225,22 @@ END_VAR
       <LineId Id="186" Count="1" />
       <LineId Id="201" Count="0" />
       <LineId Id="190" Count="0" />
-      <LineId Id="165" Count="1" />
+      <LineId Id="212" Count="1" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="237" Count="1" />
+      <LineId Id="233" Count="2" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="219" Count="0" />
+      <LineId Id="215" Count="0" />
+      <LineId Id="220" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="229" Count="2" />
+      <LineId Id="225" Count="1" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="166" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.P_List.Get">

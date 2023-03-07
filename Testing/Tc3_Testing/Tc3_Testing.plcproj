@@ -72,6 +72,15 @@
     <Compile Include="Builder\I_StringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="File\E_AdsError.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="File\FB_File.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="File\I_File.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="List\String\FB_ListSTRING.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -112,6 +121,7 @@
   <ItemGroup>
     <Folder Include="Assert" />
     <Folder Include="Base" />
+    <Folder Include="File" />
     <Folder Include="List" />
     <Folder Include="List\String" />
     <Folder Include="List\Testsuite" />

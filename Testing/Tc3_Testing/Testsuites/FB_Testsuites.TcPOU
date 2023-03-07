@@ -13,7 +13,7 @@ VAR
 	fbList:				FB_ListSTRING;
 	fbListTestsuite:	FB_ListTestsuite;
 	stTestsuites:    	ST_Testsuites;
-	sPathName:			STRING(255):= 'C:\report.xml';
+	sFilePathName:		STRING(255):= 'C:\report.xml';
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -107,7 +107,8 @@ END_VAR]]></Declaration>
 		nState:= 1;
 		
 	1:
-//<testsuites name="Test run" tests="8" failures="1" errors="1" skipped="1"  assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23">	
+//<testsuites name="Test run" tests="8" failures="1" errors="1" skipped="1"  assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23">
+		fbList.M_Insert(0, '<?xml version="1.0" encoding="UTF-8"?>');
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append('<testsuites name="');	
 		fbBuilder.M_Append(stTestsuite.sName);		
@@ -127,7 +128,7 @@ END_VAR]]></Declaration>
 		fbBuilder.M_Append(stTestsuite.sTimestamp);
 		fbBuilder.M_Append('">');
 		fbBuilder.M_Copy(sValue);
-		fbList.M_Insert(0, sValue);
+		fbList.M_Insert(1, sValue);
 		fbList.M_Add('</testsuites>');
 		M_Stopping:= TRUE;
 		
@@ -181,6 +182,7 @@ END_VAR
     <LineIds Name="FB_Testsuites.M_Stopping">
       <LineId Id="141" Count="14" />
       <LineId Id="172" Count="0" />
+      <LineId Id="202" Count="0" />
       <LineId Id="168" Count="2" />
       <LineId Id="173" Count="0" />
       <LineId Id="171" Count="0" />
@@ -196,7 +198,8 @@ END_VAR
       <LineId Id="182" Count="0" />
       <LineId Id="185" Count="0" />
       <LineId Id="184" Count="0" />
-      <LineId Id="186" Count="2" />
+      <LineId Id="186" Count="1" />
+      <LineId Id="201" Count="0" />
       <LineId Id="190" Count="0" />
       <LineId Id="165" Count="1" />
       <LineId Id="5" Count="0" />

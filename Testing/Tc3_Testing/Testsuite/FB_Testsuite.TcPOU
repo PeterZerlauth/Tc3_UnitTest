@@ -168,6 +168,7 @@ fbList.M_Add('</testsuite>');
 IF iParent <> 0 THEN
 	WHILE nIndex < fbList.P_Length DO
 		iParent.P_List.M_Add(fbList.M_Item(nIndex));
+		nIndex:= nIndex + 1;
 	END_WHILE
 END_IF
 M_Stopping:= TRUE;]]></ST>
@@ -183,7 +184,7 @@ VAR_INPUT
 	Next:				INT;			// Next test case
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[stTestcase.sName:= CONCAT(CONCAT(CONCAT(stTestsuite.sName,'.'), 'M_Testcase-'), INT_TO_STRING(nActual));
+        <ST><![CDATA[stTestcase.sName:= CONCAT(CONCAT(CONCAT(stTestsuite.sName,'.'), 'M_Testcase_'), INT_TO_STRING(nActual));
 stTestcase.sClassname:= Classname;
 stTestcase.nAssertions:= fbAssert.fbList.P_Length;
 stTestcase.sFile:= File;
@@ -345,7 +346,9 @@ END_VAR
       <LineId Id="70" Count="2" />
       <LineId Id="79" Count="0" />
       <LineId Id="83" Count="0" />
-      <LineId Id="85" Count="1" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="86" Count="0" />
       <LineId Id="84" Count="0" />
       <LineId Id="33" Count="0" />
     </LineIds>

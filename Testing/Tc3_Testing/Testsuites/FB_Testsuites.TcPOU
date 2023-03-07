@@ -117,7 +117,7 @@ END_VAR]]></Declaration>
 		fbBuilder.M_AppendInt(stTestsuite.nTests);
 		fbBuilder.M_Append('" failures="');	
 		fbBuilder.M_AppendInt(stTestsuite.nFailures);
-		fbBuilder.M_Append(' errors="');	
+		fbBuilder.M_Append('" errors="');	
 		fbBuilder.M_AppendInt(stTestsuite.nErrors);
 		fbBuilder.M_Append('" skipped="');	
 		fbBuilder.M_AppendInt(stTestsuite.nSkipped);

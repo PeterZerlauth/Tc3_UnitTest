@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="E_Assert" Id="{2f0ddc40-8c4f-0a23-0a57-061c461a7ec6}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE E_Assert :
+(
+	Passed	:= 0,
+	Failure	:= 1,
+	Error	:= 2,
+	Skipped	:= 3
+)USINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -3,31 +3,15 @@
   <POU Name="FB_Assert" Id="{a8219960-23df-08de-19e5-3265dc5cd828}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_Assert IMPLEMENTS I_Assert
 VAR_INPUT
-	fbXml:					FB_XmlDomParser;
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	node:					PVOID;
-	nAssertions:			INT;
-	nFailures:				INT;
-	nErrors:				INT;
-	nSkipped:				INT;
+	fbList:					FB_ListAssert;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[M_Reset();]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{77322c51-28ff-0124-2b45-3717a091c998}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL:=TRUE;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[fbXml.NewDocument();]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Equals_ANY" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
 VAR_INPUT
@@ -37,22 +21,17 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected.diSize <> Actual.diSize THEN			
-	nErrors:= nErrors + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'error ');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'ArithmeticError');		// type
+        <ST><![CDATA[IF Expected.diSize <> Actual.diSize THEN
+	fbList.M_Add(E_Assert.Error, Message, 'ArithmeticError');
+	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
-	nErrors:= nErrors + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'error ');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'ArithmeticError');		// type
+	fbList.M_Add(E_Assert.Error, Message, 'ArithmeticError');
+	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
-	nFailures:= nFailures + 1;		
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type	
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
+	
+ELSE
+	fbList.M_Add(E_Assert.Passed, Message, '');
 END_IF
 M_Equals_ANY:= THIS^;]]></ST>
       </Implementation>
@@ -65,14 +44,10 @@ VAR_INPUT
 	Message:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
       </Implementation>
@@ -86,14 +61,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
       </Implementation>
@@ -107,14 +78,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_DINT:= THIS^;
 ]]></ST>
@@ -129,14 +96,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
       </Implementation>
@@ -150,14 +113,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_LINT:= THIS^;
 ]]></ST>
@@ -173,14 +132,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
-	// Passed
+        <ST><![CDATA[IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_LREAL:= THIS^;]]></ST>
       </Implementation>
@@ -195,14 +150,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
-	// Passed
+        <ST><![CDATA[IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
       </Implementation>
@@ -216,14 +167,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssertions:= nAssertions + 1;
-IF Expected = Actual THEN
-	// Passed
+        <ST><![CDATA[IF Expected = Actual THEN
+	fbList.M_Add(E_Assert.Passed, Message, '');
 ELSE
-	nFailures:= nFailures + 1;
-	node:=	fbXml.AppendNode(fbXml.GetDocumentNode(), 'failure');
-			fbXml.AppendAttribute(node, 'message', Message);			// message
-			fbXml.AppendAttribute(node, 'type', 'AssertionError');		// type
+	fbList.M_Add(E_Assert.Failure, Message, 'AssertionError');
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
@@ -234,152 +181,198 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbXml.NewDocument();
-nAssertions:= 0;
-nFailures:= 0;
-nErrors:= 0;
-nSkipped:= 0;
+        <ST><![CDATA[fbList.M_Clear();
 M_Reset:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Assertions" Id="{ea6a9980-6127-4b97-85a2-2a7f9c0ec844}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Assertions : int]]></Declaration>
+    <Property Name="P_Errors" Id="{c2f1d2fa-9307-068f-1acf-e75b532667e5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Errors : Dint]]></Declaration>
+      <Get Name="Get" Id="{a5ccd883-3b3c-0f49-2d8e-96c32fb51d3a}">
+        <Declaration><![CDATA[VAR
+	nIndex: DINT;
+	stAssert: ST_Assert;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Errors:= 0;
+WHILE nIndex < fbList.P_Length DO
+	stAssert:= fbList.M_Get(nIndex);
+	IF stAssert.eAssert = E_Assert.Error THEN
+		P_Errors:= P_Errors + 1;
+	END_IF
+	nIndex:= nIndex + 1;
+END_WHILE]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_Failures" Id="{7b75fad0-983c-08d8-39cd-19ad57f0534c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Failures : Dint]]></Declaration>
+      <Get Name="Get" Id="{73818913-ecc0-0a35-28ac-898d2816923d}">
+        <Declaration><![CDATA[VAR
+	nIndex: DINT;
+	stAssert: ST_Assert;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Failures:= 0;
+WHILE nIndex < fbList.P_Length DO
+	stAssert:= fbList.M_Get(nIndex);
+	IF stAssert.eAssert = E_Assert.Failure THEN
+		P_Failures:= P_Failures + 1;
+	END_IF
+	nIndex:= nIndex + 1;
+END_WHILE]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_List" Id="{ea6a9980-6127-4b97-85a2-2a7f9c0ec844}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListAssert;]]></Declaration>
       <Get Name="Get" Id="{14ceb34e-4bf4-4c00-b722-209b0a43b8f1}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Assertions:= nAssertions;]]></ST>
+          <ST><![CDATA[P_List:= fbList;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Errors" Id="{30d0f722-5b86-4956-b739-ae22d25a0fdb}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Errors : int]]></Declaration>
-      <Get Name="Get" Id="{31dbbfcc-0dc0-4660-8eae-a37a106448f7}">
+    <Property Name="P_Passed" Id="{b0d7f1e9-2e57-0b75-193a-08f7173d4082}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Passed : Dint]]></Declaration>
+      <Get Name="Get" Id="{986e49f4-9643-0bf4-0a4b-973e66bdc6aa}">
         <Declaration><![CDATA[VAR
+	nIndex: DINT;
+	stAssert: ST_Assert;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Errors:= nErrors;]]></ST>
+          <ST><![CDATA[P_Passed:= 0;
+WHILE nIndex < fbList.P_Length DO
+	stAssert:= fbList.M_Get(nIndex);
+	IF stAssert.eAssert = E_Assert.Error THEN
+		P_Passed:= P_Passed + 1;
+	END_IF
+	nIndex:= nIndex + 1;
+END_WHILE]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_Failures" Id="{48dcd0d0-b609-448f-8d21-4b49f4635ffd}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Failures : int]]></Declaration>
-      <Get Name="Get" Id="{71c5c92e-2c3b-44cb-88d6-423c909252fe}">
+    <Property Name="P_Skipped" Id="{36f04b8a-e372-049a-1f34-1e0fa90b7d59}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : Dint]]></Declaration>
+      <Get Name="Get" Id="{40f1645d-6d95-07b4-1726-367ed90984bb}">
         <Declaration><![CDATA[VAR
+	nIndex: DINT;
+	stAssert: ST_Assert;
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Failures:= nFailures;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="P_Skipped" Id="{d5c526d8-b1d3-4c57-8c14-d538dbcb947b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Skipped : int]]></Declaration>
-      <Get Name="Get" Id="{5ccb0992-06db-4047-8401-ea4eadea5ee2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Skipped:= nSkipped;]]></ST>
+          <ST><![CDATA[P_Skipped:= 0;
+WHILE nIndex < fbList.P_Length DO
+	stAssert:= fbList.M_Get(nIndex);
+	IF stAssert.eAssert = E_Assert.Skipped THEN
+		P_Skipped:= P_Skipped + 1;
+	END_IF
+	nIndex:= nIndex + 1;
+END_WHILE]]></ST>
         </Implementation>
       </Get>
     </Property>
     <LineIds Name="FB_Assert">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Assert.FB_init">
-      <LineId Id="13" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Assert.M_Equals_ANY">
-      <LineId Id="17" Count="0" />
-      <LineId Id="49" Count="3" />
-      <LineId Id="43" Count="0" />
-      <LineId Id="58" Count="3" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="70" Count="1" />
+      <LineId Id="58" Count="0" />
       <LineId Id="57" Count="0" />
+      <LineId Id="72" Count="0" />
       <LineId Id="54" Count="0" />
-      <LineId Id="63" Count="0" />
-      <LineId Id="55" Count="1" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="75" Count="0" />
       <LineId Id="53" Count="0" />
+      <LineId Id="74" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">
-      <LineId Id="17" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
-      <LineId Id="42" Count="0" />
-      <LineId Id="38" Count="1" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BYTE">
-      <LineId Id="35" Count="2" />
-      <LineId Id="44" Count="5" />
+      <LineId Id="56" Count="3" />
+      <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_DINT">
-      <LineId Id="54" Count="2" />
-      <LineId Id="63" Count="4" />
+      <LineId Id="74" Count="3" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_INT">
-      <LineId Id="35" Count="2" />
-      <LineId Id="44" Count="4" />
+      <LineId Id="55" Count="3" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LINT">
-      <LineId Id="54" Count="2" />
-      <LineId Id="63" Count="4" />
+      <LineId Id="74" Count="3" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LREAL">
-      <LineId Id="77" Count="1" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="90" Count="4" />
+      <LineId Id="107" Count="1" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="113" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_REAL">
-      <LineId Id="17" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="44" Count="4" />
+      <LineId Id="56" Count="3" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_STRING">
-      <LineId Id="17" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="42" Count="4" />
+      <LineId Id="53" Count="3" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Reset">
-      <LineId Id="11" Count="0" />
-      <LineId Id="17" Count="2" />
       <LineId Id="15" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Assert.P_Assertions.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Assert.P_Errors.Get">
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="2" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="15" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Failures.Get">
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="2" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.P_List.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.P_Passed.Get">
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="2" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="15" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.P_Skipped.Get">
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="2" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="15" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

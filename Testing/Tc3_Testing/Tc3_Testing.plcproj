@@ -53,19 +53,28 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="List\E_Assert.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="List\FB_ListTestsuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\FB_ListAssert.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="List\I_ListTestsuite.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="List\I_ListAssert.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\ST_Assert.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Testcase\E_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Testcase\FB_Testcase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testcase\I_Testcase.TcIO">
+    <Compile Include="Testcase\ST_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuites\FB_Testsuites.TcPOU">
@@ -74,10 +83,16 @@
     <Compile Include="Testsuites\I_Testsuites.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Testsuites\ST_Testsuites.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Testsuite\FB_Testsuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuite\I_Testsuite.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Testsuite\ST_Testsuite.TcDUT">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

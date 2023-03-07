@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_ListAssert" Id="{a989d5e2-1cf5-0358-2412-01f34683c5c9}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'} 
+FUNCTION_BLOCK PUBLIC FB_ListAssert IMPLEMENTS I_ListAssert
+VAR
+	pList: 			POINTER TO ST_Assert;
+	nLength:		DINT;
+	aList:			POINTER TO POINTER TO ARRAY [0..100] OF ST_Assert:=ADR(pList);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_exit" Id="{9a1b1e03-9c79-04ae-0e47-529adbf0eb35}">
+      <Declaration><![CDATA[METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF pList <> 0 THEN
+	__DELETE(pList);
+	nLength:= 0;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Add" Id="{fc95c475-02ce-0a23-3d94-22fd0ca885a7}">
+      <Declaration><![CDATA[METHOD M_Add : BOOL
+VAR_INPUT
+	eAssert:		E_Assert;
+	sMessage:		STRING(255);
+	sType:			STRING(255);
+END_VAR
+VAR
+	pOldList: 	POINTER TO ST_Assert;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// First Item
+IF pList = 0 THEN
+	nLength:= nLength + 1;
+	pList:= __NEW(POINTER TO ST_Assert,DINT_TO_UDINT(nLength));
+ELSE
+	// Item already in List
+	IF M_Search(eAssert, sMessage, sType) = -1 THEN
+		// backup 
+		pOldList:= pList;
+		// new Length
+		nLength:= nLength + 1;
+		// new pointer
+		pList:= __NEW(POINTER TO ST_Assert,DINT_TO_UDINT(nLength));
+		// restore
+		Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert)*DINT_TO_UDINT(nLength -1));
+		// delete old
+		__DELETE(pOldList);
+	ELSE
+		M_Add:= FALSE;	
+		RETURN;
+	END_IF
+END_IF
+
+// add new Object
+pList[nLength-1].eAssert:= eAssert;
+pList[nLength-1].sMessage:= sMessage;
+pList[nLength-1].sType:= sType;	
+M_Add:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Clear" Id="{0696c9f2-3368-02c7-3570-914b538477bb}">
+      <Declaration><![CDATA[METHOD M_Clear
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF pList <> 0 THEN
+	nLength:= 0;
+	__DELETE(pList);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Get" Id="{29e4159c-eed0-0b05-05f7-6ee207ca7daf}">
+      <Declaration><![CDATA[METHOD M_Get : ST_Assert
+VAR_INPUT
+	nIndex: 	DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nIndex <= nLength THEN
+	M_Get:= pList[nIndex];
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Index" Id="{f499fc6d-d45b-0ca4-2495-d9d9df4f4408}">
+      <Declaration><![CDATA[METHOD M_Index : DINT
+VAR_INPUT
+	eAssert:		E_Assert;
+	sMessage:		STRING(255);
+	sType:			STRING(255);
+END_VAR
+VAR
+	nIndex: 	DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Object already in List
+M_Index := -1;
+WHILE nIndex < nLength DO
+    IF (pList[nIndex].eAssert = eAssert) AND (pList[nIndex].sMessage = sMessage) AND (pList[nIndex].sType = sType)  THEN
+        M_Index := nIndex;
+        RETURN;
+    END_IF
+	nIndex := nIndex + 1;
+END_WHILE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Remove" Id="{e45f8add-9693-0801-3102-f3924d7fbe37}">
+      <Declaration><![CDATA[METHOD M_Remove : BOOL
+VAR_INPUT
+	eAssert:		E_Assert;
+	sMessage:		STRING(255);
+	sType:			STRING(255);
+END_VAR
+VAR
+	pOldList:			POINTER TO ST_Assert;
+	nPosition: 			DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// First Item
+IF nLength >= 0 THEN
+	// Item already in List
+	nPosition:= M_Search(eAssert, sMessage, sType);
+	IF nPosition <> -1 THEN
+		// backup 
+		pOldList:= pList;
+		// new Length
+		nLength:= nLength -1;
+		// new pointer
+		pList:= __NEW(POINTER TO ST_Assert,DINT_TO_UDINT(nLength));
+		// restore lower part
+		Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(nPosition));
+		//pList[nPosition]:= iObject;
+		Memcpy(pList + (SIZEOF(POINTER TO ST_Assert)*nPosition),pOldList + (SIZEOF(POINTER TO ST_Assert)*(nPosition + 1)), SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(nLength - nPosition));
+		// delete old
+		__DELETE(pOldList);
+	ELSE
+		M_Remove:= FALSE;	
+		RETURN;
+	END_IF
+ELSE
+	M_Remove:= FALSE;	
+	RETURN;
+END_IF
+M_Remove:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Search" Id="{9af81950-5ba8-0340-3e5f-5b6e67170a1c}">
+      <Declaration><![CDATA[METHOD M_Search : DINT
+VAR_INPUT
+	eAssert:		E_Assert;
+	sMessage:		STRING(255);
+	sType:			STRING(255);
+END_VAR
+VAR
+	nIndex: 	UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Object already in List
+M_Search := -1;
+WHILE nIndex < nLength DO
+    IF (pList[nIndex].eAssert = eAssert) AND (pList[nIndex].sMessage = sMessage) AND (pList[nIndex].sType = sType) THEN
+        M_Search := nIndex;
+        RETURN;
+    END_IF
+	nIndex := nIndex + 1;
+END_WHILE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Length" Id="{4be58bcd-8d3b-06e7-25c0-02f6b9f73cce}">
+      <Declaration><![CDATA[PROPERTY P_Length : DINT
+]]></Declaration>
+      <Get Name="Get" Id="{ebd53a4d-532d-0f16-0572-d7a706cbf043}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Length:= nLength;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_ListAssert">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.FB_exit">
+      <LineId Id="3" Count="1" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Add">
+      <LineId Id="46" Count="20" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="67" Count="2" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="70" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Clear">
+      <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Get">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Index">
+      <LineId Id="24" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Remove">
+      <LineId Id="47" Count="25" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.M_Search">
+      <LineId Id="24" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListAssert.P_Length.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

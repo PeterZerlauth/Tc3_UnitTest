@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Testcase" Id="{483fab24-fd31-0470-0a84-7d11f82ea0b0}">
+    <Declaration><![CDATA[TYPE ST_Testcase :
+STRUCT
+	sName:				STRING(255);	//	name        The name of this test case, often the method name  
+	sClassname:			STRING(255);	//	classname   The name of the parent class/folder, often the same as the suite's name
+	nAssertions:		DINT; 			//	assertions  Number of assertions checked during test case execution  
+	fTime:				LREAL;			//	time        Execution time of the test in seconds            
+	sFile:				STRING(255);	//	file        Source code file of this test case              
+	nLine:				INT;			//	line        Source code line number of the start of this test case  
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Assert" Id="{8bec824b-498f-012d-1ff2-7dca2205fb5d}">
+    <Declaration><![CDATA[TYPE ST_Assert :
+STRUCT
+	eAssert:		E_Assert;
+	sMessage:		STRING(255);
+	sType:			STRING(255);	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

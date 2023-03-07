@@ -14,8 +14,6 @@ VAR
 	eState: 			E_Base;
 	eRequest: 			E_Base;
 	nState: 			INT;
-	sName:				STRING(255):= 'test-run'; 	// Name OF the entire test run
-	sTimestamp:			STRING(39);						// timestamp   Date and time of when the test suite was executed (in ISO 8601 format)
     {attribute 'hide'} 
 	fbTask:				GETCURTASKINDEX;
 	fbGetTime:			NT_GetTime;
@@ -84,6 +82,15 @@ END_CASE
 
 eRequest:= eState;]]></ST>
     </Implementation>
+    <Method Name="M_GetCycleTime" Id="{6573b86a-8292-0eb4-2f3a-f84b9cb145c6}">
+      <Declaration><![CDATA[METHOD INTERNAL M_GetCycleTime : LREAL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_GetCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_GetName" Id="{7644e4a6-816c-4e95-a1be-94a500976a8c}">
       <Declaration><![CDATA[METHOD INTERNAL M_GetName : STRING(255)
 VAR_INPUT
@@ -153,13 +160,11 @@ END_VAR
 	IF fbGetTime.BUSY THEN
 		;
 	ELSE
-		sTimestamp:= SYSTEMTIME_TO_ISO8601(fbGetTime.TIMESTR, 0, FALSE, 2);
 		fbGetTime.START:= FALSE;
 		M_Starting:= TRUE;
 	END_IF
 ELSE
-	sName:= M_GetName(sInstancePath);
-	fCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;
+	fCycleTime:= 
 	fbGetTime.START:= TRUE;
 END_IF]]></ST>
       </Implementation>
@@ -258,6 +263,9 @@ END_VAR]]></Declaration>
       <LineId Id="99" Count="0" />
       <LineId Id="98" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Base.M_GetCycleTime">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Base.M_GetName">
       <LineId Id="10" Count="14" />
       <LineId Id="5" Count="0" />
@@ -279,12 +287,11 @@ END_VAR]]></Declaration>
       <LineId Id="23" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="29" Count="0" />
-      <LineId Id="34" Count="0" />
       <LineId Id="31" Count="0" />
       <LineId Id="30" Count="0" />
       <LineId Id="28" Count="0" />
       <LineId Id="25" Count="0" />
-      <LineId Id="32" Count="1" />
+      <LineId Id="33" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="24" Count="0" />
     </LineIds>

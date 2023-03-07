@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_Testsuites" Id="{85af27aa-0a62-0b31-3c1b-5dbbeba3fdd0}">
+    <Declaration><![CDATA[TYPE ST_Testsuites :
+STRUCT
+	sName:				STRING(255); 				// Name OF the entire test run
+	nTests:				DINT;						// Total number of tests in this file
+	nFailures:			dINT;						// Total number of failed tests in this file
+	nErrors:			dINT;						// Total number of errored tests in this file
+	nSkipped:			dINT;						// Total number of skipped tests in this file
+	nAssertions:		dINT;						// Total number of assertions for all tests in this file
+	fTime:				REAL;						// Aggregated time of all tests in this file in seconds
+	sTimestamp:			STRING(39);					// timestamp   Date and time of when the test suite was executed (in ISO 8601 format)
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

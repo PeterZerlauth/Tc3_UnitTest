@@ -18,12 +18,6 @@
         <Declaration><![CDATA[]]></Declaration>
       </Set>
     </Property>
-    <Property Name="P_Result" Id="{d400200d-2272-0b95-2551-15ef7caf4e5d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Result : ST_Testsuite]]></Declaration>
-      <Get Name="Get" Id="{e9bba78f-c398-0241-02b0-09ddc535daac}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
     <Property Name="P_Testcase" Id="{4e4b87c6-fedd-0eea-3a95-04aa9817daa1}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : INT]]></Declaration>
       <Get Name="Get" Id="{e80fe4c8-79ad-0f5d-03c0-493d759378fe}">

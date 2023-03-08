@@ -10,6 +10,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	nIndex: 			DINT;
+	fbTimeout:			TON:= (PT:= T#300S);
 	fbFile:				FB_File;
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
@@ -41,10 +42,15 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Started:= TRUE;
+fbTimeout(IN:= TRUE);
 WHILE nIndex < fbListTestsuite.P_Length DO
 	M_Started:= M_Started AND (fbListTestsuite.M_Get(nIndex).P_State = E_Base.Stopped);
 	nIndex:= nIndex + 1;
-END_WHILE]]></ST>
+END_WHILE
+IF M_Started THEN
+	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET);
+	fbTimeout(IN:= FALSE);
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Starting" Id="{a8b1fe70-9112-024f-0be9-355ea21512f0}">
@@ -67,6 +73,8 @@ END_VAR]]></Declaration>
 			stTestsuites.nSkipped:= 0;
 			stTestsuites.nAssertions:= 0;
 			stTestsuites.fTime:= 0.0;
+			stTestsuites.sTimestamp:= SYSTEMTIME_TO_ISO8601(fbGetTime.TIMESTR, 0, FALSE, 3);
+			stTestsuites.sTimestamp:= LEFT(stTestsuites.sTimestamp, LEN(stTestsuites.sTimestamp) - 6);
 			nState:= 1;
 		END_IF
 	
@@ -88,23 +96,11 @@ END_CASE]]></ST>
 VAR_INPUT
 END_VAR
 VAR
-	stTestsuite: ST_Testsuite;
 	sValue: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE nState OF
 	0:
-		nIndex:= 0;
-		WHILE nIndex < fbListTestsuite.P_Length DO
-			stTestsuite:= fbListTestsuite.M_Get(nIndex).P_Result;
-			stTestsuites.nTests:= stTestsuites.nTests + stTestsuite.nTests;
-			stTestsuites.nFailures:= stTestsuites.nFailures + stTestsuite.nFailures;
-			stTestsuites.nErrors:= stTestsuites.nErrors + stTestsuite.nErrors;
-			stTestsuites.nSkipped:= stTestsuites.nSkipped + stTestsuite.nSkipped;
-			stTestsuites.nAssertions:= stTestsuites.nAssertions + stTestsuite.nAssertions;
-			stTestsuites.fTime:= stTestsuites.fTime +  stTestsuite.fTime;
-			nIndex:= nIndex + 1;
-		END_WHILE
 		nState:= 1;
 		
 	1:
@@ -112,21 +108,21 @@ END_VAR]]></Declaration>
 		fbList.M_Insert(0, '<?xml version="1.0" encoding="UTF-8"?>');
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append('<testsuites name="');	
-		fbBuilder.M_Append(stTestsuite.sName);		
+		fbBuilder.M_Append(stTestsuites.sName);		
 		fbBuilder.M_Append('" tests="');	
-		fbBuilder.M_AppendInt(stTestsuite.nTests);
+		fbBuilder.M_AppendInt(stTestsuites.nTests);
 		fbBuilder.M_Append('" failures="');	
-		fbBuilder.M_AppendInt(stTestsuite.nFailures);
+		fbBuilder.M_AppendInt(stTestsuites.nFailures);
 		fbBuilder.M_Append('" errors="');	
-		fbBuilder.M_AppendInt(stTestsuite.nErrors);
+		fbBuilder.M_AppendInt(stTestsuites.nErrors);
 		fbBuilder.M_Append('" skipped="');	
-		fbBuilder.M_AppendInt(stTestsuite.nSkipped);
+		fbBuilder.M_AppendInt(stTestsuites.nSkipped);
 		fbBuilder.M_Append('"  assertions="');	
-		fbBuilder.M_AppendInt(stTestsuite.nAssertions);
+		fbBuilder.M_AppendInt(stTestsuites.nAssertions);
 		fbBuilder.M_Append('" time="');	
-		fbBuilder.M_AppendReal(stTestsuite.fTime, 4);
+		fbBuilder.M_AppendReal(stTestsuites.fTime, 4);
 		fbBuilder.M_Append('" timestamp="');
-		fbBuilder.M_Append(stTestsuite.sTimestamp);
+		fbBuilder.M_Append(stTestsuites.sTimestamp);
 		fbBuilder.M_Append('">');
 		fbBuilder.M_Copy(sValue);
 		fbList.M_Insert(1, sValue);
@@ -157,6 +153,17 @@ END_VAR]]></Declaration>
 END_CASE]]></ST>
       </Implementation>
     </Method>
+    <Property Name="P_Data" Id="{185d0565-b6b7-0d45-1303-8b4f2b4c3186}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Data : reference to ST_Testsuites]]></Declaration>
+      <Get Name="Get" Id="{b4d22e3a-4d8e-0c3f-0f30-74401271467a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Data ref= stTestsuites;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="P_List" Id="{18052295-5436-0cc4-08da-cc28d1b6063a}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
       <Get Name="Get" Id="{2c6d35e0-576a-0ff0-3193-2cb041a9eff0}">
@@ -177,8 +184,12 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Started">
       <LineId Id="12" Count="0" />
+      <LineId Id="19" Count="0" />
       <LineId Id="6" Count="2" />
       <LineId Id="5" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Starting">
       <LineId Id="34" Count="0" />
@@ -189,6 +200,8 @@ END_VAR
       <LineId Id="83" Count="3" />
       <LineId Id="41" Count="0" />
       <LineId Id="87" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="122" Count="0" />
       <LineId Id="77" Count="0" />
       <LineId Id="42" Count="1" />
       <LineId Id="56" Count="0" />
@@ -203,8 +216,7 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Stopping">
       <LineId Id="141" Count="1" />
-      <LineId Id="223" Count="0" />
-      <LineId Id="143" Count="12" />
+      <LineId Id="153" Count="2" />
       <LineId Id="172" Count="0" />
       <LineId Id="202" Count="0" />
       <LineId Id="168" Count="2" />
@@ -242,6 +254,9 @@ END_VAR
       <LineId Id="232" Count="0" />
       <LineId Id="166" Count="0" />
       <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Data.Get">
+      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.P_List.Get">
       <LineId Id="2" Count="0" />

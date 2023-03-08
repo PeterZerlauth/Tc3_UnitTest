@@ -17,7 +17,7 @@ CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
 		fbTestsuite1.P_Assert.M_Equals_BOOL(FALSE,FALSE,'Equals bool false');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, 'file', 23, 1);
+		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', 23, 1);
 		
 	1:
 		fbTestsuite1.P_Assert.M_Equals_REAL(22.11, 22.11, 0.0, 'Equals real 1')

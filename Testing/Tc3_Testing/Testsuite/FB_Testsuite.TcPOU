@@ -93,7 +93,7 @@ ELSE
 		nActual:= nNext;
 	END_IF
 END_IF
-stTestsuite.fTime:= TIME_TO_REAL(fbTimeout.ET);
+stTestsuite.fTime:=  TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 fbAssert.M_Reset();
 M_Started:= nActual = E_Testcase.Done;
 ]]></ST>

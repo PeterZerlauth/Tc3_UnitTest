@@ -34,9 +34,9 @@ ELSE
 	// new Length
 	nLength:= nLength + LEN2(ADR(Value));
 	// new pointer
-	pList:= __NEW(BYTE, DINT_TO_UDINT(SIZEOF(BYTE) * nLength));
+	pList:= __NEW(BYTE, (DINT_TO_UDINT(SIZEOF(BYTE)) * nLength));
 	// restore
-	Memcpy(pList,pOldList, SIZEOF(BYTE)*DINT_TO_UDINT(SIZEOF(BYTE) * nLengthOld));
+	Memcpy(pList,pOldList, DINT_TO_UDINT(SIZEOF(BYTE)) * nLengthOld);
 	// delete old
 	__DELETE(pOldList);
 
@@ -84,7 +84,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Memset(Value.pValue, 0, Value.diSize);
+        <ST><![CDATA[Memset(Value.pValue, 0, DINT_TO_UDINT(Value.diSize));
 Memcpy(Value.pValue, pList, nLength);]]></ST>
       </Implementation>
     </Method>

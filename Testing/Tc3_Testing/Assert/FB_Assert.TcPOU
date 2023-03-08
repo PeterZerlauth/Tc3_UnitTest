@@ -14,11 +14,19 @@ VAR_OUTPUT
 END_VAR
 VAR
 	sData:					STRING(255);
-	
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="M_AddData" Id="{d002ab3f-1d38-040c-3e98-771f32ebb52b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AddData : I_Assert
+VAR_INPUT
+	Value:			ANY;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Equals_ANY" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
 VAR_INPUT
@@ -277,6 +285,31 @@ END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_IsTRUE" Id="{ff21833d-ba1f-05de-0ce2-388ab8c48e28}">
+      <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
+VAR_INPUT
+    Actual:				BOOL;
+	Message:			STRING(255);
+END_VAR
+VAR 
+	sValue:				STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nAssert:= nAssert + 1;
+IF Actual THEN
+	nPassed:= nPassed + 1;
+ELSE
+	sValue:= '<failure message="';
+	sValue:= Concat(sValue, Message);
+	sValue:= Concat(sValue, '" type="ArithmeticError">');
+	sValue:= Concat(sValue, sData);
+	sValue:= Concat(sValue, '</failure>');	
+	fbList.M_Add(sValue);
+	nFailures:= nFailures + 1;
+END_IF
+M_IsTRUE:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Reset" Id="{968629c2-18de-07f2-0ab0-109e8e7d42c9}">
       <Declaration><![CDATA[METHOD PUBLIC M_Reset : I_Assert
 VAR_INPUT
@@ -294,6 +327,9 @@ M_Reset:= THIS^;]]></ST>
     </Method>
     <LineIds Name="FB_Assert">
       <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_AddData">
+      <LineId Id="8" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_ANY">
       <LineId Id="207" Count="0" />
@@ -365,6 +401,16 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="87" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="8" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_IsTRUE">
+      <LineId Id="82" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="76" Count="5" />
+      <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>

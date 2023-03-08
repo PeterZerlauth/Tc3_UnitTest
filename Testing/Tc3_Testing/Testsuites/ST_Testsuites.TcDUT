@@ -9,7 +9,7 @@ STRUCT
 	nErrors:			dINT;						// Total number of errored tests in this file
 	nSkipped:			dINT;						// Total number of skipped tests in this file
 	nAssertions:		dINT;						// Total number of assertions for all tests in this file
-	fTime:				REAL;						// Aggregated time of all tests in this file in seconds
+	fTime:				LREAL;						// Aggregated time of all tests in this file in seconds
 	sTimestamp:			STRING(39);					// timestamp   Date and time of when the test suite was executed (in ISO 8601 format)
 END_STRUCT
 END_TYPE

@@ -48,7 +48,7 @@ WHILE nIndex < fbListTestsuite.P_Length DO
 	nIndex:= nIndex + 1;
 END_WHILE
 IF M_Started THEN
-	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET);
+	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 	fbTimeout(IN:= FALSE);
 END_IF]]></ST>
       </Implementation>

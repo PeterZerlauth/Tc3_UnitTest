@@ -8,7 +8,7 @@ STRUCT
 	nAssertions:		DINT; 			//	assertions  Number of assertions checked during test case execution  
 	fTime:				LREAL;			//	time        Execution time of the test in seconds            
 	sFile:				STRING(255);	//	file        Source code file of this test case              
-	nLine:				DINT;			//	line        Source code line number of the start of this test case  
+	sLine:				STRING(255);			//	line        Source code line number of the start of this test case  
 END_STRUCT
 END_TYPE
 ]]></Declaration>

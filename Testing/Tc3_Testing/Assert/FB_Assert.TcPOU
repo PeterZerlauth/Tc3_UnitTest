@@ -14,6 +14,7 @@ VAR_OUTPUT
 END_VAR
 VAR
 	sData:					STRING(255);
+	fbBuilder:				FB_StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
@@ -33,37 +34,35 @@ VAR_INPUT
 	Expected:			ANY;
     Actual:				ANY;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected.diSize <> Actual.diSize THEN
-	sValue:= '<error message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</error>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<error message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="ArithmeticError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</error>$R');
+	fbList.M_Add(fbBuilder.P_Value);
 	nErrors:= nErrors + 1;
 	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
-	sValue:= '<error message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</error>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<error message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="ArithmeticError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</error>$R');
+	fbList.M_Add(fbBuilder.P_Value);
 	nErrors:= nErrors + 1;
 	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>$R');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 	
 ELSE
@@ -78,21 +77,19 @@ VAR_INPUT
 	Expected:			BOOL;
     Actual:				BOOL;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append('');		
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
@@ -104,21 +101,19 @@ VAR_INPUT
 	Expected:			BYTE;
     Actual:				BYTE;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
@@ -130,21 +125,19 @@ VAR_INPUT
 	Expected:			DINT;
     Actual:				DINT;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_DINT:= THIS^;
@@ -157,21 +150,19 @@ VAR_INPUT
 	Expected:			INT;
     Actual:				INT;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
@@ -183,21 +174,19 @@ VAR_INPUT
 	Expected:			LINT;
     Actual:				LINT;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_LINT:= THIS^;
@@ -211,21 +200,19 @@ VAR_INPUT
     Actual:				LREAL;
 	Tolerance:			LREAL;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_LREAL:= THIS^;
@@ -239,21 +226,19 @@ VAR_INPUT
     Actual:				REAL;
 	Tolerance:			REAL;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
@@ -265,21 +250,19 @@ VAR_INPUT
 	Expected:			STRING(255);
     Actual:				STRING(255);
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Expected = Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
@@ -290,21 +273,19 @@ M_Equals_STRING:= THIS^;]]></ST>
 VAR_INPUT
     Actual:				BOOL;
 	Message:			STRING(255);
-END_VAR
-VAR 
-	sValue:				STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
 IF Actual THEN
 	nPassed:= nPassed + 1;
 ELSE
-	sValue:= '<failure message="';
-	sValue:= Concat(sValue, Message);
-	sValue:= Concat(sValue, '" type="ArithmeticError">');
-	sValue:= Concat(sValue, sData);
-	sValue:= Concat(sValue, '</failure>');	
-	fbList.M_Add(sValue);
+	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">$R');
+	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('</failure>$R');
+	fbList.M_Add(fbBuilder.P_Value);
 	nFailures:= nFailures + 1;
 END_IF
 M_IsTRUE:= THIS^;]]></ST>
@@ -333,83 +314,112 @@ M_Reset:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_ANY">
       <LineId Id="207" Count="0" />
+      <LineId Id="216" Count="0" />
       <LineId Id="150" Count="0" />
+      <LineId Id="217" Count="0" />
       <LineId Id="182" Count="0" />
-      <LineId Id="185" Count="1" />
-      <LineId Id="188" Count="0" />
-      <LineId Id="187" Count="0" />
+      <LineId Id="218" Count="2" />
       <LineId Id="155" Count="3" />
-      <LineId Id="189" Count="5" />
+      <LineId Id="221" Count="4" />
+      <LineId Id="194" Count="0" />
       <LineId Id="164" Count="2" />
-      <LineId Id="201" Count="5" />
+      <LineId Id="226" Count="4" />
+      <LineId Id="206" Count="0" />
       <LineId Id="172" Count="2" />
       <LineId Id="180" Count="1" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">
       <LineId Id="82" Count="0" />
+      <LineId Id="96" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
-      <LineId Id="76" Count="5" />
+      <LineId Id="91" Count="2" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="80" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BYTE">
       <LineId Id="90" Count="0" />
-      <LineId Id="93" Count="9" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="93" Count="2" />
+      <LineId Id="111" Count="4" />
+      <LineId Id="101" Count="1" />
       <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_DINT">
       <LineId Id="108" Count="0" />
-      <LineId Id="111" Count="9" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="129" Count="4" />
+      <LineId Id="119" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_INT">
       <LineId Id="89" Count="0" />
-      <LineId Id="92" Count="9" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="92" Count="2" />
+      <LineId Id="110" Count="4" />
+      <LineId Id="100" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LINT">
       <LineId Id="108" Count="0" />
-      <LineId Id="111" Count="9" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="129" Count="4" />
+      <LineId Id="119" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LREAL">
       <LineId Id="168" Count="0" />
+      <LineId Id="194" Count="0" />
       <LineId Id="107" Count="0" />
-      <LineId Id="171" Count="8" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="189" Count="4" />
+      <LineId Id="178" Count="1" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="124" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_REAL">
       <LineId Id="92" Count="0" />
+      <LineId Id="118" Count="0" />
       <LineId Id="69" Count="0" />
-      <LineId Id="95" Count="8" />
+      <LineId Id="95" Count="1" />
+      <LineId Id="113" Count="4" />
+      <LineId Id="102" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_STRING">
       <LineId Id="87" Count="0" />
+      <LineId Id="112" Count="0" />
       <LineId Id="65" Count="0" />
-      <LineId Id="90" Count="8" />
+      <LineId Id="90" Count="1" />
+      <LineId Id="107" Count="4" />
+      <LineId Id="97" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_IsTRUE">
       <LineId Id="82" Count="0" />
+      <LineId Id="95" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
-      <LineId Id="76" Count="5" />
+      <LineId Id="90" Count="4" />
+      <LineId Id="81" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />

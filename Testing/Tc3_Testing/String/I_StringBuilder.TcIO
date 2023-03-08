@@ -9,28 +9,28 @@ VAR_INPUT
 	Value	: STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_AppendBool" Id="{7603f41d-77e0-0877-3137-edeb0957466d}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendBool  : I_StringBuilder
+    <Method Name="M_AppendBOOL" Id="{7603f41d-77e0-0877-3137-edeb0957466d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendBOOL  : I_StringBuilder
 VAR_INPUT
 	Value:			BOOL;
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_AppendInt" Id="{14f51f13-e329-0cde-0c9e-a7dc465a3499}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendInt : I_StringBuilder
+    <Method Name="M_AppendINT" Id="{14f51f13-e329-0cde-0c9e-a7dc465a3499}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendINT : I_StringBuilder
 VAR_INPUT
 	Value	: LINT;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_AppendReal" Id="{f057156e-5dae-0fd8-10fe-cc573cd3ed43}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendReal : I_StringBuilder
+    <Method Name="M_AppendREAL" Id="{f057156e-5dae-0fd8-10fe-cc573cd3ed43}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendREAL : I_StringBuilder
 VAR_INPUT
 	Value:		LREAL;
 	nDecimals:	SINT;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Copy" Id="{940c2d63-a99a-009b-232c-ea17ccc23948}">
-      <Declaration><![CDATA[METHOD M_Copy : BOOL
+    <Method Name="M_CopyTo" Id="{940c2d63-a99a-009b-232c-ea17ccc23948}">
+      <Declaration><![CDATA[METHOD M_CopyTo : BOOL
 VAR_INPUT
 	Value:			ANY_STRING;
 END_VAR

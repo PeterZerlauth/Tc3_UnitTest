@@ -131,7 +131,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF nIndex <= nLength THEN
+        <ST><![CDATA[M_Item:= '';
+IF nIndex <= nLength THEN
 	M_Item:= pList[nIndex];
 END_IF]]></ST>
       </Implementation>
@@ -228,6 +229,7 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Item">
+      <LineId Id="19" Count="0" />
       <LineId Id="13" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>

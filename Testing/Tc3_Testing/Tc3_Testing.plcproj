@@ -174,9 +174,9 @@
     <SubObject Include="FB_StringBuilder.M_Replace">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
-    <SubObject Include="I_StringBuilder.M_AppendBool" />
-    <SubObject Include="I_StringBuilder.M_AppendInt" />
-    <SubObject Include="I_StringBuilder.M_AppendReal" />
+    <SubObject Include="I_StringBuilder.M_AppendBOOL" />
+    <SubObject Include="I_StringBuilder.M_AppendINT" />
+    <SubObject Include="I_StringBuilder.M_AppendREAL" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

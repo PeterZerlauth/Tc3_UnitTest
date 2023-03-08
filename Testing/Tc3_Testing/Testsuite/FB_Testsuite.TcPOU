@@ -29,7 +29,6 @@ VAR_INPUT
 END_VAR
 VAR
 	nIndex: DINT;
-	sValue: STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbTimeout(IN:= TRUE);
@@ -41,24 +40,22 @@ IF fbAssert.nPassed = fbAssert.nAssert THEN
 	fbBuilder.M_Append('" classname="');
 	fbBuilder.M_Append(stTestcase.sClassname);
 	fbBuilder.M_Append('" assertions="');
-	fbBuilder.M_AppendInt(stTestcase.nAssertions);
+	fbBuilder.M_AppendINT(stTestcase.nAssertions);
 	fbBuilder.M_Append('" time="');
-	fbBuilder.M_AppendReal(stTestcase.fTime, 5);
+	fbBuilder.M_AppendREAL(stTestcase.fTime, 4);
 	fbBuilder.M_Append('" file="');
 	fbBuilder.M_Append(stTestcase.sFile);
 	fbBuilder.M_Append('" line="');
-	fbBuilder.M_AppendInt(stTestcase.nLine);
+	fbBuilder.M_Append(stTestcase.sLine);
 	fbBuilder.M_Append('" />');
-	fbBuilder.M_Copy(sValue);
-	fbList.M_Add(sValue);
+	fbList.M_Add(fbBuilder.P_Value);
 
 	stTestsuite.nTests:= stTestsuite.nTests + 1;
 	stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
 	stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
 	stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
 	stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
-	stTestsuite.fTime:= stTestsuite.fTime + stTestCase.fTime;
-	stTestCase.fTime:= -fCycleTime;
+	stTestcase.fTime:= 0.0;
 	nActual:= nNext;
 ELSE
 	IF fbTimeout.Q THEN
@@ -68,28 +65,26 @@ ELSE
 		fbBuilder.M_Append('" classname="');
 		fbBuilder.M_Append(stTestCase.sClassname);
 		fbBuilder.M_Append('" assertions="');
-		fbBuilder.M_AppendInt(stTestCase.nAssertions);
+		fbBuilder.M_AppendINT(stTestCase.nAssertions);
 		fbBuilder.M_Append('" time="');
-		fbBuilder.M_AppendReal(stTestCase.fTime, 5);
+		fbBuilder.M_AppendREAL(stTestCase.fTime, 4);
 		fbBuilder.M_Append('" file="');
 		fbBuilder.M_Append(stTestCase.sFile);
 		fbBuilder.M_Append('" line="');
-		fbBuilder.M_AppendInt(stTestCase.nLine);
+		fbBuilder.M_Append(stTestCase.sLine);
 		fbBuilder.M_Append('" >');
+		fbList.M_Add(fbBuilder.P_Value);
 		WHILE nIndex < fbAssert.fbList.P_Length DO
-			fbBuilder.M_Append(fbAssert.fbList.M_Item(nIndex));
+			fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
 			nIndex:= nIndex + 1;
 		END_WHILE
-		fbBuilder.M_Append('</testcase>');
-		fbBuilder.M_Copy(sValue);
-		fbList.M_Add(sValue);
+		fbList.M_Add('</testcase>');
 		stTestsuite.nTests:= stTestsuite.nTests + 1;
 		stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
 		stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
 		stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
 		stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
-		stTestsuite.fTime:= stTestsuite.fTime + stTestcase.fTime;
-		stTestcase.fTime:= -fCycleTime;
+		stTestcase.fTime:= 0.0;
 		nActual:= nNext;
 	END_IF
 END_IF
@@ -147,23 +142,23 @@ fbBuilder.M_Reset();
 fbBuilder.M_Append('<testsuite name="');
 fbBuilder.M_Append(stTestsuite.sName);
 fbBuilder.M_Append('" tests="');
-fbBuilder.M_AppendInt(stTestsuite.nTests);
+fbBuilder.M_AppendINT(stTestsuite.nTests);
 fbBuilder.M_Append('" failures="');
-fbBuilder.M_AppendInt(stTestsuite.nFailures);
+fbBuilder.M_AppendINT(stTestsuite.nFailures);
 fbBuilder.M_Append('" errors="');
-fbBuilder.M_AppendInt(stTestsuite.nErrors);
+fbBuilder.M_AppendINT(stTestsuite.nErrors);
 fbBuilder.M_Append('" skipped="');
-fbBuilder.M_AppendInt(stTestsuite.nSkipped);
+fbBuilder.M_AppendINT(stTestsuite.nSkipped);
 fbBuilder.M_Append('" assertions="');
-fbBuilder.M_AppendInt(stTestsuite.nAssertions);	
+fbBuilder.M_AppendINT(stTestsuite.nAssertions);	
 fbBuilder.M_Append('" time="');
-fbBuilder.M_AppendReal(stTestsuite.fTime, 4);
+fbBuilder.M_AppendREAL(stTestsuite.fTime, 3);
 fbBuilder.M_Append('" timestamp="');
 fbBuilder.M_Append(stTestsuite.sTimestamp);
 fbBuilder.M_Append('" file="');
 fbBuilder.M_Append(stTestsuite.sFile);
 fbBuilder.M_Append('">');
-fbBuilder.M_Copy(sValue);
+fbBuilder.M_CopyTo(sValue);
 fbList.M_Insert(0, sValue);
 fbList.M_Add('</testsuite>');
 IF iParent <> 0 THEN
@@ -187,7 +182,7 @@ VAR_INPUT
 	Classname:			STRING(255);	// Classname as string
 	Timeout:			TIME;			// Timeout in ms
 	File:				STRING(255);
-	Line:				DINT;	
+	Line:				STRING(255);	
 	Next:				INT;			// Next test case
 END_VAR]]></Declaration>
       <Implementation>
@@ -195,7 +190,8 @@ END_VAR]]></Declaration>
 stTestcase.sClassname:= Classname;
 stTestcase.nAssertions:= fbAssert.fbList.P_Length;
 stTestcase.sFile:= File;
-stTestcase.NLine:= Line;
+stTestcase.sLine:= Line;
+stTestcase.fTime:= stTestcase.fTime + fCycleTime;
 IF Timeout <> T#0S THEN
 	fbTimeout(IN:= TRUE, PT:= Timeout);
 END_IF
@@ -268,7 +264,7 @@ END_VAR
       <LineId Id="100" Count="0" />
       <LineId Id="128" Count="2" />
       <LineId Id="127" Count="0" />
-      <LineId Id="98" Count="1" />
+      <LineId Id="98" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="139" Count="0" />
       <LineId Id="138" Count="0" />
@@ -276,8 +272,7 @@ END_VAR
       <LineId Id="136" Count="0" />
       <LineId Id="140" Count="0" />
       <LineId Id="135" Count="0" />
-      <LineId Id="134" Count="0" />
-      <LineId Id="132" Count="0" />
+      <LineId Id="160" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="45" Count="0" />
       <LineId Id="49" Count="0" />
@@ -290,13 +285,13 @@ END_VAR
       <LineId Id="126" Count="0" />
       <LineId Id="125" Count="0" />
       <LineId Id="114" Count="0" />
+      <LineId Id="167" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="66" Count="0" />
       <LineId Id="61" Count="1" />
-      <LineId Id="115" Count="2" />
+      <LineId Id="117" Count="0" />
       <LineId Id="142" Count="4" />
-      <LineId Id="141" Count="0" />
-      <LineId Id="131" Count="0" />
+      <LineId Id="161" Count="0" />
       <LineId Id="52" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="42" Count="0" />
@@ -355,6 +350,7 @@ END_VAR
       <LineId Id="133" Count="2" />
       <LineId Id="241" Count="0" />
       <LineId Id="137" Count="0" />
+      <LineId Id="249" Count="0" />
       <LineId Id="236" Count="2" />
       <LineId Id="229" Count="0" />
     </LineIds>

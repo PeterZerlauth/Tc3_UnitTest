@@ -8,9 +8,10 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	pList:			POINTER TO BYTE;
+	sList:			STRING(255);
+	pList:			POINTER TO BYTE:= ADR(sList);
 	aList:			POINTER TO POINTER TO STRING(1000):= ADR(pList);
-	nLength:		UDINT;
+	nLength:		UDINT:= SIZEOF(sList);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -22,63 +23,63 @@ VAR_INPUT
 	Value	: STRING(255);
 END_VAR
 VAR
-	nLengthOld:	UDINT:= nLength;
 	pOldList: 	POINTER TO BYTE:=pList;;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// First Item
-IF pList = 0 THEN
-	nLength:= LEN2(ADR(Value));
-	pList:= __NEW(BYTE, (nLength));
-ELSE
-	// new Length
-	nLength:= nLength + LEN2(ADR(Value));
-	// new pointer
-	pList:= __NEW(BYTE, (DINT_TO_UDINT(SIZEOF(BYTE)) * nLength));
-	// restore
-	Memcpy(pList,pOldList, DINT_TO_UDINT(SIZEOF(BYTE)) * nLengthOld);
-	// delete old
-	__DELETE(pOldList);
+        <ST><![CDATA[//// First Item
+//IF pList = 0 THEN
+//	nLength:= LEN2(ADR(Value));
+//	pList:= __NEW(BYTE, (nLength) + 1);
+//	CONCAT2(pList, ADR(Value), pList, nLength);
+//ELSE
+//	// new Length
+//	nLength:= nLength + LEN2(ADR(Value));
+//	// new pointer
+//	pList:= __NEW(BYTE, (DINT_TO_UDINT(SIZEOF(BYTE)) * nLength));
+	
+	
+//	// delete old
+//	__DELETE(pOldList);
 
-END_IF
-Memcpy((pList + nLengthOld) , ADR(Value), SIZEOF(BYTE)* LEN2(ADR(Value)));
+//END_IF
+CONCAT2(pList, ADR(Value), pList, nLength);
 M_Append:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_AppendBool" Id="{bfecdd7b-04e9-4b45-8de6-ce56cee3d775}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendBool  : I_StringBuilder
+    <Method Name="M_AppendBOOL" Id="{bfecdd7b-04e9-4b45-8de6-ce56cee3d775}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendBOOL  : I_StringBuilder
 VAR_INPUT
 	Value:			BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Append(BOOL_TO_STRING(Value));
-M_AppendBool:= THIS^;]]></ST>
+M_AppendBOOL:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_AppendInt" Id="{111c7396-9c3f-42fb-91f0-39c8d5232d3f}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendInt : I_StringBuilder
+    <Method Name="M_AppendINT" Id="{111c7396-9c3f-42fb-91f0-39c8d5232d3f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendINT : I_StringBuilder
 VAR_INPUT
 	Value	: LINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Append(LINT_TO_STRING(Value));
-M_AppendInt:= THIS^;]]></ST>
+M_AppendINT:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_AppendReal" Id="{2d407a54-01d7-4964-a23b-5eaea946942e}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AppendReal : I_StringBuilder
+    <Method Name="M_AppendREAL" Id="{2d407a54-01d7-4964-a23b-5eaea946942e}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendREAL : I_StringBuilder
 VAR_INPUT
 	Value:		LREAL;
 	nDecimals:	SINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Append(LREAL_TO_FMTSTR(Value, nDecimals, TRUE));
-M_AppendReal:= THIS^;]]></ST>
+M_AppendREAL:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Copy" Id="{3548b8eb-f19a-4821-aca6-7a57d9eaf053}">
-      <Declaration><![CDATA[METHOD M_Copy : BOOL
+    <Method Name="M_CopyTo" Id="{3548b8eb-f19a-4821-aca6-7a57d9eaf053}">
+      <Declaration><![CDATA[METHOD M_CopyTo : BOOL
 VAR_INPUT
 	Value:			ANY;
 END_VAR
@@ -126,34 +127,51 @@ M_Replace:= THIS^;]]></ST>
       <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[__DELETE(pList);
-nLength:= 0;
+        <ST><![CDATA[//__DELETE(pList);
+//nLength:= 0;
+sList:= '';
 M_Reset:= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="P_Value" Id="{0a4fa422-5766-0bb4-06ad-da36f0937c7f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Value : String(255)]]></Declaration>
+      <Get Name="Get" Id="{c14179cd-e0d8-09e7-0fe6-3ce7d3280b86}">
+        <Declaration><![CDATA[VAR
+	pValue:		POINTER TO STRING(255):= pList;
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Value:= pValue^;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <LineIds Name="FB_StringBuilder">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_Append">
-      <LineId Id="10" Count="4" />
-      <LineId Id="19" Count="7" />
+      <LineId Id="10" Count="3" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="25" Count="1" />
       <LineId Id="30" Count="1" />
-      <LineId Id="42" Count="0" />
+      <LineId Id="60" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendBool">
-      <LineId Id="3" Count="0" />
+    <LineIds Name="FB_StringBuilder.M_AppendBOOL">
+      <LineId Id="17" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendInt">
-      <LineId Id="3" Count="0" />
+    <LineIds Name="FB_StringBuilder.M_AppendINT">
+      <LineId Id="14" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendReal">
-      <LineId Id="3" Count="0" />
+    <LineIds Name="FB_StringBuilder.M_AppendREAL">
+      <LineId Id="17" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Copy">
+    <LineIds Name="FB_StringBuilder.M_CopyTo">
       <LineId Id="7" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
@@ -171,7 +189,11 @@ M_Reset:= THIS^;]]></ST>
     <LineIds Name="FB_StringBuilder.M_Reset">
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
       <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StringBuilder.P_Value.Get">
+      <LineId Id="6" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

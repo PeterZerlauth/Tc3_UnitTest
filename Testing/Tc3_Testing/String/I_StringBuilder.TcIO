@@ -36,9 +36,37 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="M_Insert" Id="{f4a12895-bf5f-0229-1d71-e6ed8d37aef4}">
+      <Declaration><![CDATA[METHOD M_Insert : I_StringBuilder
+VAR_INPUT
+	Position:		UDINT;
+	Value:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Replace" Id="{81279885-a9e6-0c9c-39db-b4a5dbff4d04}">
+      <Declaration><![CDATA[METHOD M_Replace : I_StringBuilder
+VAR_INPUT
+	Target:			STRING(255);
+	Value:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="M_Reset" Id="{c51c1de9-e242-0e2e-15b4-007d70478885}">
       <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
 ]]></Declaration>
     </Method>
+    <Method Name="M_ToString" Id="{3d41c117-e4c2-0981-0e95-35260077a987}">
+      <Declaration><![CDATA[METHOD PUBLIC M_ToString : String(255)
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="P_Length" Id="{917505ca-54ce-03d7-1d45-2467135a7e41}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Length : Udint]]></Declaration>
+      <Get Name="Get" Id="{9df562a0-8d74-0cfe-38db-8a1fcfe61f0c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

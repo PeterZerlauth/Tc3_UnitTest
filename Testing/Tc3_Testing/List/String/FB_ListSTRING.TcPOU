@@ -19,10 +19,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF pList <> 0 THEN
-	__DELETE(pList);
-	nLength:= 0;
-END_IF]]></ST>
+        <ST><![CDATA[M_Clear();]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Add" Id="{fc95c475-02ce-0a23-3d94-22fd0ca885a7}">
@@ -204,8 +201,6 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.FB_exit">
-      <LineId Id="3" Count="1" />
-      <LineId Id="9" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Add">

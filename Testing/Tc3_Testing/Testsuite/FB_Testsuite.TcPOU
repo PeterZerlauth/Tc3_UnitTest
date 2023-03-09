@@ -28,7 +28,7 @@ END_VAR
 VAR_INPUT
 END_VAR
 VAR
-	nIndex: DINT;
+	nIndex: DINT:=0;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbTimeout(IN:= TRUE);
@@ -48,7 +48,7 @@ IF fbAssert.nPassed = fbAssert.nAssert THEN
 	fbBuilder.M_Append('" line="');
 	fbBuilder.M_Append(stTestcase.sLine);
 	fbBuilder.M_Append('" />');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 
 	stTestsuite.nTests:= stTestsuite.nTests + 1;
 	stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
@@ -73,7 +73,7 @@ ELSE
 		fbBuilder.M_Append('" line="');
 		fbBuilder.M_Append(stTestCase.sLine);
 		fbBuilder.M_Append('" >');
-		fbList.M_Add(fbBuilder.P_Value);
+		fbList.M_Add(fbBuilder.M_ToString());
 		WHILE nIndex < fbAssert.fbList.P_Length DO
 			fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
 			nIndex:= nIndex + 1;

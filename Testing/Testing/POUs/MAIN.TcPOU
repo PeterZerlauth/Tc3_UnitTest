@@ -3,60 +3,68 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbBuiler:		FB_StringBuilder;
+	fbBuilder:		FB_StringBuilder;
+	sValue:			String(255);
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbBuiler.M_Reset();
-fbBuiler.M_Append('test');
-fbBuiler.M_Append('-test');
-
-
-fbTestsuites();
+      <ST><![CDATA[fbTestsuites();
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuite1();
 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
-		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Equals bool true');
-		fbTestsuite1.P_Assert.M_Equals_BOOL(FALSE,FALSE,'Equals bool false');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 1);
+		fbBuilder.M_Reset().M_Append('Test').M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);
 		
 	1:
-		fbTestsuite1.P_Assert.M_Equals_REAL(22.11, 22.11, 0.0, 'Equals real 1')
-							.M_Equals_REAL(22.11, 22.22, 0.5, 'Equals real 2');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 2);
+		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
+		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
 		
 	2:
-		fbTestsuite1.P_Assert.M_Equals_BYTE(2#00001111,2#00001111,'Equals byte 1')
-							.M_Equals_BYTE(2#11110000,2#11110000,'Equals byte 2');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 3);
+		fbBuilder.M_Reset().M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '', 'FB_StringBuilder.M_Reset()');
+		fbTestsuite1.P_Assert.M_Equals_DINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
 	
 	3:
-		fbTestsuite1.P_Assert.M_Equals_INT(3333,3333,'Equals int 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 4);
+		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'TRUE', 'FB_StringBuilder.M_AppendBOOL()');
+		fbTestsuite1.P_Assert.M_Equals_DINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
 		
 	4:
-		fbTestsuite1.P_Assert.M_Equals_DINT(333333,333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 5);
+		fbBuilder.M_Reset().M_AppendINT(33).M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33', 'FB_StringBuilder.M_AppendBOOL()');
+		fbTestsuite1.P_Assert.M_Equals_DINT(2, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
 		
 	5:
-		fbTestsuite1.P_Assert.M_Equals_LINT(333333333,333333333,'Equals dint 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 6);
+		fbBuilder.M_Reset().M_AppendREAL(33.44, 2).M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33.44', 'FB_StringBuilder.M_AppendBOOL()');
+		fbTestsuite1.P_Assert.M_Equals_DINT(5, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);
 		
 	6:
-		fbTestsuite1.P_Assert.M_Equals_LREAL(22.11, 22.11, 0.0, 'Equals real 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 7);
+		fbBuilder.M_Reset().M_Append('Test %s Test').M_Replace('', 'Value').M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_Equals_STRING('Test %s Test', 'Test Value Test', 'FB_StringBuilder.M_Replace()');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
 		
 	7:
-		fbTestsuite1.P_Assert.M_Equals_ANY(fbTestsuite1, fbTestsuite1, 'Equals any 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 8);
+		fbBuilder.M_Reset().M_Append('Test Test').M_Insert(5, 'Value').M_CopyTo(sValue);
+		fbTestsuite1.P_Assert.M_Equals_STRING('Test %s Test', 'Test Value Test', 'FB_StringBuilder.M_Insert()');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
 		
 	8:
-		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', 9);
+		sValue:= '';
+		sValue:= fbBuilder.M_Reset().M_Append('Test').M_ToString();
+		fbTestsuite1.P_Assert.M_Equals_STRING('Test', sValue, 'FB_StringBuilder.M_ToString()');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 9);
 		
 	9:
 		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
@@ -67,10 +75,26 @@ CASE fbTestsuite1.P_Testcase OF
 END_CASE]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="615" Count="0" />
-      <LineId Id="625" Count="0" />
-      <LineId Id="616" Count="2" />
-      <LineId Id="559" Count="49" />
+      <LineId Id="559" Count="5" />
+      <LineId Id="635" Count="0" />
+      <LineId Id="566" Count="3" />
+      <LineId Id="638" Count="2" />
+      <LineId Id="572" Count="2" />
+      <LineId Id="641" Count="2" />
+      <LineId Id="577" Count="2" />
+      <LineId Id="644" Count="2" />
+      <LineId Id="581" Count="2" />
+      <LineId Id="647" Count="2" />
+      <LineId Id="585" Count="2" />
+      <LineId Id="650" Count="2" />
+      <LineId Id="589" Count="2" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="593" Count="2" />
+      <LineId Id="663" Count="1" />
+      <LineId Id="597" Count="2" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="600" Count="8" />
       <LineId Id="80" Count="0" />
     </LineIds>
   </POU>

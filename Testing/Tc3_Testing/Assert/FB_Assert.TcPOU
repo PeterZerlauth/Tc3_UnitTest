@@ -44,7 +44,7 @@ IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Append('" type="ArithmeticError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</error>$R');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
@@ -53,7 +53,7 @@ ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	fbBuilder.M_Append('" type="ArithmeticError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</error>$R');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
@@ -62,7 +62,7 @@ ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <>
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>$R');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 	
 ELSE
@@ -89,7 +89,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append('');		
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
@@ -113,7 +113,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
@@ -137,7 +137,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_DINT:= THIS^;
@@ -162,7 +162,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
@@ -186,7 +186,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_LINT:= THIS^;
@@ -212,7 +212,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_LREAL:= THIS^;
@@ -238,7 +238,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
@@ -262,7 +262,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
@@ -285,7 +285,7 @@ ELSE
 	fbBuilder.M_Append('" type="AssertionError">$R');
 	fbBuilder.M_Append(sData);
 	fbBuilder.M_Append('</failure>$R');
-	fbList.M_Add(fbBuilder.P_Value);
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
 M_IsTRUE:= THIS^;]]></ST>

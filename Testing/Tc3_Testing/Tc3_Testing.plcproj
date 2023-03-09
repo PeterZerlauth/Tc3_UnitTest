@@ -168,15 +168,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <SubObject Include="FB_StringBuilder.M_Insert">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_StringBuilder.M_Replace">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
     <SubObject Include="I_StringBuilder.M_AppendBOOL" />
     <SubObject Include="I_StringBuilder.M_AppendINT" />
     <SubObject Include="I_StringBuilder.M_AppendREAL" />
+    <SubObject Include="I_StringBuilder.M_Insert" />
+    <SubObject Include="I_StringBuilder.M_Replace" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

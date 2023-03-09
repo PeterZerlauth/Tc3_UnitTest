@@ -57,6 +57,9 @@
     <Compile Include="Base\FB_Base.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Base\F_AnyToString.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Base\F_GetCycleTime.TcPOU">
       <SubType>Code</SubType>
     </Compile>

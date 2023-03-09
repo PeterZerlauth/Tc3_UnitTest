@@ -3,13 +3,6 @@
   <Itf Name="I_Assert" Id="{b4f88ed5-c1d6-0e0a-0598-db946561ba17}">
     <Declaration><![CDATA[INTERFACE I_Assert
 ]]></Declaration>
-    <Method Name="M_AddData" Id="{e9f51eac-ac65-09e3-2e64-d451614a587b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AddData : I_Assert
-VAR_INPUT
-	Value:			ANY;
-END_VAR
-]]></Declaration>
-    </Method>
     <Method Name="M_Equals_ANY" Id="{3fc096e7-86c9-44f3-a206-472563f4153f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
 VAR_INPUT

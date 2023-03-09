@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="F_AnyToString" Id="{c83ec4cb-bcaf-08af-3d29-8e246087fb4f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_AnyToString : STRING(255)
+VAR_INPUT
+		Value:		ANY;
+END_VAR
+VAR
+    pSINT:		POINTER TO SINT;
+    pUSINT:		POINTER TO USINT;
+    pWORD:		POINTER TO WORD;//16 bit
+    pINT:		POINTER TO INT; //16 bit
+    pUINT:		POINTER TO UINT; //16 bit
+	
+    pDINT:		POINTER TO DINT; //32 bit
+    pUDINT:		POINTER TO UDINT; //32 bit
+    pDWORD:		POINTER TO DWORD; //32 bit
+    pREAL:		POINTER TO REAL; //32 bit
+	
+    pLREAL:		POINTER TO LREAL; //64 bit
+    pLWORD:		POINTER TO LWORD; //64 bit
+    
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE Value.TypeClass OF
+// BYTE
+	__SYSTEM.TYPE_CLASS.TYPE_BYTE:
+		F_AnyToString:= BYTE_TO_STRING(Value.pValue^);
+// SINT
+	__SYSTEM.TYPE_CLASS.TYPE_SINT:
+		pSINT:= Value.pValue;
+		F_AnyToString:= SINT_TO_STRING(pSINT^);
+// USINT
+    __SYSTEM.TYPE_CLASS.TYPE_USINT:
+		pUSINT:= Value.pValue;
+		F_AnyToString:= USINT_TO_STRING(pUSINT^);
+// WORD
+    __SYSTEM.TYPE_CLASS.TYPE_WORD:
+		pWORD:= Value.pValue;
+		F_AnyToString:= WORD_TO_STRING(pWORD^);
+// INT
+    __SYSTEM.TYPE_CLASS.TYPE_INT:
+		pINT:= Value.pValue;
+		F_AnyToString:= INT_TO_STRING(pINT^);
+// UINT
+    __SYSTEM.TYPE_CLASS.TYPE_UINT:
+		pUINT:= Value.pValue;
+		F_AnyToString:= UINT_TO_STRING(pUINT^);
+// DINT
+    __SYSTEM.TYPE_CLASS.TYPE_DINT:
+		pDINT:= Value.pValue;
+		F_AnyToString:= DINT_TO_STRING(pDINT^);
+// UDINT
+    __SYSTEM.TYPE_CLASS.TYPE_UDINT:
+		pUDINT:= Value.pValue;
+		F_AnyToString:= UDINT_TO_STRING(pUDINT^);
+// DWORD
+    __SYSTEM.TYPE_CLASS.TYPE_DWORD:
+		pDWORD:= Value.pValue;
+		F_AnyToString:= DWORD_TO_STRING(pDWORD^); 
+// REAL
+    __SYSTEM.TYPE_CLASS.TYPE_REAL:
+		pREAL:= Value.pValue;
+		F_AnyToString:= REAL_TO_STRING(pREAL^);
+// LREAL
+    __SYSTEM.TYPE_CLASS.TYPE_LREAL:
+		pLREAL:= Value.pValue;
+		F_AnyToString:= LREAL_TO_STRING(pLREAL^);
+
+ 	
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="F_AnyToString">
+      <LineId Id="7" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="103" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="10" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -19,15 +19,6 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="M_AddData" Id="{d002ab3f-1d38-040c-3e98-771f32ebb52b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_AddData : I_Assert
-VAR_INPUT
-	Value:			ANY;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Equals_ANY" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
 VAR_INPUT
@@ -87,7 +78,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append('');		
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendBOOL(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendBOOL(Actual);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -111,7 +105,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -135,7 +132,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -160,7 +160,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -184,7 +187,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -210,7 +216,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendREAL(Expected, 5);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendREAL(Actual, 5);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -236,7 +245,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendREAL(Expected, 5);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendREAL(Actual, 5);
 	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -320,9 +332,6 @@ M_Reset:= THIS^;]]></ST>
     <LineIds Name="FB_Assert">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Assert.M_AddData">
-      <LineId Id="8" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Assert.M_Equals_ANY">
       <LineId Id="207" Count="0" />
       <LineId Id="216" Count="0" />
@@ -347,6 +356,7 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="91" Count="2" />
+      <LineId Id="104" Count="2" />
       <LineId Id="98" Count="0" />
       <LineId Id="95" Count="0" />
       <LineId Id="80" Count="0" />
@@ -358,7 +368,9 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="90" Count="0" />
       <LineId Id="116" Count="0" />
       <LineId Id="93" Count="2" />
-      <LineId Id="111" Count="4" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="122" Count="2" />
+      <LineId Id="114" Count="1" />
       <LineId Id="101" Count="1" />
       <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
@@ -367,7 +379,9 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="108" Count="0" />
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
-      <LineId Id="129" Count="4" />
+      <LineId Id="129" Count="2" />
+      <LineId Id="140" Count="2" />
+      <LineId Id="132" Count="1" />
       <LineId Id="119" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -377,7 +391,9 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="89" Count="0" />
       <LineId Id="115" Count="0" />
       <LineId Id="92" Count="2" />
-      <LineId Id="110" Count="4" />
+      <LineId Id="110" Count="2" />
+      <LineId Id="121" Count="2" />
+      <LineId Id="113" Count="1" />
       <LineId Id="100" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -386,7 +402,9 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="108" Count="0" />
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
-      <LineId Id="129" Count="4" />
+      <LineId Id="129" Count="2" />
+      <LineId Id="140" Count="2" />
+      <LineId Id="132" Count="1" />
       <LineId Id="119" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -397,8 +415,8 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="194" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
-      <LineId Id="189" Count="4" />
-      <LineId Id="178" Count="1" />
+      <LineId Id="201" Count="8" />
+      <LineId Id="179" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="124" Count="0" />
@@ -408,7 +426,12 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="118" Count="0" />
       <LineId Id="69" Count="0" />
       <LineId Id="95" Count="1" />
-      <LineId Id="113" Count="4" />
+      <LineId Id="113" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="117" Count="0" />
       <LineId Id="102" Count="1" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />

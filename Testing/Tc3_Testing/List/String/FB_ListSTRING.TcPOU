@@ -37,22 +37,16 @@ IF pList = 0 THEN
 	nLength:= nLength + 1;
 	pList:= __NEW(POINTER TO STRING(255), SIZEOF(STRING(255)));
 ELSE
-	// Item already in List
-	IF M_Search(Value) = -1 THEN
-		// backup 
-		pOldList:= pList;
-		// new Length
-		nLength:= nLength + 1;
-		// new pointer
-		pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
-		// restore
-		Memcpy(pList,pOldList, DINT_TO_UDINT(SIZEOF(STRING(255)) *(nLength -1)));
-		// delete old
-		__DELETE(pOldList);
-	ELSE
-		M_Add:= FALSE;	
-		RETURN;
-	END_IF
+	// backup 
+	pOldList:= pList;
+	// new Length
+	nLength:= nLength + 1;
+	// new pointer
+	pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
+	// restore
+	Memcpy(pList,pOldList, DINT_TO_UDINT(SIZEOF(STRING(255)) *(nLength -1)));
+	// delete old
+	__DELETE(pOldList);
 END_IF
 
 // add new Object
@@ -128,8 +122,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Item:= '';
-IF nIndex <= nLength THEN
+        <ST><![CDATA[IF nIndex < nLength THEN
 	M_Item:= pList[nIndex];
 END_IF]]></ST>
       </Implementation>
@@ -204,7 +197,8 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Add">
-      <LineId Id="46" Count="20" />
+      <LineId Id="46" Count="4" />
+      <LineId Id="53" Count="9" />
       <LineId Id="85" Count="0" />
       <LineId Id="67" Count="3" />
     </LineIds>
@@ -224,7 +218,6 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Item">
-      <LineId Id="19" Count="0" />
       <LineId Id="13" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>

@@ -3,17 +3,21 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	fbList:			FB_ListSTRING;
 	fbBuilder:		FB_StringBuilder;
 	sValue:			String(255);
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
+	fbTestsuite2:	FB_Testsuite;
+	nIndex: INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbTestsuites();
 fbTestsuites.M_Add(fbTestsuite1);
-fbTestsuite1();
+fbTestsuites.M_Add(fbTestsuite2);
 
+fbTestsuite1();
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
 		fbBuilder.M_Reset().M_Append('Test').M_CopyTo(sValue);
@@ -67,15 +71,37 @@ CASE fbTestsuite1.P_Testcase OF
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 9);
 		
 	9:
-		fbTestsuite1.P_Assert.M_Equals_BOOL(TRUE,TRUE,'Assert 1');
-		fbTestsuite1.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
+		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
 	
-END_CASE]]></ST>
+END_CASE
+
+fbTestsuite2();
+CASE fbTestsuite2.P_Testcase OF
+	E_Testcase.Start:
+		fbList.M_Clear();
+		FOR nIndex:= 0 TO 499 DO
+			fbList.M_Add(INT_TO_STRING(nIndex));
+		END_FOR
+		fbTestsuite2.P_Assert.M_Equals_STRING('500', fbList.M_Item(500) ,'FB_ListSTRING.M_Item()');
+		fbTestsuite2.P_Assert.M_Equals_STRING('100', fbList.M_Item(100) ,'FB_ListSTRING.M_Item()');
+		fbTestsuite2.P_Assert.M_Equals_DINT(500, fbList.P_Length ,'FB_ListSTRING.P_Length');
+		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', E_Testcase.Done);
+
+	E_Testcase.Done:;
+	
+END_CASE
+
+
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="559" Count="5" />
+      <LineId Id="559" Count="1" />
+      <LineId Id="668" Count="1" />
+      <LineId Id="561" Count="0" />
+      <LineId Id="563" Count="1" />
       <LineId Id="635" Count="0" />
       <LineId Id="566" Count="3" />
       <LineId Id="638" Count="2" />
@@ -96,6 +122,16 @@ END_CASE]]></ST>
       <LineId Id="665" Count="0" />
       <LineId Id="600" Count="8" />
       <LineId Id="80" Count="0" />
+      <LineId Id="671" Count="0" />
+      <LineId Id="677" Count="2" />
+      <LineId Id="685" Count="0" />
+      <LineId Id="687" Count="2" />
+      <LineId Id="691" Count="1" />
+      <LineId Id="681" Count="0" />
+      <LineId Id="672" Count="1" />
+      <LineId Id="682" Count="1" />
+      <LineId Id="674" Count="2" />
+      <LineId Id="670" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

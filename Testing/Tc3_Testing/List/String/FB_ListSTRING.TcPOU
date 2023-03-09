@@ -122,7 +122,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF nIndex < nLength THEN
+        <ST><![CDATA[IF nIndex <= nLength THEN
 	M_Item:= pList[nIndex];
 END_IF]]></ST>
       </Implementation>

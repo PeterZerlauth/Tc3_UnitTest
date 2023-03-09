@@ -260,11 +260,19 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append('Expected = ');
-	fbBuilder.M_Append(Expected);
-	fbBuilder.M_Append('Actual = ');
-	fbBuilder.M_Append(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('Expected = "');
+	IF Expected = '' THEN
+		fbBuilder.M_Append('null');
+	ELSE
+		fbBuilder.M_Append(Expected);
+	END_IF
+	fbBuilder.M_Append('" Actual = "');
+		IF Actual = '' THEN
+		fbBuilder.M_Append('null');
+	ELSE
+		fbBuilder.M_Append(Actual);
+	END_IF
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -411,9 +419,13 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="1" />
       <LineId Id="107" Count="2" />
-      <LineId Id="118" Count="1" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="127" Count="1" />
+      <LineId Id="130" Count="1" />
+      <LineId Id="129" Count="0" />
       <LineId Id="121" Count="0" />
-      <LineId Id="120" Count="0" />
+      <LineId Id="133" Count="3" />
+      <LineId Id="132" Count="0" />
       <LineId Id="111" Count="0" />
       <LineId Id="97" Count="1" />
       <LineId Id="14" Count="0" />

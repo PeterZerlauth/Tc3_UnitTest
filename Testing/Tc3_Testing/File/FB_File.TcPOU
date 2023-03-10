@@ -24,13 +24,13 @@ VAR_INPUT
 	sText:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[sText:= Concat(sText, '$R');
-fbWrite();
+        <ST><![CDATA[fbWrite();
 IF fbWrite.bExecute THEN
 	IF fbWrite.bError THEN
 		eError:= fbWrite.nErrId;
+		fbWrite.bExecute:= FALSE;
 	ELSIF fbWrite.bBusy THEN
-		M_Append:= FALSE;
+		;
 	ELSE
 		M_Append:= TRUE;
 		fbWrite.bExecute:= FALSE;
@@ -43,6 +43,16 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_AppendLine" Id="{9af56e02-5664-0f9f-0418-a518b6e584dd}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendLine : BOOL
+VAR_INPUT
+	sText:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[sText:= Concat(sText, '$R');
+M_AppendLine:= M_Append(sText);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Close" Id="{c0789999-930f-042f-18a5-7eb9b96ad755}">
       <Declaration><![CDATA[METHOD PUBLIC M_Close : BOOL
 VAR_INPUT
@@ -51,21 +61,21 @@ END_VAR
       <Implementation>
         <ST><![CDATA[fbClose();
 IF fbClose.bExecute THEN
-	IF fbClose.bError THEN
+	IF fbClose.hFile = 0 THEN
 		fbClose.bExecute:= FALSE;
-		M_Close:= FALSE;
+		M_Close:= TRUE;
+	ELSIF fbClose.bError THEN
+		fbClose.bExecute:= FALSE;
 		eError:= fbClose.nErrId;
+	ELSIF fbClose.bBusy THEN
+		;
 	ELSE
-		IF fbClose.bBusy THEN
-			M_Close:= FALSE;
-		ELSE
-			eError:= E_AdsError.NOERR;	
-			fbRead.hFile:= 0;
-			fbWrite.hFile:= 0;
-			fbClose.hFile:= 0;
-			fbClose.bExecute:= FALSE;
-			M_Close:= TRUE;
-		END_IF
+		eError:= E_AdsError.NOERR;	
+		fbRead.hFile:= 0;
+		fbWrite.hFile:= 0;
+		fbClose.hFile:= 0;
+		fbClose.bExecute:= FALSE;
+		M_Close:= TRUE;
 	END_IF
 ELSE
 	fbClose.bExecute:= TRUE;
@@ -88,7 +98,6 @@ VAR_INST
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbCreateDir();
-
 nTemp := FIND(RIGHT(sPathName, LEN(sPathName) - nPosition), '\');
 if nTemp <> 0 then
 	IF fbCreateDir.bExecute THEN
@@ -124,9 +133,6 @@ END_VAR
         <ST><![CDATA[fbDelete();
 IF fbDelete.bExecute THEN
 	IF fbDelete.bError THEN
-		IF fbDelete.nErrId = E_AdsErr.DEVICE_NOTFOUND THEN
-			M_Delete:= TRUE;
-		END_IF
 		fbDelete.bExecute:= FALSE;
 	ELSIF fbDelete.bBusy THEN
 		;
@@ -150,10 +156,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbLoad();
-IF fbLoad.bExecute THEN
+        <ST><![CDATA[IF fbLoad.bExecute THEN
 	IF fbLoad.bError THEN
 		eError:= fbLoad.nErrId;
+		fbLoad.bExecute:= FALSE;
 	ELSIF fbLoad.bBusy THEN
 		;
 	ELSE
@@ -175,22 +181,23 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbOpen();
-IF NOT fbOpen.bExecute THEN
-	fbOpen.bExecute:= TRUE;
-	fbOpen.sPathName:= sPathName;
-	fbOpen.nMode:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);
-ELSE
+IF fbOpen.bExecute THEN
 	IF fbOpen.bError THEN
 		eError:= fbOpen.nErrId;
+		fbOpen.bExecute:= FALSE;
 	ELSIF fbOpen.bBusy THEN
 		;
 	ELSE
-		M_Open:= TRUE;
 		fbRead.hFile:= fbOpen.hFile;
 		fbWrite.hFile:= fbOpen.hFile;
 		fbClose.hFile:= fbOpen.hFile;
 		fbOpen.bExecute:= FALSE;
+		M_Open:= TRUE;
 	END_IF	
+ELSE
+	fbOpen.bExecute:= TRUE;
+	fbOpen.sPathName:= sPathName;
+	fbOpen.nMode:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);
 END_IF
 ]]></ST>
       </Implementation>
@@ -210,8 +217,8 @@ IF fbRead.bExecute THEN
 	ELSIF fbRead.bBusy THEN
 		;
 	ELSE
-		M_Read:= TRUE;
 		fbRead.bExecute:= FALSE;
+		M_Read:= TRUE;
 	END_IF
 ELSE
 	fbRead.bExecute:= TRUE;
@@ -260,50 +267,76 @@ END_VAR
       </Get>
     </Property>
     <LineIds Name="FB_File">
-      <LineId Id="2" Count="0" />
+      <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Append">
-      <LineId Id="3" Count="15" />
+      <LineId Id="4" Count="3" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="8" Count="10" />
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_File.M_AppendLine">
+      <LineId Id="3" Count="1" />
+    </LineIds>
     <LineIds Name="FB_File.M_Close">
-      <LineId Id="3" Count="3" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="7" Count="4" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="39" Count="1" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="5" Count="3" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="36" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="27" Count="1" />
       <LineId Id="26" Count="0" />
       <LineId Id="30" Count="1" />
-      <LineId Id="15" Count="6" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="17" Count="4" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Create">
-      <LineId Id="3" Count="22" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="5" Count="20" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Delete">
-      <LineId Id="3" Count="2" />
-      <LineId Id="29" Count="2" />
-      <LineId Id="6" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="4" Count="2" />
       <LineId Id="8" Count="8" />
       <LineId Id="37" Count="0" />
       <LineId Id="17" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Load">
-      <LineId Id="3" Count="13" />
+      <LineId Id="4" Count="2" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="7" Count="9" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Open">
-      <LineId Id="3" Count="17" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="4" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="34" Count="4" />
+      <LineId Id="7" Count="1" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="20" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Read">
-      <LineId Id="3" Count="16" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="4" Count="6" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="13" Count="6" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Write">
-      <LineId Id="3" Count="15" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="4" Count="14" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.P_Error.Get">

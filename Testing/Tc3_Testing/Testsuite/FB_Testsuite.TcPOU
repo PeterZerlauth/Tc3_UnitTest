@@ -31,8 +31,11 @@ VAR
 	nIndex: DINT:=0;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbTimeout(IN:= TRUE);
+        <ST><![CDATA[IF fbTimeout.PT <> T#0S THEN
+	fbTimeout(IN:= TRUE);
+END_IF
 stTestcase.nAssertions:= fbAssert.nAssert;
+stTestsuite.fTime:=  TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 IF nActual <> nNext THEN
 	IF fbAssert.nPassed = fbAssert.nAssert THEN
 		fbBuilder.M_Reset();
@@ -56,6 +59,7 @@ IF nActual <> nNext THEN
 		stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
 		stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
 		stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
+		fbTimeout(IN:= FALSE);
 		stTestcase.fTime:= 0.0;
 		nActual:= nNext;
 	ELSE
@@ -86,11 +90,11 @@ IF nActual <> nNext THEN
 			stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
 			stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
 			stTestcase.fTime:= 0.0;
+			fbTimeout(IN:= FALSE);
 			nActual:= nNext;
 		END_IF
 	END_IF
 END_IF
-stTestsuite.fTime:=  TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 fbAssert.M_Reset();
 M_Started:= nActual = E_Testcase.Done;
 ]]></ST>
@@ -194,9 +198,7 @@ stTestcase.nAssertions:= fbAssert.fbList.P_Length;
 stTestcase.sFile:= File;
 stTestcase.sLine:= Line;
 stTestcase.fTime:= stTestcase.fTime + fCycleTime;
-IF Timeout <> T#0S THEN
-	fbTimeout(IN:= TRUE, PT:= Timeout);
-END_IF
+fbTimeout.PT:= Timeout;
 nNext:= Next;]]></ST>
       </Implementation>
     </Method>
@@ -256,8 +258,9 @@ END_VAR
       <LineId Id="97" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Started">
-      <LineId Id="153" Count="0" />
+      <LineId Id="183" Count="2" />
       <LineId Id="84" Count="0" />
+      <LineId Id="182" Count="0" />
       <LineId Id="173" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="101" Count="4" />
@@ -275,6 +278,7 @@ END_VAR
       <LineId Id="136" Count="0" />
       <LineId Id="140" Count="0" />
       <LineId Id="135" Count="0" />
+      <LineId Id="181" Count="0" />
       <LineId Id="160" Count="0" />
       <LineId Id="53" Count="0" />
       <LineId Id="45" Count="0" />
@@ -295,11 +299,11 @@ END_VAR
       <LineId Id="117" Count="0" />
       <LineId Id="142" Count="4" />
       <LineId Id="161" Count="0" />
+      <LineId Id="180" Count="0" />
       <LineId Id="52" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="42" Count="0" />
       <LineId Id="174" Count="0" />
-      <LineId Id="133" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="57" Count="0" />
@@ -355,7 +359,7 @@ END_VAR
       <LineId Id="241" Count="0" />
       <LineId Id="137" Count="0" />
       <LineId Id="249" Count="0" />
-      <LineId Id="236" Count="2" />
+      <LineId Id="237" Count="0" />
       <LineId Id="229" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Assert.Get">

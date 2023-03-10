@@ -141,7 +141,7 @@ END_VAR]]></Declaration>
 		END_IF
 	
 	4:
-			IF fbFile.M_Append(fbList.M_Item(nIndex)) THEN
+			IF fbFile.M_AppendLine(fbList.M_Item(nIndex)) THEN
 				IF nIndex > fbList.P_Length THEN
 					nState:= 5;
 				END_IF

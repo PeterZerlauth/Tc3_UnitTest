@@ -8,6 +8,12 @@ VAR_INPUT
 	sText:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_AppendLine" Id="{a6dcc4a9-e042-099e-2beb-27ebc6d1b393}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendLine : BOOL
+VAR_INPUT
+	sText:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Close" Id="{9ca2b871-cea1-0cae-0c40-7f2f8ac18932}">
       <Declaration><![CDATA[METHOD PUBLIC M_Close : BOOL
 VAR_INPUT

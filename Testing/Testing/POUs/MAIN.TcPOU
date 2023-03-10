@@ -15,6 +15,7 @@ VAR
 	fbList:			FB_ListSTRING;
 	fbBuilder:		FB_StringBuilder;
 
+	bClose: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -137,6 +138,10 @@ CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
+
+IF bClose THEN
+	bClose:= NOT fbFile.M_Delete('C:\Test.txt');
+END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -208,6 +213,9 @@ END_CASE
       <LineId Id="778" Count="0" />
       <LineId Id="743" Count="1" />
       <LineId Id="737" Count="0" />
+      <LineId Id="804" Count="0" />
+      <LineId Id="803" Count="0" />
+      <LineId Id="805" Count="1" />
       <LineId Id="670" Count="0" />
     </LineIds>
   </POU>

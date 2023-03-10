@@ -83,7 +83,7 @@ IF nActual <> nNext THEN
 				fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
 				nIndex:= nIndex + 1;
 			END_WHILE
-			fbList.M_Add('</testcase>');
+			fbList.M_Add('$T$T</testcase>');
 			stTestsuite.nTests:= stTestsuite.nTests + 1;
 			stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
 			stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
@@ -166,7 +166,7 @@ fbBuilder.M_Append(stTestsuite.sFile);
 fbBuilder.M_Append('">');
 fbBuilder.M_CopyTo(sValue);
 fbList.M_Insert(0, sValue);
-fbList.M_Add('</testsuite>');
+fbList.M_Add('$T</testsuite>');
 IF iParent <> 0 THEN
 	iParent.P_Data.nTests:= iParent.P_Data.nTests + stTestsuite.nTests;
 	iParent.P_Data.nFailures:= iParent.P_Data.nFailures + stTestsuite.nFailures;

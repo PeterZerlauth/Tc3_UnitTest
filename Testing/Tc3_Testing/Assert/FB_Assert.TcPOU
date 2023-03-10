@@ -318,7 +318,7 @@ ELSE
 	fbBuilder.M_AppendBOOL(TRUE);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendBOOL(Actual);
-	fbBuilder.M_Append('</failure>$R');
+	fbBuilder.M_Append('"</failure>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF

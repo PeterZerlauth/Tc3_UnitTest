@@ -10,6 +10,9 @@ TYPE E_Base :
 	Starting:= 2,	
 	Started	:= 3,
 	Stopping:= 4,
+	Aborting:= 5,
+	Aborted	:= 6,
+	Reset	:= 7,
 	Stopped	:= 1
 )USINT;
 END_TYPE

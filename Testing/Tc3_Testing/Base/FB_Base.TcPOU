@@ -74,11 +74,53 @@ CASE eState OF
 					nState:= 0;
 			END_CASE
 		END_IF
+
+	E_Base.Aborting:
+		IF M_Aborting() THEN
+			eState:= E_Base.Aborted;
+			nState:= 0;
+		ELSE
+			CASE eRequest OF
+				E_Base.Aborted:
+					eState:= E_Base.Aborted;
+					nState:= 0;
+			END_CASE
+		END_IF
+	
+	E_Base.Aborted:
+		IF M_Aborted() THEN
+			eState:= E_Base.Aborted;
+			nState:= 0;
+		ELSE
+			CASE eRequest OF
+				E_Base.Reset:
+					eState:= E_Base.Starting;
+					nState:= 0;
+			END_CASE
+		END_IF
 		
 END_CASE
 
 eRequest:= eState;]]></ST>
     </Implementation>
+    <Method Name="M_Aborted" Id="{853b7e8a-707d-0f29-16ef-38945d49be0d}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Aborted : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Aborting" Id="{3178fcef-aa61-016c-1264-57697be639ae}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Aborting : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Init" Id="{e2b264db-76f6-0dba-2234-6066426e6914}">
       <Declaration><![CDATA[METHOD PROTECTED M_Init : BOOL
 VAR_INPUT
@@ -196,10 +238,23 @@ END_VAR]]></Declaration>
       <LineId Id="175" Count="0" />
       <LineId Id="116" Count="0" />
       <LineId Id="89" Count="0" />
+      <LineId Id="202" Count="0" />
+      <LineId Id="192" Count="9" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="205" Count="8" />
+      <LineId Id="203" Count="0" />
       <LineId Id="121" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="99" Count="0" />
       <LineId Id="98" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Base.M_Aborted">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Base.M_Aborting">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Init">
       <LineId Id="5" Count="0" />

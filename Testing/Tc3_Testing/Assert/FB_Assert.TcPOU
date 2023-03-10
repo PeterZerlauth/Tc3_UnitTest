@@ -36,7 +36,7 @@ IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_AppendANY(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('</error>$R');
+	fbBuilder.M_Append('"</error>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
@@ -48,7 +48,7 @@ ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	fbBuilder.M_AppendANY(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('</error>$R');
+	fbBuilder.M_Append('"</error>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
@@ -60,7 +60,7 @@ ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <>
 	fbBuilder.M_AppendANY(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('</failure>$R');
+	fbBuilder.M_Append('"</failure>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 	
@@ -90,7 +90,7 @@ ELSE
 	fbBuilder.M_AppendBOOL(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendBOOL(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -117,7 +117,7 @@ ELSE
 	fbBuilder.M_AppendINT(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendINT(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -144,7 +144,7 @@ ELSE
 	fbBuilder.M_AppendINT(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendINT(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -172,7 +172,7 @@ ELSE
 	fbBuilder.M_AppendINT(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendINT(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -199,7 +199,7 @@ ELSE
 	fbBuilder.M_AppendINT(Expected);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendINT(Actual);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -228,7 +228,7 @@ ELSE
 	fbBuilder.M_AppendREAL(Expected, 5);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendREAL(Actual, 5);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF
@@ -257,7 +257,7 @@ ELSE
 	fbBuilder.M_AppendREAL(Expected, 5);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendREAL(Actual, 5);
-	fbBuilder.M_Append('</failure>');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF

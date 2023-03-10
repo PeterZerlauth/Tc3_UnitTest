@@ -145,7 +145,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[//    <testsuite name="Tests.Registration" tests="8" failures="1" errors="1" skipped="1" assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23" file="tests/registration.code">
 fbBuilder.M_Reset();
-fbBuilder.M_Append('<testsuite name="');
+fbBuilder.M_Append('$T<testsuite name="');
 fbBuilder.M_Append(stTestsuite.sName);
 fbBuilder.M_Append('" tests="');
 fbBuilder.M_AppendINT(stTestsuite.nTests);

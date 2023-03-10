@@ -107,7 +107,7 @@ END_VAR]]></Declaration>
 //<testsuites name="Test run" tests="8" failures="1" errors="1" skipped="1"  assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23">
 		fbList.M_Insert(0, '<?xml version="1.0" encoding="UTF-8"?>');
 		fbBuilder.M_Reset();
-		fbBuilder.M_Append('$T<testsuites name="');	
+		fbBuilder.M_Append('<testsuites name="');	
 		fbBuilder.M_Append(stTestsuites.sName);		
 		fbBuilder.M_Append('" tests="');	
 		fbBuilder.M_AppendINT(stTestsuites.nTests);

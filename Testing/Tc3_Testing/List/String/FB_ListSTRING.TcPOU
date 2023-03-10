@@ -55,12 +55,13 @@ M_Add:= TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Clear" Id="{0696c9f2-3368-02c7-3570-914b538477bb}">
-      <Declaration><![CDATA[METHOD M_Clear
+      <Declaration><![CDATA[METHOD M_Clear : BOOL
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF pList <> 0 THEN
 	nLength:= 0;
 	__DELETE(pList);
+	M_Clear:= TRUE;
 END_IF]]></ST>
       </Implementation>
     </Method>
@@ -122,7 +123,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF nIndex <= nLength THEN
+        <ST><![CDATA[IF nIndex < (nLength) THEN
 	M_Item:= pList[nIndex];
 END_IF]]></ST>
       </Implementation>
@@ -204,6 +205,7 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Clear">
       <LineId Id="3" Count="2" />
+      <LineId Id="7" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Index">
@@ -218,7 +220,8 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Item">
-      <LineId Id="13" Count="1" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="21" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Remove">

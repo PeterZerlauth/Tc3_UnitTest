@@ -33,52 +33,24 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbTimeout(IN:= TRUE);
 stTestcase.nAssertions:= fbAssert.nAssert;
-IF fbAssert.nPassed = fbAssert.nAssert THEN
-	fbBuilder.M_Reset();
-	fbBuilder.M_Append('<testcase name="');
-	fbBuilder.M_Append(stTestcase.sName);
-	fbBuilder.M_Append('" classname="');
-	fbBuilder.M_Append(stTestcase.sClassname);
-	fbBuilder.M_Append('" assertions="');
-	fbBuilder.M_AppendINT(stTestcase.nAssertions);
-	fbBuilder.M_Append('" time="');
-	fbBuilder.M_AppendREAL(stTestcase.fTime, 4);
-	fbBuilder.M_Append('" file="');
-	fbBuilder.M_Append(stTestcase.sFile);
-	fbBuilder.M_Append('" line="');
-	fbBuilder.M_Append(stTestcase.sLine);
-	fbBuilder.M_Append('" />');
-	fbList.M_Add(fbBuilder.M_ToString());
-
-	stTestsuite.nTests:= stTestsuite.nTests + 1;
-	stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
-	stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
-	stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
-	stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
-	stTestcase.fTime:= 0.0;
-	nActual:= nNext;
-ELSE
-	IF fbTimeout.Q THEN
+IF nActual <> nNext THEN
+	IF fbAssert.nPassed = fbAssert.nAssert THEN
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append('<testcase name="');
-		fbBuilder.M_Append(stTestCase.sName);
+		fbBuilder.M_Append(stTestcase.sName);
 		fbBuilder.M_Append('" classname="');
-		fbBuilder.M_Append(stTestCase.sClassname);
+		fbBuilder.M_Append(stTestcase.sClassname);
 		fbBuilder.M_Append('" assertions="');
-		fbBuilder.M_AppendINT(stTestCase.nAssertions);
+		fbBuilder.M_AppendINT(stTestcase.nAssertions);
 		fbBuilder.M_Append('" time="');
-		fbBuilder.M_AppendREAL(stTestCase.fTime, 4);
+		fbBuilder.M_AppendREAL(stTestcase.fTime, 4);
 		fbBuilder.M_Append('" file="');
-		fbBuilder.M_Append(stTestCase.sFile);
+		fbBuilder.M_Append(stTestcase.sFile);
 		fbBuilder.M_Append('" line="');
-		fbBuilder.M_Append(stTestCase.sLine);
-		fbBuilder.M_Append('" >');
+		fbBuilder.M_Append(stTestcase.sLine);
+		fbBuilder.M_Append('" />');
 		fbList.M_Add(fbBuilder.M_ToString());
-		WHILE nIndex < fbAssert.fbList.P_Length DO
-			fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
-			nIndex:= nIndex + 1;
-		END_WHILE
-		fbList.M_Add('</testcase>');
+	
 		stTestsuite.nTests:= stTestsuite.nTests + 1;
 		stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
 		stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
@@ -86,6 +58,36 @@ ELSE
 		stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
 		stTestcase.fTime:= 0.0;
 		nActual:= nNext;
+	ELSE
+		IF fbTimeout.Q THEN
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('<testcase name="');
+			fbBuilder.M_Append(stTestCase.sName);
+			fbBuilder.M_Append('" classname="');
+			fbBuilder.M_Append(stTestCase.sClassname);
+			fbBuilder.M_Append('" assertions="');
+			fbBuilder.M_AppendINT(stTestCase.nAssertions);
+			fbBuilder.M_Append('" time="');
+			fbBuilder.M_AppendREAL(stTestCase.fTime, 4);
+			fbBuilder.M_Append('" file="');
+			fbBuilder.M_Append(stTestCase.sFile);
+			fbBuilder.M_Append('" line="');
+			fbBuilder.M_Append(stTestCase.sLine);
+			fbBuilder.M_Append('" >');
+			fbList.M_Add(fbBuilder.M_ToString());
+			WHILE nIndex < fbAssert.fbList.P_Length DO
+				fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
+				nIndex:= nIndex + 1;
+			END_WHILE
+			fbList.M_Add('</testcase>');
+			stTestsuite.nTests:= stTestsuite.nTests + 1;
+			stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
+			stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
+			stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
+			stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
+			stTestcase.fTime:= 0.0;
+			nActual:= nNext;
+		END_IF
 	END_IF
 END_IF
 stTestsuite.fTime:=  TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
@@ -256,6 +258,7 @@ END_VAR
     <LineIds Name="FB_Testsuite.M_Started">
       <LineId Id="153" Count="0" />
       <LineId Id="84" Count="0" />
+      <LineId Id="173" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="101" Count="4" />
       <LineId Id="118" Count="0" />
@@ -295,6 +298,7 @@ END_VAR
       <LineId Id="52" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="42" Count="0" />
+      <LineId Id="174" Count="0" />
       <LineId Id="133" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="58" Count="0" />

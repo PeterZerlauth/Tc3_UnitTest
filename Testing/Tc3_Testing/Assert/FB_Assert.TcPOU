@@ -13,7 +13,6 @@ VAR_OUTPUT
 	nErrors:				DINT;
 END_VAR
 VAR
-	sData:					STRING(255);
 	fbBuilder:				FB_StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
@@ -33,7 +32,10 @@ IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Append('<error message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendANY(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendANY(Actual);
 	fbBuilder.M_Append('</error>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
@@ -42,7 +44,10 @@ ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	fbBuilder.M_Append('<error message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendANY(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendANY(Actual);
 	fbBuilder.M_Append('</error>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
@@ -51,7 +56,10 @@ ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <>
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendANY(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendANY(Actual);
 	fbBuilder.M_Append('</failure>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -306,7 +314,10 @@ ELSE
 	fbBuilder.M_Append('<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">$R');
-	fbBuilder.M_Append(sData);
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendBOOL(TRUE);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendBOOL(Actual);
 	fbBuilder.M_Append('</failure>$R');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -338,12 +349,18 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="150" Count="0" />
       <LineId Id="217" Count="0" />
       <LineId Id="182" Count="0" />
-      <LineId Id="218" Count="2" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="236" Count="2" />
+      <LineId Id="219" Count="1" />
       <LineId Id="155" Count="3" />
-      <LineId Id="221" Count="4" />
+      <LineId Id="221" Count="2" />
+      <LineId Id="239" Count="2" />
+      <LineId Id="224" Count="1" />
       <LineId Id="194" Count="0" />
       <LineId Id="164" Count="2" />
-      <LineId Id="226" Count="4" />
+      <LineId Id="226" Count="2" />
+      <LineId Id="242" Count="2" />
+      <LineId Id="229" Count="1" />
       <LineId Id="206" Count="0" />
       <LineId Id="172" Count="2" />
       <LineId Id="180" Count="1" />
@@ -460,7 +477,9 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
-      <LineId Id="90" Count="4" />
+      <LineId Id="90" Count="2" />
+      <LineId Id="100" Count="2" />
+      <LineId Id="93" Count="1" />
       <LineId Id="81" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />

@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.0.1</ProjectVersion>
+    <ProjectVersion>0.0.0.2</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -55,9 +55,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\FB_Base.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\F_AnyToString.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\F_GetCycleTime.TcPOU">
@@ -174,8 +171,6 @@
     <SubObject Include="I_StringBuilder.M_AppendBOOL" />
     <SubObject Include="I_StringBuilder.M_AppendINT" />
     <SubObject Include="I_StringBuilder.M_AppendREAL" />
-    <SubObject Include="I_StringBuilder.M_Insert" />
-    <SubObject Include="I_StringBuilder.M_Replace" />
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

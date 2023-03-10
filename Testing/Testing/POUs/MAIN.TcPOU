@@ -3,13 +3,14 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	nIndex: 		INT;
+	sValue:			STRING(255);
 	fbList:			FB_ListSTRING;
 	fbBuilder:		FB_StringBuilder;
-	sValue:			String(255);
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
 	fbTestsuite2:	FB_Testsuite;
-	nIndex: INT;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -55,22 +56,12 @@ CASE fbTestsuite1.P_Testcase OF
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);
 		
 	6:
-		fbBuilder.M_Reset().M_Append('Test %s Test').M_Replace('', 'Value').M_CopyTo(sValue);
-		fbTestsuite1.P_Assert.M_Equals_STRING('Test %s Test', 'Test Value Test', 'FB_StringBuilder.M_Replace()');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
-		
-	7:
-		fbBuilder.M_Reset().M_Append('Test Test').M_Insert(5, 'Value').M_CopyTo(sValue);
-		fbTestsuite1.P_Assert.M_Equals_STRING('Test %s Test', 'Test Value Test', 'FB_StringBuilder.M_Insert()');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
-		
-	8:
 		sValue:= '';
 		sValue:= fbBuilder.M_Reset().M_Append('Test').M_ToString();
 		fbTestsuite1.P_Assert.M_Equals_STRING('Test', sValue, 'FB_StringBuilder.M_ToString()');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 9);
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
 		
-	9:
+	7:
 		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);
 	
@@ -82,19 +73,30 @@ fbTestsuite2();
 CASE fbTestsuite2.P_Testcase OF
 	E_Testcase.Start:
 		fbList.M_Clear();
-		FOR nIndex:= 0 TO 499 DO
+		FOR nIndex:= 0 TO 49 DO
 			fbList.M_Add(INT_TO_STRING(nIndex));
 		END_FOR
-		fbTestsuite2.P_Assert.M_Equals_STRING('500', fbList.M_Item(500) ,'FB_ListSTRING.M_Item()');
-		fbTestsuite2.P_Assert.M_Equals_STRING('100', fbList.M_Item(100) ,'FB_ListSTRING.M_Item()');
-		fbTestsuite2.P_Assert.M_Equals_DINT(500, fbList.P_Length ,'FB_ListSTRING.P_Length');
-		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', E_Testcase.Done);
+		fbTestsuite2.P_Assert.M_Equals_STRING('49', fbList.M_Item(fbList.P_Length - 1) ,'FB_ListSTRING.M_Item()');
+		fbTestsuite2.P_Assert.M_Equals_STRING('10', fbList.M_Item(10) ,'FB_ListSTRING.M_Item()');
+		fbTestsuite2.P_Assert.M_Equals_DINT(50, fbList.P_Length ,'FB_ListSTRING.P_Length');
+		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 1);
+	
+1:
+		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Clear(), 'FB_ListSTRING.M_Clear()');
+		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 2);		
+2:
+		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('1'), 'FB_ListSTRING.M_Add()');
+		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('3'), 'FB_ListSTRING.M_Add()');
+		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Insert(1, '2'), 'FB_ListSTRING.M_Insert()');
+		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '',3);
+		
+3:
+		fbTestsuite2.P_Assert.M_Equals_STRING('2', fbList.M_Item(1), 'fbList.M_Item()');
+		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', E_Testcase.Done);			
 
 	E_Testcase.Done:;
 	
 END_CASE
-
-
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -113,11 +115,8 @@ END_CASE
       <LineId Id="647" Count="2" />
       <LineId Id="585" Count="2" />
       <LineId Id="650" Count="2" />
-      <LineId Id="589" Count="2" />
-      <LineId Id="660" Count="1" />
-      <LineId Id="593" Count="2" />
-      <LineId Id="663" Count="1" />
-      <LineId Id="597" Count="2" />
+      <LineId Id="589" Count="0" />
+      <LineId Id="598" Count="1" />
       <LineId Id="666" Count="0" />
       <LineId Id="665" Count="0" />
       <LineId Id="600" Count="8" />
@@ -128,9 +127,19 @@ END_CASE
       <LineId Id="687" Count="2" />
       <LineId Id="691" Count="1" />
       <LineId Id="681" Count="0" />
-      <LineId Id="672" Count="1" />
+      <LineId Id="672" Count="0" />
+      <LineId Id="713" Count="1" />
+      <LineId Id="709" Count="0" />
+      <LineId Id="705" Count="0" />
+      <LineId Id="715" Count="0" />
+      <LineId Id="717" Count="2" />
+      <LineId Id="706" Count="0" />
+      <LineId Id="725" Count="0" />
+      <LineId Id="721" Count="1" />
+      <LineId Id="720" Count="0" />
+      <LineId Id="673" Count="0" />
       <LineId Id="682" Count="1" />
-      <LineId Id="674" Count="2" />
+      <LineId Id="674" Count="0" />
       <LineId Id="670" Count="0" />
     </LineIds>
   </POU>

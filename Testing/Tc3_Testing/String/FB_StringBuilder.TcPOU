@@ -46,7 +46,7 @@ ELSE
 	// new Length
 	nLength:= nLength + nValue;
 	// new pointer
-	pList:= __NEW(BYTE, DINT_TO_UDINT(SIZEOF(BYTE) * (nLength + 1)));
+	pList:= __NEW(BYTE, (SIZEOF(BYTE) * (nLength + 1)));
 	
 	CONCAT2(pOldList, pValue, pList, nLength + 1);
 	// delete old
@@ -55,6 +55,123 @@ ELSE
 END_IF
 M_Append:= THIS^;
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_AppendANY" Id="{8dc6449d-20e9-08f8-23cf-a3212782295d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_AppendANY : I_StringBuilder
+VAR_INPUT
+	Value:		ANY;
+END_VAR
+VAR
+	sValue:				STRING(255);
+	pBOOL:				POINTER TO BOOL;
+	pTIME:				POINTER TO TIME;
+	pLTIME:				POINTER TO LTIME;
+	pDATE:				POINTER TO DATE;
+	pDATE_AND_TIME:		POINTER TO DATE_AND_TIME;		
+	pSTRING:			POINTER TO STRING;
+	pWSTRING:			POINTER TO WSTRING;
+    pSINT:				POINTER TO SINT;
+    pUSINT:				POINTER TO USINT;
+    pWORD:				POINTER TO WORD;//16 bit
+    pINT:				POINTER TO INT; //16 bit
+    pUINT:				POINTER TO UINT; //16 bit
+	            		
+    pDINT:				POINTER TO DINT; //32 bit
+    pUDINT:				POINTER TO UDINT; //32 bit
+    pDWORD:				POINTER TO DWORD; //32 bit
+    pREAL:				POINTER TO REAL; //32 bit
+	            		
+    pLREAL:				POINTER TO LREAL; //64 bit
+    pLWORD:				POINTER TO LWORD; //64 bit
+	pLINT:				POINTER TO LINT;
+ 	pULINT:				POINTER TO ULINT;   
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE Value.TypeClass OF
+	__SYSTEM.TYPE_CLASS.TYPE_BOOL:
+		pBOOL:= Value.pValue;
+		sValue:= BOOL_TO_STRING(pBOOL^);
+	__SYSTEM.TYPE_CLASS.TYPE_BIT:
+		sValue:= TO_STRING(Value.pValue^);
+	__SYSTEM.TYPE_CLASS.TYPE_BYTE:
+		sValue:= BYTE_TO_STRING(Value.pValue^);
+	__SYSTEM.TYPE_CLASS.TYPE_WORD:
+		pWORD:= Value.pValue;
+		sValue:= WORD_TO_STRING(pWORD^);
+	__SYSTEM.TYPE_CLASS.TYPE_DWORD:
+		pDWORD:= Value.pValue;
+		sValue:= DWORD_TO_STRING(pDWORD^);
+	__SYSTEM.TYPE_CLASS.TYPE_LWORD:
+		pLWORD:= Value.pValue;
+		sValue:= LWORD_TO_STRING(pLWORD^);
+	__SYSTEM.TYPE_CLASS.TYPE_SINT:
+		pSINT:= Value.pValue;
+		sValue:= SINT_TO_STRING(pSINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_INT:
+		pINT:= Value.pValue;
+		sValue:= INT_TO_STRING(pINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_DINT:
+		pDINT:= Value.pValue;
+		sValue:= DINT_TO_STRING(pDINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_LINT:;
+		pLINT:= Value.pValue;
+		sValue:= LINT_TO_STRING(pLINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_USINT:
+		sValue:= USINT_TO_STRING(Value.pValue^);
+	__SYSTEM.TYPE_CLASS.TYPE_UINT:
+		pUINT:= Value.pValue;
+		sValue:= UINT_TO_STRING(pUINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_UDINT:
+		pUDINT:= Value.pValue;
+		sValue:= UDINT_TO_STRING(pUDINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_ULINT:
+		pULINT:= Value.pValue;
+		sValue:= ULINT_TO_STRING(pULINT^);
+	__SYSTEM.TYPE_CLASS.TYPE_REAL:
+		pREAL:= Value.pValue;
+		sValue:= REAL_TO_STRING(pREAL^);
+	__SYSTEM.TYPE_CLASS.TYPE_LREAL:
+		pLREAL:= Value.pValue;
+		sValue:= LREAL_TO_STRING(pLREAL^);
+	__SYSTEM.TYPE_CLASS.TYPE_STRING:
+		pSTRING:= Value.pValue;
+		sValue:= pSTRING^;	
+	__SYSTEM.TYPE_CLASS.TYPE_WSTRING:
+		pWSTRING:= Value.pValue;
+		sValue:= WSTRING_TO_STRING(pWSTRING^);	
+	__SYSTEM.TYPE_CLASS.TYPE_TIME:
+		pTIME:= Value.pValue;
+		sValue:= TIME_TO_STRING(pTIME^);	
+	__SYSTEM.TYPE_CLASS.TYPE_DATE:
+		pDATE:= Value.pValue;
+		sValue:= DATE_TO_STRING(pDATE^);	
+	__SYSTEM.TYPE_CLASS.TYPE_DATEANDTIME:
+		pDATE:= Value.pValue;
+		sValue:= DATE_TO_STRING(pDATE^);	
+	__SYSTEM.TYPE_CLASS.TYPE_TIMEOFDAY:;	
+	__SYSTEM.TYPE_CLASS.TYPE_POINTER:;
+	__SYSTEM.TYPE_CLASS.TYPE_REFERENCE:;
+	__SYSTEM.TYPE_CLASS.TYPE_SUBRANGE:;
+	__SYSTEM.TYPE_CLASS.TYPE_ENUM:;
+	__SYSTEM.TYPE_CLASS.TYPE_ARRAY:;
+	__SYSTEM.TYPE_CLASS.TYPE_PARAMS:;
+	__SYSTEM.TYPE_CLASS.TYPE_USERDEF:;
+	__SYSTEM.TYPE_CLASS.TYPE_NONE:;
+	__SYSTEM.TYPE_CLASS.TYPE_ANY:;
+	__SYSTEM.TYPE_CLASS.TYPE_ANYBIT:;
+	__SYSTEM.TYPE_CLASS.TYPE_ANYDATE:;
+	__SYSTEM.TYPE_CLASS.TYPE_ANYINT:;
+	__SYSTEM.TYPE_CLASS.TYPE_ANYNUM:;
+	__SYSTEM.TYPE_CLASS.TYPE_LAZY:;
+	__SYSTEM.TYPE_CLASS.TYPE_LTIME:
+		pLTIME:= Value.pValue;
+		sValue:= TIME_TO_STRING(pTIME^);	
+	__SYSTEM.TYPE_CLASS.TYPE_BITCONST:;
+END_CASE
+
+M_Append(sValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_AppendBOOL" Id="{56944132-17d4-0f65-1303-77dc1a8188a8}">
@@ -110,28 +227,6 @@ END_VAR
         <ST><![CDATA[M_Find:= FIND2(pList, adr(sValue));]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Insert" Id="{f217d718-d245-036c-3a5b-ac55f71cd6ca}">
-      <Declaration><![CDATA[METHOD M_Insert : I_StringBuilder
-VAR_INPUT
-	Position:		UDINT;
-	Value:			STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Insert:= THIS^;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Replace" Id="{b3a28a4e-dd13-099a-19eb-7f8e1f3e5153}">
-      <Declaration><![CDATA[METHOD M_Replace : I_StringBuilder
-VAR_INPUT
-	Target:			STRING(255);
-	Value:			STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Replace:= THIS^;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="M_Reset" Id="{fc3baabb-d4a7-08e7-3d21-7dd7a233d0d0}">
       <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
 ]]></Declaration>
@@ -172,6 +267,15 @@ END_VAR
       <LineId Id="31" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_StringBuilder.M_AppendANY">
+      <LineId Id="31" Count="1" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="33" Count="71" />
+      <LineId Id="108" Count="4" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="114" Count="0" />
+    </LineIds>
     <LineIds Name="FB_StringBuilder.M_AppendBOOL">
       <LineId Id="17" Count="0" />
       <LineId Id="2" Count="0" />
@@ -189,12 +293,6 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_Find">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Insert">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Replace">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_Reset">

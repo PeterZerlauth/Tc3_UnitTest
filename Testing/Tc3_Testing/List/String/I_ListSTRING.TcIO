@@ -10,8 +10,7 @@ VAR_INPUT
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Clear" Id="{2568afe7-f1ba-0d49-04c6-4cf7f25a949a}">
-      <Declaration><![CDATA[METHOD M_Clear
-]]></Declaration>
+      <Declaration><![CDATA[METHOD M_Clear : BOOL]]></Declaration>
     </Method>
     <Method Name="M_Index" Id="{4c369575-4541-0c11-19ef-292e554e4ba7}">
       <Declaration><![CDATA[METHOD M_Index : DINT

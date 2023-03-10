@@ -152,12 +152,13 @@ END_IF
     <Method Name="M_Load" Id="{0b14d214-f7f4-0ddf-2e3e-5b5b47c4b73c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Load : BOOL
 VAR_INPUT
-	sPathName:		T_MaxString;
+	sPathName:		STRING(255);
 	Value:			ANY;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF fbLoad.bExecute THEN
+        <ST><![CDATA[fbLoad();
+IF fbLoad.bExecute THEN
 	IF fbLoad.bError THEN
 		eError:= fbLoad.nErrId;
 		fbLoad.bExecute:= FALSE;
@@ -310,6 +311,7 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Load">
+      <LineId Id="28" Count="0" />
       <LineId Id="4" Count="2" />
       <LineId Id="22" Count="0" />
       <LineId Id="7" Count="9" />

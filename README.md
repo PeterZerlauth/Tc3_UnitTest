@@ -1,11 +1,17 @@
-# TcTesting
+# Tc3_Testing.library
 Twincat 3 unit testing
 
 Start with my own simplified unit test lib
 
-* FB_Assert => done;
-* FB_Testsuite => done
-* FB_Testsuite => open
+- [x] FB_Assert => done;
+- [x] FB_Testsuite => done
+- [x] FB_Testsuite => done
+- [x] Junit Xml format => done
+- [ ] Twincat error to Testcase => open
 
-![grafik](https://user-images.githubusercontent.com/48495545/221642520-067dda53-0e73-40f4-b141-c089c395d0a3.png)
+![image](https://user-images.githubusercontent.com/48495545/224327239-0ac14ea2-1ed5-47e6-90c4-c2653fee89d6.png)
 
+
+Example Test result:
+
+![image](https://user-images.githubusercontent.com/48495545/224326897-179f3f01-c37b-4a58-bd7c-811189d2363b.png)

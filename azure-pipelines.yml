@@ -14,7 +14,7 @@ steps:
   displayName: 'Checkout'
 
 - task: CmdLine@2
-  displayName: Build twincat 3 library 
+  displayName: Build twincat 3 library / run unit tests 
   condition: succeeded()
   inputs:
         failOnStderr: true
@@ -26,3 +26,5 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/report*.xml'
+    testRunTitle: 'Test-Run'
+    buildPlatform: 'Twincat 3'

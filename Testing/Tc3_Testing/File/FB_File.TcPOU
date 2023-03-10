@@ -53,14 +53,19 @@ END_VAR
 IF fbClose.bExecute THEN
 	IF fbClose.bError THEN
 		fbClose.bExecute:= FALSE;
+		M_Close:= FALSE;
 		eError:= fbClose.nErrId;
 	ELSE
 		IF fbClose.bBusy THEN
 			M_Close:= FALSE;
 		ELSE
-			M_Close:= TRUE;
-			eError:= E_AdsError.NOERR;
+			eError:= E_AdsError.NOERR;	
+			fbRead.hFile:= 0;
+			fbWrite.hFile:= 0;
+			fbClose.hFile:= 0;
+			fbOpen.hFile:= 0;
 			fbClose.bExecute:= FALSE;
+			M_Close:= TRUE;
 		END_IF
 	END_IF
 ELSE
@@ -133,6 +138,7 @@ IF fbDelete.bExecute THEN
 ELSE
 	fbDelete.bExecute:= TRUE;
 	fbDelete.sPathName:= sPathName;
+	fbDelete.ePath:= E_OpenPath.PATH_GENERIC;
 END_IF
 ]]></ST>
       </Implementation>
@@ -262,7 +268,14 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Close">
-      <LineId Id="3" Count="18" />
+      <LineId Id="3" Count="3" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="7" Count="4" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="29" Count="2" />
+      <LineId Id="15" Count="6" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Create">
@@ -273,7 +286,9 @@ END_VAR
       <LineId Id="3" Count="2" />
       <LineId Id="29" Count="2" />
       <LineId Id="6" Count="0" />
-      <LineId Id="8" Count="9" />
+      <LineId Id="8" Count="8" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="17" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Load">

@@ -141,8 +141,7 @@ END_IF
       <Declaration><![CDATA[METHOD PUBLIC M_Load : BOOL
 VAR_INPUT
 	sPathName:		T_MaxString;
-	pData:			PVOID;
-	nData:			UDINT;
+	Value:			ANY;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -158,8 +157,8 @@ IF fbLoad.bExecute THEN
 ELSE
 	fbLoad.sPathName:= sPathName;
 	fbLoad.bExecute:= TRUE;
-	fbLoad.pReadBuff:= pData;
-	fbLoad.cbReadLen:= nData;
+	fbLoad.pReadBuff:= Value.pValue;
+	fbLoad.cbReadLen:= DINT_TO_UDINT(Value.diSize);
 END_IF]]></ST>
       </Implementation>
     </Method>

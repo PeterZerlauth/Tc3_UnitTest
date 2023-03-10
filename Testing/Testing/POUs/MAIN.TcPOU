@@ -3,20 +3,25 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	nIndex: 		INT;
-	sValue:			STRING(255);
-	fbList:			FB_ListSTRING;
-	fbBuilder:		FB_StringBuilder;
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
 	fbTestsuite2:	FB_Testsuite;
-	
+	fbTestsuite3:	FB_Testsuite;	
+
+	nIndex: 		INT;
+	sValue:			STRING(255);
+	sValue3:		STRING(255);
+	fbFile:			FB_File;
+	fbList:			FB_ListSTRING;
+	fbBuilder:		FB_StringBuilder;
+
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbTestsuites();
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
+fbTestsuites.M_Add(fbTestsuite3);
 
 fbTestsuite1();
 CASE fbTestsuite1.P_Testcase OF
@@ -97,11 +102,48 @@ CASE fbTestsuite2.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
+
+fbFile();
+fbTestsuite3();
+CASE fbTestsuite3.P_Testcase OF
+	E_Testcase.Start:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Create('C:\Test.txt'), 'fbFile.M_Create()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 1);
+	1:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 2);		
+		
+	2:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 3);
+		
+	3:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 4);
+		
+		
+	4:
+		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 5);	
+		
+	5:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 6);
+		
+	6:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
+		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', E_Testcase.Done);
+		
+	E_Testcase.Done:;
+	
+END_CASE
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="559" Count="1" />
-      <LineId Id="668" Count="1" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="779" Count="0" />
+      <LineId Id="669" Count="0" />
       <LineId Id="561" Count="0" />
       <LineId Id="563" Count="1" />
       <LineId Id="635" Count="0" />
@@ -140,6 +182,32 @@ END_CASE
       <LineId Id="673" Count="0" />
       <LineId Id="682" Count="1" />
       <LineId Id="674" Count="0" />
+      <LineId Id="787" Count="0" />
+      <LineId Id="738" Count="0" />
+      <LineId Id="741" Count="1" />
+      <LineId Id="739" Count="1" />
+      <LineId Id="745" Count="0" />
+      <LineId Id="756" Count="1" />
+      <LineId Id="754" Count="0" />
+      <LineId Id="786" Count="0" />
+      <LineId Id="747" Count="0" />
+      <LineId Id="749" Count="0" />
+      <LineId Id="748" Count="0" />
+      <LineId Id="753" Count="0" />
+      <LineId Id="751" Count="1" />
+      <LineId Id="750" Count="0" />
+      <LineId Id="764" Count="0" />
+      <LineId Id="768" Count="0" />
+      <LineId Id="766" Count="1" />
+      <LineId Id="765" Count="0" />
+      <LineId Id="771" Count="2" />
+      <LineId Id="761" Count="0" />
+      <LineId Id="777" Count="0" />
+      <LineId Id="775" Count="1" />
+      <LineId Id="774" Count="0" />
+      <LineId Id="778" Count="0" />
+      <LineId Id="743" Count="1" />
+      <LineId Id="737" Count="0" />
       <LineId Id="670" Count="0" />
     </LineIds>
   </POU>

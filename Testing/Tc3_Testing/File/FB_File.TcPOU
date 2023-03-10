@@ -134,6 +134,7 @@ END_VAR
 IF fbDelete.bExecute THEN
 	IF fbDelete.bError THEN
 		fbDelete.bExecute:= FALSE;
+		M_Delete:= TRUE;
 	ELSIF fbDelete.bBusy THEN
 		;
 	ELSE
@@ -302,6 +303,7 @@ END_VAR
     <LineIds Name="FB_File.M_Delete">
       <LineId Id="39" Count="0" />
       <LineId Id="4" Count="2" />
+      <LineId Id="45" Count="0" />
       <LineId Id="8" Count="8" />
       <LineId Id="37" Count="0" />
       <LineId Id="17" Count="0" />

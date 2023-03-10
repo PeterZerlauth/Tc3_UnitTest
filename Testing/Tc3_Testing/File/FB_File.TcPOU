@@ -63,7 +63,6 @@ IF fbClose.bExecute THEN
 			fbRead.hFile:= 0;
 			fbWrite.hFile:= 0;
 			fbClose.hFile:= 0;
-			fbOpen.hFile:= 0;
 			fbClose.bExecute:= FALSE;
 			M_Close:= TRUE;
 		END_IF
@@ -274,7 +273,7 @@ END_VAR
       <LineId Id="13" Count="0" />
       <LineId Id="27" Count="1" />
       <LineId Id="26" Count="0" />
-      <LineId Id="29" Count="2" />
+      <LineId Id="30" Count="1" />
       <LineId Id="15" Count="6" />
       <LineId Id="2" Count="0" />
     </LineIds>

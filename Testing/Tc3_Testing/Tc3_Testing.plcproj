@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.0.3</ProjectVersion>
+    <ProjectVersion>0.0.0.4</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>

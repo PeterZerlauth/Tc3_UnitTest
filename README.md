@@ -11,9 +11,9 @@ Start with my own simplified unit test lib
 - [x] Junit Xml format => done
 - [x] Junit Xml format => done
 
-- [ ] FB_Profiler => open
-- [ ] FB_Stoppwatch => open
-- [ ] Twincat error to Testcase => open
+- [ ] FB_Profiler => in Work
+- [ ] FB_Stoppwatch => in Work
+- [x] Twincat Error to FB_Assert => done
 
 ![image](https://user-images.githubusercontent.com/48495545/224327239-0ac14ea2-1ed5-47e6-90c4-c2653fee89d6.png)
 

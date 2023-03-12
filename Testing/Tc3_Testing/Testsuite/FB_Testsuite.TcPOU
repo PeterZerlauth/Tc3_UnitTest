@@ -189,10 +189,10 @@ M_Stopping:= TRUE;]]></ST>
       <Declaration><![CDATA[METHOD PUBLIC M_Testcase : BOOL
 VAR_INPUT
 	Classname:			STRING(255);	// Classname as string
-	Timeout:			TIME;			// Timeout in ms
-	File:				STRING(255);
-	Line:				STRING(255);	
-	Next:				INT;			// Next test case
+	Timeout:			TIME;			// Timeout as time
+	File:				STRING(255);	// File as string
+	Line:				STRING(255);	// Line as string
+	Next:				INT;			// Next Testcase as int
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[stTestcase.sName:= CONCAT(CONCAT(CONCAT(stTestsuite.sName,'.'), 'M_Testcase_'), INT_TO_STRING(nActual));

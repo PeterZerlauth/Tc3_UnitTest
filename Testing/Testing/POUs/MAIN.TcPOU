@@ -3,35 +3,40 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbTestsuites:	FB_Testsuites;
-	fbTestsuite1:	FB_Testsuite;
-	fbTestsuite2:	FB_Testsuite;
-	fbTestsuite3:	FB_Testsuite;
-	fbTestsuite4:	FB_Testsuite;	
+	fbTestsuites:	FB_Testsuites;				// Testsuites
+	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
+	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
+	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
+	fbTestsuite4:	FB_Testsuite;				// Testsuite	FB_Stopwatch
 
-	nIndex: 		INT;
-	sValue:			STRING(255);
-	sValue3:		STRING(255);
-	fbFile:			FB_File;
-	fbList:			FB_ListSTRING;
-	fbBuilder:		FB_StringBuilder;
-	fbStopwatch:	FB_Stopwatch;
+	nIndex: 		INT;						// Test-vars
+	sValue:			STRING(255);				// Test-vars
+	sValue3:		STRING(255);				// Test-vars
+	fbFile:			FB_File;					// Test-vars	
+	fbList:			FB_ListSTRING;				// Test-vars
+	fbBuilder:		FB_StringBuilder;			// Test-vars
+	fbStopwatch:	FB_Stopwatch;				// Test-vars
 	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbTestsuites();
+      <ST><![CDATA[// Run
+fbTestsuites();
+// Add Testsuite to Testsuites
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuites.M_Add(fbTestsuite3);
 fbTestsuites.M_Add(fbTestsuite4);
 
+{region "fbTestsuite1"}
+// Run
 fbTestsuite1();
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
+		// First test case
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
 		
 	1:
 		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
@@ -71,12 +76,16 @@ CASE fbTestsuite1.P_Testcase OF
 		
 	7:
 		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);
-	
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
+		
+	8:
+		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
+		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);	
 	E_Testcase.Done:;
 	
 END_CASE
-
+{endregion}
+{region "fbTestsuite2"}
 fbTestsuite2();
 CASE fbTestsuite2.P_Testcase OF
 	E_Testcase.Start:
@@ -105,7 +114,8 @@ CASE fbTestsuite2.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
-
+{endregion}
+{region "fbTestsuite3"}
 fbTestsuite3();
 CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Start:
@@ -139,7 +149,8 @@ CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
-
+{endregion}
+{region "fbTestsuite4"}
 fbStopwatch();
 fbTestsuite4();
 CASE fbTestsuite4.P_Testcase OF
@@ -168,16 +179,22 @@ CASE fbTestsuite4.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
-]]></ST>
+{endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="559" Count="1" />
+      <LineId Id="863" Count="0" />
+      <LineId Id="559" Count="0" />
+      <LineId Id="862" Count="0" />
+      <LineId Id="560" Count="0" />
       <LineId Id="668" Count="0" />
       <LineId Id="779" Count="0" />
       <LineId Id="809" Count="0" />
+      <LineId Id="866" Count="0" />
+      <LineId Id="864" Count="0" />
       <LineId Id="669" Count="0" />
       <LineId Id="561" Count="0" />
       <LineId Id="563" Count="1" />
+      <LineId Id="865" Count="0" />
       <LineId Id="635" Count="0" />
       <LineId Id="566" Count="3" />
       <LineId Id="638" Count="2" />
@@ -193,9 +210,13 @@ END_CASE
       <LineId Id="598" Count="1" />
       <LineId Id="666" Count="0" />
       <LineId Id="665" Count="0" />
-      <LineId Id="600" Count="8" />
+      <LineId Id="600" Count="5" />
+      <LineId Id="861" Count="0" />
+      <LineId Id="859" Count="1" />
+      <LineId Id="606" Count="2" />
       <LineId Id="80" Count="0" />
       <LineId Id="671" Count="0" />
+      <LineId Id="869" Count="0" />
       <LineId Id="677" Count="2" />
       <LineId Id="685" Count="0" />
       <LineId Id="687" Count="2" />
@@ -214,7 +235,8 @@ END_CASE
       <LineId Id="673" Count="0" />
       <LineId Id="682" Count="1" />
       <LineId Id="674" Count="0" />
-      <LineId Id="738" Count="0" />
+      <LineId Id="874" Count="0" />
+      <LineId Id="870" Count="0" />
       <LineId Id="741" Count="1" />
       <LineId Id="739" Count="1" />
       <LineId Id="745" Count="0" />
@@ -239,6 +261,7 @@ END_CASE
       <LineId Id="778" Count="0" />
       <LineId Id="743" Count="1" />
       <LineId Id="737" Count="0" />
+      <LineId Id="875" Count="0" />
       <LineId Id="811" Count="0" />
       <LineId Id="823" Count="0" />
       <LineId Id="816" Count="1" />

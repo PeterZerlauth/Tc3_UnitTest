@@ -9,7 +9,6 @@ Start with my own simplified unit test lib
 - [x] FB_Testsuite => done
 - [x] FB_Testsuite => done
 - [x] Junit Xml format => done
-- [x] Junit Xml format => done
 - [x] Twincat Error to FB_Assert => done
 - [ ] FB_Profiler => in Work
 - [ ] FB_Stoppwatch => in Work

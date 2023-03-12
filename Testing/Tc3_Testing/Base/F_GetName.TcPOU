@@ -3,7 +3,7 @@
   <POU Name="F_GetName" Id="{bea55f67-96ec-0cf9-2d8d-bcae176f31a7}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION F_GetName : STRING(255)
 VAR_INPUT
-	sInstancePath:		STRING(255);
+	InstancePath:		STRING(255);
 END_VAR
 VAR
     sName:				STRING(255);
@@ -12,13 +12,13 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[sName := CONCAT(TwinCAT_SystemInfoVarList._AppInfo.ProjectName, '.');
 
-nPosition := FIND(sInstancePath, sName);
+nPosition := FIND(InstancePath, sName);
 
 IF nPosition > 0 THEN
-    F_GetName:= DELETE(sInstancePath, nPosition-1 + LEN(sName), 1);
+    F_GetName:= DELETE(InstancePath, nPosition-1 + LEN(sName), 1);
 END_IF
 
-nPosition := FIND(sInstancePath, sName);
+nPosition := FIND(InstancePath, sName);
 
 IF nPosition > 0 THEN
     F_GetName:= DELETE(F_GetName, nPosition - 1 + LEN(sName), 1);
@@ -28,7 +28,7 @@ nPosition:= FIND(STR1 := F_GetName, '.');
 F_GetName:= RIGHT(STR := F_GetName, LEN(STR := F_GetName) - nPosition);]]></ST>
     </Implementation>
     <LineIds Name="F_GetName">
-      <LineId Id="15" Count="14" />
+      <LineId Id="44" Count="14" />
       <LineId Id="7" Count="0" />
     </LineIds>
   </POU>

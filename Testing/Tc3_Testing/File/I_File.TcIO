@@ -53,15 +53,13 @@ END_VAR
     <Method Name="M_Read" Id="{d6544e38-9389-075a-15aa-5bab85948640}">
       <Declaration><![CDATA[METHOD PUBLIC M_Read : BOOL
 VAR_INPUT
-	pData:		PVOID;
-	nData:		udint;
+	Value:		ANY;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Write" Id="{ade87bcf-1dc4-0b90-0279-e8b498b630a0}">
       <Declaration><![CDATA[METHOD PUBLIC M_Write : BOOL
 VAR_INPUT
-	pData:		POINTER TO BYTE;
-	nData:		UDINT;
+	Value:		ANY;
 END_VAR]]></Declaration>
     </Method>
     <Property Name="P_Error" Id="{bc44daab-bd44-0bcc-12e7-c5e0e48215a2}">

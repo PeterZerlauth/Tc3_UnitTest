@@ -15,7 +15,6 @@ VAR
 	fbList:			FB_ListSTRING;
 	fbBuilder:		FB_StringBuilder;
 
-	bClose: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -27,36 +26,36 @@ fbTestsuites.M_Add(fbTestsuite3);
 fbTestsuite1();
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
-		fbBuilder.M_Reset().M_Append('Test').M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);
 		
 	1:
-		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
 		
 	2:
-		fbBuilder.M_Reset().M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '', 'FB_StringBuilder.M_Reset()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
 	
 	3:
-		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'TRUE', 'FB_StringBuilder.M_AppendBOOL()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
 		
 	4:
-		fbBuilder.M_Reset().M_AppendINT(33).M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_AppendINT(33).M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33', 'FB_StringBuilder.M_AppendBOOL()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(2, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
 		
 	5:
-		fbBuilder.M_Reset().M_AppendREAL(33.44, 2).M_CopyTo(sValue);
+		fbBuilder.M_Reset().M_AppendREAL(33.44, 2).M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33.44', 'FB_StringBuilder.M_AppendBOOL()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(5, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);
@@ -104,45 +103,39 @@ CASE fbTestsuite2.P_Testcase OF
 	
 END_CASE
 
-fbFile();
 fbTestsuite3();
 CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Start:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Create('C:\Test.txt'), 'fbFile.M_Create()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 1);
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 1);
 	1:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 2);		
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 2);		
 		
 	2:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 3);
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 3);
 		
 	3:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 4);
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 4);
 		
 		
 	4:
 		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 5);	
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 5);	
 		
 	5:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', 6);
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 6);
 		
 	6:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
-		fbTestsuite3.M_Testcase('fbFile', T#1S, '', '', E_Testcase.Done);
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
 		
 	E_Testcase.Done:;
 	
-END_CASE
-
-IF bClose THEN
-	bClose:= NOT fbFile.M_Delete('C:\Test.txt');
-END_IF
-]]></ST>
+END_CASE]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="559" Count="1" />
@@ -187,7 +180,6 @@ END_IF
       <LineId Id="673" Count="0" />
       <LineId Id="682" Count="1" />
       <LineId Id="674" Count="0" />
-      <LineId Id="787" Count="0" />
       <LineId Id="738" Count="0" />
       <LineId Id="741" Count="1" />
       <LineId Id="739" Count="1" />
@@ -213,10 +205,6 @@ END_IF
       <LineId Id="778" Count="0" />
       <LineId Id="743" Count="1" />
       <LineId Id="737" Count="0" />
-      <LineId Id="804" Count="0" />
-      <LineId Id="803" Count="0" />
-      <LineId Id="805" Count="1" />
-      <LineId Id="670" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

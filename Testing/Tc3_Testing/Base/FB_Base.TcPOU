@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Base" Id="{83180dff-a34f-4cb4-bb72-3f658f1a77bc}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_Base IMPLEMENTS I_Base
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK FB_Base IMPLEMENTS I_Base
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -14,6 +15,7 @@ VAR
 	eState: 			E_Base;
 	eRequest: 			E_Base;
 	nState: 			INT;
+	{attribute 'hide'} 
 	fbGetTime:			NT_GetTime;
 END_VAR
 ]]></Declaration>

@@ -21,7 +21,7 @@ END_VAR
     <Method Name="M_Append" Id="{1e5af4d0-f329-067d-0bf2-a3973278c0e5}">
       <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL
 VAR_INPUT
-	sText:			STRING(255);
+	Text:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbWrite();
@@ -37,8 +37,8 @@ IF fbWrite.bExecute THEN
 	END_IF
 ELSE
 	fbWrite.bExecute:= TRUE;
-	fbWrite.pWriteBuff:= ADR(sText);
-	fbWrite.cbWriteLen:= INT_TO_UDINT(Len(sText));
+	fbWrite.pWriteBuff:= ADR(Text);
+	fbWrite.cbWriteLen:= INT_TO_UDINT(Len(Text));
 END_IF
 ]]></ST>
       </Implementation>
@@ -46,11 +46,11 @@ END_IF
     <Method Name="M_AppendLine" Id="{9af56e02-5664-0f9f-0418-a518b6e584dd}">
       <Declaration><![CDATA[METHOD PUBLIC M_AppendLine : BOOL
 VAR_INPUT
-	sText:			STRING(255);
+	Text:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[sText:= Concat(sText, '$R');
-M_AppendLine:= M_Append(sText);]]></ST>
+        <ST><![CDATA[Text:= Concat(Text, '$R');
+M_AppendLine:= M_Append(Text);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Close" Id="{c0789999-930f-042f-18a5-7eb9b96ad755}">
@@ -88,7 +88,7 @@ END_IF
     <Method Name="M_Create" Id="{26efe1d9-595f-0507-2f2f-b4311f718a87}">
       <Declaration><![CDATA[METHOD PUBLIC M_Create : BOOL
 VAR_INPUT
-	sPathName:		T_MaxString;
+	PathName:		STRING(255);
 END_VAR
 VAR
 	nTemp: INT;
@@ -98,7 +98,7 @@ VAR_INST
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbCreateDir();
-nTemp := FIND(RIGHT(sPathName, LEN(sPathName) - nPosition), '\');
+nTemp := FIND(RIGHT(PathName, LEN(PathName) - nPosition), '\');
 if nTemp <> 0 then
 	IF fbCreateDir.bExecute THEN
 		IF NOT fbCreateDir.bBusy THEN
@@ -108,10 +108,10 @@ if nTemp <> 0 then
 	ELSE
 		fbCreateDir.bExecute:= TRUE;
 		fbCreateDir.ePath:= PATH_GENERIC;
-		fbCreateDir.sPathName:= Left(sPathName, nPosition + nTemp);
+		fbCreateDir.sPathName:= Left(PathName, nPosition + nTemp);
 	END_IF
 ELSE
-	IF M_Open(sPathName) THEN
+	IF M_Open(PathName) THEN
 		M_Create:= TRUE;
 		nPosition:= 0;
 	END_IF
@@ -125,7 +125,7 @@ END_IF
     <Method Name="M_Delete" Id="{35d3c0a5-5d24-0db0-05ee-ad42476ea1e5}">
       <Declaration><![CDATA[METHOD PUBLIC M_Delete : BOOL
 VAR_INPUT
-	sPathName:		T_MaxString;
+	PathName:		STRING(255);
 END_VAR
 
 ]]></Declaration>
@@ -143,7 +143,7 @@ IF fbDelete.bExecute THEN
 	END_IF
 ELSE
 	fbDelete.bExecute:= TRUE;
-	fbDelete.sPathName:= sPathName;
+	fbDelete.sPathName:= PathName;
 	fbDelete.ePath:= E_OpenPath.PATH_GENERIC;
 END_IF
 ]]></ST>
@@ -152,7 +152,7 @@ END_IF
     <Method Name="M_Load" Id="{0b14d214-f7f4-0ddf-2e3e-5b5b47c4b73c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Load : BOOL
 VAR_INPUT
-	sPathName:		STRING(255);
+	PathName:		STRING(255);
 	Value:			ANY;
 END_VAR
 ]]></Declaration>
@@ -168,7 +168,7 @@ IF fbLoad.bExecute THEN
 		M_Load:= TRUE;
 	END_IF
 ELSE
-	fbLoad.sPathName:= sPathName;
+	fbLoad.sPathName:= PathName;
 	fbLoad.bExecute:= TRUE;
 	fbLoad.pReadBuff:= Value.pValue;
 	fbLoad.cbReadLen:= DINT_TO_UDINT(Value.diSize);
@@ -178,7 +178,7 @@ END_IF]]></ST>
     <Method Name="M_Open" Id="{a8dc81cc-e694-069e-3edb-de6efac1c222}">
       <Declaration><![CDATA[METHOD PUBLIC M_Open : BOOL
 VAR_INPUT
-	sPathName:		T_MaxString;
+	PathName:		STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -198,7 +198,7 @@ IF fbOpen.bExecute THEN
 	END_IF	
 ELSE
 	fbOpen.bExecute:= TRUE;
-	fbOpen.sPathName:= sPathName;
+	fbOpen.sPathName:= PathName;
 	fbOpen.nMode:= (FOPEN_MODEAPPEND OR FOPEN_MODEPLUS OR FOPEN_MODETEXT);
 END_IF
 ]]></ST>
@@ -207,8 +207,7 @@ END_IF
     <Method Name="M_Read" Id="{b2e3afdd-1ca1-0d8e-0510-561806c5e056}">
       <Declaration><![CDATA[METHOD PUBLIC M_Read : BOOL
 VAR_INPUT
-	pData:		PVOID;
-	nData:		udint;
+	Value:		ANY;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbRead();
@@ -224,8 +223,8 @@ IF fbRead.bExecute THEN
 	END_IF
 ELSE
 	fbRead.bExecute:= TRUE;
-	fbRead.pReadBuff:= pData;
-	fbRead.cbReadLen:= nData;
+	fbRead.pReadBuff:= Value.pValue;
+	fbRead.cbReadLen:= DINT_TO_UDINT(Value.diSize);
 END_IF
 
 ]]></ST>
@@ -234,8 +233,7 @@ END_IF
     <Method Name="M_Write" Id="{190fc925-5e69-0b04-04d9-e18614960a32}">
       <Declaration><![CDATA[METHOD PUBLIC M_Write : BOOL
 VAR_INPUT
-	pData:		POINTER TO BYTE;
-	nData:		UDINT;
+	Value:		ANY;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbWrite();
@@ -251,8 +249,8 @@ IF fbWrite.bExecute THEN
 	END_IF
 ELSE
 	fbWrite.bExecute:= TRUE;
-	fbWrite.pWriteBuff:= pData;
-	fbWrite.cbWriteLen:=nData;
+	fbRead.pReadBuff:= Value.pValue;
+	fbRead.cbReadLen:= DINT_TO_UDINT(Value.diSize);
 END_IF
 ]]></ST>
       </Implementation>
@@ -272,9 +270,7 @@ END_VAR
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Append">
-      <LineId Id="4" Count="3" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="8" Count="10" />
+      <LineId Id="29" Count="15" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_AppendLine">
@@ -297,37 +293,19 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Create">
-      <LineId Id="35" Count="0" />
-      <LineId Id="5" Count="20" />
+      <LineId Id="54" Count="21" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Delete">
-      <LineId Id="39" Count="0" />
-      <LineId Id="4" Count="2" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="8" Count="8" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="17" Count="0" />
+      <LineId Id="56" Count="15" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Load">
-      <LineId Id="28" Count="0" />
-      <LineId Id="4" Count="2" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="7" Count="9" />
+      <LineId Id="34" Count="14" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Open">
-      <LineId Id="40" Count="0" />
-      <LineId Id="4" Count="0" />
-      <LineId Id="28" Count="1" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="30" Count="2" />
-      <LineId Id="34" Count="4" />
-      <LineId Id="7" Count="1" />
-      <LineId Id="26" Count="1" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="20" Count="0" />
+      <LineId Id="49" Count="18" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.M_Read">
@@ -340,7 +318,9 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_File.M_Write">
       <LineId Id="23" Count="0" />
-      <LineId Id="4" Count="14" />
+      <LineId Id="4" Count="11" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="17" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_File.P_Error.Get">

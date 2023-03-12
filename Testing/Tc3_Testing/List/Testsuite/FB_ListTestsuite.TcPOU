@@ -25,21 +25,21 @@ END_VAR
     <Method Name="M_Add" Id="{a38c7fef-d96a-4183-97fc-f0e5fdcf0ccf}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR
 VAR
 	pOldList: 	POINTER TO I_Testsuite;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF iTestsuite <> 0 THEN
+        <ST><![CDATA[IF Testsuite <> 0 THEN
 	// First Item
 	IF pList = 0 THEN
 		nLength:= nLength + 1;
 		pList:= __NEW(POINTER TO I_Testsuite,DINT_TO_UDINT(nLength));
 	ELSE
 		// Item already in List
-		IF M_Search(iTestsuite) = -1 THEN
+		IF M_Search(Testsuite) = -1 THEN
 			// backup 
 			pOldList:= pList;
 			// new Length
@@ -56,7 +56,7 @@ END_VAR
 		END_IF
 	END_IF
 	// add new Object
-	pList[nLength-1]:= iTestsuite;
+	pList[nLength-1]:= Testsuite;
 	M_Add:= TRUE;
 ELSE
 	M_Add:= FALSE;	
@@ -76,19 +76,19 @@ END_IF]]></ST>
     <Method Name="M_Get" Id="{d9624459-7fd8-4784-aea6-5c773f6a64a0}">
       <Declaration><![CDATA[METHOD M_Get : I_Testsuite
 VAR_INPUT
-	nIndex: 	DINT;
+	Index: 	DINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF nIndex <= nLength THEN
-	M_Get:= pList[nIndex];
+        <ST><![CDATA[IF Index <= nLength THEN
+	M_Get:= pList[Index];
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Index" Id="{a8754c07-7f0e-4184-834d-318ea0557896}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR
 VAR
 	nIndex: 	DINT;
@@ -97,7 +97,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Index := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex] = iTestsuite) THEN
+    IF (pList[nIndex] = Testsuite) THEN
         M_Index := nIndex;
         RETURN;
     END_IF
@@ -109,18 +109,18 @@ END_WHILE
     <Method Name="M_Remove" Id="{e3d569c0-1249-4bbc-9b3c-c9d8221349af}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	iTestsuite: 			I_Testsuite;
+	Testsuite: 			I_Testsuite;
 END_VAR
 VAR
 	pOldList:			POINTER TO I_Testsuite;
 	nPosition: 			DINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF iTestsuite <> 0 THEN
+        <ST><![CDATA[IF Testsuite <> 0 THEN
 	// First Item
 	IF nLength >= 0 THEN
 		// Item already in List
-		nPosition:= M_Search(iTestsuite);
+		nPosition:= M_Search(Testsuite);
 		IF nPosition <> -1 THEN
 			// backup 
 			pOldList:= pList;
@@ -151,7 +151,7 @@ END_IF]]></ST>
     <Method Name="M_Search" Id="{b4574359-c512-4073-955e-3a3fc1e43b2b}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR
 VAR
 	nIndex: 	UINT;
@@ -160,7 +160,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Search := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex] = iTestsuite) THEN
+    IF (pList[nIndex] = Testsuite) THEN
         M_Search := nIndex;
         RETURN;
     END_IF
@@ -188,7 +188,7 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Add">
-      <LineId Id="45" Count="27" />
+      <LineId Id="87" Count="27" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Clear">
@@ -196,19 +196,19 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Get">
-      <LineId Id="3" Count="1" />
+      <LineId Id="13" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Index">
-      <LineId Id="24" Count="8" />
+      <LineId Id="45" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Remove">
-      <LineId Id="46" Count="28" />
+      <LineId Id="89" Count="28" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.M_Search">
-      <LineId Id="24" Count="8" />
+      <LineId Id="45" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListTestsuite.P_Length.Get">

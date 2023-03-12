@@ -1,23 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Testsuite" Id="{139d3d86-4160-0b84-0f97-b2398a2924e9}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'reflection'} 
-FUNCTION_BLOCK FB_Testsuite EXTENDS FB_Base IMPLEMENTS I_Testsuite
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Testsuite EXTENDS FB_Base IMPLEMENTS I_Testsuite
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	iParent:			I_Testsuites;
-	fbTimeout:			TON:= (PT:= T#300S);
-	fCycleTime: 		LREAL;	
 	stTestsuite:		ST_Testsuite;
 	stTestcase:			ST_Testcase;
+	nActual:			INT:=  E_Testcase.Init;
+	nNext:				INT;
+	fCycleTime: 		LREAL;	
+	iParent:			I_Testsuites;
+	fbTimeout:			TON:= (PT:= T#300S);
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbAssert:			FB_Assert;
-	nActual:			INT:=  E_Testcase.Init;
-	nNext:				INT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -164,7 +163,7 @@ fbBuilder.M_Append(stTestsuite.sTimestamp);
 fbBuilder.M_Append('" file="');
 fbBuilder.M_Append(stTestsuite.sFile);
 fbBuilder.M_Append('">');
-fbBuilder.M_CopyTo(sValue);
+fbBuilder.M_ToAny(sValue);
 fbList.M_Insert(0, sValue);
 fbList.M_Add('$T</testsuite>');
 IF iParent <> 0 THEN

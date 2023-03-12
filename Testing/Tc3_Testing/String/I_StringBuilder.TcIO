@@ -26,18 +26,18 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD PUBLIC M_AppendREAL : I_StringBuilder
 VAR_INPUT
 	Value:		LREAL;
-	nDecimals:	SINT;
+	Decimals:	SINT;
 END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_CopyTo" Id="{940c2d63-a99a-009b-232c-ea17ccc23948}">
-      <Declaration><![CDATA[METHOD M_CopyTo : BOOL
-VAR_INPUT
-	Value:			ANY_STRING;
-END_VAR
-]]></Declaration>
     </Method>
     <Method Name="M_Reset" Id="{c51c1de9-e242-0e2e-15b4-007d70478885}">
       <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
+]]></Declaration>
+    </Method>
+    <Method Name="M_ToAny" Id="{940c2d63-a99a-009b-232c-ea17ccc23948}">
+      <Declaration><![CDATA[METHOD M_ToAny : BOOL
+VAR_INPUT
+	Value:			ANY_STRING;
+END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_ToString" Id="{3d41c117-e4c2-0981-0e95-35260077a987}">

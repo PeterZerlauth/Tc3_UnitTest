@@ -1,22 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Testsuites" Id="{f57812b9-99c8-4f64-b54a-807a33ca5cc6}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'reflection'} 
-FUNCTION_BLOCK PUBLIC FB_Testsuites EXTENDS FB_Base IMPLEMENTS I_Testsuites
+    <Declaration><![CDATA[ FUNCTION_BLOCK PUBLIC FB_Testsuites EXTENDS FB_Base IMPLEMENTS I_Testsuites
 VAR_INPUT
-
 END_VAR
 VAR_OUTPUT
 END_VAR
-VAR
+VAR	
+	sFilePathName:		STRING(255):= 'C:\report.xml';
+	stTestsuites:    	ST_Testsuites;
 	nIndex: 			DINT;
 	fbTimeout:			TON:= (PT:= T#300S);
 	fbFile:				FB_File;
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbListTestsuite:	FB_ListTestsuite;
-	stTestsuites:    	ST_Testsuites;
-	sFilePathName:		STRING(255):= 'C:\report.xml';
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -24,12 +22,12 @@ END_VAR]]></Declaration>
     <Method Name="M_Add" Id="{341dc9d1-6013-01b3-2ca0-fe24c585f169}">
       <Declaration><![CDATA[METHOD PUBLIC M_Add : BOOL
 VAR_INPUT
-	iTestsuite:		I_Testsuite;
+	Testsuite:		I_Testsuite;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbListTestsuite.M_Add(iTestsuite);
-iTestsuite.P_Parent:= this^;]]></ST>
+        <ST><![CDATA[fbListTestsuite.M_Add(Testsuite);
+Testsuite.P_Parent:= this^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Started" Id="{9f9f5ca1-441c-0f29-0c6d-16c04b2958a4}">
@@ -124,7 +122,7 @@ END_VAR]]></Declaration>
 		fbBuilder.M_Append('" timestamp="');
 		fbBuilder.M_Append(stTestsuites.sTimestamp);
 		fbBuilder.M_Append('">');
-		fbBuilder.M_CopyTo(sValue);
+		fbBuilder.M_ToAny(sValue);
 		fbList.M_Insert(1, sValue);
 		fbList.M_Add('</testsuites>');
 		nState:= 2;
@@ -179,7 +177,7 @@ END_VAR
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Add">
-      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Started">

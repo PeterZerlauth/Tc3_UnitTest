@@ -6,7 +6,7 @@
     <Method Name="M_Add" Id="{78c2dc4e-c059-0ee4-1d4e-6a3f41393df7}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Clear" Id="{1d816771-7da2-09ff-2318-6eb9ddc155f7}">
@@ -16,26 +16,26 @@ END_VAR]]></Declaration>
     <Method Name="M_Get" Id="{69c7a09c-f8ba-07d1-3063-8e31f9cac43e}">
       <Declaration><![CDATA[METHOD M_Get : I_Testsuite
 VAR_INPUT
-	nIndex: 	DINT;
+	Index: 	DINT;
 END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_Index" Id="{e23e94e7-e402-01cb-2e81-d199ad68a010}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Remove" Id="{07441ba8-075c-0fa5-0895-940b56f7439a}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	iTestsuite: 			I_Testsuite;
+	Testsuite: 			I_Testsuite;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Search" Id="{9664ac8e-a0b9-0c4a-2c05-31740cc2cdc9}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	iTestsuite: 	I_Testsuite;
+	Testsuite: 	I_Testsuite;
 END_VAR]]></Declaration>
     </Method>
     <Property Name="P_Length" Id="{eca1815b-8a98-0fae-3613-d611134bfecd}">

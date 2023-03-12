@@ -28,14 +28,14 @@ END_VAR]]></Declaration>
     <Method Name="M_Item" Id="{905d8954-1c11-0cee-01d2-ea1e30f0ae14}">
       <Declaration><![CDATA[METHOD M_Item : STRING(255)
 VAR_INPUT
-	nIndex: 	DINT;
+	Index: 	DINT;
 END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_Remove" Id="{3d146390-4ec0-0a33-08ae-7d967444c553}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	nPosition:			DINT;
+	Position:			DINT;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Search" Id="{5b3ec785-684b-03f5-2c9c-f1a00aa7c91f}">

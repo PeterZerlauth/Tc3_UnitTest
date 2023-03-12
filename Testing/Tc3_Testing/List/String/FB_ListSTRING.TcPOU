@@ -119,26 +119,26 @@ M_Insert:= TRUE;]]></ST>
     <Method Name="M_Item" Id="{29e4159c-eed0-0b05-05f7-6ee207ca7daf}">
       <Declaration><![CDATA[METHOD M_Item : STRING(255)
 VAR_INPUT
-	nIndex: 	DINT;
+	Index: 	DINT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF nIndex < (nLength) THEN
-	M_Item:= pList[nIndex];
+        <ST><![CDATA[IF Index < (nLength) THEN
+	M_Item:= pList[Index];
 END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Remove" Id="{e45f8add-9693-0801-3102-f3924d7fbe37}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	nPosition:			DINT;
+	Position:			DINT;
 END_VAR
 VAR
 	pOldList:			POINTER TO STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[// First Item
-IF nLength >= nPosition THEN
+IF nLength >= Position THEN
 	// backup 
 	pOldList:= pList;
 	// new Length
@@ -146,9 +146,9 @@ IF nLength >= nPosition THEN
 	// new pointer
 	pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
 	// restore lower part
-	Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(nPosition));
+	Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(Position));
 	//pList[nPosition]:= iObject;
-	Memcpy(pList + (SIZEOF(STRING(255))*nPosition),pOldList + (SIZEOF(STRING(255))*(nPosition + 1)), SIZEOF(STRING(255)) * DINT_TO_UDINT(nLength - nPosition));
+	Memcpy(pList + (SIZEOF(STRING(255))*Position),pOldList + (SIZEOF(STRING(255))*(Position + 1)), SIZEOF(STRING(255)) * DINT_TO_UDINT(nLength - Position));
 	// delete old
 	__DELETE(pOldList);
 ELSE
@@ -220,14 +220,11 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Item">
-      <LineId Id="13" Count="0" />
-      <LineId Id="21" Count="0" />
+      <LineId Id="30" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Remove">
-      <LineId Id="87" Count="1" />
-      <LineId Id="92" Count="11" />
-      <LineId Id="108" Count="3" />
+      <LineId Id="124" Count="17" />
       <LineId Id="72" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Search">

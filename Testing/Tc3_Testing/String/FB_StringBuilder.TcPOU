@@ -199,22 +199,11 @@ M_AppendINT:= THIS^;]]></ST>
       <Declaration><![CDATA[METHOD PUBLIC M_AppendREAL : I_StringBuilder
 VAR_INPUT
 	Value:		LREAL;
-	nDecimals:	SINT;
+	Decimals:	SINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Append(LREAL_TO_FMTSTR(Value, nDecimals, TRUE));
+        <ST><![CDATA[M_Append(LREAL_TO_FMTSTR(Value, Decimals, TRUE));
 M_AppendREAL:= THIS^;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_CopyTo" Id="{e82dfe86-f804-0621-2a01-a384fa38ed4a}">
-      <Declaration><![CDATA[METHOD M_CopyTo : BOOL
-VAR_INPUT
-	Value:			ANY;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Memset(Value.pValue, 0, DINT_TO_UDINT(Value.diSize));
-Memcpy(Value.pValue, pList, nLength + 1);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Find" Id="{bdf827ee-cb2f-0b2a-285b-3c9de78c6af6}">
@@ -234,6 +223,17 @@ END_VAR
         <ST><![CDATA[__DELETE(pList);
 nLength:= 0;
 M_Reset:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ToAny" Id="{e82dfe86-f804-0621-2a01-a384fa38ed4a}">
+      <Declaration><![CDATA[METHOD M_ToAny : BOOL
+VAR_INPUT
+	Value:			ANY;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Memset(Value.pValue, 0, DINT_TO_UDINT(Value.diSize));
+Memcpy(Value.pValue, pList, nLength + 1);]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ToString" Id="{a3197c03-d800-0530-2d92-cfaefafd28b4}">
@@ -285,11 +285,7 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_AppendREAL">
-      <LineId Id="17" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_CopyTo">
-      <LineId Id="7" Count="0" />
+      <LineId Id="26" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_Find">
@@ -298,6 +294,10 @@ END_VAR
     <LineIds Name="FB_StringBuilder.M_Reset">
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StringBuilder.M_ToAny">
+      <LineId Id="7" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_ToString">

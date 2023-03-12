@@ -17,7 +17,6 @@ VAR
 	fbBuilder:		FB_StringBuilder;
 	fbStopwatch:	FB_Stopwatch;
 	
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

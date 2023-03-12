@@ -4,8 +4,8 @@
 # https://aka.ms/yaml
 
 
-trigger:
-- 'master'
+trigger: 
+- 'none'
 
 pool: 'Default'    # self-hosted agent  
 
@@ -36,7 +36,7 @@ steps:
     action: 'create'
     target: '$(Build.SourceVersion)'
     tagSource: 'userSpecifiedTag'
-    tag: '0.0.0.7'
+    tag: '$(Version)'
     title: 'Tc3_Testing.library'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'

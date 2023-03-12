@@ -18,7 +18,7 @@ steps:
   condition: succeeded()
   inputs:
         failOnStderr: true
-        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(System.DefaultWorkingDirectory)"'
+        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(Build.ArtifactStagingDirectory)"'
         
 - task: PublishTestResults@2
   displayName: Publish results
@@ -35,8 +35,9 @@ steps:
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(tag)'
+    tagSource: 'gitTag'
+    tag:  $(Build.BuildNumber)
+    assets:  $(Build.ArtifactStagingDirectory)/*.library
     title: 'Tc3_Testing.library'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'

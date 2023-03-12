@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Stopwatch" Id="{ea8d5d03-07a5-0557-320d-b945c7000a26}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Stopwatch
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	bRunning:		BOOL;
+	nIndex:			BYTE;
+	tElapsed:		TIME;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bRunning THEN
+	tElapsed:= tElapsed + M_GetCycletime();
+END_IF]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{ab5ba7c6-0946-0698-3d6e-a909fd4dfd48}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+VAR
+	fbTask:				GETCURTASKINDEX;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbTask();
+nIndex:= fbTask.index;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_GetCycletime" Id="{338c9ee5-70a2-0048-11a8-0849581c2877}">
+      <Declaration><![CDATA[METHOD INTERNAL M_GetCycletime : TIME
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_GetCycletime:= LREAL_TO_TIME(UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[nIndex].CycleTime) / 10000.0);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Reset" Id="{ba944a76-c6c6-09c2-3ee3-b7bdd8ffc878}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bRunning:= FALSE;
+tElapsed:= T#0S;
+M_Reset:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Restart" Id="{c046b838-c816-017e-2d5a-07c04968c6b0}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Restart : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bRunning:= TRUE;
+tElapsed:= T#0S;
+M_Restart:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Start" Id="{c4894435-be15-0c3e-1ce6-e45af90b931c}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Start : BOOL
+VAR_INPUT
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bRunning:= TRUE;
+M_Start:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Stop" Id="{ad8d41dc-63d6-002e-19b5-772bdd2bad6b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Stop : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[bRunning:= FALSE;
+M_Stop:= TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_ToString" Id="{a5c47b34-177a-0110-3c5e-fa58afcd8a30}">
+      <Declaration><![CDATA[METHOD PUBLIC M_ToString : String(255)
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_ToString:= TIME_TO_STring(tElapsed);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Elapsed" Id="{2ad96b99-8cf7-00e2-36db-08df0650367e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Elapsed : TIME]]></Declaration>
+      <Get Name="Get" Id="{97a5abbf-958d-0c6a-3e54-414d0b1ac9db}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Elapsed:= tElapsed;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_Running" Id="{02d97fa5-9906-063b-0201-0418a51019c9}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Running : bool]]></Declaration>
+      <Get Name="Get" Id="{e2e5c92d-51c7-0242-128c-d32a8f0e272e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Running:= bRunning;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Stopwatch">
+      <LineId Id="9" Count="0" />
+      <LineId Id="13" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.FB_init">
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_GetCycletime">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_Reset">
+      <LineId Id="12" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_Restart">
+      <LineId Id="16" Count="1" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_Start">
+      <LineId Id="5" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_Stop">
+      <LineId Id="9" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.M_ToString">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.P_Elapsed.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Stopwatch.P_Running.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

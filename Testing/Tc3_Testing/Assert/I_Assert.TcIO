@@ -85,10 +85,42 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="M_Equals_TIME" Id="{51eaec81-f77a-05ec-2de9-7753f46c3831}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_TIME : I_Assert
+VAR_INPUT
+	Expected:			TIME;
+    Actual:				TIME;
+	Tolerance:			TIME;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_UDINT" Id="{6aa1b163-41e1-0d51-0448-99c33df4fd9b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UDINT : I_Assert
+VAR_INPUT
+	Expected:			UDINT;
+    Actual:				UDINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_UINT" Id="{a4e93fdd-92e5-0569-2645-43b3d23c0b99}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UINT : I_Assert
+VAR_INPUT
+	Expected:			UINT;
+    Actual:				UINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_IsTRUE" Id="{930bad75-ec80-0015-1b94-8704388ab0c3}">
       <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
 VAR_INPUT
     Actual:				BOOL;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_TcError" Id="{8b9d0d56-51be-00e5-1c44-3d5087833868}">
+      <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
+VAR_INPUT
+	nErrorId:			UDINT;
 	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>

@@ -228,6 +228,8 @@ ELSE
 	fbBuilder.M_AppendREAL(Expected, 5);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendREAL(Actual, 5);
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_AppendREAL(Tolerance, 5);
 	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -257,6 +259,8 @@ ELSE
 	fbBuilder.M_AppendREAL(Expected, 5);
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_AppendREAL(Actual, 5);
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_AppendREAL(Tolerance, 5);
 	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -299,6 +303,92 @@ END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Equals_TIME" Id="{91b48555-653d-0553-104e-334d1e902474}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_TIME : I_Assert
+VAR_INPUT
+	Expected:			TIME;
+    Actual:				TIME;
+	Tolerance:			TIME;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
+IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
+	nPassed:= nPassed + 1;
+ELSE
+	fbBuilder.M_Append('$T$T$T<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Actual));
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Tolerance));
+	fbBuilder.M_Append('"</failure>');
+	fbList.M_Add(fbBuilder.M_ToString());
+	nFailures:= nFailures + 1;
+END_IF
+M_Equals_TIME:= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_UDINT" Id="{dab23cde-89d2-0c20-3b51-ea863cfc23a2}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UDINT : I_Assert
+VAR_INPUT
+	Expected:			UDINT;
+    Actual:				UDINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
+IF Expected = Actual THEN
+	nPassed:= nPassed + 1;
+ELSE
+	fbBuilder.M_Append('$T$T$T<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
+	fbBuilder.M_Append('"</failure>');
+	fbList.M_Add(fbBuilder.M_ToString());
+	nFailures:= nFailures + 1;
+END_IF
+M_Equals_UDINT:= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_UINT" Id="{d4264b4a-bfbe-0a03-22f6-a7578de8f804}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UINT : I_Assert
+VAR_INPUT
+	Expected:			UINT;
+    Actual:				UINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
+IF Expected = Actual THEN
+	nPassed:= nPassed + 1;
+ELSE
+	fbBuilder.M_Append('$T$T$T<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_AppendINT(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_AppendINT(Actual);
+	fbBuilder.M_Append('"</failure>');
+	fbList.M_Add(fbBuilder.M_ToString());
+	nFailures:= nFailures + 1;
+END_IF
+M_Equals_UINT:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_IsTRUE" Id="{ff21833d-ba1f-05de-0ce2-388ab8c48e28}">
       <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
 VAR_INPUT
@@ -338,6 +428,33 @@ nSkipped:= 0;
 nFailures:= 0;
 nErrors:= 0;
 M_Reset:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
+      <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
+VAR_INPUT
+	nErrorId:			UDINT;
+	Message:			STRING(255);
+END_VAR
+VAR
+	eError:				E_AdsError:= nErrorId;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nAssert:= nAssert + 1;
+fbBuilder.M_Reset();
+IF nErrorID = 0 THEN
+	nPassed:= nPassed + 1;
+ELSE
+	fbBuilder.M_Append('$T$T$T<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append(TO_STRING(eError));
+	fbBuilder.M_Append('"</failure>');
+	fbList.M_Add(fbBuilder.M_ToString());
+	nFailures:= nFailures + 1;
+END_IF
+M_TcError:= THIS^;]]></ST>
       </Implementation>
     </Method>
     <LineIds Name="FB_Assert">
@@ -432,7 +549,10 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="194" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
-      <LineId Id="201" Count="8" />
+      <LineId Id="201" Count="6" />
+      <LineId Id="217" Count="0" />
+      <LineId Id="216" Count="0" />
+      <LineId Id="208" Count="1" />
       <LineId Id="179" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
@@ -448,6 +568,7 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="136" Count="0" />
       <LineId Id="131" Count="0" />
       <LineId Id="135" Count="0" />
+      <LineId Id="144" Count="1" />
       <LineId Id="117" Count="0" />
       <LineId Id="102" Count="1" />
       <LineId Id="14" Count="0" />
@@ -471,6 +592,43 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_TIME">
+      <LineId Id="168" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="171" Count="1" />
+      <LineId Id="201" Count="6" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="222" Count="0" />
+      <LineId Id="208" Count="1" />
+      <LineId Id="179" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="124" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_UDINT">
+      <LineId Id="108" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="129" Count="2" />
+      <LineId Id="140" Count="2" />
+      <LineId Id="132" Count="1" />
+      <LineId Id="119" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_UINT">
+      <LineId Id="89" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="92" Count="2" />
+      <LineId Id="110" Count="2" />
+      <LineId Id="121" Count="2" />
+      <LineId Id="113" Count="1" />
+      <LineId Id="100" Count="1" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Assert.M_IsTRUE">
       <LineId Id="82" Count="0" />
       <LineId Id="95" Count="0" />
@@ -490,6 +648,12 @@ M_Reset:= THIS^;]]></ST>
       <LineId Id="29" Count="0" />
       <LineId Id="22" Count="3" />
       <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_TcError">
+      <LineId Id="7" Count="7" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="19" Count="3" />
+      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

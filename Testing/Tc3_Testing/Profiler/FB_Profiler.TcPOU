@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Profiler" Id="{c14cfb6c-09fa-013d-01ad-5952a1bb49b2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Profiler
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbProfiler:		Profiler;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Reset" Id="{1cb04307-072a-068a-08e9-e6c0b54e48e8}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbProfiler(START:= false, RESET:= True);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Restart" Id="{06d22935-012a-0ff6-08f3-d2ffe893a5c3}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Restart : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbProfiler(START:= True, RESET:= FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Start" Id="{b0d529f8-0646-0c38-2bb5-7235169dde15}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Start : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbProfiler(START:= True, RESET:= FALSE);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Busy" Id="{146312e2-1031-06cd-3fe8-ea7f1db13c6f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Busy : bool]]></Declaration>
+      <Get Name="Get" Id="{620d4dce-97f9-051f-17f8-5298f3b6fbcb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Busy:= fbProfiler.BUSY;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Profiler">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Profiler.M_Reset">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Profiler.M_Restart">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Profiler.M_Start">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Profiler.P_Busy.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -39,6 +39,9 @@
     <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assert\E_AdsError.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Assert\E_Assert.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -66,13 +69,16 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Profiler\FB_Profiler.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stopwatch\FB_Stopwatch.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="String\FB_StringBuilder.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="String\I_StringBuilder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="File\E_AdsError.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="File\FB_File.TcPOU">
@@ -125,6 +131,8 @@
     <Folder Include="List" />
     <Folder Include="List\String" />
     <Folder Include="List\Testsuite" />
+    <Folder Include="Profiler" />
+    <Folder Include="Stopwatch" />
     <Folder Include="String" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />

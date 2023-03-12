@@ -6,7 +6,8 @@ VAR
 	fbTestsuites:	FB_Testsuites;
 	fbTestsuite1:	FB_Testsuite;
 	fbTestsuite2:	FB_Testsuite;
-	fbTestsuite3:	FB_Testsuite;	
+	fbTestsuite3:	FB_Testsuite;
+	fbTestsuite4:	FB_Testsuite;	
 
 	nIndex: 		INT;
 	sValue:			STRING(255);
@@ -14,7 +15,9 @@ VAR
 	fbFile:			FB_File;
 	fbList:			FB_ListSTRING;
 	fbBuilder:		FB_StringBuilder;
-
+	fbStopwatch:	FB_Stopwatch;
+	
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -22,6 +25,7 @@ END_VAR
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuites.M_Add(fbTestsuite3);
+fbTestsuites.M_Add(fbTestsuite4);
 
 fbTestsuite1();
 CASE fbTestsuite1.P_Testcase OF
@@ -135,12 +139,43 @@ CASE fbTestsuite3.P_Testcase OF
 		
 	E_Testcase.Done:;
 	
-END_CASE]]></ST>
+END_CASE
+
+fbStopwatch();
+fbTestsuite4();
+CASE fbTestsuite4.P_Testcase OF
+	E_Testcase.Start:
+		fbTestsuite4.P_Assert.M_IsTRUE(NOT fbStopwatch.P_Running, 'fbStopwatch.P_Running');
+		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Start(), 'fbStopwatch.M_Start()');
+		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.P_Running, 'fbStopwatch.P_Running');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 1);
+	
+	1:
+		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Stop(), 'fbStopwatch.M_Stop()');
+		fbTestsuite4.P_Assert.M_IsTRUE(NOT fbStopwatch.P_Running, 'fbStopwatch.P_Running');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 2);
+	
+	2:
+		fbTestsuite4.P_Assert.M_IsTRUE(T#0S <> fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 3);
+		
+	3:
+		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Reset(), 'fbStopwatch.M_Reset()');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 4);
+		
+	4:
+		fbTestsuite4.P_Assert.M_IsTRUE(T#0S = fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
+	E_Testcase.Done:;
+	
+END_CASE
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="559" Count="1" />
       <LineId Id="668" Count="0" />
       <LineId Id="779" Count="0" />
+      <LineId Id="809" Count="0" />
       <LineId Id="669" Count="0" />
       <LineId Id="561" Count="0" />
       <LineId Id="563" Count="1" />
@@ -205,6 +240,30 @@ END_CASE]]></ST>
       <LineId Id="778" Count="0" />
       <LineId Id="743" Count="1" />
       <LineId Id="737" Count="0" />
+      <LineId Id="811" Count="0" />
+      <LineId Id="823" Count="0" />
+      <LineId Id="816" Count="1" />
+      <LineId Id="813" Count="0" />
+      <LineId Id="840" Count="0" />
+      <LineId Id="821" Count="0" />
+      <LineId Id="839" Count="0" />
+      <LineId Id="822" Count="0" />
+      <LineId Id="825" Count="0" />
+      <LineId Id="827" Count="0" />
+      <LineId Id="826" Count="0" />
+      <LineId Id="841" Count="0" />
+      <LineId Id="824" Count="0" />
+      <LineId Id="828" Count="0" />
+      <LineId Id="830" Count="1" />
+      <LineId Id="829" Count="0" />
+      <LineId Id="832" Count="0" />
+      <LineId Id="834" Count="1" />
+      <LineId Id="833" Count="0" />
+      <LineId Id="838" Count="0" />
+      <LineId Id="836" Count="1" />
+      <LineId Id="818" Count="2" />
+      <LineId Id="814" Count="0" />
+      <LineId Id="810" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

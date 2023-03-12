@@ -14,6 +14,7 @@ VAR
 	fCycleTime: 		LREAL;	
 	iParent:			I_Testsuites;
 	fbTimeout:			TON:= (PT:= T#300S);
+	fbRuntime:			TON:= (PT:= T#300S);
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbAssert:			FB_Assert;
@@ -34,7 +35,6 @@ END_VAR]]></Declaration>
 	fbTimeout(IN:= TRUE);
 END_IF
 stTestcase.nAssertions:= fbAssert.nAssert;
-stTestsuite.fTime:=  TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 IF nActual <> nNext THEN
 	IF fbAssert.nPassed = fbAssert.nAssert THEN
 		fbBuilder.M_Reset();
@@ -94,6 +94,8 @@ IF nActual <> nNext THEN
 		END_IF
 	END_IF
 END_IF
+fbRuntime(IN:= TRUE);
+stTestsuite.fTime:=  TIME_TO_LREAL(fbRuntime.ET) / 1000.0;
 fbAssert.M_Reset();
 M_Started:= nActual = E_Testcase.Done;
 ]]></ST>
@@ -128,6 +130,7 @@ END_VAR]]></Declaration>
 		
 	1:
 		nActual:= E_Testcase.Start;
+		fbRuntime.IN:= True;
 		M_Starting:= TRUE;
 	
 END_CASE]]></ST>
@@ -178,6 +181,7 @@ IF iParent <> 0 THEN
 	END_WHILE
 END_IF
 fbTimeout(IN:=FALSE);
+fbRuntime(IN:=FALSE);
 M_Stopping:= TRUE;]]></ST>
       </Implementation>
     </Method>
@@ -259,7 +263,6 @@ END_VAR
     <LineIds Name="FB_Testsuite.M_Started">
       <LineId Id="183" Count="2" />
       <LineId Id="84" Count="0" />
-      <LineId Id="182" Count="0" />
       <LineId Id="173" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="101" Count="4" />
@@ -302,7 +305,8 @@ END_VAR
       <LineId Id="52" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="42" Count="0" />
-      <LineId Id="174" Count="0" />
+      <LineId Id="192" Count="1" />
+      <LineId Id="191" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="58" Count="0" />
       <LineId Id="57" Count="0" />
@@ -323,6 +327,7 @@ END_VAR
       <LineId Id="55" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="128" Count="0" />
+      <LineId Id="156" Count="0" />
       <LineId Id="67" Count="0" />
       <LineId Id="135" Count="0" />
       <LineId Id="38" Count="0" />
@@ -351,6 +356,7 @@ END_VAR
       <LineId Id="86" Count="0" />
       <LineId Id="84" Count="0" />
       <LineId Id="105" Count="0" />
+      <LineId Id="112" Count="0" />
       <LineId Id="33" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Testcase">

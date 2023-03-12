@@ -32,12 +32,13 @@ steps:
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_PeterZerlauth'
-    repositoryName: '$(Build.Repository.Name)'
+    repositoryName: 'PeterZerlauth/Testing'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
-    tag:  $(Build.BuildNumber)
-    assets:  $(Build.ArtifactStagingDirectory)/*.library
+    tagSource: 'userSpecifiedTag'
+    tag: '$(myTagName)'
     title: 'Tc3_Testing.library'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
+
+

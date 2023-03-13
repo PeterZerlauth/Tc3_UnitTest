@@ -183,9 +183,14 @@ CASE fbTestsuite4.P_Testcase OF
 		
 	4:
 		fbTestsuite4.P_Assert.M_IsTRUE(T#0S = fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
+			 
+	5:
+		fbTestsuite4.P_Assert.M_Equals_ANY(fbTestsuite1, fbTestsuite1, 'test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
-	E_Testcase.Done:;
 	
+	E_Testcase.Done:;
+		 
 END_CASE
 {endregion}]]></ST>
     </Implementation>
@@ -297,7 +302,12 @@ END_CASE
       <LineId Id="833" Count="0" />
       <LineId Id="838" Count="0" />
       <LineId Id="836" Count="1" />
-      <LineId Id="818" Count="2" />
+      <LineId Id="818" Count="0" />
+      <LineId Id="924" Count="1" />
+      <LineId Id="928" Count="0" />
+      <LineId Id="926" Count="1" />
+      <LineId Id="819" Count="0" />
+      <LineId Id="923" Count="0" />
       <LineId Id="814" Count="0" />
       <LineId Id="810" Count="0" />
     </LineIds>

@@ -32,35 +32,26 @@ IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Append('$T$T$T<error message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_AppendANY(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('"</error>$R');
+	fbBuilder.M_Append('Expected <> Actual');
+	fbBuilder.M_Append('"</error>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
-	fbBuilder.M_Append('<error message="');
+	fbBuilder.M_Append('$T$T$T<error message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_AppendANY(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('"</error>$R');
+	fbBuilder.M_Append('Expected <> Actual');
+	fbBuilder.M_Append('"</error>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
-	fbBuilder.M_Append('<failure message="');
+	fbBuilder.M_Append('$T$T$T<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_AppendANY(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_AppendANY(Actual);
-	fbBuilder.M_Append('"</failure>$R');
+	fbBuilder.M_Append('Expected <> Actual');
+	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 	
@@ -466,18 +457,12 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="150" Count="0" />
       <LineId Id="217" Count="0" />
       <LineId Id="182" Count="0" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="236" Count="2" />
-      <LineId Id="219" Count="1" />
+      <LineId Id="218" Count="2" />
       <LineId Id="155" Count="3" />
-      <LineId Id="221" Count="2" />
-      <LineId Id="239" Count="2" />
-      <LineId Id="224" Count="1" />
+      <LineId Id="221" Count="4" />
       <LineId Id="194" Count="0" />
       <LineId Id="164" Count="2" />
-      <LineId Id="226" Count="2" />
-      <LineId Id="242" Count="2" />
-      <LineId Id="229" Count="1" />
+      <LineId Id="226" Count="4" />
       <LineId Id="206" Count="0" />
       <LineId Id="172" Count="2" />
       <LineId Id="180" Count="1" />

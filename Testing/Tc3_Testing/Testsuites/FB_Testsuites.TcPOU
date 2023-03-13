@@ -7,7 +7,8 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR	
-	sFilePathName:		STRING(255):= 'C:\report.xml';
+	{attribute 'TcInitSymbol'}
+	sFilePathName:		STRING(255):= 'C:\report.xml';		// as Property or init symbol
 	stTestsuites:    	ST_Testsuites;
 	nIndex: 			DINT;
 	fbTimeout:			TON:= (PT:= T#300S);

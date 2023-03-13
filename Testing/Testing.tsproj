@@ -22,7 +22,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{0AE0D945-EDB4-DD3A-54B2-FAA963D88BBD}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{5500B853-E1B4-D8C6-666A-41FDD8E40B52}">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -36,6 +36,15 @@
 							<CycleTime>10000000</CycleTime>
 						</Context>
 					</Contexts>
+					<InitSymbols>
+						<InitSymbol>
+							<Name>MAIN.fbTestsuites.sFilePathName</Name>
+							<Type GUID="{18071995-0000-0000-0000-0001000000FF}">STRING(255)</Type>
+							<Comment><![CDATA[ as Property or init symbol]]></Comment>
+							<AreaNo>#x00000003</AreaNo>
+							<Data>433a5c7265706f72742e786d6c000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Data>
+						</InitSymbol>
+					</InitSymbols>
 					<TaskPouOids>
 						<TaskPouOid Prio="20" OTCID="#x08502001"/>
 					</TaskPouOids>

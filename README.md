@@ -1,6 +1,6 @@
 # Tc3_Testing.library
 Unit testing Twincat 3
-O easy to use unit testing framework
+A easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
 
 Start with my own simplified unit test lib

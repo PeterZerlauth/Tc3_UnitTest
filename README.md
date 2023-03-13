@@ -1,6 +1,6 @@
 # Tc3_Testing.library
 Unit testing Twincat 3
-O easy to use unit testing framework
+A easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
 
 Start with my own simplified unit test lib
@@ -9,11 +9,10 @@ Start with my own simplified unit test lib
 - [x] FB_Testsuite => done
 - [x] FB_Testsuite => done
 - [x] Junit Xml format => done
-- [x] Junit Xml format => done
-
+- [x] Twincat Error to FB_Assert => done
 - [ ] FB_Profiler => in Work
 - [ ] FB_Stoppwatch => in Work
-- [x] Twincat Error to FB_Assert => done
+
 
 ![image](https://user-images.githubusercontent.com/48495545/224327239-0ac14ea2-1ed5-47e6-90c4-c2653fee89d6.png)
 

@@ -171,14 +171,14 @@
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tc3_Testing.tmc">
-      <SubType>Content</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <SubObject Include="I_StringBuilder.M_AppendBOOL" />
     <SubObject Include="I_StringBuilder.M_AppendINT" />
     <SubObject Include="I_StringBuilder.M_AppendREAL" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tc3_Testing.tmc">
+      <SubType>Content</SubType>
+    </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

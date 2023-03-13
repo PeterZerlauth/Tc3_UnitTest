@@ -3,6 +3,7 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	bExecute:		Bool;
 	fbTestsuites:	FB_Testsuites;				// Testsuites
 	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
 	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
@@ -22,6 +23,13 @@ END_VAR
     <Implementation>
       <ST><![CDATA[// Run
 fbTestsuites();
+
+IF bExecute THEN
+	// manual execute | override file path
+	fbTestsuites.P_FilePathName:= 'C:\report.xml';
+	bExecute:= NOT fbTestsuites.M_Request(E_Base.Started);
+END_IF
+
 // Add Testsuite to Testsuites
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
@@ -184,6 +192,12 @@ END_CASE
     <LineIds Name="MAIN">
       <LineId Id="863" Count="0" />
       <LineId Id="559" Count="0" />
+      <LineId Id="901" Count="0" />
+      <LineId Id="895" Count="0" />
+      <LineId Id="904" Count="0" />
+      <LineId Id="903" Count="0" />
+      <LineId Id="899" Count="1" />
+      <LineId Id="893" Count="0" />
       <LineId Id="862" Count="0" />
       <LineId Id="560" Count="0" />
       <LineId Id="668" Count="0" />

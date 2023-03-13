@@ -162,6 +162,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="P_FilePathName" Id="{fc679f92-417c-026f-27ab-acefc2a3ef66}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_FilePathName : String(255)]]></Declaration>
+      <Get Name="Get" Id="{31fff3dd-e9db-059c-17a4-8c9a978fed83}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_FilePathName:= sFilePathName;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{b8cfbbc6-70e4-05d8-3ad2-fa6b01d9d259}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[sFilePathName:= P_FilePathName;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="P_List" Id="{18052295-5436-0cc4-08da-cc28d1b6063a}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
       <Get Name="Get" Id="{2c6d35e0-576a-0ff0-3193-2cb041a9eff0}">
@@ -254,6 +273,12 @@ END_VAR
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.P_Data.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_FilePathName.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_FilePathName.Set">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.P_List.Get">

@@ -18,8 +18,8 @@ END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="M_Equals_ANY" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY : I_Assert
+    <Method Name="M_Equals" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
 VAR_INPUT
 	Expected:			ANY;
     Actual:				ANY;
@@ -58,7 +58,7 @@ ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <>
 ELSE
 	nPassed:= nPassed + 1;
 END_IF
-M_Equals_ANY:= THIS^;]]></ST>
+M_Equals:= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals_BOOL" Id="{a59ebe08-8964-0b2c-38a4-ac8145e6076b}">
@@ -451,21 +451,8 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert">
       <LineId Id="9" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Assert.M_Equals_ANY">
-      <LineId Id="207" Count="0" />
-      <LineId Id="216" Count="0" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="217" Count="0" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="218" Count="2" />
-      <LineId Id="155" Count="3" />
-      <LineId Id="221" Count="4" />
-      <LineId Id="194" Count="0" />
-      <LineId Id="164" Count="2" />
-      <LineId Id="226" Count="4" />
-      <LineId Id="206" Count="0" />
-      <LineId Id="172" Count="2" />
-      <LineId Id="180" Count="1" />
+    <LineIds Name="FB_Assert.M_Equals">
+      <LineId Id="241" Count="31" />
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">

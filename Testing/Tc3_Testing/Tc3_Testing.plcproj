@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.0.10</ProjectVersion>
+    <ProjectVersion>0.0.0.11</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -171,13 +171,14 @@
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
-    <SubObject Include="FB_Assert.M_Error">
+    <SubObject Include="FB_Assert.M_Passed" />
+    <SubObject Include="FB_Assert.M_Skip">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
-    <SubObject Include="FB_Assert.M_Failure">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Skipp">
+    <SubObject Include="I_Assert.M_Error" />
+    <SubObject Include="I_Assert.M_Failure" />
+    <SubObject Include="I_Assert.M_Passed" />
+    <SubObject Include="I_Assert.M_Skip">
       <ExcludeFromBuild>true</ExcludeFromBuild>
     </SubObject>
     <SubObject Include="I_StringBuilder.M_AppendBOOL" />

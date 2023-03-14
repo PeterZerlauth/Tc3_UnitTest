@@ -186,7 +186,7 @@ CASE fbTestsuite4.P_Testcase OF
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
 			 
 	5:
-		fbTestsuite4.P_Assert.M_Equals_ANY(fbTestsuite1, fbTestsuite1, 'test');
+		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;

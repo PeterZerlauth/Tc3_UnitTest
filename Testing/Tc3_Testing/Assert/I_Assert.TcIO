@@ -3,6 +3,12 @@
   <Itf Name="I_Assert" Id="{b4f88ed5-c1d6-0e0a-0598-db946561ba17}">
     <Declaration><![CDATA[INTERFACE I_Assert
 ]]></Declaration>
+    <Method Name="M_Assert" Id="{6bbd6334-a05d-0a06-3aa7-7cb6bb31f1d4}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Assert : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="M_Equals" Id="{3fc096e7-86c9-44f3-a206-472563f4153f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
 VAR_INPUT
@@ -110,12 +116,42 @@ VAR_INPUT
 	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_Error" Id="{e857968b-1a0e-0e58-391f-bc7835d9faa3}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Error : I_Assert
+VAR_INPUT
+	Expected:			STRING(255);
+    Actual:				STRING(255);
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Failure" Id="{9318ab5d-6ac3-0a7e-34e9-3d149bb041e1}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Failure : I_Assert
+VAR_INPUT
+	Expected:			STRING(255);
+    Actual:				STRING(255);
+	Message:			STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="M_IsTRUE" Id="{930bad75-ec80-0015-1b94-8704388ab0c3}">
       <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
 VAR_INPUT
     Actual:				BOOL;
 	Message:			STRING(255);
 END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Passed" Id="{0375d3f9-48c7-0d90-07e0-1dda2904cba0}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Passed : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Skip" Id="{ef0781cb-34ac-0549-002f-05960e0559d5}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Skip : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
     </Method>
     <Method Name="M_TcError" Id="{8b9d0d56-51be-00e5-1c44-3d5087833868}">
       <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert

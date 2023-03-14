@@ -27,7 +27,7 @@ fbTestsuites();
 IF bExecute THEN
 	// manual execute | override file path
 	fbTestsuites.P_FilePathName:= 'C:\report.xml';
-	bExecute:= NOT fbTestsuites.M_Request(E_Base.Started);
+	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 
 // Add Testsuite to Testsuites

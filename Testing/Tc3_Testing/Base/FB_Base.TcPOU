@@ -35,7 +35,7 @@ CASE eState OF
 			nState:= 0;
 		ELSE
 			CASE eRequest OF
-				E_Base.Starting, E_Base.Started:
+				E_Base.Starting, E_Base.Execute:
 					eState:= E_Base.Starting;
 					nState:= 0;
 			END_CASE
@@ -43,18 +43,18 @@ CASE eState OF
 		
 	E_Base.Starting:
 		IF M_Starting() THEN
-			eState:= E_Base.Started;
+			eState:= E_Base.Execute;
 			nState:= 0;
 		ELSE
 			CASE eRequest OF
-				E_Base.Started:
-					eState:= E_Base.Started;
+				E_Base.Execute:
+					eState:= E_Base.Execute;
 					nState:= 0;
 			END_CASE
 		END_IF
 		
-	E_Base.Started:
-		IF M_Started() THEN
+	E_Base.Execute:
+		IF M_Execute() THEN
 			eState:= E_Base.Stopping;
 			nState:= 0;
 		ELSE
@@ -123,6 +123,15 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Execute" Id="{fab29306-c16a-0fb5-0321-3e286d1045b9}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Init" Id="{e2b264db-76f6-0dba-2234-6066426e6914}">
       <Declaration><![CDATA[METHOD PROTECTED M_Init : BOOL
 VAR_INPUT
@@ -141,15 +150,6 @@ END_VAR
       <Implementation>
         <ST><![CDATA[eRequest:= eState;
 M_Request:= TRUE;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Started" Id="{fab29306-c16a-0fb5-0321-3e286d1045b9}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Started : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Starting" Id="{bc9486fc-909d-0efe-150c-a33931b8ee19}">
@@ -199,57 +199,7 @@ END_VAR]]></Declaration>
       </Get>
     </Property>
     <LineIds Name="FB_Base">
-      <LineId Id="122" Count="1" />
-      <LineId Id="45" Count="0" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="72" Count="1" />
-      <LineId Id="167" Count="0" />
-      <LineId Id="74" Count="0" />
-      <LineId Id="92" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="75" Count="0" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="168" Count="0" />
-      <LineId Id="101" Count="2" />
-      <LineId Id="105" Count="0" />
-      <LineId Id="169" Count="0" />
-      <LineId Id="104" Count="0" />
-      <LineId Id="77" Count="0" />
-      <LineId Id="93" Count="0" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="84" Count="1" />
-      <LineId Id="170" Count="0" />
-      <LineId Id="107" Count="3" />
-      <LineId Id="171" Count="0" />
-      <LineId Id="106" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="87" Count="1" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="115" Count="0" />
-      <LineId Id="112" Count="2" />
-      <LineId Id="173" Count="0" />
-      <LineId Id="111" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="90" Count="1" />
-      <LineId Id="174" Count="0" />
-      <LineId Id="117" Count="3" />
-      <LineId Id="175" Count="0" />
-      <LineId Id="116" Count="0" />
-      <LineId Id="89" Count="0" />
-      <LineId Id="202" Count="0" />
-      <LineId Id="192" Count="9" />
-      <LineId Id="191" Count="0" />
-      <LineId Id="204" Count="0" />
-      <LineId Id="214" Count="0" />
-      <LineId Id="205" Count="8" />
-      <LineId Id="203" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="65" Count="0" />
-      <LineId Id="99" Count="0" />
+      <LineId Id="232" Count="82" />
       <LineId Id="98" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Aborted">
@@ -258,15 +208,15 @@ END_VAR]]></Declaration>
     <LineIds Name="FB_Base.M_Aborting">
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Base.M_Execute">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Base.M_Init">
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Request">
       <LineId Id="5" Count="0" />
       <LineId Id="8" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Started">
-      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Starting">
       <LineId Id="15" Count="0" />

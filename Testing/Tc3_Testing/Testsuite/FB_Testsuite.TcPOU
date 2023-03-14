@@ -23,8 +23,8 @@ END_VAR
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
     </Implementation>
-    <Method Name="M_Started" Id="{78e3f5cf-1c2d-00e7-2cad-335430cad839}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Started : BOOL
+    <Method Name="M_Execute" Id="{78e3f5cf-1c2d-00e7-2cad-335430cad839}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL
 VAR_INPUT
 END_VAR
 VAR
@@ -126,7 +126,7 @@ END_IF
 fbRuntime(IN:= TRUE);
 stTestsuite.fTime:=  TIME_TO_LREAL(fbRuntime.ET) / 1000.0;
 fbAssert.M_Reset();
-M_Started:= nActual = E_Testcase.Done;
+M_Execute:= nActual = E_Testcase.Done;
 ]]></ST>
       </Implementation>
     </Method>
@@ -289,7 +289,7 @@ END_VAR
     <LineIds Name="FB_Testsuite">
       <LineId Id="97" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuite.M_Started">
+    <LineIds Name="FB_Testsuite.M_Execute">
       <LineId Id="183" Count="2" />
       <LineId Id="84" Count="0" />
       <LineId Id="173" Count="0" />

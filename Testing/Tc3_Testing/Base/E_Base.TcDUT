@@ -8,7 +8,7 @@ TYPE E_Base :
 	{attribute 'hide'} 
 	Init 	:= 0,
 	Starting:= 2,	
-	Started	:= 3,
+	Execute	:= 3,
 	Stopping:= 4,
 	Aborting:= 5,
 	Aborted	:= 6,

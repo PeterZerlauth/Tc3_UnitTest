@@ -31,8 +31,8 @@ END_VAR
 Testsuite.P_Parent:= this^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Started" Id="{9f9f5ca1-441c-0f29-0c6d-16c04b2958a4}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Started : BOOL
+    <Method Name="M_Execute" Id="{9f9f5ca1-441c-0f29-0c6d-16c04b2958a4}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL
 VAR_INPUT
 END_VAR
 
@@ -40,13 +40,13 @@ VAR
 	nIndex: DINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Started:= TRUE;
+        <ST><![CDATA[M_Execute:= TRUE;
 fbTimeout(IN:= TRUE);
 WHILE nIndex < fbListTestsuite.P_Length DO
-	M_Started:= M_Started AND (fbListTestsuite.M_Get(nIndex).P_State = E_Base.Stopped);
+	M_Execute:= M_Execute AND (fbListTestsuite.M_Get(nIndex).P_State = E_Base.Stopped);
 	nIndex:= nIndex + 1;
 END_WHILE
-IF M_Started THEN
+IF M_Execute THEN
 	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 	fbTimeout(IN:= FALSE);
 END_IF]]></ST>
@@ -200,7 +200,7 @@ END_VAR
       <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuites.M_Started">
+    <LineIds Name="FB_Testsuites.M_Execute">
       <LineId Id="12" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="6" Count="2" />

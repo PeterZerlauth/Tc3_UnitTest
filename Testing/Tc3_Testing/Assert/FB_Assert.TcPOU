@@ -380,6 +380,24 @@ END_IF
 M_Equals_UINT:= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Error" Id="{8fb01682-0d3e-09d1-1052-e80c2a25c45c}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Error : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Failure" Id="{c1dc23cc-f885-0540-1115-b7058773bd0a}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Failure : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_IsTRUE" Id="{ff21833d-ba1f-05de-0ce2-388ab8c48e28}">
       <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
 VAR_INPUT
@@ -419,6 +437,15 @@ nSkipped:= 0;
 nFailures:= 0;
 nErrors:= 0;
 M_Reset:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Skipp" Id="{01e03b07-71f0-0cb8-3278-37acfad51370}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Skipp : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
@@ -601,6 +628,12 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Assert.M_Error">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Failure">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Assert.M_IsTRUE">
       <LineId Id="82" Count="0" />
       <LineId Id="95" Count="0" />
@@ -620,6 +653,9 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="29" Count="0" />
       <LineId Id="22" Count="3" />
       <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Skipp">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_TcError">
       <LineId Id="7" Count="7" />

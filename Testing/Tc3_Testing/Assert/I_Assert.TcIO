@@ -4,7 +4,7 @@
     <Declaration><![CDATA[INTERFACE I_Assert
 ]]></Declaration>
     <Method Name="M_Assert" Id="{6bbd6334-a05d-0a06-3aa7-7cb6bb31f1d4}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Assert : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Assert
 VAR_INPUT
 END_VAR
 ]]></Declaration>
@@ -116,8 +116,16 @@ VAR_INPUT
 	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_Equals_WSTRING" Id="{56bdcbed-b45e-08e5-3329-e3361274412b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
+VAR_INPUT
+	Expected:			WSTRING(255);
+    Actual:				WSTRING(255);
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Error" Id="{e857968b-1a0e-0e58-391f-bc7835d9faa3}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Error : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Error
 VAR_INPUT
 	Expected:			STRING(255);
     Actual:				STRING(255);
@@ -126,7 +134,7 @@ END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_Failure" Id="{9318ab5d-6ac3-0a7e-34e9-3d149bb041e1}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Failure : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Failure
 VAR_INPUT
 	Expected:			STRING(255);
     Actual:				STRING(255);
@@ -142,16 +150,16 @@ VAR_INPUT
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Passed" Id="{0375d3f9-48c7-0d90-07e0-1dda2904cba0}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Passed : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Passed
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_Skip" Id="{ef0781cb-34ac-0549-002f-05960e0559d5}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Skip : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Skip
 VAR_INPUT
-END_VAR
-]]></Declaration>
+	Message:			STRING(255);
+END_VAR]]></Declaration>
     </Method>
     <Method Name="M_TcError" Id="{8b9d0d56-51be-00e5-1c44-3d5087833868}">
       <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert

@@ -36,7 +36,36 @@ END_VAR]]></Declaration>
 END_IF
 stTestcase.nAssertions:= fbAssert.nAssert;
 IF nActual <> nNext THEN
-	IF fbAssert.nPassed = fbAssert.nAssert THEN
+	IF fbAssert.nSkipped <> 0 THEN
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('$T$T<testcase name="');
+			fbBuilder.M_Append(stTestCase.sName);
+			fbBuilder.M_Append('" classname="');
+			fbBuilder.M_Append(stTestCase.sClassname);
+			fbBuilder.M_Append('" assertions="');
+			fbBuilder.M_AppendINT(stTestCase.nAssertions);
+			fbBuilder.M_Append('" time="');
+			fbBuilder.M_AppendREAL(stTestCase.fTime, 4);
+			fbBuilder.M_Append('" file="');
+			fbBuilder.M_Append(stTestCase.sFile);
+			fbBuilder.M_Append('" line="');
+			fbBuilder.M_Append(stTestCase.sLine);
+			fbBuilder.M_Append('" >');
+			fbList.M_Add(fbBuilder.M_ToString());
+			WHILE nIndex < fbAssert.fbList.P_Length DO
+				fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
+				nIndex:= nIndex + 1;
+			END_WHILE
+			fbList.M_Add('$T$T</testcase>');
+			stTestsuite.nTests:= stTestsuite.nTests + 1;
+			stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
+			stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
+			stTestsuite.nSkipped:= stTestsuite.nSkipped + fbAssert.nSkipped;
+			stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
+			stTestcase.fTime:= 0.0;
+			fbTimeout(IN:= FALSE);
+			nActual:= nNext;
+	ELSIF fbAssert.nPassed = fbAssert.nAssert THEN
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append('$T$T<testcase name="');
 		fbBuilder.M_Append(stTestcase.sName);
@@ -264,6 +293,9 @@ END_VAR
       <LineId Id="183" Count="2" />
       <LineId Id="84" Count="0" />
       <LineId Id="173" Count="0" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="204" Count="26" />
+      <LineId Id="201" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="101" Count="4" />
       <LineId Id="118" Count="0" />

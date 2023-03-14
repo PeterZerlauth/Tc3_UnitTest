@@ -44,6 +44,8 @@ CASE fbTestsuite1.P_Testcase OF
 		// First test case
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
+//		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
+//		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
 		
 	1:
@@ -186,7 +188,7 @@ CASE fbTestsuite4.P_Testcase OF
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
 			 
 	5:
-		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
+		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
@@ -215,7 +217,9 @@ END_CASE
       <LineId Id="563" Count="1" />
       <LineId Id="865" Count="0" />
       <LineId Id="635" Count="0" />
-      <LineId Id="566" Count="3" />
+      <LineId Id="566" Count="0" />
+      <LineId Id="948" Count="1" />
+      <LineId Id="567" Count="2" />
       <LineId Id="638" Count="2" />
       <LineId Id="572" Count="2" />
       <LineId Id="641" Count="2" />

@@ -19,12 +19,14 @@ END_VAR]]></Declaration>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Method Name="M_Assert" Id="{20d02a5f-db58-0c6c-14cd-0b5cd69f1cdb}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Assert : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Assert
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nAssert:= nAssert + 1;]]></ST>
+        <ST><![CDATA[IF nSkipped = 0 THEN
+	nAssert:= nAssert + 1;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
@@ -156,7 +158,13 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
-IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
+IF LrealIsNaN(Expected) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Expected is NaN ', Message));
+ELSIF LrealIsNaN(Actual) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Actual is NaN ', Message));	
+ELSIF LrealIsNaN(Tolerance) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Tolerance is NaN ', Message));	
+ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Message);
@@ -176,7 +184,13 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
-IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
+IF RealIsNaN(Expected) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Expected is NaN ', Message));
+ELSIF RealIsNaN(Actual) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Actual is NaN ', Message));	
+ELSIF RealIsNaN(Tolerance) THEN
+	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Tolerance is NaN ', Message));	
+ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	M_Failure(REAL_TO_STRING(Expected), REAL_TO_STRING(Actual), Message);
@@ -260,8 +274,26 @@ END_IF
 M_Equals_UINT:= THIS^;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Equals_WSTRING" Id="{d57eeb77-552a-03e8-31d9-648afdaf68b1}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
+VAR_INPUT
+	Expected:			WSTRING(255);
+    Actual:				WSTRING(255);
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+IF Expected = Actual THEN
+	M_Passed();
+ELSE
+	M_Failure(WSTRING_TO_STRING(Expected), WSTRING_TO_STRING(Actual), Message);
+	fbList.M_Add(fbBuilder.M_ToString());
+END_IF
+M_Equals_WSTRING:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Error" Id="{8fb01682-0d3e-09d1-1052-e80c2a25c45c}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Error : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Error
 VAR_INPUT
 	Expected:			STRING(255);
     Actual:				STRING(255);
@@ -269,20 +301,22 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbBuilder.M_Reset();
-fbBuilder.M_Append('$T$T$T<error message="');
-fbBuilder.M_Append(Message);
-fbBuilder.M_Append('" type="ArithmeticError">');
-fbBuilder.M_Append('Expected = "');
-fbBuilder.M_Append(Expected);
-fbBuilder.M_Append('" Actual = "');
-fbBuilder.M_Append(Actual);
-fbBuilder.M_Append('"</error>');
-nErrors:= nErrors + 1;]]></ST>
+        <ST><![CDATA[IF nSkipped = 0 THEN
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('$T$T$T<error message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="ArithmeticError">');
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(Actual);
+	fbBuilder.M_Append('"</error>');
+	nErrors:= nErrors + 1;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Failure" Id="{c1dc23cc-f885-0540-1115-b7058773bd0a}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Failure : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Failure
 VAR_INPUT
 	Expected:			STRING(255);
     Actual:				STRING(255);
@@ -290,16 +324,18 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbBuilder.M_Reset();
-fbBuilder.M_Append('$T$T$T<failure message="');
-fbBuilder.M_Append(Message);
-fbBuilder.M_Append('" type="AssertionError">');
-fbBuilder.M_Append('Expected = "');
-fbBuilder.M_Append(Expected);
-fbBuilder.M_Append('" Actual = "');
-fbBuilder.M_Append(Actual);
-fbBuilder.M_Append('"</failure>');
-nFailures:= nFailures + 1;]]></ST>
+        <ST><![CDATA[IF nSkipped = 0 THEN
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('$T$T$T<failure message="');
+	fbBuilder.M_Append(Message);
+	fbBuilder.M_Append('" type="AssertionError">');
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(Actual);
+	fbBuilder.M_Append('"</failure>');
+	nFailures:= nFailures + 1;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_IsTRUE" Id="{ff21833d-ba1f-05de-0ce2-388ab8c48e28}">
@@ -321,12 +357,15 @@ M_IsTRUE:= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Passed" Id="{0da5074d-f435-0060-10d7-5f55502ee455}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Passed : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Passed
 VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[nPassed:= nPassed + 1;]]></ST>
+        <ST><![CDATA[IF nSkipped = 0 THEN
+	nPassed:= nPassed + 1;
+END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Reset" Id="{968629c2-18de-07f2-0ab0-109e8e7d42c9}">
@@ -345,12 +384,23 @@ M_Reset:= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Skip" Id="{01e03b07-71f0-0cb8-3278-37acfad51370}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Skip : I_Assert
+      <Declaration><![CDATA[METHOD PUBLIC M_Skip
 VAR_INPUT
+	Message:			STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[fbList.M_Clear();
+nAssert:= 0;
+nPassed:= 0;
+nFailures:= 0;
+nErrors:= 0;
+fbBuilder.M_Reset();
+fbBuilder.M_Append('$T$T$T<skipped message="');
+fbBuilder.M_Append(Message);
+fbBuilder.M_Append('" />');
+nSkipped:= nSkipped + 1;
+fbList.M_Add(fbBuilder.M_ToString());]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
@@ -379,7 +429,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Assert">
-      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="2" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals">
       <LineId Id="241" Count="0" />
@@ -438,6 +488,10 @@ M_TcError:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_LREAL">
       <LineId Id="194" Count="0" />
+      <LineId Id="225" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="230" Count="2" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
       <LineId Id="208" Count="1" />
@@ -447,6 +501,7 @@ M_TcError:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_REAL">
       <LineId Id="118" Count="0" />
+      <LineId Id="152" Count="5" />
       <LineId Id="69" Count="0" />
       <LineId Id="95" Count="1" />
       <LineId Id="117" Count="0" />
@@ -489,18 +544,29 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_WSTRING">
+      <LineId Id="112" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="90" Count="1" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Assert.M_Error">
+      <LineId Id="31" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="20" Count="2" />
       <LineId Id="24" Count="2" />
       <LineId Id="23" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="27" Count="0" />
+      <LineId Id="32" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Failure">
-      <LineId Id="12" Count="7" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="24" Count="8" />
+      <LineId Id="22" Count="1" />
     </LineIds>
     <LineIds Name="FB_Assert.M_IsTRUE">
       <LineId Id="82" Count="0" />
@@ -514,6 +580,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Passed">
+      <LineId Id="31" Count="2" />
       <LineId Id="27" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Reset">
@@ -523,7 +590,13 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Skip">
+      <LineId Id="20" Count="2" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="18" Count="0" />
       <LineId Id="5" Count="0" />
+      <LineId Id="25" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_TcError">
       <LineId Id="7" Count="4" />

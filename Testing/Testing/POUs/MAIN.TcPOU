@@ -129,30 +129,33 @@ END_CASE
 fbTestsuite3();
 CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Start:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'Delete old file');
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 1);			 
+	
+	1:			  
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Create('C:\Test.txt'), 'fbFile.M_Create()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 1);
-	1:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 2);		
-		
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 2);
 	2:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 3);
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 3);		
 		
 	3:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
 		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 4);
 		
-		
 	4:
-		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 5);	
-		
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 5);
+			
 	5:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 6);
+		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 6);	
 		
 	6:
+		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
+		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 7);
+		
+	7:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
 //			 fbTestsuite3.P_Assert.M_Skip('blub');
 		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
@@ -264,7 +267,9 @@ END_CASE
       <LineId Id="874" Count="0" />
       <LineId Id="870" Count="0" />
       <LineId Id="741" Count="1" />
-      <LineId Id="739" Count="1" />
+      <LineId Id="739" Count="0" />
+      <LineId Id="1019" Count="3" />
+      <LineId Id="740" Count="0" />
       <LineId Id="745" Count="0" />
       <LineId Id="756" Count="1" />
       <LineId Id="754" Count="0" />
@@ -276,7 +281,6 @@ END_CASE
       <LineId Id="751" Count="1" />
       <LineId Id="750" Count="0" />
       <LineId Id="764" Count="0" />
-      <LineId Id="768" Count="0" />
       <LineId Id="766" Count="1" />
       <LineId Id="765" Count="0" />
       <LineId Id="771" Count="2" />

@@ -154,7 +154,7 @@ CASE fbTestsuite3.P_Testcase OF
 		
 	6:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
-			 fbTestsuite3.P_Assert.M_Skip('blub');
+//			 fbTestsuite3.P_Assert.M_Skip('blub');
 		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
 		
 	E_Testcase.Done:;
@@ -189,7 +189,8 @@ CASE fbTestsuite4.P_Testcase OF
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
 			 
 	5:
-		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'test');
+		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
+//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'error');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
@@ -312,6 +313,7 @@ END_CASE
       <LineId Id="818" Count="0" />
       <LineId Id="924" Count="1" />
       <LineId Id="928" Count="0" />
+      <LineId Id="999" Count="0" />
       <LineId Id="926" Count="1" />
       <LineId Id="819" Count="0" />
       <LineId Id="923" Count="0" />

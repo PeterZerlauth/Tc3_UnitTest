@@ -3,6 +3,30 @@
   <Itf Name="I_Logger" Id="{59383f8d-db3d-0d19-3304-bf0ceba7beae}">
     <Declaration><![CDATA[INTERFACE I_Logger EXTENDS __SYSTEM.IQueryInterface
 ]]></Declaration>
+    <Method Name="M_Critical" Id="{dd781374-6c6d-0fea-2c16-2b76c2c52c71}">
+      <Declaration><![CDATA[METHOD M_Critical
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Debug" Id="{1f74700c-d134-0589-1d8a-695ca8826b37}">
+      <Declaration><![CDATA[METHOD M_Debug
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Error" Id="{e934b0cd-cb76-09dc-0a8b-b9dea2518446}">
+      <Declaration><![CDATA[METHOD M_Error
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Info" Id="{ceea61eb-6966-0316-2290-a84fd3f98027}">
+      <Declaration><![CDATA[METHOD M_Info
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Log" Id="{9f47792d-6f28-0f46-2c95-a5541e4508fa}">
       <Declaration><![CDATA[METHOD M_Log
 VAR_INPUT
@@ -10,14 +34,14 @@ VAR_INPUT
 	Message:		STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Reset" Id="{ee41d5d2-dcf2-0bf3-26fa-c22d7363f46c}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+    <Method Name="M_Warning" Id="{2972d0d6-bcba-07cf-2b40-c67bfc6f7be5}">
+      <Declaration><![CDATA[METHOD M_Warning
 VAR_INPUT
-END_VAR
-]]></Declaration>
+	Message:		STRING(255);
+END_VAR]]></Declaration>
     </Method>
-    <Property Name="P_Options" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Parameter" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
       <Get Name="Get" Id="{7014e2a1-dc1b-0612-3281-09945aee9943}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

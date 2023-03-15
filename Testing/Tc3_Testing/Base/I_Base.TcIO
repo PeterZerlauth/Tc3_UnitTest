@@ -10,6 +10,15 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Property Name="P_Logger" Id="{6fb3a8fe-2739-06e9-3894-49e798facdba}">
+      <Declaration><![CDATA[PROPERTY P_Logger : I_Logger]]></Declaration>
+      <Get Name="Get" Id="{581d3e03-4c18-00d3-2756-8605376a3eb3}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{123d7bb0-a994-01b6-0a58-cdba6ee7e68b}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
     <Property Name="P_State" Id="{519f0641-a13c-0e6f-16fe-695b8f49bbd7}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_State : E_Base]]></Declaration>
       <Get Name="Get" Id="{a6309e82-4735-0d58-29bd-fc8c104809a5}">

@@ -18,19 +18,22 @@ VAR
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
 	fbStopwatch:	FB_Stopwatch;				// Test-vars
-	
+	bLogger:		Bool;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbLogger();
-fbLogger.M_Reset();
+IF bLogger THEN
+	bLogger:= FALSE;
+	fbLogger.M_Log(E_LogLevel.Warning, 'Message');
+END_IF
+
 
 // Run
 fbTestsuites();
 
 IF bExecute THEN
 	bExecute:= FALSE;
-	fbLogger.M_Log(E_LogLevel.Critical, 'Message');
 	// manual execute | override file path
 	fbTestsuites.P_FilePathName:= 'C:\report.xml';
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
@@ -160,6 +163,7 @@ CASE fbTestsuite3.P_Testcase OF
 		
 	6:
 		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
+			 fbTestsuite3.P_Assert.M_Skip('blub');
 		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
 		
 	E_Testcase.Done:;
@@ -194,7 +198,7 @@ CASE fbTestsuite4.P_Testcase OF
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
 			 
 	5:
-		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
+		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
@@ -203,13 +207,17 @@ END_CASE
 {endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="969" Count="2" />
+      <LineId Id="969" Count="0" />
+      <LineId Id="993" Count="0" />
+      <LineId Id="997" Count="0" />
+      <LineId Id="995" Count="1" />
+      <LineId Id="994" Count="0" />
+      <LineId Id="971" Count="0" />
       <LineId Id="863" Count="0" />
       <LineId Id="559" Count="0" />
       <LineId Id="901" Count="0" />
       <LineId Id="895" Count="0" />
       <LineId Id="973" Count="0" />
-      <LineId Id="972" Count="0" />
       <LineId Id="904" Count="0" />
       <LineId Id="903" Count="0" />
       <LineId Id="899" Count="1" />
@@ -289,6 +297,7 @@ END_CASE
       <LineId Id="761" Count="0" />
       <LineId Id="777" Count="0" />
       <LineId Id="775" Count="1" />
+      <LineId Id="998" Count="0" />
       <LineId Id="774" Count="0" />
       <LineId Id="778" Count="0" />
       <LineId Id="743" Count="1" />

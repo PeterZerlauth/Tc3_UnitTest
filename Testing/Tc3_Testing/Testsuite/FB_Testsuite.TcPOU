@@ -54,6 +54,9 @@ IF nActual <> nNext THEN
 			fbList.M_Add(fbBuilder.M_ToString());
 			WHILE nIndex < fbAssert.fbList.P_Length DO
 				fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
+				IF iLogger <> 0 THEN
+					iLogger.M_Warning(stTestcase.sName);					
+				END_IF
 				nIndex:= nIndex + 1;
 			END_WHILE
 			fbList.M_Add('$T$T</testcase>');
@@ -109,6 +112,9 @@ IF nActual <> nNext THEN
 			fbList.M_Add(fbBuilder.M_ToString());
 			WHILE nIndex < fbAssert.fbList.P_Length DO
 				fbList.M_Add(fbAssert.fbList.M_Item(nIndex));
+				IF iLogger <> 0 THEN
+					iLogger.M_Error(stTestcase.sName);	
+				END_IF
 				nIndex:= nIndex + 1;
 			END_WHILE
 			fbList.M_Add('$T$T</testcase>');
@@ -294,7 +300,9 @@ END_VAR
       <LineId Id="84" Count="0" />
       <LineId Id="173" Count="0" />
       <LineId Id="199" Count="0" />
-      <LineId Id="204" Count="26" />
+      <LineId Id="204" Count="16" />
+      <LineId Id="242" Count="2" />
+      <LineId Id="221" Count="9" />
       <LineId Id="201" Count="0" />
       <LineId Id="89" Count="0" />
       <LineId Id="101" Count="4" />
@@ -329,6 +337,8 @@ END_VAR
       <LineId Id="167" Count="0" />
       <LineId Id="51" Count="0" />
       <LineId Id="66" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="239" Count="1" />
       <LineId Id="61" Count="1" />
       <LineId Id="117" Count="0" />
       <LineId Id="142" Count="4" />

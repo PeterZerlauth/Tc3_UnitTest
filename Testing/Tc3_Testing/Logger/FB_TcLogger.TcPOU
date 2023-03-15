@@ -1,44 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_TcLogger" Id="{ac5cb775-ca52-0255-1111-53dd9dd30a39}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_TcLogger IMPLEMENTS I_Logger
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_TcLogger EXTENDS FB_Logger
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	stOptions:		ST_Logger;
-	fbReset:		ADSCLEAREVENTS;
-	fbAlarm:		FB_TcAlarm;
-	bRaiseAlarm: BOOL;
-	bConfirmAlarm: BOOL;
-	bClearAlarm: BOOL;
-	bInit: BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[IF bInit THEN
-	bInit:= FALSE;
-	fbAlarm.CreateEx(TC_Events.TcLogger.Warning, TRUE, 0);
-END_IF
-
-IF bRaiseAlarm THEN
-    bRaiseAlarm := FALSE;
-    fbAlarm.ipArguments.Clear().AddString('Alice');
-    fbAlarm.Raise(0);
-END_IF
-
-IF bConfirmAlarm THEN
-    bConfirmAlarm := FALSE;
-    fbAlarm.Confirm(0);
-END_IF
-
-
-IF bClearAlarm THEN
-    bClearAlarm := FALSE;
-    fbAlarm.Clear(0, FALSE);
-END_IF]]></ST>
+      <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="M_Critical" Id="{2982efed-966c-01d1-1cd8-85c5858fe88f}">
+      <Declaration><![CDATA[METHOD M_Critical
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Log(E_LogLevel.Critical, Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Debug" Id="{e9b66a72-8740-048e-056d-384013e2c854}">
+      <Declaration><![CDATA[METHOD M_Debug
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Log(E_LogLevel.Debug, Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Error" Id="{f2d5f7b6-19e2-0369-0afb-2b4249522bc0}">
+      <Declaration><![CDATA[METHOD M_Error
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Log(E_LogLevel.Error, Message);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Info" Id="{4effdfa3-d848-028b-038f-a8a5dc542fba}">
+      <Declaration><![CDATA[METHOD M_Info
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Log(E_LogLevel.Info, Message);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Log" Id="{a246f3a7-4c6c-0276-17fe-454760b02efa}">
       <Declaration><![CDATA[METHOD M_Log
 VAR_INPUT
@@ -49,91 +58,93 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE LogLevel OF
 	E_LogLevel.Debug:
-		ADSLOGSTR(ADSLOG_MSGTYPE_LOG,'Debug: %s', Message);
+		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+			ADSLOGSTR(ADSLOG_MSGTYPE_STRING OR ADSLOG_MSGTYPE_LOG,'Debug: %s', Message);
+		END_IF
+		
 	E_LogLevel.Info:
-		ADSLOGSTR(ADSLOG_MSGTYPE_HINT OR ADSLOG_MSGTYPE_LOG,'Info: %s', Message);
+		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+			ADSLOGSTR(ADSLOG_MSGTYPE_HINT OR ADSLOG_MSGTYPE_LOG,'Info: %s', Message);
+		END_IF
+		
 	E_LogLevel.Warning:
-		ADSLOGSTR(ADSLOG_MSGTYPE_WARN OR ADSLOG_MSGTYPE_LOG,'Warning: %s', Message);
+		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+			ADSLOGSTR(ADSLOG_MSGTYPE_WARN OR ADSLOG_MSGTYPE_LOG,'Warning: %s', Message);
+		END_IF
+		
 	E_LogLevel.Error:
-		ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Error: %s', Message);
+		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+			ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Error: %s', Message);
+		END_IF
+		
 	E_LogLevel.Critical:
-		ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Critical: %s', Message);
+		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+			ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Critical: %s', Message);
+		END_IF
+		
 END_CASE]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Reset" Id="{20ac3f4e-5dd2-0dc9-2928-84ab167e93b2}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+    <Method Name="M_Warning" Id="{95cba8b4-3106-0b72-0c22-17a6383ccea8}">
+      <Declaration><![CDATA[METHOD M_Warning
 VAR_INPUT
-END_VAR
-]]></Declaration>
+	Message:		STRING(255);
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbReset();
-IF fbReset.bClear THEN
-	IF fbReset.bBusy THEN
-		;
-	ELSIF fbReset.bErr THEN
-		fbReset.bClear:= FALSE;
-	ELSE
-		fbReset.bClear:= FALSE;
-		M_Reset:= TRUE;
-	END_IF
-ELSE
-	fbReset.bClear:= TRUE;
-	fbReset.iMode:= E_TcEventClearModes.TCEVENTLOGIOFFS_CLEARALL;
-END_IF
-]]></ST>
+        <ST><![CDATA[M_Log(E_LogLevel.Warning, Message);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Options" Id="{4e533074-8c0b-038d-0852-ee1041ac284d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Parameter" Id="{4e533074-8c0b-038d-0852-ee1041ac284d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
       <Get Name="Get" Id="{10b9215a-2d65-0764-10de-3ee1463207f3}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Options ref= stOptions;]]></ST>
+          <ST><![CDATA[P_Parameter ref= stParameter;]]></ST>
         </Implementation>
       </Get>
     </Property>
     <LineIds Name="FB_TcLogger">
-      <LineId Id="49" Count="1" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="51" Count="0" />
-      <LineId Id="30" Count="4" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="37" Count="3" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="43" Count="4" />
       <LineId Id="42" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcLogger.M_Critical">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcLogger.M_Debug">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcLogger.M_Error">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_TcLogger.M_Info">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_TcLogger.M_Log">
       <LineId Id="8" Count="0" />
       <LineId Id="11" Count="0" />
-      <LineId Id="17" Count="0" />
+      <LineId Id="27" Count="2" />
+      <LineId Id="33" Count="0" />
       <LineId Id="16" Count="0" />
+      <LineId Id="30" Count="2" />
       <LineId Id="18" Count="0" />
       <LineId Id="14" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="34" Count="0" />
       <LineId Id="19" Count="0" />
       <LineId Id="15" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="37" Count="0" />
       <LineId Id="20" Count="0" />
       <LineId Id="13" Count="0" />
+      <LineId Id="40" Count="2" />
       <LineId Id="21" Count="0" />
       <LineId Id="12" Count="0" />
     </LineIds>
-    <LineIds Name="FB_TcLogger.M_Reset">
-      <LineId Id="15" Count="0" />
-      <LineId Id="9" Count="1" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="17" Count="0" />
-      <LineId Id="12" Count="2" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="7" Count="0" />
+    <LineIds Name="FB_TcLogger.M_Warning">
+      <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_TcLogger.P_Options.Get">
+    <LineIds Name="FB_TcLogger.P_Parameter.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

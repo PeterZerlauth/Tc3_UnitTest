@@ -7,12 +7,51 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	fbReset:		ADSCLEAREVENTS;
+	stParameter:		ST_Logger;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="M_Critical" Id="{2c8a5c1c-03ce-0010-0a47-0212c31c090a}">
+      <Declaration><![CDATA[METHOD M_Critical
+VAR_INPUT
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Debug" Id="{e3912c08-cf4d-007c-00c3-1ee82a0d186f}">
+      <Declaration><![CDATA[METHOD M_Debug
+VAR_INPUT
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Error" Id="{03bff8e4-5538-0253-230e-ccdcab79aad4}">
+      <Declaration><![CDATA[METHOD M_Error
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Info" Id="{2ddc58e6-49ca-01d6-1dfd-87a9538cab59}">
+      <Declaration><![CDATA[METHOD M_Info
+VAR_INPUT
+	Message	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Log" Id="{4452c859-b6bf-01af-3dbe-b917edbc909d}">
       <Declaration><![CDATA[METHOD M_Log
 VAR_INPUT
@@ -24,17 +63,18 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Reset" Id="{f1ea0704-f646-0f48-3f3a-8268c84492ef}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+    <Method Name="M_Warning" Id="{0990c154-baa1-08fc-1e9d-e8bdc2ce38cc}">
+      <Declaration><![CDATA[METHOD M_Warning
 VAR_INPUT
+	Message	: STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Options" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Parameter" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
       <Get Name="Get" Id="{5db43e1f-632d-0054-2947-dbccd362cd17}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -47,13 +87,25 @@ END_VAR
     <LineIds Name="FB_Logger">
       <LineId Id="16" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Logger.M_Critical">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.M_Debug">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.M_Error">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.M_Info">
+      <LineId Id="7" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Logger.M_Log">
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Logger.M_Reset">
+    <LineIds Name="FB_Logger.M_Warning">
       <LineId Id="7" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Logger.P_Options.Get">
+    <LineIds Name="FB_Logger.P_Parameter.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

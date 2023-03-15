@@ -16,6 +16,7 @@ VAR
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbListTestsuite:	FB_ListTestsuite;
+	fbLogger:			FB_TcLogger;
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[SUPER^();]]></ST>
@@ -28,7 +29,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbListTestsuite.M_Add(Testsuite);
-Testsuite.P_Parent:= this^;]]></ST>
+Testsuite.P_Parent:= THIS^;
+Testsuite.P_Logger:= P_Logger;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Execute" Id="{9f9f5ca1-441c-0f29-0c6d-16c04b2958a4}">
@@ -50,6 +52,16 @@ IF M_Execute THEN
 	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 	fbTimeout(IN:= FALSE);
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Init" Id="{66605a0c-2267-0b37-061c-c893e811d94f}">
+      <Declaration><![CDATA[METHOD PROTECTED M_Init : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[iLogger:= fbLogger;
+M_Init:= True;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Starting" Id="{a8b1fe70-9112-024f-0be9-355ea21512f0}">
@@ -100,10 +112,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[CASE nState OF
 	0:
-		nState:= 1;
-		
-	1:
-//<testsuites name="Test run" tests="8" failures="1" errors="1" skipped="1"  assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23">
+		//<testsuites name="Test run" tests="8" failures="1" errors="1" skipped="1"  assertions="20" time="16.082687" timestamp="2021-04-02T15:48:23">
 		fbList.M_Insert(0, '<?xml version="1.0" encoding="UTF-8"?>');
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append('<testsuites name="');	
@@ -116,7 +125,7 @@ END_VAR]]></Declaration>
 		fbBuilder.M_AppendINT(stTestsuites.nErrors);
 		fbBuilder.M_Append('" skipped="');	
 		fbBuilder.M_AppendINT(stTestsuites.nSkipped);
-		fbBuilder.M_Append('"  assertions="');	
+		fbBuilder.M_Append('" assertions="');	
 		fbBuilder.M_AppendINT(stTestsuites.nAssertions);
 		fbBuilder.M_Append('" time="');	
 		fbBuilder.M_AppendREAL(stTestsuites.fTime, 3);
@@ -126,8 +135,32 @@ END_VAR]]></Declaration>
 		fbBuilder.M_ToAny(sValue);
 		fbList.M_Insert(1, sValue);
 		fbList.M_Add('</testsuites>');
+		nState:= 1;
+	1:
+		fbBuilder.M_Reset();
+		fbBuilder.M_Append(stTestsuites.sName);		
+		fbBuilder.M_Append(': tests= ');
+		fbBuilder.M_AppendINT(stTestsuites.nTests);
+		fbBuilder.M_Append(' failures= ');	
+		fbBuilder.M_AppendINT(stTestsuites.nFailures);
+		fbBuilder.M_Append(' errors= ');	
+		fbBuilder.M_AppendINT(stTestsuites.nErrors);
+		fbBuilder.M_Append(' skipped= ');	
+		fbBuilder.M_AppendINT(stTestsuites.nSkipped);
+		fbBuilder.M_Append(' assertions= ');
+		fbBuilder.M_AppendINT(stTestsuites.nAssertions);
+		fbBuilder.M_ToAny(sValue);
+		IF iLogger <> 0 THEN
+			IF stTestsuites.nFailures <> 0 OR_ELSE stTestsuites.nErrors <> 0 THEN
+				iLogger.M_Error(sValue);
+			ELSIF stTestsuites.nSkipped <> 0 THEN
+				iLogger.M_Warning(sValue);
+			ELSE
+				iLogger.M_Info(sValue);
+			END_IF
+		END_IF
 		nState:= 2;
-		
+			
 	2:
 		IF fbFile.M_Delete(sFilePathName) THEN
 			nState:= 3;
@@ -199,6 +232,7 @@ END_VAR
     <LineIds Name="FB_Testsuites.M_Add">
       <LineId Id="16" Count="0" />
       <LineId Id="7" Count="0" />
+      <LineId Id="21" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Execute">
       <LineId Id="12" Count="0" />
@@ -208,6 +242,9 @@ END_VAR
       <LineId Id="20" Count="1" />
       <LineId Id="23" Count="0" />
       <LineId Id="22" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.M_Init">
+      <LineId Id="5" Count="1" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Starting">
       <LineId Id="34" Count="0" />
@@ -234,7 +271,6 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Stopping">
       <LineId Id="141" Count="1" />
-      <LineId Id="153" Count="2" />
       <LineId Id="172" Count="0" />
       <LineId Id="202" Count="0" />
       <LineId Id="168" Count="2" />
@@ -256,6 +292,21 @@ END_VAR
       <LineId Id="201" Count="0" />
       <LineId Id="190" Count="0" />
       <LineId Id="212" Count="1" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="248" Count="5" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="254" Count="0" />
+      <LineId Id="260" Count="1" />
+      <LineId Id="264" Count="2" />
+      <LineId Id="271" Count="1" />
+      <LineId Id="268" Count="0" />
+      <LineId Id="267" Count="0" />
+      <LineId Id="262" Count="0" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="244" Count="0" />
       <LineId Id="211" Count="0" />
       <LineId Id="237" Count="1" />
       <LineId Id="233" Count="2" />

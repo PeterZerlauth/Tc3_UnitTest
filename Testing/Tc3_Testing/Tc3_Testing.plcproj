@@ -69,6 +69,21 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Logger\E_LogLevel.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\FB_TcLogger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\FB_Logger.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\I_Logger.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Logger\ST_Logger.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Profiler\FB_Profiler.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -131,6 +146,7 @@
     <Folder Include="List" />
     <Folder Include="List\String" />
     <Folder Include="List\Testsuite" />
+    <Folder Include="Logger" />
     <Folder Include="Profiler" />
     <Folder Include="Stopwatch" />
     <Folder Include="String" />
@@ -150,6 +166,10 @@
     <PlaceholderReference Include="Tc2_Utilities">
       <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_Utilities</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_EventLogger">
+      <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_EventLogger</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Logger" Id="{75e85e1a-2f6e-03ab-0c87-a271e0cb3059}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT FB_Logger IMPLEMENTS I_Logger
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbReset:		ADSCLEAREVENTS;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Log" Id="{4452c859-b6bf-01af-3dbe-b917edbc909d}">
+      <Declaration><![CDATA[METHOD M_Log
+VAR_INPUT
+	LogLevel:		E_LogLevel;
+	Message:		STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Reset" Id="{f1ea0704-f646-0f48-3f3a-8268c84492ef}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_Options" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_Logger]]></Declaration>
+      <Get Name="Get" Id="{5db43e1f-632d-0054-2947-dbccd362cd17}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Logger">
+      <LineId Id="16" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.M_Log">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.M_Reset">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Logger.P_Options.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

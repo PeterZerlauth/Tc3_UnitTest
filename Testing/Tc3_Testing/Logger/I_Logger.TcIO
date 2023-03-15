@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Logger" Id="{59383f8d-db3d-0d19-3304-bf0ceba7beae}">
+    <Declaration><![CDATA[INTERFACE I_Logger EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="M_Log" Id="{9f47792d-6f28-0f46-2c95-a5541e4508fa}">
+      <Declaration><![CDATA[METHOD M_Log
+VAR_INPUT
+	LogLevel:		E_LogLevel;
+	Message:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Reset" Id="{ee41d5d2-dcf2-0bf3-26fa-c22d7363f46c}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="P_Options" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_Logger]]></Declaration>
+      <Get Name="Get" Id="{7014e2a1-dc1b-0612-3281-09945aee9943}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

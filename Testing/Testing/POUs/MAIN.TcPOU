@@ -3,8 +3,7 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbLogger:		FB_TcLogger;
-	bExecute:		Bool;
+	bExecute:		BOOL;
 	fbTestsuites:	FB_Testsuites;				// Testsuites
 	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
 	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
@@ -18,18 +17,10 @@ VAR
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
 	fbStopwatch:	FB_Stopwatch;				// Test-vars
-	bLogger:		Bool;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbLogger();
-IF bLogger THEN
-	bLogger:= FALSE;
-	fbLogger.M_Log(E_LogLevel.Warning, 'Message');
-END_IF
-
-
-// Run
+      <ST><![CDATA[// Run
 fbTestsuites();
 
 IF bExecute THEN
@@ -207,12 +198,6 @@ END_CASE
 {endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="969" Count="0" />
-      <LineId Id="993" Count="0" />
-      <LineId Id="997" Count="0" />
-      <LineId Id="995" Count="1" />
-      <LineId Id="994" Count="0" />
-      <LineId Id="971" Count="0" />
       <LineId Id="863" Count="0" />
       <LineId Id="559" Count="0" />
       <LineId Id="901" Count="0" />

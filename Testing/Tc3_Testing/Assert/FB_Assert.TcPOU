@@ -40,20 +40,50 @@ END_VAR]]></Declaration>
         <ST><![CDATA[M_Assert();
 IF Expected.diSize <> Actual.diSize THEN
 	M_Error('', '', Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 	
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
 	M_Error('', '', Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 	
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
 	M_Failure('', '', Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 	
 ELSE
 	M_Passed();
 END_IF
 M_Equals:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_Array_BOOL" Id="{3f074cfa-3c0a-0eb4-0c1c-06c9b9f81a4b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF BOOL;
+    Actual:				ARRAY [*] OF BOOL;
+END_VAR
+VAR_INPUT
+	Message:		STRING(255);
+END_VAR
+
+VAR
+	nIndex: DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_BOOL:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('','', Message);
+	RETURN;
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('','', Message);
+	RETURN;
+ELSE
+	FOR nIndex := LOWER_BOUND(Expected,1) TO UPPER_BOUND(Expected,1) DO
+    	IF Expected[nIndex] <> Actual[nIndex] THEN
+			M_Error('', '', Message);
+			RETURN;
+		END_IF
+	END_FOR;
+	M_Passed();
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals_BOOL" Id="{a59ebe08-8964-0b2c-38a4-ac8145e6076b}">
@@ -69,7 +99,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(BOOL_TO_STRING(Expected), BOOL_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
       </Implementation>
@@ -87,7 +116,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(BYTE_TO_STRING(Expected), BYTE_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
       </Implementation>
@@ -105,7 +133,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(DINT_TO_STRING(Expected), DINT_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_DINT:= THIS^;
 ]]></ST>
@@ -124,7 +151,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(INT_TO_STRING(Expected), INT_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
       </Implementation>
@@ -142,7 +168,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(LINT_TO_STRING(Expected), LINT_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_LINT:= THIS^;
 ]]></ST>
@@ -168,7 +193,6 @@ ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_LREAL:= THIS^;
 ]]></ST>
@@ -194,7 +218,6 @@ ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	M_Failure(REAL_TO_STRING(Expected), REAL_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
       </Implementation>
@@ -212,7 +235,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(Expected, Actual, Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
@@ -231,7 +253,6 @@ IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	M_Failure(TIME_TO_STRING(Expected), TIME_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_TIME:= THIS^;
 ]]></ST>
@@ -250,7 +271,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(UDINT_TO_STRING(Expected), UDINT_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_UDINT:= THIS^;
 ]]></ST>
@@ -269,7 +289,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(UINT_TO_STRING(Expected), UINT_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_UINT:= THIS^;]]></ST>
       </Implementation>
@@ -287,7 +306,6 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	M_Failure(WSTRING_TO_STRING(Expected), WSTRING_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_Equals_WSTRING:= THIS^;]]></ST>
       </Implementation>
@@ -311,6 +329,7 @@ END_VAR
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(Actual);
 	fbBuilder.M_Append('"</error>');
+	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 END_IF]]></ST>
       </Implementation>
@@ -334,6 +353,7 @@ END_VAR
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(Actual);
 	fbBuilder.M_Append('"</failure>');
+	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF]]></ST>
       </Implementation>
@@ -399,8 +419,9 @@ fbBuilder.M_Reset();
 fbBuilder.M_Append('$T$T$T<skipped message="');
 fbBuilder.M_Append(Message);
 fbBuilder.M_Append('" />');
+fbList.M_Add(fbBuilder.M_ToString());
 nSkipped:= nSkipped + 1;
-fbList.M_Add(fbBuilder.M_ToString());]]></ST>
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
@@ -434,13 +455,17 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals">
       <LineId Id="241" Count="0" />
       <LineId Id="243" Count="0" />
-      <LineId Id="248" Count="1" />
+      <LineId Id="248" Count="0" />
       <LineId Id="251" Count="1" />
-      <LineId Id="257" Count="1" />
+      <LineId Id="257" Count="0" />
       <LineId Id="260" Count="1" />
-      <LineId Id="266" Count="1" />
+      <LineId Id="266" Count="0" />
       <LineId Id="269" Count="3" />
       <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_BOOL">
+      <LineId Id="41" Count="15" />
+      <LineId Id="12" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">
       <LineId Id="82" Count="0" />
@@ -448,7 +473,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="95" Count="0" />
-      <LineId Id="80" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -456,7 +480,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="116" Count="0" />
       <LineId Id="93" Count="2" />
       <LineId Id="115" Count="0" />
-      <LineId Id="101" Count="0" />
       <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -464,7 +487,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="108" Count="0" />
       <LineId Id="111" Count="2" />
       <LineId Id="133" Count="0" />
-      <LineId Id="119" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
@@ -473,7 +495,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="89" Count="0" />
       <LineId Id="92" Count="2" />
       <LineId Id="114" Count="0" />
-      <LineId Id="100" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -481,7 +502,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
       <LineId Id="133" Count="0" />
-      <LineId Id="119" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
@@ -494,7 +514,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="230" Count="2" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
-      <LineId Id="208" Count="1" />
+      <LineId Id="208" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="124" Count="0" />
@@ -505,7 +525,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="69" Count="0" />
       <LineId Id="95" Count="1" />
       <LineId Id="117" Count="0" />
-      <LineId Id="102" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -514,7 +533,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="1" />
       <LineId Id="111" Count="0" />
-      <LineId Id="97" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -522,7 +540,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="194" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
-      <LineId Id="208" Count="1" />
+      <LineId Id="208" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="124" Count="0" />
@@ -531,7 +549,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
       <LineId Id="133" Count="0" />
-      <LineId Id="119" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
@@ -540,7 +557,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="115" Count="0" />
       <LineId Id="92" Count="2" />
       <LineId Id="114" Count="0" />
-      <LineId Id="100" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -549,7 +565,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="1" />
       <LineId Id="111" Count="0" />
-      <LineId Id="97" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -560,12 +575,14 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="24" Count="2" />
       <LineId Id="23" Count="0" />
       <LineId Id="12" Count="0" />
+      <LineId Id="39" Count="0" />
       <LineId Id="27" Count="0" />
       <LineId Id="32" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Failure">
       <LineId Id="21" Count="0" />
       <LineId Id="24" Count="8" />
+      <LineId Id="39" Count="0" />
       <LineId Id="22" Count="1" />
     </LineIds>
     <LineIds Name="FB_Assert.M_IsTRUE">
@@ -595,6 +612,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="19" Count="0" />
       <LineId Id="10" Count="2" />
       <LineId Id="18" Count="0" />
+      <LineId Id="30" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="25" Count="0" />
     </LineIds>

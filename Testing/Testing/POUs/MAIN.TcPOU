@@ -17,6 +17,8 @@ VAR
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
 	fbStopwatch:	FB_Stopwatch;				// Test-vars
+	aBool1:			ARRAY [0..10] OF BOOL;
+	aBool2:			ARRAY [0..10] OF BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -193,7 +195,9 @@ CASE fbTestsuite4.P_Testcase OF
 			 
 	5:
 		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
-//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'error');
+//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'error');
+//	 	aBool1[0]:= TRUE;
+//	 	fbTestsuite4.P_Assert.M_Equals_Array_BOOL(aBool1,aBool2, 'Array test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
@@ -318,6 +322,8 @@ END_CASE
       <LineId Id="924" Count="1" />
       <LineId Id="928" Count="0" />
       <LineId Id="999" Count="0" />
+      <LineId Id="1043" Count="0" />
+      <LineId Id="1042" Count="0" />
       <LineId Id="926" Count="1" />
       <LineId Id="819" Count="0" />
       <LineId Id="923" Count="0" />

@@ -18,14 +18,14 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_BOOL" Id="{6f8f5d7e-ffa3-07d4-3a44-1a4ed79db640}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF BOOL;
-    Actual:				ARRAY [*] OF BOOL;
-END_VAR
+    <Method Name="M_Equals_Array" Id="{6f8f5d7e-ffa3-07d4-3a44-1a4ed79db640}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array : I_Assert
 VAR_INPUT
-	Message:		STRING(255);
+	Expected:			ANY;
+    Actual:				ANY;
+	TypeClass:			__SYSTEM.TYPE_CLASS;
+	Tolerance:			LREAL;
+	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Equals_BOOL" Id="{20ff750d-b30d-4f5f-8423-4ded171d3cd6}">

@@ -17,8 +17,8 @@ VAR
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
 	fbStopwatch:	FB_Stopwatch;				// Test-vars
-	aBool1:			ARRAY [0..10] OF BOOL;
-	aBool2:			ARRAY [0..10] OF BOOL;
+	ARRAY1:			ARRAY [0..10] OF REAL;
+	ARRAY2:			ARRAY [0..10] OF REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -196,8 +196,8 @@ CASE fbTestsuite4.P_Testcase OF
 	5:
 		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
 //		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'error');
-//	 	aBool1[0]:= TRUE;
-//	 	fbTestsuite4.P_Assert.M_Equals_Array_BOOL(aBool1,aBool2, 'Array test');
+//	 	ARRAY1[10]:= 33.3;
+//	 	fbTestsuite4.P_Assert.M_Equals_Array(ARRAY1,ARRAY2, AnyType.TYPE_REAL , 0 , 'Array test');
 		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 	
 	E_Testcase.Done:;
@@ -206,128 +206,7 @@ END_CASE
 {endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="863" Count="0" />
-      <LineId Id="559" Count="0" />
-      <LineId Id="901" Count="0" />
-      <LineId Id="895" Count="0" />
-      <LineId Id="973" Count="0" />
-      <LineId Id="904" Count="0" />
-      <LineId Id="903" Count="0" />
-      <LineId Id="899" Count="1" />
-      <LineId Id="893" Count="0" />
-      <LineId Id="862" Count="0" />
-      <LineId Id="560" Count="0" />
-      <LineId Id="668" Count="0" />
-      <LineId Id="779" Count="0" />
-      <LineId Id="809" Count="0" />
-      <LineId Id="866" Count="0" />
-      <LineId Id="864" Count="0" />
-      <LineId Id="669" Count="0" />
-      <LineId Id="561" Count="0" />
-      <LineId Id="563" Count="1" />
-      <LineId Id="865" Count="0" />
-      <LineId Id="635" Count="0" />
-      <LineId Id="566" Count="0" />
-      <LineId Id="948" Count="1" />
-      <LineId Id="567" Count="2" />
-      <LineId Id="638" Count="2" />
-      <LineId Id="572" Count="2" />
-      <LineId Id="641" Count="2" />
-      <LineId Id="577" Count="2" />
-      <LineId Id="644" Count="2" />
-      <LineId Id="581" Count="2" />
-      <LineId Id="647" Count="2" />
-      <LineId Id="585" Count="2" />
-      <LineId Id="650" Count="2" />
-      <LineId Id="589" Count="0" />
-      <LineId Id="598" Count="1" />
-      <LineId Id="666" Count="0" />
-      <LineId Id="665" Count="0" />
-      <LineId Id="600" Count="5" />
-      <LineId Id="861" Count="0" />
-      <LineId Id="859" Count="1" />
-      <LineId Id="606" Count="2" />
-      <LineId Id="80" Count="0" />
-      <LineId Id="671" Count="0" />
-      <LineId Id="869" Count="0" />
-      <LineId Id="677" Count="2" />
-      <LineId Id="685" Count="0" />
-      <LineId Id="687" Count="2" />
-      <LineId Id="691" Count="1" />
-      <LineId Id="681" Count="0" />
-      <LineId Id="672" Count="0" />
-      <LineId Id="713" Count="1" />
-      <LineId Id="709" Count="0" />
-      <LineId Id="705" Count="0" />
-      <LineId Id="715" Count="0" />
-      <LineId Id="717" Count="2" />
-      <LineId Id="706" Count="0" />
-      <LineId Id="725" Count="0" />
-      <LineId Id="721" Count="1" />
-      <LineId Id="720" Count="0" />
-      <LineId Id="673" Count="0" />
-      <LineId Id="682" Count="1" />
-      <LineId Id="674" Count="0" />
-      <LineId Id="874" Count="0" />
-      <LineId Id="870" Count="0" />
-      <LineId Id="741" Count="1" />
-      <LineId Id="739" Count="0" />
-      <LineId Id="1019" Count="3" />
-      <LineId Id="740" Count="0" />
-      <LineId Id="745" Count="0" />
-      <LineId Id="756" Count="1" />
-      <LineId Id="754" Count="0" />
-      <LineId Id="786" Count="0" />
-      <LineId Id="747" Count="0" />
-      <LineId Id="749" Count="0" />
-      <LineId Id="748" Count="0" />
-      <LineId Id="753" Count="0" />
-      <LineId Id="751" Count="1" />
-      <LineId Id="750" Count="0" />
-      <LineId Id="764" Count="0" />
-      <LineId Id="766" Count="1" />
-      <LineId Id="765" Count="0" />
-      <LineId Id="771" Count="2" />
-      <LineId Id="761" Count="0" />
-      <LineId Id="777" Count="0" />
-      <LineId Id="775" Count="1" />
-      <LineId Id="998" Count="0" />
-      <LineId Id="774" Count="0" />
-      <LineId Id="778" Count="0" />
-      <LineId Id="743" Count="1" />
-      <LineId Id="737" Count="0" />
-      <LineId Id="875" Count="0" />
-      <LineId Id="811" Count="0" />
-      <LineId Id="823" Count="0" />
-      <LineId Id="816" Count="1" />
-      <LineId Id="813" Count="0" />
-      <LineId Id="840" Count="0" />
-      <LineId Id="821" Count="0" />
-      <LineId Id="839" Count="0" />
-      <LineId Id="822" Count="0" />
-      <LineId Id="825" Count="0" />
-      <LineId Id="827" Count="0" />
-      <LineId Id="826" Count="0" />
-      <LineId Id="841" Count="0" />
-      <LineId Id="824" Count="0" />
-      <LineId Id="828" Count="0" />
-      <LineId Id="830" Count="1" />
-      <LineId Id="829" Count="0" />
-      <LineId Id="832" Count="0" />
-      <LineId Id="834" Count="1" />
-      <LineId Id="833" Count="0" />
-      <LineId Id="838" Count="0" />
-      <LineId Id="836" Count="1" />
-      <LineId Id="818" Count="0" />
-      <LineId Id="924" Count="1" />
-      <LineId Id="928" Count="0" />
-      <LineId Id="999" Count="0" />
-      <LineId Id="1043" Count="0" />
-      <LineId Id="1042" Count="0" />
-      <LineId Id="926" Count="1" />
-      <LineId Id="819" Count="0" />
-      <LineId Id="923" Count="0" />
-      <LineId Id="814" Count="0" />
+      <LineId Id="1082" Count="180" />
       <LineId Id="810" Count="0" />
     </LineIds>
   </POU>

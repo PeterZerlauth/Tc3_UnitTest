@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="U_Assert" Id="{2edf3810-a04e-0a82-2269-79a0b858016c}">
+    <Declaration><![CDATA[TYPE U_Assert :
+UNION
+	pBYTE:		POINTER TO BYTE;
+	pWORD:		POINTER TO WORD;
+	pDWORD:		POINTER TO DWORD;
+	pLWORD:		POINTER TO LWORD;
+	pUINT:		POINTER TO UINT;
+	pINT:		POINTER TO INT;
+	pDINT:		POINTER TO DINT;
+	pULINT:		POINTER TO ULINT;
+	pLINT:		POINTER TO LINT;
+	pREAL:		POINTER TO REAL;
+	pLREAL:		POINTER TO LREAL;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

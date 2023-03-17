@@ -54,7 +54,7 @@
     <Compile Include="Assert\ST_Assert.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assert\AnyType.TcDUT">
+    <Compile Include="Assert\Any_Type.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Assert\U_Assert.TcDUT">

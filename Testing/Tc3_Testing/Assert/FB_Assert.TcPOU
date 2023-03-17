@@ -58,7 +58,7 @@ M_Equals:= THIS^;]]></ST>
 VAR_INPUT
 	Expected:			ANY;
     Actual:				ANY;
-	TypeClass:			AnyType;
+	TypeClass:			Any_Type;
 	Tolerance:			LREAL;
 	Message:			STRING(255);
 END_VAR
@@ -79,7 +79,7 @@ ELSIF Expected.diSize <> Actual.diSize THEN
 		M_Failure(Concat('Expected.diSize = ', DINT_TO_STRING(Expected.diSize)), Concat('Actual.diSize = ', DINT_TO_STRING(Expected.diSize)), Message);
 ELSE
 	CASE TypeClass OF
-		AnyType.TYPE_BOOL:
+		Any_Type.TYPE_BOOL:
 			FOR nIndex:= 0 TO Expected.diSize DO
 				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
 					M_ErrorArray(BOOL_TO_STRING(BYTE_TO_BOOL(Expected.pValue[nIndex])), BOOL_TO_STRING(BYTE_TO_BOOL(Actual.pValue[nIndex])), nIndex, Message);
@@ -87,7 +87,7 @@ ELSE
 				END_IF
 			END_FOR
 		
-		AnyType.TYPE_BYTE:
+		Any_Type.TYPE_BYTE:
 			FOR nIndex:= 0 TO Expected.diSize DO
 				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
 					M_ErrorArray(BYTE_TO_STRING(Expected.pValue[nIndex]), BYTE_TO_STRING(Actual.pValue[nIndex]), nIndex, Message);
@@ -95,7 +95,7 @@ ELSE
 				END_IF
 			END_FOR
 
-		AnyType.TYPE_USINT:
+		Any_Type.TYPE_USINT:
 			FOR nIndex:= 0 TO Expected.diSize DO
 				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
 					M_ErrorArray(BYTE_TO_STRING(Expected.pValue[nIndex]), BYTE_TO_STRING(Actual.pValue[nIndex]), nIndex, Message);
@@ -103,7 +103,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_SINT:
+		Any_Type.TYPE_SINT:
 			FOR nIndex:= 0 TO Expected.diSize DO
 				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
 					M_ErrorArray(SINT_TO_STRING(BYTE_TO_SINT(Expected.pValue[nIndex])), SINT_TO_STRING(BYTE_TO_SINT(Actual.pValue[nIndex])), nIndex, Message);
@@ -111,7 +111,7 @@ ELSE
 				END_IF
 			END_FOR
 		
-		AnyType.TYPE_WORD:
+		Any_Type.TYPE_WORD:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(WORD) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(WORD));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(WORD));		
@@ -121,7 +121,7 @@ ELSE
 				END_IF
 			END_FOR
 
-		AnyType.TYPE_UINT:
+		Any_Type.TYPE_UINT:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(UINT) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));		
@@ -131,7 +131,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_DWORD:
+		Any_Type.TYPE_DWORD:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(DWORD) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DWORD));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DWORD));					
@@ -141,7 +141,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_LWORD:
+		Any_Type.TYPE_LWORD:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LWORD) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LWORD));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LWORD));			
@@ -151,7 +151,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_ULINT:
+		Any_Type.TYPE_ULINT:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(UINT) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));			
@@ -161,7 +161,7 @@ ELSE
 				END_IF
 			END_FOR
 
-		AnyType.TYPE_INT:
+		Any_Type.TYPE_INT:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(INT) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(INT));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(INT));		
@@ -171,7 +171,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_DINT:;
+		Any_Type.TYPE_DINT:;
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(DINT) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DINT));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DINT));	
@@ -181,7 +181,7 @@ ELSE
 				END_IF
 			END_FOR
 			
-		AnyType.TYPE_LINT:
+		Any_Type.TYPE_LINT:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LINT) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LINT));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LINT));
@@ -191,7 +191,7 @@ ELSE
 				END_IF
 			END_FOR
 		
-		AnyType.TYPE_REAL:
+		Any_Type.TYPE_REAL:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(REAL) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(REAL));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(REAL));
@@ -200,7 +200,7 @@ ELSE
 					RETURN;
 				END_IF
 			END_FOR
-		AnyType.TYPE_LREAL:
+		Any_Type.TYPE_LREAL:
 			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LREAL) DO
 				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LREAL));
 				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LREAL));

@@ -9,6 +9,7 @@ VAR
 	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
 	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
 	fbTestsuite4:	FB_Testsuite;				// Testsuite	FB_Stopwatch
+//	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
 
 	nIndex: 		INT;						// Test-vars
 	sValue:			STRING(255);				// Test-vars
@@ -37,7 +38,7 @@ fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuites.M_Add(fbTestsuite3);
 fbTestsuites.M_Add(fbTestsuite4);
-
+//fbTestsuites.M_Add(fbTestsuite5);
 {region "fbTestsuite1"}
 // Run
 fbTestsuite1();
@@ -191,10 +192,10 @@ CASE fbTestsuite4.P_Testcase OF
 		
 	4:
 		fbTestsuite4.P_Assert.M_IsTRUE(T#0S = fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 5);
+		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
 			 
 	5:
-		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
+//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
 //		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'error');
 //	 	ARRAY1[10]:= 33.3;
 //	 	fbTestsuite4.P_Assert.M_Equals_Array(ARRAY1,ARRAY2, AnyType.TYPE_REAL , 0 , 'Array test');
@@ -203,11 +204,80 @@ CASE fbTestsuite4.P_Testcase OF
 	E_Testcase.Done:;
 		 
 END_CASE
-{endregion}]]></ST>
+{endregion}
+{region "fbTestsuite1"}
+// Run
+//fbTestsuite5();
+//CASE fbTestsuite5.P_Testcase OF
+//	E_Testcase.Start:
+//		// First test case
+//		fbTestsuite5.P_Assert.M_Skip('Skipped testcase');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);
+			 
+//	1:
+//		fbTestsuite5.P_Assert.M_IsTRUE(FALSE, 'M_IsTRUE');
+//		fbTestsuite5.P_Assert.M_Equals_BOOL(FALSE, TRUE, 'M_Equals_BOOL');
+//		fbTestsuite5.P_Assert.M_Equals_BYTE(0, 1, 'M_Equals_BYTE');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
+	
+//	2:
+//		fbTestsuite5.P_Assert.M_Equals_INT(0, 1, 'M_Equals_INT');
+//		fbTestsuite5.P_Assert.M_Equals_UINT(0, 1, 'M_Equals_UINT');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
+
+//	3:
+//		fbTestsuite5.P_Assert.M_Equals_DINT(0, 1, 'M_Equals_DINT');
+//		fbTestsuite5.P_Assert.M_Equals_UDINT(0, 1, 'M_Equals_UDINT');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
+			 
+//	4:
+//		fbTestsuite5.P_Assert.M_Equals_LINT(0, 1, 'M_Equals_LINT');
+//		fbTestsuite5.P_Assert.M_Equals_ULINT(0, 1, 'M_Equals_ULINT');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
+			 
+//	5:
+//		fbTestsuite5.P_Assert.M_Equals_REAL(0.0, 1.0, 0.0, 'M_Equals_REAL');
+//		fbTestsuite5.P_Assert.M_Equals_LREAL(0.0, 1.0, 0.0, 'M_Equals_LREAL');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);	 
+			 
+//	6:
+//		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
+//		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
+//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);	
+//	E_Testcase.Done:;
+		 
+//END_CASE	 
+{endregion}
+	 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="1082" Count="180" />
       <LineId Id="810" Count="0" />
+      <LineId Id="1290" Count="5" />
+      <LineId Id="1297" Count="0" />
+      <LineId Id="1289" Count="0" />
+      <LineId Id="1308" Count="0" />
+      <LineId Id="1305" Count="0" />
+      <LineId Id="1307" Count="0" />
+      <LineId Id="1314" Count="1" />
+      <LineId Id="1304" Count="0" />
+      <LineId Id="1310" Count="0" />
+      <LineId Id="1312" Count="1" />
+      <LineId Id="1317" Count="0" />
+      <LineId Id="1311" Count="0" />
+      <LineId Id="1318" Count="3" />
+      <LineId Id="1285" Count="0" />
+      <LineId Id="1326" Count="0" />
+      <LineId Id="1323" Count="2" />
+      <LineId Id="1322" Count="0" />
+      <LineId Id="1331" Count="0" />
+      <LineId Id="1328" Count="2" />
+      <LineId Id="1327" Count="0" />
+      <LineId Id="1332" Count="0" />
+      <LineId Id="1334" Count="2" />
+      <LineId Id="1333" Count="0" />
+      <LineId Id="1302" Count="1" />
+      <LineId Id="1286" Count="2" />
     </LineIds>
   </POU>
 </TcPlcObject>

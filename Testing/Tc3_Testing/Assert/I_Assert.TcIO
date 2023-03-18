@@ -9,25 +9,6 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals" Id="{3fc096e7-86c9-44f3-a206-472563f4153f}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
-VAR_INPUT
-	Expected:			ANY;
-    Actual:				ANY;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array" Id="{6f8f5d7e-ffa3-07d4-3a44-1a4ed79db640}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array : I_Assert
-VAR_INPUT
-	Expected:			ANY;
-    Actual:				ANY;
-	TypeClass:			__SYSTEM.TYPE_CLASS;
-	Tolerance:			LREAL;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
-    </Method>
     <Method Name="M_Equals_BOOL" Id="{20ff750d-b30d-4f5f-8423-4ded171d3cd6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BOOL : I_Assert
 VAR_INPUT
@@ -126,6 +107,14 @@ VAR_INPUT
 	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_Equals_ULINT" Id="{1715857e-4c84-0484-0b94-b46c21ae7819}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ULINT : I_Assert
+VAR_INPUT
+	Expected:			ULINT;
+    Actual:				ULINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Equals_WSTRING" Id="{56bdcbed-b45e-08e5-3329-e3361274412b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
 VAR_INPUT
@@ -137,8 +126,7 @@ END_VAR]]></Declaration>
     <Method Name="M_Error" Id="{e857968b-1a0e-0e58-391f-bc7835d9faa3}">
       <Declaration><![CDATA[METHOD PUBLIC M_Error
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
+	Data:				STRING(255);
 	Message:			STRING(255);
 END_VAR
 ]]></Declaration>
@@ -146,8 +134,7 @@ END_VAR
     <Method Name="M_Failure" Id="{9318ab5d-6ac3-0a7e-34e9-3d149bb041e1}">
       <Declaration><![CDATA[METHOD PUBLIC M_Failure
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
+	Data:				STRING(255);
 	Message:			STRING(255);
 END_VAR
 ]]></Declaration>

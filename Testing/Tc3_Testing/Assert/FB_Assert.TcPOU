@@ -29,189 +29,68 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Equals" Id="{2f898a7a-61a5-0f1c-0018-13ff343db6b6}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
+    <Method Name="M_Equals_Array_LINT" Id="{ad7b55f1-407d-0125-1100-b2f5a1a335ce}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF LINT;
+	Actual:				ARRAY [*] OF LINT;
+END_VAR
 VAR_INPUT
-	Expected:			ANY;
-    Actual:				ANY;
 	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Assert();
-IF Expected.diSize <> Actual.diSize THEN
-	M_Error('', '', Message);
-	
-ELSIF Expected.TypeClass <> Actual.TypeClass THEN			
-	M_Error('', '', Message);
-	
-ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
-	M_Failure('', '', Message);
-	
+        <ST><![CDATA[M_Equals_Array_LINT:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
 ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF Expected[nIndex] <> Actual[nIndex] THEN	
+			M_Error('', Message);
+			RETURN;
+		END_IF
+	END_FOR
 	M_Passed();
-END_IF
-M_Equals:= THIS^;]]></ST>
+END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Equals_Array" Id="{3f074cfa-3c0a-0eb4-0c1c-06c9b9f81a4b}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array : I_Assert
+    <Method Name="M_Equals_Array_LREAL" Id="{c66fd740-f5b0-0aea-32aa-9f9e8cd1f3c8}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LREAL : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF LREAL;
+	Actual:				ARRAY [*] OF LREAL;
+END_VAR
 VAR_INPUT
-	Expected:			ANY;
-    Actual:				ANY;
-	TypeClass:			Any_Type;
 	Tolerance:			LREAL;
 	Message:			STRING(255);
 END_VAR
 
 VAR
 	nIndex:				DINT;
-	uExpected:			U_Assert;
-	uActual:			U_Assert;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Equals_Array:= THIS^;
+        <ST><![CDATA[M_Equals_Array_LREAL:= THIS^;
 M_Assert();
-IF Expected.TypeClass <> __SYSTEM.TYPE_CLASS.TYPE_ARRAY THEN
-	M_Failure('Expected.TypeClass.TYPE_ARRAY', Concat('Expected.TypeClass.', TO_STRING(Expected.TypeClass)), Message);
-ELSIF Expected.TypeClass <> __SYSTEM.TYPE_CLASS.TYPE_ARRAY THEN
-	M_Failure('Actual.TypeClass.TYPE_ARRAY', Concat('Actual.TypeClass.', TO_STRING(Expected.TypeClass)), Message);
-ELSIF Expected.diSize <> Actual.diSize THEN
-		M_Failure(Concat('Expected.diSize = ', DINT_TO_STRING(Expected.diSize)), Concat('Actual.diSize = ', DINT_TO_STRING(Expected.diSize)), Message);
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
 ELSE
-	CASE TypeClass OF
-		Any_Type.TYPE_BOOL:
-			FOR nIndex:= 0 TO Expected.diSize DO
-				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
-					M_ErrorArray(BOOL_TO_STRING(BYTE_TO_BOOL(Expected.pValue[nIndex])), BOOL_TO_STRING(BYTE_TO_BOOL(Actual.pValue[nIndex])), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-		
-		Any_Type.TYPE_BYTE:
-			FOR nIndex:= 0 TO Expected.diSize DO
-				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
-					M_ErrorArray(BYTE_TO_STRING(Expected.pValue[nIndex]), BYTE_TO_STRING(Actual.pValue[nIndex]), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-
-		Any_Type.TYPE_USINT:
-			FOR nIndex:= 0 TO Expected.diSize DO
-				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
-					M_ErrorArray(BYTE_TO_STRING(Expected.pValue[nIndex]), BYTE_TO_STRING(Actual.pValue[nIndex]), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_SINT:
-			FOR nIndex:= 0 TO Expected.diSize DO
-				IF Expected.pValue[nIndex] <> Actual.pValue[nIndex] THEN
-					M_ErrorArray(SINT_TO_STRING(BYTE_TO_SINT(Expected.pValue[nIndex])), SINT_TO_STRING(BYTE_TO_SINT(Actual.pValue[nIndex])), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-		
-		Any_Type.TYPE_WORD:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(WORD) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(WORD));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(WORD));		
-				IF uExpected.pWORD^ <> uActual.pWORD^ THEN
-					M_ErrorArray(WORD_TO_STRING(uExpected.pWORD^), WORD_TO_STRING(uActual.pWORD^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-
-		Any_Type.TYPE_UINT:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(UINT) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));		
-				IF uActual.pUINT^ <> uExpected.pUINT^ THEN
-					M_ErrorArray(UINT_TO_STRING(uExpected.pUINT^), UINT_TO_STRING(uActual.pUINT^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_DWORD:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(DWORD) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DWORD));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DWORD));					
-				IF uExpected.pDWORD^ <> uActual.pDWORD^ THEN
-					M_ErrorArray(DWORD_TO_STRING(uExpected.pDWORD^), DWORD_TO_STRING(uActual.pDWORD^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_LWORD:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LWORD) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LWORD));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LWORD));			
-				IF uExpected.pLWORD^ <> uActual.pLWORD^ THEN
-					M_ErrorArray(LWORD_TO_STRING(uExpected.pLWORD^), LWORD_TO_STRING(uActual.pLWORD^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_ULINT:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(UINT) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(UINT));			
-				IF uExpected.pULINT^ <> uActual.pULINT^ THEN
-					M_ErrorArray(ULINT_TO_STRING(uExpected.pULINT^), ULINT_TO_STRING(uActual.pULINT^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-
-		Any_Type.TYPE_INT:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(INT) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(INT));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(INT));		
-				IF uExpected.pINT^ <> uActual.pINT^ THEN
-					M_ErrorArray(INT_TO_STRING(uExpected.pINT^), INT_TO_STRING(uActual.pINT^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_DINT:;
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(DINT) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DINT));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(DINT));	
-				IF uExpected.pDINT^ <> uActual.pDINT^ THEN
-					M_ErrorArray(DINT_TO_STRING(uExpected.pDINT^), DINT_TO_STRING(uActual.pDINT^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-			
-		Any_Type.TYPE_LINT:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LINT) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LINT));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LINT));
-				IF uExpected.pLINT^ <> uActual.pLINT^ THEN
-					M_ErrorArray(LINT_TO_STRING(uActual.pLINT^), LINT_TO_STRING(uActual.pLINT^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-		
-		Any_Type.TYPE_REAL:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(REAL) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(REAL));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(REAL));
-				IF ABS(uExpected.pREAL^ - uActual.pREAL^) > ABS(Tolerance) THEN
-					M_ErrorArray(REAL_TO_STRING(uExpected.pREAL^), REAL_TO_STRING(uActual.pREAL^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR
-		Any_Type.TYPE_LREAL:
-			FOR nIndex:= 0 TO Expected.diSize / SIZEOF(LREAL) DO
-				uExpected.pBYTE:= Expected.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LREAL));
-				uActual.pBYTE:= Actual.pValue + DINT_TO_LWORD(nIndex * SIZEOF(LREAL));
-				IF ABS(uExpected.pLREAL^ - uActual.pLREAL^) > ABS(Tolerance) THEN
-					M_ErrorArray(LREAL_TO_STRING(uExpected.pLREAL^), LREAL_TO_STRING(uActual.pLREAL^), nIndex, Message);
-					RETURN;
-				END_IF
-			END_FOR	
-	
-	END_CASE
-END_IF]]></ST>
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF ABS(Expected[nIndex] - Actual[nIndex]) <= ABS(Tolerance) THEN	
+			M_Error('', Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals_BOOL" Id="{a59ebe08-8964-0b2c-38a4-ac8145e6076b}">
@@ -226,7 +105,13 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(BOOL_TO_STRING(Expected), BOOL_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(BOOL_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(BOOL_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
       </Implementation>
@@ -243,7 +128,13 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(BYTE_TO_STRING(Expected), BYTE_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(BYTE_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(BYTE_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
       </Implementation>
@@ -260,7 +151,13 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(DINT_TO_STRING(Expected), DINT_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(DINT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(DINT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_DINT:= THIS^;
 ]]></ST>
@@ -278,7 +175,13 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(INT_TO_STRING(Expected), INT_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(INT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(INT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
       </Implementation>
@@ -295,7 +198,13 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(LINT_TO_STRING(Expected), LINT_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(LINT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(LINT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_LINT:= THIS^;
 ]]></ST>
@@ -312,15 +221,23 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF LrealIsNaN(Expected) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Expected is NaN ', Message));
+	M_Failure('', Concat('Expected is NaN ', Message));
 ELSIF LrealIsNaN(Actual) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Actual is NaN ', Message));	
+	M_Failure('', Concat('Actual is NaN ', Message));	
 ELSIF LrealIsNaN(Tolerance) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Tolerance is NaN ', Message));	
+	M_Failure('', Concat('Tolerance is NaN ', Message));	
 ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Actual));
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_LREAL:= THIS^;
 ]]></ST>
@@ -337,15 +254,23 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF RealIsNaN(Expected) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Expected is NaN ', Message));
+	M_Failure('', Concat('Expected is NaN ', Message));
 ELSIF RealIsNaN(Actual) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Actual is NaN ', Message));	
+	M_Failure('', Concat('Actual is NaN ', Message));	
 ELSIF RealIsNaN(Tolerance) THEN
-	M_Failure(LREAL_TO_STRING(Expected), LREAL_TO_STRING(Actual), Concat('Tolerance is NaN ', Message));	
+	M_Failure('', Concat('Tolerance is NaN ', Message));	
 ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
-	M_Failure(REAL_TO_STRING(Expected), REAL_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Actual));
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
       </Implementation>
@@ -362,7 +287,12 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(Expected, Actual, Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(Expected);
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(Actual);
+	fbBuilder.M_Append('"');
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
@@ -380,7 +310,15 @@ END_VAR]]></Declaration>
 IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
-	M_Failure(TIME_TO_STRING(Expected), TIME_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Actual));
+	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append(TIME_TO_STRING(Tolerance));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_TIME:= THIS^;
 ]]></ST>
@@ -398,7 +336,12 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(UDINT_TO_STRING(Expected), UDINT_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(UDINT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(UDINT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
 END_IF
 M_Equals_UDINT:= THIS^;
 ]]></ST>
@@ -416,9 +359,38 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(UINT_TO_STRING(Expected), UINT_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(UINT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(UINT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
 END_IF
 M_Equals_UINT:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_ULINT" Id="{6a3deaae-41c3-057d-0ef8-285e9e3cbbcc}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ULINT : I_Assert
+VAR_INPUT
+	Expected:			ULINT;
+    Actual:				ULINT;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+IF Expected = Actual THEN
+	M_Passed();
+ELSE
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(ULINT_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(ULINT_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
+END_IF
+M_Equals_ULINT:= THIS^;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Equals_WSTRING" Id="{d57eeb77-552a-03e8-31d9-648afdaf68b1}">
@@ -433,7 +405,12 @@ END_VAR]]></Declaration>
 IF Expected = Actual THEN
 	M_Passed();
 ELSE
-	M_Failure(WSTRING_TO_STRING(Expected), WSTRING_TO_STRING(Actual), Message);
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(WSTRING_TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(WSTRING_TO_STRING(Actual));
+	fbBuilder.M_Append('"');
 END_IF
 M_Equals_WSTRING:= THIS^;]]></ST>
       </Implementation>
@@ -441,8 +418,7 @@ M_Equals_WSTRING:= THIS^;]]></ST>
     <Method Name="M_Error" Id="{8fb01682-0d3e-09d1-1052-e80c2a25c45c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Error
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
+	Data:				STRING(255);
 	Message:			STRING(255);
 END_VAR
 ]]></Declaration>
@@ -452,37 +428,11 @@ END_VAR
 	fbBuilder.M_Append('$T$T$T<error message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_Append(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_Append(Actual);
-	fbBuilder.M_Append('"</error>');
-	fbList.M_Add(fbBuilder.M_ToString());
-	nErrors:= nErrors + 1;
-END_IF]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_ErrorArray" Id="{e9eed25c-66d5-0c2c-3d16-d73e2d2d84e1}">
-      <Declaration><![CDATA[METHOD PUBLIC M_ErrorArray
-VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
-	Index:				DINT;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[IF nSkipped = 0 THEN
-	fbBuilder.M_Reset();
-	fbBuilder.M_Append('$T$T$T<error message="');
-	fbBuilder.M_Append(Message);
-	fbBuilder.M_Append('" type="ArithmeticError">');
-	fbBuilder.M_Append('Index = "');
-	fbBuilder.M_AppendInt(Index);
-	fbBuilder.M_Append('" Expected = "');
-	fbBuilder.M_Append(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_Append(Actual);
+	fbBuilder.M_Append(Data);	
+//	fbBuilder.M_Append('Expected = "');
+//	fbBuilder.M_Append(Expected);
+//	fbBuilder.M_Append('" Actual = "');
+//	fbBuilder.M_Append(Actual);
 	fbBuilder.M_Append('"</error>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
@@ -492,21 +442,16 @@ END_IF]]></ST>
     <Method Name="M_Failure" Id="{c1dc23cc-f885-0540-1115-b7058773bd0a}">
       <Declaration><![CDATA[METHOD PUBLIC M_Failure
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
+	Data:				STRING(255);
 	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF nSkipped = 0 THEN
 	fbBuilder.M_Reset();
 	fbBuilder.M_Append('$T$T$T<failure message="');
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_Append(Expected);
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_Append(Actual);
+	fbBuilder.M_Append(Data);
 	fbBuilder.M_Append('"</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
@@ -524,8 +469,7 @@ END_VAR]]></Declaration>
 IF Actual THEN
 	M_Passed();
 ELSE
-	M_Failure('TRUE', BOOL_TO_STRING(Actual), Message);
-	fbList.M_Add(fbBuilder.M_ToString());
+	M_Failure('Actual = FALSE', Message);
 	nFailures:= nFailures + 1;
 END_IF
 M_IsTRUE:= THIS^;]]></ST>
@@ -595,7 +539,7 @@ fbBuilder.M_Reset();
 IF nErrorID = E_AdsErr.NOERR THEN
 	M_Passed();
 ELSE
-	M_Failure(TO_STRING(E_AdsErr.NOERR), TO_STRING(eError), Message);
+	M_Failure('', Message);
 	fbList.M_Add(fbBuilder.M_ToString());
 END_IF
 M_TcError:= THIS^;]]></ST>
@@ -607,26 +551,41 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Assert">
       <LineId Id="7" Count="2" />
     </LineIds>
-    <LineIds Name="FB_Assert.M_Equals">
-      <LineId Id="241" Count="0" />
-      <LineId Id="243" Count="0" />
-      <LineId Id="248" Count="0" />
-      <LineId Id="251" Count="1" />
-      <LineId Id="257" Count="0" />
-      <LineId Id="260" Count="1" />
-      <LineId Id="266" Count="0" />
-      <LineId Id="269" Count="3" />
-      <LineId Id="21" Count="0" />
+    <LineIds Name="FB_Assert.M_Equals_Array_LINT">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Assert.M_Equals_Array">
-      <LineId Id="482" Count="141" />
-      <LineId Id="99" Count="0" />
+    <LineIds Name="FB_Assert.M_Equals_Array_LREAL">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
+      <LineId Id="489" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_BOOL">
       <LineId Id="82" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
+      <LineId Id="105" Count="5" />
       <LineId Id="95" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -634,6 +593,8 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_BYTE">
       <LineId Id="116" Count="0" />
       <LineId Id="93" Count="2" />
+      <LineId Id="123" Count="4" />
+      <LineId Id="122" Count="0" />
       <LineId Id="115" Count="0" />
       <LineId Id="49" Count="0" />
       <LineId Id="21" Count="0" />
@@ -641,6 +602,8 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_DINT">
       <LineId Id="108" Count="0" />
       <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="4" />
+      <LineId Id="139" Count="0" />
       <LineId Id="133" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -649,6 +612,7 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_INT">
       <LineId Id="89" Count="0" />
       <LineId Id="92" Count="2" />
+      <LineId Id="120" Count="5" />
       <LineId Id="114" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -656,6 +620,7 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_LINT">
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="5" />
       <LineId Id="133" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -669,6 +634,10 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="230" Count="2" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
+      <LineId Id="239" Count="4" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="244" Count="0" />
       <LineId Id="208" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
@@ -679,6 +648,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="152" Count="5" />
       <LineId Id="69" Count="0" />
       <LineId Id="95" Count="1" />
+      <LineId Id="164" Count="7" />
       <LineId Id="117" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -687,6 +657,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="112" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="1" />
+      <LineId Id="118" Count="4" />
       <LineId Id="111" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -695,6 +666,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="194" Count="0" />
       <LineId Id="107" Count="0" />
       <LineId Id="171" Count="1" />
+      <LineId Id="220" Count="7" />
       <LineId Id="208" Count="0" />
       <LineId Id="61" Count="0" />
       <LineId Id="21" Count="0" />
@@ -703,6 +675,7 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_UDINT">
       <LineId Id="134" Count="0" />
       <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="4" />
       <LineId Id="133" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -711,14 +684,25 @@ M_TcError:= THIS^;]]></ST>
     <LineIds Name="FB_Assert.M_Equals_UINT">
       <LineId Id="115" Count="0" />
       <LineId Id="92" Count="2" />
+      <LineId Id="121" Count="4" />
       <LineId Id="114" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_ULINT">
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="5" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_WSTRING">
       <LineId Id="112" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="90" Count="1" />
+      <LineId Id="118" Count="4" />
       <LineId Id="111" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
@@ -727,19 +711,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="31" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="20" Count="2" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="39" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="32" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Assert.M_ErrorArray">
-      <LineId Id="31" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="2" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="53" Count="0" />
+      <LineId Id="46" Count="0" />
       <LineId Id="24" Count="2" />
       <LineId Id="23" Count="0" />
       <LineId Id="12" Count="0" />
@@ -749,7 +721,9 @@ M_TcError:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Failure">
       <LineId Id="21" Count="0" />
-      <LineId Id="24" Count="8" />
+      <LineId Id="24" Count="3" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="32" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="22" Count="1" />
     </LineIds>
@@ -759,7 +733,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="13" Count="0" />
       <LineId Id="43" Count="0" />
       <LineId Id="94" Count="0" />
-      <LineId Id="81" Count="0" />
       <LineId Id="35" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />

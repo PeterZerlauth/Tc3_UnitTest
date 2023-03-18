@@ -1,4 +1,4 @@
-# Tc3_Testing.library
+# Tc3_Testing.library ![bug](https://user-images.githubusercontent.com/48495545/226121534-c6e32169-1f6b-4ff0-a13f-dea22eda5c23.svg)
 Unit testing Twincat 3
 A easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format

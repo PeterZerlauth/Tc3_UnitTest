@@ -9,7 +9,7 @@ VAR
 	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
 	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
 	fbTestsuite4:	FB_Testsuite;				// Testsuite	FB_Stopwatch
-//	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
+	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
 
 	nIndex: 		INT;						// Test-vars
 	sValue:			STRING(255);				// Test-vars
@@ -18,8 +18,8 @@ VAR
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
 	fbStopwatch:	FB_Stopwatch;				// Test-vars
-	ARRAY1:			ARRAY [0..10] OF REAL;
-	ARRAY2:			ARRAY [0..10] OF REAL;
+	ARRAY1:			ARRAY [0..10] OF LREAL;
+	ARRAY2:			ARRAY [0..10] OF LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -38,7 +38,7 @@ fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuites.M_Add(fbTestsuite3);
 fbTestsuites.M_Add(fbTestsuite4);
-//fbTestsuites.M_Add(fbTestsuite5);
+fbTestsuites.M_Add(fbTestsuite5);
 {region "fbTestsuite1"}
 // Run
 fbTestsuite1();
@@ -207,46 +207,52 @@ END_CASE
 {endregion}
 {region "fbTestsuite1"}
 // Run
-//fbTestsuite5();
-//CASE fbTestsuite5.P_Testcase OF
-//	E_Testcase.Start:
-//		// First test case
-//		fbTestsuite5.P_Assert.M_Skip('Skipped testcase');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);
+fbTestsuite5();
+CASE fbTestsuite5.P_Testcase OF
+	E_Testcase.Start:
+		// First test case
+		fbTestsuite5.P_Assert.M_Skip('Skipped testcase');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 1);
 			 
-//	1:
-//		fbTestsuite5.P_Assert.M_IsTRUE(FALSE, 'M_IsTRUE');
-//		fbTestsuite5.P_Assert.M_Equals_BOOL(FALSE, TRUE, 'M_Equals_BOOL');
-//		fbTestsuite5.P_Assert.M_Equals_BYTE(0, 1, 'M_Equals_BYTE');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
-	
-//	2:
-//		fbTestsuite5.P_Assert.M_Equals_INT(0, 1, 'M_Equals_INT');
-//		fbTestsuite5.P_Assert.M_Equals_UINT(0, 1, 'M_Equals_UINT');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
+	1:
+		fbTestsuite5.P_Assert.M_IsTRUE(FALSE, 'M_IsTRUE');
+		fbTestsuite5.P_Assert.M_Equals_BOOL(FALSE, TRUE, 'M_Equals_BOOL');
+		fbTestsuite5.P_Assert.M_Equals_BYTE(0, 1, 'M_Equals_BYTE');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 2);
 
-//	3:
-//		fbTestsuite5.P_Assert.M_Equals_DINT(0, 1, 'M_Equals_DINT');
-//		fbTestsuite5.P_Assert.M_Equals_UDINT(0, 1, 'M_Equals_UDINT');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
+	2:
+		fbTestsuite5.P_Assert.M_Equals_INT(0, 1, 'M_Equals_INT');
+		fbTestsuite5.P_Assert.M_Equals_UINT(0, 1, 'M_Equals_UINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 3);
+
+	3:
+		fbTestsuite5.P_Assert.M_Equals_DINT(0, 1, 'M_Equals_DINT');
+		fbTestsuite5.P_Assert.M_Equals_UDINT(0, 1, 'M_Equals_UDINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 4);
 			 
-//	4:
-//		fbTestsuite5.P_Assert.M_Equals_LINT(0, 1, 'M_Equals_LINT');
-//		fbTestsuite5.P_Assert.M_Equals_ULINT(0, 1, 'M_Equals_ULINT');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
+	4:
+		fbTestsuite5.P_Assert.M_Equals_LINT(0, 1, 'M_Equals_LINT');
+		fbTestsuite5.P_Assert.M_Equals_ULINT(0, 1, 'M_Equals_ULINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 5);
 			 
-//	5:
-//		fbTestsuite5.P_Assert.M_Equals_REAL(0.0, 1.0, 0.0, 'M_Equals_REAL');
-//		fbTestsuite5.P_Assert.M_Equals_LREAL(0.0, 1.0, 0.0, 'M_Equals_LREAL');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);	 
+	5:
+		fbTestsuite5.P_Assert.M_Equals_REAL(0.0, 1.0, 0.0, 'M_Equals_REAL');
+		fbTestsuite5.P_Assert.M_Equals_LREAL(0.0, 1.0, 0.0, 'M_Equals_LREAL');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 6);	 
 			 
-//	6:
-//		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
-//		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
-//		fbTestsuite5.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);	
-//	E_Testcase.Done:;
+	6:
+		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
+		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 7);
+	
+	7:
+		ARRAY2[4]:= 3.14159;
+		fbTestsuite5.P_Assert.M_Equals_Array_LREAL(ARRAY1, ARRAY2, 0.0, 'M_Equals_STRING');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
+			 
+	E_Testcase.Done:;
 		 
-//END_CASE	 
+END_CASE	 
 {endregion}
 	 ]]></ST>
     </Implementation>
@@ -276,6 +282,12 @@ END_CASE
       <LineId Id="1332" Count="0" />
       <LineId Id="1334" Count="2" />
       <LineId Id="1333" Count="0" />
+      <LineId Id="1357" Count="0" />
+      <LineId Id="1359" Count="0" />
+      <LineId Id="1363" Count="0" />
+      <LineId Id="1360" Count="0" />
+      <LineId Id="1358" Count="0" />
+      <LineId Id="1362" Count="0" />
       <LineId Id="1302" Count="1" />
       <LineId Id="1286" Count="2" />
     </LineIds>

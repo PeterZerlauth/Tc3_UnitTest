@@ -52,7 +52,15 @@ ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
 ELSE
 	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
 		IF Expected[nIndex] <> Actual[nIndex] THEN	
-			M_Error('', Message);
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(LINT_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(LINT_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
 	END_FOR
@@ -83,8 +91,16 @@ ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
 	M_Failure('', Message);
 ELSE
 	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
-		IF ABS(Expected[nIndex] - Actual[nIndex]) <= ABS(Tolerance) THEN	
-			M_Error('', Message);
+		IF ABS(Expected[nIndex] - Actual[nIndex]) > ABS(Tolerance) THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(LREAL_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(LREAL_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
 	END_FOR
@@ -293,6 +309,7 @@ ELSE
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(Actual);
 	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
       </Implementation>
@@ -342,6 +359,7 @@ ELSE
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(UDINT_TO_STRING(Actual));
 	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_UDINT:= THIS^;
 ]]></ST>
@@ -365,6 +383,7 @@ ELSE
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(UINT_TO_STRING(Actual));
 	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_UINT:= THIS^;]]></ST>
       </Implementation>
@@ -411,6 +430,7 @@ ELSE
 	fbBuilder.M_Append('" Actual = "');
 	fbBuilder.M_Append(WSTRING_TO_STRING(Actual));
 	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_WSTRING:= THIS^;]]></ST>
       </Implementation>
@@ -558,6 +578,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="660" Count="1" />
       <LineId Id="658" Count="0" />
       <LineId Id="662" Count="0" />
+      <LineId Id="680" Count="7" />
       <LineId Id="665" Count="0" />
       <LineId Id="667" Count="0" />
       <LineId Id="666" Count="0" />
@@ -572,6 +593,9 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="660" Count="1" />
       <LineId Id="658" Count="0" />
       <LineId Id="662" Count="0" />
+      <LineId Id="681" Count="2" />
+      <LineId Id="687" Count="1" />
+      <LineId Id="684" Count="2" />
       <LineId Id="665" Count="0" />
       <LineId Id="667" Count="0" />
       <LineId Id="666" Count="0" />
@@ -659,6 +683,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="90" Count="1" />
       <LineId Id="118" Count="4" />
       <LineId Id="111" Count="0" />
+      <LineId Id="128" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -677,6 +702,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="111" Count="2" />
       <LineId Id="140" Count="4" />
       <LineId Id="133" Count="0" />
+      <LineId Id="150" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
@@ -686,6 +712,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="92" Count="2" />
       <LineId Id="121" Count="4" />
       <LineId Id="114" Count="0" />
+      <LineId Id="131" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>
@@ -704,6 +731,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="90" Count="1" />
       <LineId Id="118" Count="4" />
       <LineId Id="111" Count="0" />
+      <LineId Id="128" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
     </LineIds>

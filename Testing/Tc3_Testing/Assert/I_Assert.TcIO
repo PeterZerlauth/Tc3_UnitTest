@@ -9,6 +9,27 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="M_Equals_Array_LINT" Id="{9bdf53fc-f227-0038-0924-86b588091f84}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF LINT;
+	Actual:				ARRAY [*] OF LINT;
+END_VAR
+VAR_INPUT
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_Array_LREAL" Id="{d953f1f9-1657-08ea-2e02-0b1654ea92cc}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LREAL : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF LREAL;
+	Actual:				ARRAY [*] OF LREAL;
+END_VAR
+VAR_INPUT
+	Tolerance:			LREAL;
+	Message:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Equals_BOOL" Id="{20ff750d-b30d-4f5f-8423-4ded171d3cd6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BOOL : I_Assert
 VAR_INPUT

@@ -29,6 +29,162 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Equals_Array_BOOL" Id="{f134011c-e659-0f0f-1451-e11b2d1801b6}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF BYTE;
+	Actual:				ARRAY [*] OF BYTE;
+END_VAR
+VAR_INPUT
+	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_BOOL:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF Expected[nIndex] <> Actual[nIndex] THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(BYTE_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(BYTE_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_Array_BYTE" Id="{12f09544-1af8-0ebe-07a7-8b9c32b9d2dc}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BYTE : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF BOOL;
+	Actual:				ARRAY [*] OF BOOL;
+END_VAR
+VAR_INPUT
+	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_BYTE:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF Expected[nIndex] <> Actual[nIndex] THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(BOOL_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(BOOL_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_Array_DINT" Id="{518ae4ab-060a-09e2-266f-8d59ac7249b8}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_DINT : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF DINT;
+	Actual:				ARRAY [*] OF DINT;
+END_VAR
+VAR_INPUT
+	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_DINT:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF Expected[nIndex] <> Actual[nIndex] THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(DINT_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(DINT_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_Array_INT" Id="{6713325b-4c44-0e26-2bb7-5e725aa270d3}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_INT : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF INT;
+	Actual:				ARRAY [*] OF INT;
+END_VAR
+VAR_INPUT
+	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_INT:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF Expected[nIndex] <> Actual[nIndex] THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(INT_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(INT_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Equals_Array_LINT" Id="{ad7b55f1-407d-0125-1100-b2f5a1a335ce}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
 VAR_IN_OUT
@@ -99,6 +255,47 @@ ELSE
 			fbBuilder.M_Append(LREAL_TO_STRING(Expected[nIndex]));
 			fbBuilder.M_Append('" Actual = "');
 			fbBuilder.M_Append(LREAL_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('"');
+			M_Failure(fbBuilder.M_ToString(), Message);
+			RETURN;
+		END_IF
+	END_FOR
+	M_Passed();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_Array_REAL" Id="{4fd08f76-ba10-092b-0f97-d99ee406f12f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_REAL : I_Assert
+VAR_IN_OUT
+	Expected:			ARRAY [*] OF REAL;
+	Actual:				ARRAY [*] OF REAL;
+END_VAR
+VAR_INPUT
+	Tolerance:			REAL;
+	Message:			STRING(255);
+END_VAR
+
+VAR
+	nIndex:				DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Equals_Array_REAL:= THIS^;
+M_Assert();
+IF LOWER_BOUND(Expected, 1) <> LOWER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSIF UPPER_BOUND(Expected, 1) <> UPPER_BOUND(Actual, 1) THEN
+	M_Failure('', Message);
+ELSE
+	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
+		IF ABS(Expected[nIndex] - Actual[nIndex]) > ABS(Tolerance) THEN	
+			fbBuilder.M_Reset();
+			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
+			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append(REAL_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append(REAL_TO_STRING(Actual[nIndex]));
 			fbBuilder.M_Append('"');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
@@ -559,8 +756,13 @@ fbBuilder.M_Reset();
 IF nErrorID = E_AdsErr.NOERR THEN
 	M_Passed();
 ELSE
-	M_Failure('', Message);
-	fbList.M_Add(fbBuilder.M_ToString());
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TO_STRING(E_AdsError.NOERR));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TO_STRING(eError));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_TcError:= THIS^;]]></ST>
       </Implementation>
@@ -570,6 +772,66 @@ M_TcError:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_Assert">
       <LineId Id="7" Count="2" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_BOOL">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="680" Count="7" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_BYTE">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="680" Count="7" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_DINT">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="680" Count="7" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_INT">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="680" Count="7" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_Array_LINT">
       <LineId Id="482" Count="2" />
@@ -587,6 +849,24 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="655" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_Array_LREAL">
+      <LineId Id="482" Count="2" />
+      <LineId Id="654" Count="0" />
+      <LineId Id="656" Count="0" />
+      <LineId Id="660" Count="1" />
+      <LineId Id="658" Count="0" />
+      <LineId Id="662" Count="0" />
+      <LineId Id="681" Count="2" />
+      <LineId Id="687" Count="1" />
+      <LineId Id="684" Count="2" />
+      <LineId Id="665" Count="0" />
+      <LineId Id="667" Count="0" />
+      <LineId Id="666" Count="0" />
+      <LineId Id="663" Count="0" />
+      <LineId Id="668" Count="0" />
+      <LineId Id="655" Count="0" />
+      <LineId Id="489" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_Array_REAL">
       <LineId Id="482" Count="2" />
       <LineId Id="654" Count="0" />
       <LineId Id="656" Count="0" />
@@ -787,7 +1067,7 @@ M_TcError:= THIS^;]]></ST>
     </LineIds>
     <LineIds Name="FB_Assert.M_TcError">
       <LineId Id="7" Count="4" />
-      <LineId Id="14" Count="0" />
+      <LineId Id="31" Count="5" />
       <LineId Id="20" Count="0" />
       <LineId Id="22" Count="0" />
       <LineId Id="5" Count="0" />

@@ -3,199 +3,192 @@
   <Itf Name="I_Assert" Id="{b4f88ed5-c1d6-0e0a-0598-db946561ba17}">
     <Declaration><![CDATA[INTERFACE I_Assert
 ]]></Declaration>
-    <Method Name="M_Assert" Id="{6bbd6334-a05d-0a06-3aa7-7cb6bb31f1d4}">
+    <Method Name="M_Assert" Id="{ffff88d6-0cfd-04bb-2497-39648fb2c924}">
       <Declaration><![CDATA[METHOD PUBLIC M_Assert
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_BOOL" Id="{92ac5d8d-cc29-02a1-3785-e020fd150ddc}">
+    <Method Name="M_Equals_Array_BOOL" Id="{8558398b-7346-0449-24be-1428458a8698}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF BYTE;
-	Actual:				ARRAY [*] OF BYTE;
+	Expected:			ARRAY [*] OF BOOL;		// Expected as array of bool
+	Actual:				ARRAY [*] OF BOOL;		// Actual as array of bool
 END_VAR
 VAR_INPUT
-	Message:			STRING(255);
+	Message:			STRING(255);			// Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_BYTE" Id="{8e86d4d7-8ab0-0aac-1199-dfb1b2d81e07}">
+    <Method Name="M_Equals_Array_BYTE" Id="{4cbef9b0-27bd-0b86-2715-ece5f55cbd4c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BYTE : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF BOOL;
-	Actual:				ARRAY [*] OF BOOL;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF BOOL;	// Expected as array of byte
+	Actual:				ARRAY [*] OF BOOL;	// Actual as array of byte
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);     	 // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_DINT" Id="{f7e8b710-9816-0767-1830-bfd238c5f43b}">
+    <Method Name="M_Equals_Array_DINT" Id="{e1608178-4a53-0991-0a31-43f80571e6c9}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_DINT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF DINT;
-	Actual:				ARRAY [*] OF DINT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF DINT;	// Expected as array of dint
+	Actual:				ARRAY [*] OF DINT;	// Actual as array of dint
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);       // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_INT" Id="{d8daa648-3198-0f86-126a-fe71e0be5ab7}">
+    <Method Name="M_Equals_Array_INT" Id="{191e8d60-e80d-03ab-03b2-1a89c8fd7b87}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_INT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF INT;
-	Actual:				ARRAY [*] OF INT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF INT;	// Expected as array of int
+	Actual:				ARRAY [*] OF INT;	// Actual as array of int
+END_VAR                                  
+VAR_INPUT                                
+	Message:			STRING(255);      // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_LINT" Id="{0d93c8a1-7c4b-0956-2b30-6179a3b741d1}">
+    <Method Name="M_Equals_Array_LINT" Id="{d3908072-8108-068b-278f-3270abe1ec00}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF LINT;
-	Actual:				ARRAY [*] OF LINT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF LINT;	// Expected as array of lint
+	Actual:				ARRAY [*] OF LINT;	// Actual as array of lint
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);       // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_LREAL" Id="{c890f23a-c001-0830-08fe-2e72c0e89957}">
+    <Method Name="M_Equals_Array_LREAL" Id="{774d23e5-1a54-0df4-0ca6-9307963084b9}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LREAL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF LREAL;
-	Actual:				ARRAY [*] OF LREAL;
-END_VAR
-VAR_INPUT
-	Tolerance:			LREAL;
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF LREAL;	// Expected as array of lreal
+	Actual:				ARRAY [*] OF LREAL;	// Actual as array of lreal
+END_VAR                                    
+VAR_INPUT                                  
+	Tolerance:			LREAL;              // Tolerance as lreal
+	Message:			STRING(255);		// Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Array_REAL" Id="{51e9b12b-2a2b-0916-1b93-631a5e32e803}">
+    <Method Name="M_Equals_Array_REAL" Id="{a9b073a6-63b4-0f7f-23a2-28f68111f7aa}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_REAL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF REAL;
-	Actual:				ARRAY [*] OF REAL;
-END_VAR
-VAR_INPUT
-	Tolerance:			REAL;
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF REAL;	// Expected as array of real
+	Actual:				ARRAY [*] OF REAL;	// Actual as array of real
+END_VAR                                   
+VAR_INPUT                                 
+	Tolerance:			REAL;             	// Tolerance as real
+	Message:			STRING(255);      	// Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_BOOL" Id="{20ff750d-b30d-4f5f-8423-4ded171d3cd6}">
+    <Method Name="M_Equals_BOOL" Id="{45693d85-d364-042e-341f-db4b3dc339e2}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BOOL : I_Assert
 VAR_INPUT
-	Expected:			BOOL;
-    Actual:				BOOL;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Expected:			BOOL;				// Expected as bool
+    Actual:				BOOL;           	// Actual as bool
+	Message:			STRING(255);    	// Message as string
+END_VAR                                                                       	]]></Declaration>
     </Method>
-    <Method Name="M_Equals_BYTE" Id="{5bd1529d-7a07-437d-997b-293b93a808f6}">
+    <Method Name="M_Equals_BYTE" Id="{3780a050-48c6-03a3-36df-dd8a2cb5b373}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BYTE : I_Assert
 VAR_INPUT
-	Expected:			BYTE;
-    Actual:				BYTE;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			BYTE;			// Expected as byte
+    Actual:				BYTE;           // Actual as byte
+	Message:			STRING(255);    // Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_DINT" Id="{90c9be2b-042a-481e-8db3-ec5c48ce047f}">
+    <Method Name="M_Equals_DINT" Id="{fe4ac3e1-068a-0b6b-3e20-a01bb4c2038b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_DINT : I_Assert
 VAR_INPUT
-	Expected:			DINT;
-    Actual:				DINT;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			DINT;			// Expected as dint
+    Actual:				DINT;           // Actual as dint
+	Message:			STRING(255);    // Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_INT" Id="{00f5ca25-961e-40f4-a702-d6bba94686af}">
+    <Method Name="M_Equals_INT" Id="{eda99ceb-4d13-04cc-1865-e05193c0c82b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_INT : I_Assert
 VAR_INPUT
-	Expected:			INT;
-    Actual:				INT;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			INT;			// Expected as int
+    Actual:				INT;            // Actual as int
+	Message:			STRING(255);    // Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_LINT" Id="{ef90d0f1-9155-4c59-bb8c-00dc044423bf}">
+    <Method Name="M_Equals_LINT" Id="{fda089c2-447e-0b05-280f-2c291d6a88ba}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_LINT : I_Assert
 VAR_INPUT
-	Expected:			LINT;
-    Actual:				LINT;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			LINT;			// Expected as lint
+    Actual:				LINT;           // Actual as lint
+	Message:			STRING(255);    // Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_LREAL" Id="{1db37392-f9e3-4e3e-a14c-8919e2dcb561}">
+    <Method Name="M_Equals_LREAL" Id="{40c6587a-8f63-0780-09c7-8afdaca5a613}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_LREAL : I_Assert
 VAR_INPUT
-	Expected:			LREAL;
-    Actual:				LREAL;
-	Tolerance:			LREAL;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			LREAL;				// Expected as lreal
+    Actual:				LREAL;              // Actual as lreal
+	Tolerance:			LREAL;             	// Tolerance as lreal         
+	Message:			STRING(255);		// Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_REAL" Id="{e82016a2-5c9d-4289-a11c-c43e561fe18a}">
+    <Method Name="M_Equals_REAL" Id="{0e1491d4-1734-083b-3aa8-c32a38083f95}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_REAL : I_Assert
 VAR_INPUT
-	Expected:			REAL;
-    Actual:				REAL;
-	Tolerance:			REAL;
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			REAL;			// Expected as real
+    Actual:				REAL;           // Actual as real
+	Tolerance:			REAL;           // Tolerance as real    
+	Message:			STRING(255);    // Message as string
+END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_STRING" Id="{3f101efa-6f27-4e2c-bb04-f19ede1e56d0}">
+    <Method Name="M_Equals_STRING" Id="{69a0d009-c862-0a94-0105-576a01034679}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_STRING : I_Assert
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
-	Message:			STRING(255);
-END_VAR
-]]></Declaration>
+	Expected:			STRING(255);		// Expected as string
+    Actual:				STRING(255);        // Actual as string
+	Message:			STRING(255);      	// Message as string  
+END_VAR                                  ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_TIME" Id="{51eaec81-f77a-05ec-2de9-7753f46c3831}">
+    <Method Name="M_Equals_TIME" Id="{cc38e39e-83b0-0834-2cd1-f45e0dc3eb24}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_TIME : I_Assert
 VAR_INPUT
-	Expected:			TIME;
-    Actual:				TIME;
-	Tolerance:			TIME;
-	Message:			STRING(255);
+	Expected:			TIME;				// Expected as time
+    Actual:				TIME;               // Actual as time
+	Tolerance:			TIME;               // Tolerance as time    
+	Message:			STRING(255);        // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_UDINT" Id="{6aa1b163-41e1-0d51-0448-99c33df4fd9b}">
+    <Method Name="M_Equals_UDINT" Id="{804b3179-3ca4-0fb7-3ddf-9bb74b342681}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_UDINT : I_Assert
 VAR_INPUT
-	Expected:			UDINT;
-    Actual:				UDINT;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Expected:			UDINT;			// Expected as udint
+    Actual:				UDINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_UINT" Id="{a4e93fdd-92e5-0569-2645-43b3d23c0b99}">
+    <Method Name="M_Equals_UINT" Id="{b050c1ec-67cb-0384-3394-17ab2643343f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_UINT : I_Assert
 VAR_INPUT
-	Expected:			UINT;
-    Actual:				UINT;
-	Message:			STRING(255);
+	Expected:			UINT;			// Expected as uint
+    Actual:				UINT;           // Actual as uint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_ULINT" Id="{1715857e-4c84-0484-0b94-b46c21ae7819}">
+    <Method Name="M_Equals_ULINT" Id="{512e5a0c-9062-06ac-2524-bd84cdbb1966}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ULINT : I_Assert
 VAR_INPUT
-	Expected:			ULINT;
-    Actual:				ULINT;
-	Message:			STRING(255);
+	Expected:			ULINT;			// Expected as ulint
+    Actual:				ULINT;          // Actual as ulint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Equals_WSTRING" Id="{56bdcbed-b45e-08e5-3329-e3361274412b}">
+    <Method Name="M_Equals_WSTRING" Id="{b67576ba-db17-0aaf-103d-b9281476ad75}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
 VAR_INPUT
-	Expected:			WSTRING(255);
-    Actual:				WSTRING(255);
-	Message:			STRING(255);
+	Expected:			WSTRING(255);		// Expected as wstring
+    Actual:				WSTRING(255);       // Actual as wstring
+	Message:			STRING(255);        // Message as string
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Error" Id="{e857968b-1a0e-0e58-391f-bc7835d9faa3}">
+    <Method Name="M_Error" Id="{f0e7a2f9-c312-0edc-2379-fc7ed26dd080}">
       <Declaration><![CDATA[METHOD PUBLIC M_Error
 VAR_INPUT
 	Data:				STRING(255);
@@ -203,39 +196,48 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Failure" Id="{9318ab5d-6ac3-0a7e-34e9-3d149bb041e1}">
+    <Method Name="M_Failure" Id="{5c8874c8-05e1-0138-33cf-96b3e5819e33}">
       <Declaration><![CDATA[METHOD PUBLIC M_Failure
 VAR_INPUT
 	Data:				STRING(255);
 	Message:			STRING(255);
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_IsTRUE" Id="{930bad75-ec80-0015-1b94-8704388ab0c3}">
-      <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
-VAR_INPUT
-    Actual:				BOOL;
-	Message:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="M_Passed" Id="{0375d3f9-48c7-0d90-07e0-1dda2904cba0}">
+    <Method Name="M_IsTRUE" Id="{64b3dfa0-987d-02e1-2a0b-4a9910ccacd1}">
+      <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
+VAR_INPUT
+    Actual:				BOOL;				// Actual as bool
+	Message:			STRING(255);        // Message as string
+END_VAR                                     
+                                            
+                                            ]]></Declaration>
+    </Method>
+    <Method Name="M_Passed" Id="{3cc4e56e-196c-0c54-111d-ad42ac42925b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Passed
 VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Skip" Id="{ef0781cb-34ac-0549-002f-05960e0559d5}">
+    <Method Name="M_Reset" Id="{0495facf-8e26-030d-2f21-8a670848ee29}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset : I_Assert
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Skip" Id="{853798c9-a88b-0930-1b0d-61cc51b72034}">
       <Declaration><![CDATA[METHOD PUBLIC M_Skip
 VAR_INPUT
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Message:			STRING(255);	// Message as string
+END_VAR
+]]></Declaration>
     </Method>
-    <Method Name="M_TcError" Id="{8b9d0d56-51be-00e5-1c44-3d5087833868}">
+    <Method Name="M_TcError" Id="{896ddf43-3bd6-0b81-29ca-ea752bcab5a7}">
       <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
 VAR_INPUT
-	nErrorId:			UDINT;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	ErrorId:			UDINT;			// ErrorId as UDINT
+	Message:			STRING(255);	// Message as string
+END_VAR
+]]></Declaration>
     </Method>
   </Itf>
 </TcPlcObject>

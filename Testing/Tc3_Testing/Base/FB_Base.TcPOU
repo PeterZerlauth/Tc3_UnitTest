@@ -150,7 +150,7 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[eRequest:= eState;
-M_Request:= TRUE;]]></ST>
+M_Request:= this^.eState = eRequest;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Starting" Id="{bc9486fc-909d-0efe-150c-a33931b8ee19}">

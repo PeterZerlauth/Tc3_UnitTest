@@ -32,11 +32,11 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_BOOL" Id="{f134011c-e659-0f0f-1451-e11b2d1801b6}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF BYTE;
-	Actual:				ARRAY [*] OF BYTE;
+	Expected:			ARRAY [*] OF BOOL;		// Expected as array of bool
+	Actual:				ARRAY [*] OF BOOL;		// Actual as array of bool
 END_VAR
 VAR_INPUT
-	Message:			STRING(255);
+	Message:			STRING(255);			// Message as string
 END_VAR
 
 VAR
@@ -56,9 +56,9 @@ ELSE
 			fbBuilder.M_Append('Index = "');
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
-			fbBuilder.M_Append(BYTE_TO_STRING(Expected[nIndex]));
+			fbBuilder.M_Append(BOOL_TO_STRING(Expected[nIndex]));
 			fbBuilder.M_Append('" Actual = "');
-			fbBuilder.M_Append(BYTE_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append(BOOL_TO_STRING(Actual[nIndex]));
 			fbBuilder.M_Append('"');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
@@ -71,11 +71,11 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_BYTE" Id="{12f09544-1af8-0ebe-07a7-8b9c32b9d2dc}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BYTE : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF BOOL;
-	Actual:				ARRAY [*] OF BOOL;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF BOOL;	// Expected as array of byte
+	Actual:				ARRAY [*] OF BOOL;	// Actual as array of byte
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);     	 // Message as string
 END_VAR
 
 VAR
@@ -110,11 +110,11 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_DINT" Id="{518ae4ab-060a-09e2-266f-8d59ac7249b8}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_DINT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF DINT;
-	Actual:				ARRAY [*] OF DINT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF DINT;	// Expected as array of dint
+	Actual:				ARRAY [*] OF DINT;	// Actual as array of dint
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);       // Message as string
 END_VAR
 
 VAR
@@ -149,11 +149,11 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_INT" Id="{6713325b-4c44-0e26-2bb7-5e725aa270d3}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_INT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF INT;
-	Actual:				ARRAY [*] OF INT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF INT;	// Expected as array of int
+	Actual:				ARRAY [*] OF INT;	// Actual as array of int
+END_VAR                                  
+VAR_INPUT                                
+	Message:			STRING(255);      // Message as string
 END_VAR
 
 VAR
@@ -188,11 +188,11 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_LINT" Id="{ad7b55f1-407d-0125-1100-b2f5a1a335ce}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF LINT;
-	Actual:				ARRAY [*] OF LINT;
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF LINT;	// Expected as array of lint
+	Actual:				ARRAY [*] OF LINT;	// Actual as array of lint
+END_VAR                                   
+VAR_INPUT                                 
+	Message:			STRING(255);       // Message as string
 END_VAR
 
 VAR
@@ -227,12 +227,12 @@ END_IF]]></ST>
     <Method Name="M_Equals_Array_LREAL" Id="{c66fd740-f5b0-0aea-32aa-9f9e8cd1f3c8}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LREAL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF LREAL;
-	Actual:				ARRAY [*] OF LREAL;
-END_VAR
-VAR_INPUT
-	Tolerance:			LREAL;
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF LREAL;	// Expected as array of lreal
+	Actual:				ARRAY [*] OF LREAL;	// Actual as array of lreal
+END_VAR                                    
+VAR_INPUT                                  
+	Tolerance:			LREAL;              // Tolerance as lreal
+	Message:			STRING(255);		// Message as string
 END_VAR
 
 VAR
@@ -268,12 +268,12 @@ END_IF
     <Method Name="M_Equals_Array_REAL" Id="{4fd08f76-ba10-092b-0f97-d99ee406f12f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_REAL : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF REAL;
-	Actual:				ARRAY [*] OF REAL;
-END_VAR
-VAR_INPUT
-	Tolerance:			REAL;
-	Message:			STRING(255);
+	Expected:			ARRAY [*] OF REAL;	// Expected as array of real
+	Actual:				ARRAY [*] OF REAL;	// Actual as array of real
+END_VAR                                   
+VAR_INPUT                                 
+	Tolerance:			REAL;             	// Tolerance as real
+	Message:			STRING(255);      	// Message as string
 END_VAR
 
 VAR
@@ -309,10 +309,10 @@ END_IF
     <Method Name="M_Equals_BOOL" Id="{a59ebe08-8964-0b2c-38a4-ac8145e6076b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BOOL : I_Assert
 VAR_INPUT
-	Expected:			BOOL;
-    Actual:				BOOL;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Expected:			BOOL;				// Expected as bool
+    Actual:				BOOL;           	// Actual as bool
+	Message:			STRING(255);    	// Message as string
+END_VAR                                                                       	]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF Expected = Actual THEN
@@ -332,9 +332,9 @@ M_Equals_BOOL:= THIS^;]]></ST>
     <Method Name="M_Equals_BYTE" Id="{2d0157fb-a7a4-0a24-2f21-b00692b22401}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_BYTE : I_Assert
 VAR_INPUT
-	Expected:			BYTE;
-    Actual:				BYTE;
-	Message:			STRING(255);
+	Expected:			BYTE;			// Expected as byte
+    Actual:				BYTE;           // Actual as byte
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -355,9 +355,9 @@ M_Equals_BYTE:= THIS^;]]></ST>
     <Method Name="M_Equals_DINT" Id="{472197bd-33d6-0fc3-0f19-0526022a1a63}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_DINT : I_Assert
 VAR_INPUT
-	Expected:			DINT;
-    Actual:				DINT;
-	Message:			STRING(255);
+	Expected:			DINT;			// Expected as dint
+    Actual:				DINT;           // Actual as dint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -379,9 +379,9 @@ M_Equals_DINT:= THIS^;
     <Method Name="M_Equals_INT" Id="{69d1cbc7-70c0-0cef-01a9-39c278d3ddf8}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_INT : I_Assert
 VAR_INPUT
-	Expected:			INT;
-    Actual:				INT;
-	Message:			STRING(255);
+	Expected:			INT;			// Expected as int
+    Actual:				INT;            // Actual as int
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -402,9 +402,9 @@ M_Equals_INT:= THIS^;]]></ST>
     <Method Name="M_Equals_LINT" Id="{a849c410-b14f-0b59-2551-ae0df6d9a14d}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_LINT : I_Assert
 VAR_INPUT
-	Expected:			LINT;
-    Actual:				LINT;
-	Message:			STRING(255);
+	Expected:			LINT;			// Expected as lint
+    Actual:				LINT;           // Actual as lint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -426,10 +426,10 @@ M_Equals_LINT:= THIS^;
     <Method Name="M_Equals_LREAL" Id="{56afa40f-43c1-0c87-2e3a-7092c4bb5d6b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_LREAL : I_Assert
 VAR_INPUT
-	Expected:			LREAL;
-    Actual:				LREAL;
-	Tolerance:			LREAL;
-	Message:			STRING(255);
+	Expected:			LREAL;				// Expected as lreal
+    Actual:				LREAL;              // Actual as lreal
+	Tolerance:			LREAL;             	// Tolerance as lreal         
+	Message:			STRING(255);		// Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -459,10 +459,10 @@ M_Equals_LREAL:= THIS^;
     <Method Name="M_Equals_REAL" Id="{d6abdbdc-3ed4-0597-3832-aa884ad8510e}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_REAL : I_Assert
 VAR_INPUT
-	Expected:			REAL;
-    Actual:				REAL;
-	Tolerance:			REAL;
-	Message:			STRING(255);
+	Expected:			REAL;			// Expected as real
+    Actual:				REAL;           // Actual as real
+	Tolerance:			REAL;           // Tolerance as real    
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -491,10 +491,10 @@ M_Equals_REAL:= THIS^;]]></ST>
     <Method Name="M_Equals_STRING" Id="{be4cf22a-d59c-479d-91df-27b8c49cf405}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_STRING : I_Assert
 VAR_INPUT
-	Expected:			STRING(255);
-    Actual:				STRING(255);
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Expected:			STRING(255);		// Expected as string
+    Actual:				STRING(255);        // Actual as string
+	Message:			STRING(255);      	// Message as string  
+END_VAR                                  ]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF Expected = Actual THEN
@@ -514,10 +514,10 @@ M_Equals_STRING:= THIS^;]]></ST>
     <Method Name="M_Equals_TIME" Id="{91b48555-653d-0553-104e-334d1e902474}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_TIME : I_Assert
 VAR_INPUT
-	Expected:			TIME;
-    Actual:				TIME;
-	Tolerance:			TIME;
-	Message:			STRING(255);
+	Expected:			TIME;				// Expected as time
+    Actual:				TIME;               // Actual as time
+	Tolerance:			TIME;               // Tolerance as time    
+	Message:			STRING(255);        // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -541,10 +541,10 @@ M_Equals_TIME:= THIS^;
     <Method Name="M_Equals_UDINT" Id="{dab23cde-89d2-0c20-3b51-ea863cfc23a2}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_UDINT : I_Assert
 VAR_INPUT
-	Expected:			UDINT;
-    Actual:				UDINT;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+	Expected:			UDINT;			// Expected as udint
+    Actual:				UDINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF Expected = Actual THEN
@@ -565,9 +565,9 @@ M_Equals_UDINT:= THIS^;
     <Method Name="M_Equals_UINT" Id="{d4264b4a-bfbe-0a03-22f6-a7578de8f804}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_UINT : I_Assert
 VAR_INPUT
-	Expected:			UINT;
-    Actual:				UINT;
-	Message:			STRING(255);
+	Expected:			UINT;			// Expected as uint
+    Actual:				UINT;           // Actual as uint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -588,9 +588,9 @@ M_Equals_UINT:= THIS^;]]></ST>
     <Method Name="M_Equals_ULINT" Id="{6a3deaae-41c3-057d-0ef8-285e9e3cbbcc}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_ULINT : I_Assert
 VAR_INPUT
-	Expected:			ULINT;
-    Actual:				ULINT;
-	Message:			STRING(255);
+	Expected:			ULINT;			// Expected as ulint
+    Actual:				ULINT;          // Actual as ulint
+	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -612,9 +612,9 @@ M_Equals_ULINT:= THIS^;
     <Method Name="M_Equals_WSTRING" Id="{d57eeb77-552a-03e8-31d9-648afdaf68b1}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
 VAR_INPUT
-	Expected:			WSTRING(255);
-    Actual:				WSTRING(255);
-	Message:			STRING(255);
+	Expected:			WSTRING(255);		// Expected as wstring
+    Actual:				WSTRING(255);       // Actual as wstring
+	Message:			STRING(255);        // Message as string
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
@@ -646,10 +646,6 @@ END_VAR
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
 	fbBuilder.M_Append(Data);	
-//	fbBuilder.M_Append('Expected = "');
-//	fbBuilder.M_Append(Expected);
-//	fbBuilder.M_Append('" Actual = "');
-//	fbBuilder.M_Append(Actual);
 	fbBuilder.M_Append('"</error>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
@@ -678,9 +674,11 @@ END_IF]]></ST>
     <Method Name="M_IsTRUE" Id="{ff21833d-ba1f-05de-0ce2-388ab8c48e28}">
       <Declaration><![CDATA[METHOD PUBLIC M_IsTRUE : I_Assert
 VAR_INPUT
-    Actual:				BOOL;
-	Message:			STRING(255);
-END_VAR]]></Declaration>
+    Actual:				BOOL;				// Actual as bool
+	Message:			STRING(255);        // Message as string
+END_VAR                                     
+                                            
+                                            ]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF Actual THEN
@@ -722,7 +720,7 @@ M_Reset:= THIS^;]]></ST>
     <Method Name="M_Skip" Id="{01e03b07-71f0-0cb8-3278-37acfad51370}">
       <Declaration><![CDATA[METHOD PUBLIC M_Skip
 VAR_INPUT
-	Message:			STRING(255);
+	Message:			STRING(255);	// Message as string
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -743,17 +741,17 @@ nSkipped:= nSkipped + 1;
     <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
       <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
 VAR_INPUT
-	nErrorId:			UDINT;
-	Message:			STRING(255);
+	ErrorId:			UDINT;			// ErrorId as UDINT
+	Message:			STRING(255);	// Message as string
 END_VAR
 VAR
-	eError:				E_AdsError:= nErrorId;
+	eError:				E_AdsError:= ErrorId;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 fbBuilder.M_Reset();
-IF nErrorID = E_AdsErr.NOERR THEN
+IF ErrorId = E_AdsErr.NOERR THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
@@ -1020,8 +1018,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="5" Count="0" />
       <LineId Id="20" Count="2" />
       <LineId Id="46" Count="0" />
-      <LineId Id="24" Count="2" />
-      <LineId Id="23" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="39" Count="0" />
       <LineId Id="27" Count="0" />
@@ -1066,10 +1062,7 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="25" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_TcError">
-      <LineId Id="7" Count="4" />
-      <LineId Id="31" Count="5" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="22" Count="0" />
+      <LineId Id="53" Count="12" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

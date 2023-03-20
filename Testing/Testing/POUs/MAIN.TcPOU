@@ -47,6 +47,7 @@ CASE fbTestsuite1.P_Testcase OF
 		// First test case
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
+		fbTestsuite1.P_Assert.M_Equals_Array_BOOL(
 //		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
 //		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
@@ -257,7 +258,9 @@ END_CASE
 	 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="1082" Count="180" />
+      <LineId Id="1082" Count="23" />
+      <LineId Id="1384" Count="0" />
+      <LineId Id="1106" Count="156" />
       <LineId Id="810" Count="0" />
       <LineId Id="1290" Count="5" />
       <LineId Id="1297" Count="0" />

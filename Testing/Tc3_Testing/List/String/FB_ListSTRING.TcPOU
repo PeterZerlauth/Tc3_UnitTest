@@ -146,7 +146,7 @@ IF nLength >= Position THEN
 	// new pointer
 	pList:= __NEW(POINTER TO STRING(255),DINT_TO_UDINT(SIZEOF(STRING(255)) * nLength));
 	// restore lower part
-	Memcpy(pList,pOldList, SIZEOF(POINTER TO ST_Assert) * DINT_TO_UDINT(Position));
+	Memcpy(pList,pOldList, SIZEOF(POINTER TO STRING(255)) * DINT_TO_UDINT(Position));
 	//pList[nPosition]:= iObject;
 	Memcpy(pList + (SIZEOF(STRING(255))*Position),pOldList + (SIZEOF(STRING(255))*(Position + 1)), SIZEOF(STRING(255)) * DINT_TO_UDINT(nLength - Position));
 	// delete old

@@ -9,6 +9,15 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="P_Logger" Id="{ed5121df-8a75-0b78-2403-edba980ee298}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Logger : I_Logger]]></Declaration>
+      <Get Name="Get" Id="{332f727d-4af8-0dcd-3c33-20e0c188cc99}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{48759934-cc6c-0535-18d0-64ac77c2d5c5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
     <Property Name="P_Parent" Id="{dec8515c-cb5f-06f1-34a8-4435601bd530}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
       <Get Name="Get" Id="{bf712599-e9a4-0d4b-2139-f66f32ed9d3c}">

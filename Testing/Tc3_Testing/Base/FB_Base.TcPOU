@@ -12,7 +12,6 @@ VAR
     {attribute 'noinit'}
     {attribute 'hide'} 
     sInstancePath:		STRING(255);
-	iLogger:			I_Logger;
 	eState: 			E_Base;
 	eRequest: 			E_Base;
 	nState: 			INT;
@@ -46,12 +45,6 @@ CASE eState OF
 		IF M_Starting() THEN
 			eState:= E_Base.Execute;
 			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Execute:
-					eState:= E_Base.Execute;
-					nState:= 0;
-			END_CASE
 		END_IF
 		
 	E_Base.Execute:
@@ -70,24 +63,12 @@ CASE eState OF
 		IF M_Stopping() THEN
 			eState:= E_Base.Stopped;
 			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Stopped:
-					eState:= E_Base.Stopped;
-					nState:= 0;
-			END_CASE
 		END_IF
 
 	E_Base.Aborting:
 		IF M_Aborting() THEN
 			eState:= E_Base.Aborted;
 			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Aborted:
-					eState:= E_Base.Aborted;
-					nState:= 0;
-			END_CASE
 		END_IF
 	
 	E_Base.Aborted:
@@ -189,25 +170,6 @@ END_VAR
         <ST><![CDATA[M_Stopping:= True;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Logger" Id="{aef4d745-013d-0a3b-0253-582cd57d2820}">
-      <Declaration><![CDATA[PROPERTY P_Logger : I_Logger]]></Declaration>
-      <Get Name="Get" Id="{31e7273c-1880-091a-0762-4e4366e8f5de}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_Logger:= iLogger;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{e906a9b5-7600-0ead-3e61-f93753beeb34}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[iLogger:= P_Logger;]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <Property Name="P_State" Id="{d9e0f669-bd46-078f-1943-fa0edc94c5ef}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_State : E_Base]]></Declaration>
       <Get Name="Get" Id="{0e5b7a2d-df5c-054a-30f6-0a2798994d9f}">
@@ -219,7 +181,10 @@ END_VAR]]></Declaration>
       </Get>
     </Property>
     <LineIds Name="FB_Base">
-      <LineId Id="232" Count="82" />
+      <LineId Id="232" Count="24" />
+      <LineId Id="263" Count="17" />
+      <LineId Id="287" Count="5" />
+      <LineId Id="299" Count="15" />
       <LineId Id="98" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Aborted">
@@ -254,12 +219,6 @@ END_VAR]]></Declaration>
     </LineIds>
     <LineIds Name="FB_Base.M_Stopping">
       <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.P_Logger.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.P_Logger.Set">
-      <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.P_State.Get">
       <LineId Id="2" Count="0" />

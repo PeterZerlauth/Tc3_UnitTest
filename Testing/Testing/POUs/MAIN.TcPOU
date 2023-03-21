@@ -8,7 +8,6 @@ VAR
 	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
 	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
 	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
-	fbTestsuite4:	FB_Testsuite;				// Testsuite	FB_Stopwatch
 //	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
 
 	nIndex: 		INT;						// Test-vars
@@ -17,9 +16,8 @@ VAR
 	fbFile:			FB_File;					// Test-vars	
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
-	fbStopwatch:	FB_Stopwatch;				// Test-vars
-	ARRAY1:			ARRAY [0..10] OF LREAL;
-	ARRAY2:			ARRAY [0..10] OF LREAL;
+//	ARRAY1:			ARRAY [0..10] OF LREAL;
+//	ARRAY2:			ARRAY [0..10] OF LREAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -29,7 +27,7 @@ fbTestsuites();
 IF bExecute THEN
 	bExecute:= FALSE;
 	// manual execute | override file path
-	fbTestsuites.P_FilePathName:= 'C:\report.xml';
+	fbTestsuites.P_FilePathName:= 'C:\temp\report.xml';
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 
@@ -37,7 +35,6 @@ END_IF
 fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuites.M_Add(fbTestsuite2);
 fbTestsuites.M_Add(fbTestsuite3);
-fbTestsuites.M_Add(fbTestsuite4);
 //fbTestsuites.M_Add(fbTestsuite5);
 {region "fbTestsuite1"}
 // Run
@@ -47,7 +44,6 @@ CASE fbTestsuite1.P_Testcase OF
 		// First test case
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
-		fbTestsuite1.P_Assert.M_Equals_Array_BOOL(
 //		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
 //		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
@@ -168,45 +164,8 @@ CASE fbTestsuite3.P_Testcase OF
 	
 END_CASE
 {endregion}
-{region "fbTestsuite4"}
-fbStopwatch();
-fbTestsuite4();
-CASE fbTestsuite4.P_Testcase OF
-	E_Testcase.Start:
-		fbTestsuite4.P_Assert.M_IsTRUE(NOT fbStopwatch.P_Running, 'fbStopwatch.P_Running');
-		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Start(), 'fbStopwatch.M_Start()');
-		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.P_Running, 'fbStopwatch.P_Running');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 1);
-	
-	1:
-		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Stop(), 'fbStopwatch.M_Stop()');
-		fbTestsuite4.P_Assert.M_IsTRUE(NOT fbStopwatch.P_Running, 'fbStopwatch.P_Running');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 2);
-	
-	2:
-		fbTestsuite4.P_Assert.M_IsTRUE(T#0S <> fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 3);
-		
-	3:
-		fbTestsuite4.P_Assert.M_IsTRUE(fbStopwatch.M_Reset(), 'fbStopwatch.M_Reset()');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', 4);
-		
-	4:
-		fbTestsuite4.P_Assert.M_IsTRUE(T#0S = fbStopwatch.P_Elapsed, 'fbStopwatch.P_Elapsed');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
-			 
-	5:
-//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite1, 'test');
-//		fbTestsuite4.P_Assert.M_Equals(fbTestsuite1, fbTestsuite2, 'error');
-//	 	ARRAY1[10]:= 33.3;
-//	 	fbTestsuite4.P_Assert.M_Equals_Array(ARRAY1,ARRAY2, AnyType.TYPE_REAL , 0 , 'Array test');
-		fbTestsuite4.M_Testcase('FB_Stopwatch', T#1S, '', '', E_Testcase.Done);
-	
-	E_Testcase.Done:;
-		 
-END_CASE
-{endregion}
-{region "fbTestsuite1"}
+
+{region "fbTestsuite5"}
 // Run
 //fbTestsuite5();
 //CASE fbTestsuite5.P_Testcase OF
@@ -254,13 +213,11 @@ END_CASE
 //	E_Testcase.Done:;
 		 
 //END_CASE	 
-{endregion}
-	 ]]></ST>
+{endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="1082" Count="23" />
-      <LineId Id="1384" Count="0" />
-      <LineId Id="1106" Count="156" />
+      <LineId Id="1082" Count="13" />
+      <LineId Id="1097" Count="128" />
       <LineId Id="810" Count="0" />
       <LineId Id="1290" Count="5" />
       <LineId Id="1297" Count="0" />
@@ -292,7 +249,7 @@ END_CASE
       <LineId Id="1358" Count="0" />
       <LineId Id="1362" Count="0" />
       <LineId Id="1302" Count="1" />
-      <LineId Id="1286" Count="2" />
+      <LineId Id="1286" Count="1" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Object" Id="{bc419bc7-e982-01ff-324b-3fdbe45e59c1}">
+    <Declaration><![CDATA[INTERFACE I_Object EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+  </Itf>
+</TcPlcObject>

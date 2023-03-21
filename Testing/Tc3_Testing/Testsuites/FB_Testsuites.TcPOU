@@ -15,7 +15,7 @@ VAR
 	fbFile:				FB_File;
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
-	fbListTestsuite:	FB_ListTestsuite;
+	fbListTestsuite:	FB_ListObject;
 	fbLogger:			FB_TcLogger;
 END_VAR]]></Declaration>
     <Implementation>
@@ -30,38 +30,32 @@ END_VAR
       <Implementation>
         <ST><![CDATA[fbListTestsuite.M_Add(Testsuite);
 Testsuite.P_Parent:= THIS^;
-Testsuite.P_Logger:= P_Logger;]]></ST>
+Testsuite.P_Logger:= fbLogger;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Execute" Id="{9f9f5ca1-441c-0f29-0c6d-16c04b2958a4}">
       <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL
 VAR_INPUT
 END_VAR
-
 VAR
-	nIndex: DINT;
+	iTestsuite:		I_Testsuite;
+	nIndex: 		DINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Execute:= TRUE;
 fbTimeout(IN:= TRUE);
 WHILE nIndex < fbListTestsuite.P_Length DO
-	M_Execute:= M_Execute AND (fbListTestsuite.M_Get(nIndex).P_State = E_Base.Stopped);
+	IF __QUERYINTERFACE(fbListTestsuite.M_Get(nIndex), iTestsuite) THEN
+		M_Execute:= M_Execute AND (iTestsuite.P_State = E_Base.Stopped);
+	END_IF
 	nIndex:= nIndex + 1;
 END_WHILE
 IF M_Execute THEN
 	stTestsuites.fTime:= TIME_TO_LREAL(fbTimeout.ET) / 1000.0;
 	fbTimeout(IN:= FALSE);
-END_IF]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Init" Id="{66605a0c-2267-0b37-061c-c893e811d94f}">
-      <Declaration><![CDATA[METHOD PROTECTED M_Init : BOOL
-VAR_INPUT
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[iLogger:= fbLogger;
-M_Init:= True;]]></ST>
+END_IF
+
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Starting" Id="{a8b1fe70-9112-024f-0be9-355ea21512f0}">
@@ -70,6 +64,7 @@ VAR_INPUT
 END_VAR
 
 VAR
+	iTestsuite:		I_Testsuite;
 	nIndex: DINT;
 END_VAR]]></Declaration>
       <Implementation>
@@ -91,7 +86,9 @@ END_VAR]]></Declaration>
 	
 	1:
 		WHILE nIndex < fbListTestsuite.P_Length DO
-			fbListTestsuite.M_Get(nIndex).M_Request(E_Base.Starting);
+			IF __QUERYINTERFACE(fbListTestsuite.M_Get(nIndex), iTestsuite) THEN
+				iTestsuite.M_Request(E_Base.Starting);
+			END_IF
 			nIndex:= nIndex + 1;
 		END_WHILE
 		nState:= 2;
@@ -150,14 +147,12 @@ END_VAR]]></Declaration>
 		fbBuilder.M_Append(' assertions= ');
 		fbBuilder.M_AppendINT(stTestsuites.nAssertions);
 		fbBuilder.M_ToAny(sValue);
-		IF iLogger <> 0 THEN
-			IF stTestsuites.nFailures <> 0 OR_ELSE stTestsuites.nErrors <> 0 THEN
-				iLogger.M_Error(sValue);
-			ELSIF stTestsuites.nSkipped <> 0 THEN
-				iLogger.M_Warning(sValue);
-			ELSE
-				iLogger.M_Info(sValue);
-			END_IF
+		IF stTestsuites.nFailures <> 0 OR_ELSE stTestsuites.nErrors <> 0 THEN
+			fbLogger.M_Error(sValue);
+		ELSIF stTestsuites.nSkipped <> 0 THEN
+			fbLogger.M_Warning(sValue);
+		ELSE
+			fbLogger.M_Info(sValue);
 		END_IF
 		nState:= 2;
 			
@@ -237,14 +232,16 @@ END_VAR
     <LineIds Name="FB_Testsuites.M_Execute">
       <LineId Id="12" Count="0" />
       <LineId Id="19" Count="0" />
-      <LineId Id="6" Count="2" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="1" />
+      <LineId Id="8" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="20" Count="1" />
       <LineId Id="23" Count="0" />
       <LineId Id="22" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.M_Init">
-      <LineId Id="5" Count="1" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="35" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.M_Starting">
       <LineId Id="34" Count="0" />
@@ -261,7 +258,8 @@ END_VAR
       <LineId Id="42" Count="1" />
       <LineId Id="56" Count="0" />
       <LineId Id="58" Count="0" />
-      <LineId Id="65" Count="0" />
+      <LineId Id="131" Count="1" />
+      <LineId Id="130" Count="0" />
       <LineId Id="59" Count="1" />
       <LineId Id="68" Count="0" />
       <LineId Id="70" Count="0" />
@@ -299,12 +297,11 @@ END_VAR
       <LineId Id="248" Count="5" />
       <LineId Id="247" Count="0" />
       <LineId Id="254" Count="0" />
-      <LineId Id="260" Count="1" />
+      <LineId Id="260" Count="0" />
       <LineId Id="264" Count="2" />
       <LineId Id="271" Count="1" />
       <LineId Id="268" Count="0" />
       <LineId Id="267" Count="0" />
-      <LineId Id="262" Count="0" />
       <LineId Id="257" Count="0" />
       <LineId Id="244" Count="0" />
       <LineId Id="211" Count="0" />

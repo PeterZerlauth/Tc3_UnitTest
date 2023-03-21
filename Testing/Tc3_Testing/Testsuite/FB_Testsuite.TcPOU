@@ -18,6 +18,7 @@ VAR
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbAssert:			FB_Assert;
+	iLogger:			I_Logger;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -262,6 +263,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="P_Logger" Id="{389579cb-377c-0600-1342-01af8803477a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Logger : I_Logger]]></Declaration>
+      <Get Name="Get" Id="{296567e7-21a5-0164-1f56-62cb7073a610}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Logger:= iLogger;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{5fd7c513-137f-09bd-08a8-49968e32f92a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[iLogger:= P_Logger;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
     <Property Name="P_Parent" Id="{26b3c1be-b48f-0a73-3f11-669666d67824}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
       <Get Name="Get" Id="{cbeb0dff-5be2-0eeb-3c4b-d2308bd2f226}">
@@ -413,6 +433,12 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_List.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Logger.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Logger.Set">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Parent.Get">

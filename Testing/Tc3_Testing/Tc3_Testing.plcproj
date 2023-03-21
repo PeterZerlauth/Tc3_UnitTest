@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.0.19</ProjectVersion>
+    <ProjectVersion>0.0.0.20</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -51,9 +51,6 @@
     <Compile Include="Assert\I_Assert.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assert\ST_Assert.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Base\E_Base.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +64,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Base\I_Base.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\Object\I_Object.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\String\FB_StringBuilder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\String\I_StringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger\E_LogLevel.TcDUT">
@@ -84,18 +90,6 @@
     <Compile Include="Logger\ST_Logger.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Profiler\FB_Profiler.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Stopwatch\FB_Stopwatch.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="String\FB_StringBuilder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="String\I_StringBuilder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="File\FB_File.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -108,10 +102,10 @@
     <Compile Include="List\String\I_ListSTRING.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\Testsuite\FB_ListTestsuite.TcPOU">
+    <Compile Include="List\Object\FB_ListObject.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="List\Testsuite\I_ListTestsuite.TcIO">
+    <Compile Include="List\Object\I_ListObject.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testcase\E_Testcase.TcDUT">
@@ -145,11 +139,8 @@
     <Folder Include="File" />
     <Folder Include="List" />
     <Folder Include="List\String" />
-    <Folder Include="List\Testsuite" />
+    <Folder Include="List\Object" />
     <Folder Include="Logger" />
-    <Folder Include="Profiler" />
-    <Folder Include="Stopwatch" />
-    <Folder Include="String" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />
@@ -188,9 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <SubObject Include="FB_Assert.M_Passed" />
-    <SubObject Include="I_StringBuilder.M_AppendBOOL" />
-    <SubObject Include="I_StringBuilder.M_AppendINT" />
-    <SubObject Include="I_StringBuilder.M_AppendREAL" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Tc3_Testing.tmc">
@@ -217,7 +205,62 @@
             <v>Rules</v>
             <o>
               <v n="Name">"Rules"</v>
-              <d n="SubKeys" t="Hashtable" />
+              <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+                <v>167</v>
+                <o>
+                  <v n="Name">"167"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>4</v>
+                <o>
+                  <v n="Name">"4"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>33</v>
+                <o>
+                  <v n="Name">"33"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>6</v>
+                <o>
+                  <v n="Name">"6"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+                <v>27</v>
+                <o>
+                  <v n="Name">"27"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>False</v>
+                  </d>
+                </o>
+                <v>28</v>
+                <o>
+                  <v n="Name">"28"</v>
+                  <d n="SubKeys" t="Hashtable" />
+                  <d n="Values" t="Hashtable" ckt="String" cvt="Boolean">
+                    <v>bActive</v>
+                    <v>True</v>
+                  </d>
+                </o>
+              </d>
               <d n="Values" t="Hashtable" />
             </o>
           </d>
@@ -243,6 +286,7 @@
     </o>
         </Data>
         <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
           <Type n="Hashtable">System.Collections.Hashtable</Type>
           <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
           <Type n="String">System.String</Type>

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <POU Name="FB_ListTestsuite" Id="{80a15822-49de-454f-b0fc-12851675b870}" SpecialFunc="None">
+  <POU Name="FB_ListObject" Id="{80a15822-49de-454f-b0fc-12851675b870}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'} 
-FUNCTION_BLOCK PUBLIC FB_ListTestsuite IMPLEMENTS I_ListTestsuite
+FUNCTION_BLOCK PUBLIC FB_ListObject IMPLEMENTS I_ListObject
 VAR
-	pList: 			POINTER TO I_Testsuite;
+	pList: 			POINTER TO I_Object;
 	nLength:		DINT;
-	aList:			POINTER TO POINTER TO ARRAY [0..100] OF I_Testsuite:=ADR(pList);
+	aList:			POINTER TO POINTER TO ARRAY [0..100] OF I_Object:=ADR(pList);
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -25,29 +25,29 @@ END_VAR
     <Method Name="M_Add" Id="{a38c7fef-d96a-4183-97fc-f0e5fdcf0ccf}">
       <Declaration><![CDATA[METHOD M_Add : BOOL
 VAR_INPUT
-	Testsuite: 	I_Testsuite;
+	Object: 	I_Object;
 END_VAR
 VAR
-	pOldList: 	POINTER TO I_Testsuite;
+	pOldList: 	POINTER TO I_Object;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Testsuite <> 0 THEN
+        <ST><![CDATA[IF Object <> 0 THEN
 	// First Item
 	IF pList = 0 THEN
 		nLength:= nLength + 1;
-		pList:= __NEW(POINTER TO I_Testsuite,DINT_TO_UDINT(nLength));
+		pList:= __NEW(POINTER TO I_Object,DINT_TO_UDINT(nLength));
 	ELSE
 		// Item already in List
-		IF M_Search(Testsuite) = -1 THEN
+		IF M_Search(Object) = -1 THEN
 			// backup 
 			pOldList:= pList;
 			// new Length
 			nLength:= nLength + 1;
 			// new pointer
-			pList:= __NEW(POINTER TO I_Testsuite,DINT_TO_UDINT(nLength));
+			pList:= __NEW(POINTER TO I_Object,DINT_TO_UDINT(nLength));
 			// restore
-			Memcpy(pList,pOldList, SIZEOF(POINTER TO I_Testsuite)*DINT_TO_UDINT(nLength -1));
+			Memcpy(pList,pOldList, SIZEOF(POINTER TO I_Object)*DINT_TO_UDINT(nLength -1));
 			// delete old
 			__DELETE(pOldList);
 		ELSE
@@ -56,7 +56,7 @@ END_VAR
 		END_IF
 	END_IF
 	// add new Object
-	pList[nLength-1]:= Testsuite;
+	pList[nLength-1]:= Object;
 	M_Add:= TRUE;
 ELSE
 	M_Add:= FALSE;	
@@ -74,7 +74,7 @@ END_IF]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Get" Id="{d9624459-7fd8-4784-aea6-5c773f6a64a0}">
-      <Declaration><![CDATA[METHOD M_Get : I_Testsuite
+      <Declaration><![CDATA[METHOD M_Get : I_Object
 VAR_INPUT
 	Index: 	DINT;
 END_VAR
@@ -88,7 +88,7 @@ END_IF]]></ST>
     <Method Name="M_Index" Id="{a8754c07-7f0e-4184-834d-318ea0557896}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
-	Testsuite: 	I_Testsuite;
+	Object: 	I_Object;
 END_VAR
 VAR
 	nIndex: 	DINT;
@@ -97,7 +97,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Index := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex] = Testsuite) THEN
+    IF (pList[nIndex] = Object) THEN
         M_Index := nIndex;
         RETURN;
     END_IF
@@ -109,29 +109,29 @@ END_WHILE
     <Method Name="M_Remove" Id="{e3d569c0-1249-4bbc-9b3c-c9d8221349af}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
-	Testsuite: 			I_Testsuite;
+	Object: 	I_Object;
 END_VAR
 VAR
-	pOldList:			POINTER TO I_Testsuite;
+	pOldList:			POINTER TO I_Object;
 	nPosition: 			DINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Testsuite <> 0 THEN
+        <ST><![CDATA[IF Object <> 0 THEN
 	// First Item
 	IF nLength >= 0 THEN
 		// Item already in List
-		nPosition:= M_Search(Testsuite);
+		nPosition:= M_Search(Object);
 		IF nPosition <> -1 THEN
 			// backup 
 			pOldList:= pList;
 			// new Length
 			nLength:= nLength -1;
 			// new pointer
-			pList:= __NEW(POINTER TO I_Testsuite,DINT_TO_UDINT(nLength));
+			pList:= __NEW(POINTER TO I_Object,DINT_TO_UDINT(nLength));
 			// restore lower part
-			Memcpy(pList,pOldList, SIZEOF(POINTER TO I_Testsuite) * DINT_TO_UDINT(nPosition));
+			Memcpy(pList,pOldList, SIZEOF(POINTER TO I_Object) * DINT_TO_UDINT(nPosition));
 			//pList[nPosition]:= iObject;
-			Memcpy(pList + (SIZEOF(POINTER TO I_Testsuite)*nPosition),pOldList + (SIZEOF(POINTER TO I_Testsuite)*(nPosition + 1)), SIZEOF(POINTER TO I_Testsuite) * DINT_TO_UDINT(nLength - nPosition));
+			Memcpy(pList + (SIZEOF(POINTER TO I_Object)*nPosition),pOldList + (SIZEOF(POINTER TO I_Object)*(nPosition + 1)), SIZEOF(POINTER TO I_Object) * DINT_TO_UDINT(nLength - nPosition));
 			// delete old
 			__DELETE(pOldList);
 		ELSE
@@ -151,7 +151,7 @@ END_IF]]></ST>
     <Method Name="M_Search" Id="{b4574359-c512-4073-955e-3a3fc1e43b2b}">
       <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
-	Testsuite: 	I_Testsuite;
+	Object: 	I_Object;
 END_VAR
 VAR
 	nIndex: 	UINT;
@@ -160,7 +160,7 @@ END_VAR]]></Declaration>
         <ST><![CDATA[// Object already in List
 M_Search := -1;
 WHILE nIndex < nLength DO
-    IF (pList[nIndex] = Testsuite) THEN
+    IF (pList[nIndex] = Object) THEN
         M_Search := nIndex;
         RETURN;
     END_IF
@@ -181,37 +181,37 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_ListTestsuite">
+    <LineIds Name="FB_ListObject">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.FB_exit">
+    <LineIds Name="FB_ListObject.FB_exit">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Add">
-      <LineId Id="87" Count="27" />
+    <LineIds Name="FB_ListObject.M_Add">
+      <LineId Id="129" Count="27" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Clear">
+    <LineIds Name="FB_ListObject.M_Clear">
       <LineId Id="3" Count="2" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Get">
+    <LineIds Name="FB_ListObject.M_Get">
       <LineId Id="13" Count="1" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Index">
-      <LineId Id="45" Count="8" />
+    <LineIds Name="FB_ListObject.M_Index">
+      <LineId Id="66" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Remove">
-      <LineId Id="89" Count="28" />
+    <LineIds Name="FB_ListObject.M_Remove">
+      <LineId Id="132" Count="28" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.M_Search">
-      <LineId Id="45" Count="8" />
+    <LineIds Name="FB_ListObject.M_Search">
+      <LineId Id="66" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListTestsuite.P_Length.Get">
+    <LineIds Name="FB_ListObject.P_Length.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

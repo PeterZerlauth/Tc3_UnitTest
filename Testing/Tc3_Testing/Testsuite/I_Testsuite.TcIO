@@ -3,6 +3,15 @@
   <Itf Name="I_Testsuite" Id="{be1b8503-88c7-00d0-316f-5b2753f7b610}">
     <Declaration><![CDATA[INTERFACE I_Testsuite EXTENDS I_Base
 ]]></Declaration>
+    <Property Name="P_File" Id="{a818bff5-ba3d-0c59-3d5e-9f25ce58cd33}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_File : String(255)]]></Declaration>
+      <Get Name="Get" Id="{cedd11f8-8c12-0ca0-3de4-d95b3ccb4746}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{4cc4cce7-b779-00b2-3ed3-bcd8149eb033}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
     <Property Name="P_List" Id="{8c44755e-2744-0f94-1f92-c5697833051a}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
       <Get Name="Get" Id="{1f7d7b47-83e0-07fc-1005-a59bd3ef5268}">

@@ -11,8 +11,8 @@ Start with my own simplified unit test lib
 - [x] Junit Xml format => done
 - [x] Twincat Error to FB_Assert => done
 - [x] FB_Assert.M_Skip(..)  = done
-- [ ] FB_Profiler => in Work
-- [ ] FB_Stoppwatch => in Work
+- [x] FB_Assert Array support
+- [ ] FB_Stoppwatch => open
 
 
 ![grafik](https://user-images.githubusercontent.com/48495545/224820175-c4a4e19d-6121-4f63-82c7-0de1a41552c8.png)

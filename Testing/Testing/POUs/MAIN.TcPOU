@@ -16,8 +16,10 @@ VAR
 	fbFile:			FB_File;					// Test-vars	
 	fbList:			FB_ListSTRING;				// Test-vars
 	fbBuilder:		FB_StringBuilder;			// Test-vars
-//	ARRAY1:			ARRAY [0..10] OF LREAL;
-//	ARRAY2:			ARRAY [0..10] OF LREAL;
+	ARRAY1:			ARRAY [0..10] OF LREAL;
+	ARRAY2:			ARRAY [0..10] OF LREAL;
+	ARRAY3:			ARRAY [0..10] OF REAL;
+	ARRAY4:			ARRAY [0..10] OF REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -165,9 +167,10 @@ CASE fbTestsuite3.P_Testcase OF
 END_CASE
 {endregion}
 
-{region "fbTestsuite5"}
-// Run
+//{region "fbTestsuite5"}
+//// Run
 //fbTestsuite5();
+//fbTestsuite5.P_File:= 'FB_Assert';
 //CASE fbTestsuite5.P_Testcase OF
 //	E_Testcase.Start:
 //		// First test case
@@ -204,22 +207,32 @@ END_CASE
 //		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
 //		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
 //		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 7);
-	
+			 
 //	7:
+		
+//		fbTestsuite5.P_Assert.M_TcError( E_AdsErr.CLIENT_ERROR, 'E_AdsErr');
+//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 8);
+	
+//	8:
 //		ARRAY2[4]:= 3.14159;
-//		fbTestsuite5.P_Assert.M_Equals_Array_LREAL(ARRAY1, ARRAY2, 0.0, 'M_Equals_STRING');
+//		ARRAY4[5]:= 1.0;
+//		fbTestsuite5.P_Assert.M_Equals_Array_LREAL(ARRAY1, ARRAY2, 0.0, 'M_Equals_Array_LREAL');
+//		fbTestsuite5.P_Assert.M_Equals_Array_REAL(ARRAY3, ARRAY4, 0.99, 'M_Equals_Array_REAL');
+//		fbTestsuite5.P_Assert.M_Equals(ARRAY1, ARRAY2, 'M_Equals');
 //		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
 			 
 //	E_Testcase.Done:;
 		 
 //END_CASE	 
-{endregion}]]></ST>
+//{endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="1082" Count="13" />
       <LineId Id="1097" Count="128" />
       <LineId Id="810" Count="0" />
-      <LineId Id="1290" Count="5" />
+      <LineId Id="1290" Count="2" />
+      <LineId Id="1384" Count="0" />
+      <LineId Id="1293" Count="2" />
       <LineId Id="1297" Count="0" />
       <LineId Id="1289" Count="0" />
       <LineId Id="1308" Count="0" />
@@ -242,10 +255,18 @@ END_CASE
       <LineId Id="1332" Count="0" />
       <LineId Id="1334" Count="2" />
       <LineId Id="1333" Count="0" />
+      <LineId Id="1389" Count="0" />
+      <LineId Id="1391" Count="0" />
+      <LineId Id="1394" Count="0" />
+      <LineId Id="1392" Count="0" />
+      <LineId Id="1390" Count="0" />
       <LineId Id="1357" Count="0" />
       <LineId Id="1359" Count="0" />
       <LineId Id="1363" Count="0" />
+      <LineId Id="1388" Count="0" />
       <LineId Id="1360" Count="0" />
+      <LineId Id="1385" Count="0" />
+      <LineId Id="1382" Count="0" />
       <LineId Id="1358" Count="0" />
       <LineId Id="1362" Count="0" />
       <LineId Id="1302" Count="1" />

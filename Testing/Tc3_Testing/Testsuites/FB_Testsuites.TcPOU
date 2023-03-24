@@ -87,7 +87,7 @@ END_VAR]]></Declaration>
 	1:
 		WHILE nIndex < fbListTestsuite.P_Length DO
 			IF __QUERYINTERFACE(fbListTestsuite.M_Get(nIndex), iTestsuite) THEN
-				iTestsuite.M_Request(E_Base.Starting);
+				iTestsuite.M_Request(E_Base.Execute);
 			END_IF
 			nIndex:= nIndex + 1;
 		END_WHILE
@@ -260,7 +260,8 @@ END_VAR
       <LineId Id="58" Count="0" />
       <LineId Id="131" Count="1" />
       <LineId Id="130" Count="0" />
-      <LineId Id="59" Count="1" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="60" Count="0" />
       <LineId Id="68" Count="0" />
       <LineId Id="70" Count="0" />
       <LineId Id="66" Count="1" />

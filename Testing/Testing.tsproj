@@ -43,6 +43,11 @@
 	</DataTypes>
 	<Project ProjectGUID="{7CAAC051-3A3C-4F8D-9039-D7B6F336303B}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
+			<Licenses>
+				<Target BkhfOrder="none">
+					<ManualSelect>{9FD32FC8-0CF9-4C5B-95FB-F35423496A77}</ManualSelect>
+				</Target>
+			</Licenses>
 			<Tasks>
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
@@ -63,7 +68,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{CCF4393A-7054-BB9C-8A2A-4D4DA4B53E5A}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{A90CB55C-7490-3BFF-76D5-BFAFD3B60E30}">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

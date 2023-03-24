@@ -9,8 +9,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_Any" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Any : I_Assert
+    <Method Name="M_Equals" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
 VAR_INPUT
 	Expected:			ANY;		// Expected
 	Actual:				ANY;		// Actual
@@ -236,14 +236,6 @@ END_VAR
     <Method Name="M_Skip" Id="{853798c9-a88b-0930-1b0d-61cc51b72034}">
       <Declaration><![CDATA[METHOD PUBLIC M_Skip
 VAR_INPUT
-	Message:			STRING(255);	// Message as string
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_TcError" Id="{896ddf43-3bd6-0b81-29ca-ea752bcab5a7}">
-      <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
-VAR_INPUT
-	ErrorId:			UDINT;			// ErrorId as UDINT
 	Message:			STRING(255);	// Message as string
 END_VAR
 ]]></Declaration>

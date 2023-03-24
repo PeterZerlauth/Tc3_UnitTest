@@ -29,19 +29,19 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Equals_Any" Id="{d6bff329-0902-018a-3953-76060d68264d}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Any : I_Assert
+    <Method Name="M_Equals" Id="{d6bff329-0902-018a-3953-76060d68264d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
 VAR_INPUT
-	Expected:			ANY;		// Expected
-	Actual:				ANY;		// Actual
+	Expected:			ANY;					// Expected
+	Actual:				ANY;					// Actual
 	Message:			STRING(255);			// Message as string
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Equals_Any:= THIS^;
+        <ST><![CDATA[M_Equals:= THIS^;
 M_Assert();
 IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('" Expected size = "');
+	fbBuilder.M_Append('Expected size = "');
 	fbBuilder.M_Append(DINT_TO_STRING(Expected.diSize));
 	fbBuilder.M_Append('" Actual size = "');
 	fbBuilder.M_Append(DINT_TO_STRING(Actual.diSize));
@@ -50,7 +50,7 @@ IF Expected.diSize <> Actual.diSize THEN
 	RETURN;
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('" Expected typeclass = "');
+	fbBuilder.M_Append('Expected typeclass = "');
 	fbBuilder.M_Append(TO_STRING(Expected.TypeClass));
 	fbBuilder.M_Append('" Actual typeclass = "');
 	fbBuilder.M_Append(TO_STRING(Actual.TypeClass));
@@ -59,7 +59,7 @@ ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	RETURN;
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('" Expected <> Actual"');
+	fbBuilder.M_Append('Expected != Actual');
 	M_Failure(fbBuilder.M_ToString(), Message);
 	RETURN;
 ELSE
@@ -293,6 +293,8 @@ ELSE
 			fbBuilder.M_Append(LREAL_TO_STRING(Expected[nIndex]));
 			fbBuilder.M_Append('" Actual = "');
 			fbBuilder.M_Append(LREAL_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('" Tolerance = "');
+			fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
 			fbBuilder.M_Append('"');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
@@ -334,6 +336,8 @@ ELSE
 			fbBuilder.M_Append(REAL_TO_STRING(Expected[nIndex]));
 			fbBuilder.M_Append('" Actual = "');
 			fbBuilder.M_Append(REAL_TO_STRING(Actual[nIndex]));
+			fbBuilder.M_Append('" Tolerance = "');
+			fbBuilder.M_Append(REAL_TO_STRING(Tolerance));
 			fbBuilder.M_Append('"');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
@@ -684,7 +688,7 @@ END_VAR
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="ArithmeticError">');
 	fbBuilder.M_Append(Data);	
-	fbBuilder.M_Append('"</error>');
+	fbBuilder.M_Append('</error>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nErrors:= nErrors + 1;
 END_IF]]></ST>
@@ -703,7 +707,7 @@ END_VAR]]></Declaration>
 	fbBuilder.M_Append(Message);
 	fbBuilder.M_Append('" type="AssertionError">');
 	fbBuilder.M_Append(Data);
-	fbBuilder.M_Append('"</failure>');
+	fbBuilder.M_Append('</failure>');
 	fbList.M_Add(fbBuilder.M_ToString());
 	nFailures:= nFailures + 1;
 END_IF]]></ST>
@@ -722,7 +726,7 @@ END_VAR
 IF Actual THEN
 	M_Passed();
 ELSE
-	M_Failure('Actual = FALSE', Message);
+	M_Failure('Actual = "FALSE"', Message);
 	nFailures:= nFailures + 1;
 END_IF
 M_IsTRUE:= THIS^;]]></ST>
@@ -776,53 +780,14 @@ nSkipped:= nSkipped + 1;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_TcError" Id="{afc6c894-8d15-0f9c-362a-c323312b5010}">
-      <Declaration><![CDATA[METHOD PUBLIC M_TcError : I_Assert
-VAR_INPUT
-	ErrorId:			UDINT;			// ErrorId as UDINT
-	Message:			STRING(255);	// Message as string
-END_VAR
-VAR
-	eError:				E_AdsError:= ErrorId;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Assert();
-fbBuilder.M_Reset();
-IF ErrorId = E_AdsErr.NOERR THEN
-	M_Passed();
-ELSE
-	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
-	fbBuilder.M_Append(TO_STRING(E_AdsError.NOERR));
-	fbBuilder.M_Append('" Actual = "');
-	fbBuilder.M_Append(TO_STRING(eError));
-	fbBuilder.M_Append('"');
-	M_Failure(fbBuilder.M_ToString(), Message);
-END_IF
-M_TcError:= THIS^;]]></ST>
-      </Implementation>
-    </Method>
     <LineIds Name="FB_Assert">
       <LineId Id="9" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Assert">
       <LineId Id="7" Count="2" />
     </LineIds>
-    <LineIds Name="FB_Assert.M_Equals_Any">
-      <LineId Id="482" Count="2" />
-      <LineId Id="710" Count="0" />
-      <LineId Id="713" Count="5" />
-      <LineId Id="654" Count="0" />
-      <LineId Id="656" Count="0" />
-      <LineId Id="719" Count="6" />
-      <LineId Id="660" Count="1" />
-      <LineId Id="727" Count="0" />
-      <LineId Id="683" Count="0" />
-      <LineId Id="665" Count="0" />
-      <LineId Id="667" Count="0" />
-      <LineId Id="726" Count="0" />
-      <LineId Id="668" Count="0" />
+    <LineIds Name="FB_Assert.M_Equals">
+      <LineId Id="738" Count="26" />
       <LineId Id="655" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_Array_BOOL">
@@ -909,7 +874,9 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="662" Count="0" />
       <LineId Id="681" Count="2" />
       <LineId Id="687" Count="1" />
-      <LineId Id="684" Count="2" />
+      <LineId Id="684" Count="1" />
+      <LineId Id="701" Count="1" />
+      <LineId Id="686" Count="0" />
       <LineId Id="665" Count="0" />
       <LineId Id="667" Count="0" />
       <LineId Id="666" Count="0" />
@@ -927,7 +894,9 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="662" Count="0" />
       <LineId Id="681" Count="2" />
       <LineId Id="687" Count="1" />
-      <LineId Id="684" Count="2" />
+      <LineId Id="684" Count="1" />
+      <LineId Id="701" Count="1" />
+      <LineId Id="686" Count="0" />
       <LineId Id="665" Count="0" />
       <LineId Id="667" Count="0" />
       <LineId Id="666" Count="0" />
@@ -1114,10 +1083,6 @@ M_TcError:= THIS^;]]></ST>
       <LineId Id="30" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="25" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Assert.M_TcError">
-      <LineId Id="53" Count="12" />
-      <LineId Id="5" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

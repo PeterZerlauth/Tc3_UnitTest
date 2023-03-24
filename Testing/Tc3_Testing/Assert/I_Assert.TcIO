@@ -9,6 +9,15 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="M_Equals_Any" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Any : I_Assert
+VAR_INPUT
+	Expected:			ANY;		// Expected
+	Actual:				ANY;		// Actual
+	Message:			STRING(255);			// Message as string
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="M_Equals_Array_BOOL" Id="{8558398b-7346-0449-24be-1428458a8698}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
 VAR_IN_OUT
@@ -22,8 +31,8 @@ END_VAR]]></Declaration>
     <Method Name="M_Equals_Array_BYTE" Id="{4cbef9b0-27bd-0b86-2715-ece5f55cbd4c}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BYTE : I_Assert
 VAR_IN_OUT
-	Expected:			ARRAY [*] OF BOOL;	// Expected as array of byte
-	Actual:				ARRAY [*] OF BOOL;	// Actual as array of byte
+	Expected:			ARRAY [*] OF BYTE;	// Expected as array of byte
+	Actual:				ARRAY [*] OF BYTE;	// Actual as array of byte
 END_VAR                                   
 VAR_INPUT                                 
 	Message:			STRING(255);     	 // Message as string

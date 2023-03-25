@@ -2,9 +2,9 @@
 <TcLicenseInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2011/11/TcLicenseInfo">
 	<LicenseInfo>
 		<SystemId>{AB74CE02-5685-495B-F710-8DB270F39474}</SystemId>
-		<IssueTime>2023-03-24T15:31:00</IssueTime>
+		<IssueTime>2023-03-24T21:58:00</IssueTime>
 		<ExpireTime>2023-04-01T00:00:00</ExpireTime>
-		<LicenseKey>f8567a9776ba3e2ff99afb71edff80860e612f48520adb72ba18d5d8ba90294df63b803ac0f980a5c5ce44fcc93c1f317922537ce1e5d5c72a667de46e6e97cb39fb92cfa4206cd4c6d8ab6f4d2192313164338c4ca6649d1cbf4f8e061b43d26fc05a57a5a8d067673b92bfd28f070ac344efd5bd584623cd59bcc9e285e4d03c685ebfe2c938bde89ccce281402839e6a0c41dd647d314232f73a7f2eebe1863ecda95d36c18e6d501b79fccbbbb3ca6a8556e30a30485cbf1fe07a5a0ea4eac71e5740fcfede28500691360c775c948c2be4d41b38da3ec4200f629621c576c924ed4cce3fdff5ec20766bdb4b2b0ed4711bbb2eef8c229854b9753e93a78</LicenseKey>
+		<LicenseKey>2ef0c6ed67a9736a36077c8c1b7c4244b76eedc4a7ac6b8f78c4a8cd77225e8458e70f29791f3e9e7cb4f01352c1d2e417b7f6cd7f82178098be70049a77940f1de4c01b0303cab6a7ed72444ba6cc8532501a15745a0ed16088eaba7d4df0b9e9466e6164e8c55f6ba6e232249fab2aa1dd52104f03fb835075c881a357e177b04c32512f7d82445d7093c2dc907ced527c4d40067a6ad9bf7de54ff1b1edf2384df855fa3ff8e77fd6565caa97283087138413835d6afad2bda3aaf578818d76f505ea79c7909d5493d5737de6c7fd133d4e02eeb2615e57ad34201c601ac19a6cd96f1920321cd773e01b341530849a82cfa45cc69f80f3a4037f6b772d11</LicenseKey>
 		<License>
 			<LicenseId>{4C256767-E6E6-4AF5-BD68-9F7ABAD0C200}</LicenseId>
 			<Name>TC3 ADS</Name>
@@ -19,11 +19,6 @@
 			<LicenseId>{66689887-CCBD-452C-AC9A-039D997C6E66}</LicenseId>
 			<Name>TC3 PLC</Name>
 			<OrderNo>TC1200</OrderNo>
-		</License>
-		<License>
-			<LicenseId>{9FD32FC8-0CF9-4C5B-95FB-F35423496A77}</LicenseId>
-			<Name>TC3 PLC Static Analysis</Name>
-			<OrderNo>TE1200</OrderNo>
 		</License>
 	</LicenseInfo>
 </TcLicenseInfo>

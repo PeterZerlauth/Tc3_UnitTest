@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_Logger" Id="{75e85e1a-2f6e-03ab-0c87-a271e0cb3059}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT FB_Logger IMPLEMENTS I_Logger
+    <Declaration><![CDATA[{attribute 'no_explicit_call'} 
+FUNCTION_BLOCK ABSTRACT FB_Logger IMPLEMENTS I_Logger
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
-	stParameter:		ST_Logger;
+	stSettings:		ST_LoggerSettings;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -73,8 +74,8 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Parameter" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Settings" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
       <Get Name="Get" Id="{5db43e1f-632d-0054-2947-dbccd362cd17}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -105,7 +106,7 @@ END_VAR
     <LineIds Name="FB_Logger.M_Warning">
       <LineId Id="7" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Logger.P_Parameter.Get">
+    <LineIds Name="FB_Logger.P_Settings.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

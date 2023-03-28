@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.1.0</ProjectVersion>
+    <ProjectVersion>0.0.1.1</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -87,7 +87,7 @@
     <Compile Include="Logger\I_Logger.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logger\ST_Logger.TcDUT">
+    <Compile Include="Logger\ST_LoggerSettings.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="File\FB_File.TcPOU">

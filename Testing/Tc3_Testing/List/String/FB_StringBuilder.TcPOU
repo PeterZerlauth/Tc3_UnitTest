@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_StringBuilder" Id="{9f827a4a-fbbc-02a4-003e-5f1aba2ebf50}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'} 
+    <Declaration><![CDATA[{attribute 'no_explicit_call'}
 FUNCTION_BLOCK FB_StringBuilder IMPLEMENTS I_StringBuilder
 VAR_INPUT
 END_VAR

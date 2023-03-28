@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_File" Id="{54789f62-498b-04f5-3258-42d49534c4a8}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_File
+    <Declaration><![CDATA[{attribute 'no_explicit_call'} 
+FUNCTION_BLOCK FB_File
 VAR
     fbCreateDir:	FB_CreateDir;
 	fbOpen:			FB_FileOpen;

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
-  <DUT Name="ST_Logger" Id="{138d5e95-86ec-04dd-398b-aa4b90656350}">
-    <Declaration><![CDATA[TYPE ST_Logger :
+  <DUT Name="ST_LoggerSettings" Id="{138d5e95-86ec-04dd-398b-aa4b90656350}">
+    <Declaration><![CDATA[TYPE ST_LoggerSettings :
 STRUCT
 	eLogLevelMinimum:		E_LogLevel:= E_LogLevel.Debug;
 	eLogLevelMaximum:		E_LogLevel:= E_LogLevel.Critical;

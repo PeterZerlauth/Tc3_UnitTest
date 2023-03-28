@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_ListSTRING" Id="{a989d5e2-1cf5-0358-2412-01f34683c5c9}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'} 
+    <Declaration><![CDATA[{attribute 'no_explicit_call'} 
 FUNCTION_BLOCK PUBLIC FB_ListSTRING IMPLEMENTS I_ListSTRING
 VAR
 	pList: 			POINTER TO STRING(255);

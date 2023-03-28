@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1">
   <POU Name="FB_ListObject" Id="{80a15822-49de-454f-b0fc-12851675b870}" SpecialFunc="None">
-    <Declaration><![CDATA[{attribute 'no_explicit_call' := 'do not call this POU directly'} 
+    <Declaration><![CDATA[{attribute 'no_explicit_call'} 
 FUNCTION_BLOCK PUBLIC FB_ListObject IMPLEMENTS I_ListObject
 VAR
 	pList: 			POINTER TO I_Object;

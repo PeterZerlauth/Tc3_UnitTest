@@ -58,27 +58,27 @@ END_VAR
       <Implementation>
         <ST><![CDATA[CASE LogLevel OF
 	E_LogLevel.Debug:
-		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+		IF LogLevel >= stSettings.eLogLevelMinimum AND LogLevel <= stSettings.eLogLevelMaximum THEN
 			ADSLOGSTR(ADSLOG_MSGTYPE_STRING OR ADSLOG_MSGTYPE_LOG,'Debug: %s', Message);
 		END_IF
 		
 	E_LogLevel.Info:
-		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+		IF LogLevel >= stSettings.eLogLevelMinimum AND LogLevel <= stSettings.eLogLevelMaximum THEN
 			ADSLOGSTR(ADSLOG_MSGTYPE_HINT OR ADSLOG_MSGTYPE_LOG,'Info: %s', Message);
 		END_IF
 		
 	E_LogLevel.Warning:
-		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+		IF LogLevel >= stSettings.eLogLevelMinimum AND LogLevel <= stSettings.eLogLevelMaximum THEN
 			ADSLOGSTR(ADSLOG_MSGTYPE_WARN OR ADSLOG_MSGTYPE_LOG,'Warning: %s', Message);
 		END_IF
 		
 	E_LogLevel.Error:
-		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+		IF LogLevel >= stSettings.eLogLevelMinimum AND LogLevel <= stSettings.eLogLevelMaximum THEN
 			ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Error: %s', Message);
 		END_IF
 		
 	E_LogLevel.Critical:
-		IF LogLevel >= stParameter.eLogLevelMinimum AND LogLevel <= stParameter.eLogLevelMaximum THEN
+		IF LogLevel >= stSettings.eLogLevelMinimum AND LogLevel <= stSettings.eLogLevelMaximum THEN
 			ADSLOGSTR(ADSLOG_MSGTYPE_ERROR OR ADSLOG_MSGTYPE_LOG,'Critical: %s', Message);
 		END_IF
 		
@@ -94,14 +94,14 @@ END_VAR]]></Declaration>
         <ST><![CDATA[M_Log(E_LogLevel.Warning, Message);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Parameter" Id="{4e533074-8c0b-038d-0852-ee1041ac284d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Settings" Id="{4e533074-8c0b-038d-0852-ee1041ac284d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
       <Get Name="Get" Id="{10b9215a-2d65-0764-10de-3ee1463207f3}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[P_Parameter ref= stParameter;]]></ST>
+          <ST><![CDATA[P_Settings ref= stSettings;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -144,7 +144,7 @@ END_VAR
     <LineIds Name="FB_TcLogger.M_Warning">
       <LineId Id="5" Count="0" />
     </LineIds>
-    <LineIds Name="FB_TcLogger.P_Parameter.Get">
+    <LineIds Name="FB_TcLogger.P_Settings.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

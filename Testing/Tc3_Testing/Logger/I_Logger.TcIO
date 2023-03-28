@@ -40,8 +40,8 @@ VAR_INPUT
 	Message:		STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Property Name="P_Parameter" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Parameter : reference to ST_Logger]]></Declaration>
+    <Property Name="P_Settings" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
       <Get Name="Get" Id="{7014e2a1-dc1b-0612-3281-09945aee9943}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>

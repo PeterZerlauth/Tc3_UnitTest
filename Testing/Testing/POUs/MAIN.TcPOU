@@ -5,10 +5,10 @@
 VAR
 	bExecute:		BOOL;
 	fbTestsuites:	FB_Testsuites;				// Testsuites
-	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
-	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
-	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
-//	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
+//	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
+//	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
+//	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
+	fbTestsuite5:	FB_Testsuite;				// Testsuite	Errors
 
 	nIndex: 		INT;						// Test-vars
 	sValue:			STRING(255);				// Test-vars
@@ -33,198 +33,198 @@ IF bExecute THEN
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 
-// Add Testsuite to Testsuites
-fbTestsuites.M_Add(fbTestsuite1);
-fbTestsuites.M_Add(fbTestsuite2);
-fbTestsuites.M_Add(fbTestsuite3);
-//fbTestsuites.M_Add(fbTestsuite5);
-{region "fbTestsuite1"}
-// Run
-fbTestsuite1();
-CASE fbTestsuite1.P_Testcase OF
-	E_Testcase.Start:
-		// First test case
-		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
-//		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
-//		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
-		
-	1:
-		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
-		
-	2:
-		fbBuilder.M_Reset().M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '', 'FB_StringBuilder.M_Reset()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
-	
-	3:
-		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'TRUE', 'FB_StringBuilder.M_AppendBOOL()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
-		
-	4:
-		fbBuilder.M_Reset().M_AppendINT(33).M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33', 'FB_StringBuilder.M_AppendBOOL()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(2, fbBuilder.P_Length, 'fbBuilder.P_Length');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
-		
-	5:
-		fbBuilder.M_Reset().M_AppendREAL(33.44, 2).M_ToAny(sValue);
-		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33.44', 'FB_StringBuilder.M_AppendBOOL()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(5, fbBuilder.P_Length, 'fbBuilder.P_Length');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);
-		
-	6:
-		sValue:= '';
-		sValue:= fbBuilder.M_Reset().M_Append('Test').M_ToString();
-		fbTestsuite1.P_Assert.M_Equals_STRING('Test', sValue, 'FB_StringBuilder.M_ToString()');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
-		
-	7:
-		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
-		
-	8:
-		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
-		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);	
-	E_Testcase.Done:;
-	
-END_CASE
-{endregion}
-{region "fbTestsuite2"}
-fbTestsuite2();
-CASE fbTestsuite2.P_Testcase OF
-	E_Testcase.Start:
-		fbList.M_Clear();
-		FOR nIndex:= 0 TO 49 DO
-			fbList.M_Add(INT_TO_STRING(nIndex));
-		END_FOR
-		fbTestsuite2.P_Assert.M_Equals_STRING('49', fbList.M_Item(fbList.P_Length - 1) ,'FB_ListSTRING.M_Item()');
-		fbTestsuite2.P_Assert.M_Equals_STRING('10', fbList.M_Item(10) ,'FB_ListSTRING.M_Item()');
-		fbTestsuite2.P_Assert.M_Equals_DINT(50, fbList.P_Length ,'FB_ListSTRING.P_Length');
-		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 1);
-	
-1:
-		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Clear(), 'FB_ListSTRING.M_Clear()');
-		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 2);		
-2:
-		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('1'), 'FB_ListSTRING.M_Add()');
-		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('3'), 'FB_ListSTRING.M_Add()');
-		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Insert(1, '2'), 'FB_ListSTRING.M_Insert()');
-		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '',3);
-		
-3:
-		fbTestsuite2.P_Assert.M_Equals_STRING('2', fbList.M_Item(1), 'fbList.M_Item()');
-		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', E_Testcase.Done);			
-
-	E_Testcase.Done:;
-	
-END_CASE
-{endregion}
-{region "fbTestsuite3"}
-fbTestsuite3();
-CASE fbTestsuite3.P_Testcase OF
-	E_Testcase.Start:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'Delete old file');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 1);			 
-	
-	1:			  
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Create('C:\Test.txt'), 'fbFile.M_Create()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 2);
-	2:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 3);		
-		
-	3:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 4);
-		
-	4:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 5);
-			
-	5:
-		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 6);	
-		
-	6:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 7);
-		
-	7:
-		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
-//			 fbTestsuite3.P_Assert.M_Skip('blub');
-		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
-		
-	E_Testcase.Done:;
-	
-END_CASE
-{endregion}
-
-//{region "fbTestsuite5"}
+//// Add Testsuite to Testsuites
+//fbTestsuites.M_Add(fbTestsuite1);
+//fbTestsuites.M_Add(fbTestsuite2);
+//fbTestsuites.M_Add(fbTestsuite3);
+fbTestsuites.M_Add(fbTestsuite5);
+//{region "fbTestsuite1"}
 //// Run
-//fbTestsuite5();
-//fbTestsuite5.P_File:= 'FB_Assert';
-//CASE fbTestsuite5.P_Testcase OF
+//fbTestsuite1();
+//CASE fbTestsuite1.P_Testcase OF
 //	E_Testcase.Start:
 //		// First test case
-//		fbTestsuite5.P_Assert.M_Skip('Skipped testcase');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 1);
-			 
-//	1:
-//		fbTestsuite5.P_Assert.M_IsTRUE(FALSE, 'M_IsTRUE');
-//		fbTestsuite5.P_Assert.M_Equals_BOOL(FALSE, TRUE, 'M_Equals_BOOL');
-//		fbTestsuite5.P_Assert.M_Equals_BYTE(0, 1, 'M_Equals_BYTE');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 2);
-
-//	2:
-//		fbTestsuite5.P_Assert.M_Equals_INT(0, 1, 'M_Equals_INT');
-//		fbTestsuite5.P_Assert.M_Equals_UINT(0, 1, 'M_Equals_UINT');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 3);
-
-//	3:
-//		fbTestsuite5.P_Assert.M_Equals_DINT(0, 1, 'M_Equals_DINT');
-//		fbTestsuite5.P_Assert.M_Equals_UDINT(0, 1, 'M_Equals_UDINT');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 4);
-			 
-//	4:
-//		fbTestsuite5.P_Assert.M_Equals_LINT(0, 1, 'M_Equals_LINT');
-//		fbTestsuite5.P_Assert.M_Equals_ULINT(0, 1, 'M_Equals_ULINT');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 5);
-			 
-//	5:
-//		fbTestsuite5.P_Assert.M_Equals_REAL(0.0, 1.0, 0.0, 'M_Equals_REAL');
-//		fbTestsuite5.P_Assert.M_Equals_LREAL(0.0, 1.0, 0.0, 'M_Equals_LREAL');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 6);	 
-			 
-//	6:
-//		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
-//		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 7);
-			 
-//	7:
+//		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
+////		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
+////		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '__POSITION()', 1);		// Not supported jet
 		
-//		fbTestsuite5.P_Assert.M_TcError( E_AdsErr.CLIENT_ERROR, 'E_AdsErr');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 8);
+//	1:
+//		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
+//		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
+		
+//	2:
+//		fbBuilder.M_Reset().M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '', 'FB_StringBuilder.M_Reset()');
+//		fbTestsuite1.P_Assert.M_Equals_DINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
 	
+//	3:
+//		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'TRUE', 'FB_StringBuilder.M_AppendBOOL()');
+//		fbTestsuite1.P_Assert.M_Equals_DINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
+		
+//	4:
+//		fbBuilder.M_Reset().M_AppendINT(33).M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33', 'FB_StringBuilder.M_AppendBOOL()');
+//		fbTestsuite1.P_Assert.M_Equals_DINT(2, fbBuilder.P_Length, 'fbBuilder.P_Length');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 5);
+		
+//	5:
+//		fbBuilder.M_Reset().M_AppendREAL(33.44, 2).M_ToAny(sValue);
+//		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '33.44', 'FB_StringBuilder.M_AppendBOOL()');
+//		fbTestsuite1.P_Assert.M_Equals_DINT(5, fbBuilder.P_Length, 'fbBuilder.P_Length');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 6);
+		
+//	6:
+//		sValue:= '';
+//		sValue:= fbBuilder.M_Reset().M_Append('Test').M_ToString();
+//		fbTestsuite1.P_Assert.M_Equals_STRING('Test', sValue, 'FB_StringBuilder.M_ToString()');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
+		
+//	7:
+//		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
+		
 //	8:
-//		ARRAY2[4]:= 3.14159;
-//		ARRAY4[5]:= 1.0;
-//		fbTestsuite5.P_Assert.M_Equals_Array_LREAL(ARRAY1, ARRAY2, 0.0, 'M_Equals_Array_LREAL');
-//		fbTestsuite5.P_Assert.M_Equals_Array_REAL(ARRAY3, ARRAY4, 0.99, 'M_Equals_Array_REAL');
-//		fbTestsuite5.P_Assert.M_Equals(ARRAY1, ARRAY2, 'M_Equals');
-//		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
-			 
+//		fbTestsuite1.P_Assert.M_IsTRUE(TRUE, 'Placeholder');
+//		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', E_Testcase.Done);	
 //	E_Testcase.Done:;
+	
+//END_CASE
+//{endregion}
+//{region "fbTestsuite2"}
+//fbTestsuite2();
+//CASE fbTestsuite2.P_Testcase OF
+//	E_Testcase.Start:
+//		fbList.M_Clear();
+//		FOR nIndex:= 0 TO 49 DO
+//			fbList.M_Add(INT_TO_STRING(nIndex));
+//		END_FOR
+//		fbTestsuite2.P_Assert.M_Equals_STRING('49', fbList.M_Item(fbList.P_Length - 1) ,'FB_ListSTRING.M_Item()');
+//		fbTestsuite2.P_Assert.M_Equals_STRING('10', fbList.M_Item(10) ,'FB_ListSTRING.M_Item()');
+//		fbTestsuite2.P_Assert.M_Equals_DINT(50, fbList.P_Length ,'FB_ListSTRING.P_Length');
+//		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 1);
+	
+//1:
+//		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Clear(), 'FB_ListSTRING.M_Clear()');
+//		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', 2);		
+//2:
+//		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('1'), 'FB_ListSTRING.M_Add()');
+//		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Add('3'), 'FB_ListSTRING.M_Add()');
+//		fbTestsuite2.P_Assert.M_IsTrue(fbList.M_Insert(1, '2'), 'FB_ListSTRING.M_Insert()');
+//		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '',3);
+		
+//3:
+//		fbTestsuite2.P_Assert.M_Equals_STRING('2', fbList.M_Item(1), 'fbList.M_Item()');
+//		fbTestsuite2.M_Testcase('FB_ListSTRING', T#1S, '', '', E_Testcase.Done);			
+
+//	E_Testcase.Done:;
+	
+//END_CASE
+//{endregion}
+//{region "fbTestsuite3"}
+//fbTestsuite3();
+//CASE fbTestsuite3.P_Testcase OF
+//	E_Testcase.Start:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'Delete old file');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 1);			 
+	
+//	1:			  
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Create('C:\Test.txt'), 'fbFile.M_Create()');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 2);
+//	2:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Append('TestString'), 'fbFile.M_Append()');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 3);		
+		
+//	3:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 4);
+		
+//	4:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Load('C:\Test.txt', sValue3), 'fbFile.M_Load()');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 5);
+			
+//	5:
+//		fbTestsuite3.P_Assert.M_Equals_STRING('TestString', sValue3, 'File content');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 6);	
+		
+//	6:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Close(), 'fbFile.M_Close()');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', 7);
+		
+//	7:
+//		fbTestsuite3.P_Assert.M_IsTRUE(fbFile.M_Delete('C:\Test.txt'), 'fbFile.M_Delete()');
+////			 fbTestsuite3.P_Assert.M_Skip('blub');
+//		fbTestsuite3.M_Testcase('FB_File', T#1S, '', '', E_Testcase.Done);
+		
+//	E_Testcase.Done:;
+	
+//END_CASE
+//{endregion}
+
+{region "fbTestsuite5"}
+// Run
+fbTestsuite5();
+fbTestsuite5.P_File:= 'FB_Assert';
+CASE fbTestsuite5.P_Testcase OF
+	E_Testcase.Start:
+		// First test case
+		fbTestsuite5.P_Assert.M_Skip('Skipped testcase');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 1);
+			 
+	1:
+		fbTestsuite5.P_Assert.M_IsTRUE(FALSE, 'M_IsTRUE');
+		fbTestsuite5.P_Assert.M_Equals_BOOL(FALSE, TRUE, 'M_Equals_BOOL');
+		fbTestsuite5.P_Assert.M_Equals_BYTE(0, 1, 'M_Equals_BYTE');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 2);
+
+	2:
+		fbTestsuite5.P_Assert.M_Equals_INT(0, 1, 'M_Equals_INT');
+		fbTestsuite5.P_Assert.M_Equals_UINT(0, 1, 'M_Equals_UINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 3);
+
+	3:
+		fbTestsuite5.P_Assert.M_Equals_DINT(0, 1, 'M_Equals_DINT');
+		fbTestsuite5.P_Assert.M_Equals_UDINT(0, 1, 'M_Equals_UDINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 4);
+			 
+	4:
+		fbTestsuite5.P_Assert.M_Equals_LINT(0, 1, 'M_Equals_LINT');
+		fbTestsuite5.P_Assert.M_Equals_ULINT(0, 1, 'M_Equals_ULINT');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 5);
+			 
+	5:
+		fbTestsuite5.P_Assert.M_Equals_REAL(0.0, 1.0, 0.0, 'M_Equals_REAL');
+		fbTestsuite5.P_Assert.M_Equals_LREAL(0.0, 1.0, 0.0, 'M_Equals_LREAL');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 6);	 
+			 
+	6:
+		fbTestsuite5.P_Assert.M_Equals_STRING('x', 'y', 'M_Equals_STRING');
+		fbTestsuite5.P_Assert.M_Equals_WSTRING("x", "y", 'M_Equals_WSTRING');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 7);
+			 
+	7:
+		
+		fbTestsuite5.P_Assert.M_TcError( E_AdsErr.CLIENT_ERROR, 'E_AdsErr');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', 8);
+	
+	8:
+		ARRAY2[4]:= 3.14159;
+		ARRAY4[5]:= 1.0;
+		fbTestsuite5.P_Assert.M_Equals_Array_LREAL(ARRAY1, ARRAY2, 0.0, 'M_Equals_Array_LREAL');
+		fbTestsuite5.P_Assert.M_Equals_Array_REAL(ARRAY3, ARRAY4, 0.99, 'M_Equals_Array_REAL');
+		fbTestsuite5.P_Assert.M_Equals(ARRAY1, ARRAY2, 'M_Equals');
+		fbTestsuite5.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
+			 
+	E_Testcase.Done:;
 		 
-//END_CASE	 
-//{endregion}]]></ST>
+END_CASE	 
+{endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="1082" Count="13" />

@@ -1,0 +1,92 @@
+.. first line of object.rst template
+.. first line of pou-object.rst template
+.. first line of fb-object.rst template
+.. <% set key = ".fld-Assert.FB_Assert" %>
+.. _`.fld-Assert.FB_Assert`:
+.. <% merge "object.Defines" %>
+.. <% endmerge  %>
+
+
+.. index::
+   single: FB_Assert
+
+.. _`FB_Assert`:
+
+FB_Assert (FB)
+--------------
+
+FUNCTION_BLOCK FB_Assert IMPLEMENTS |dI_Assert|
+
+.. |dI_Assert| replace:: :ref:`I_Assert<I_Assert>`
+
+.. <% merge "object.Doc" %>
+
+.. todo:: Please add documentation for functionblock: FB_Assert
+
+.. <% endmerge  %>
+
+.. <% merge "object.iotbl" %>
+
+
+
+InOut:
+    +--------+-----------+-------------------+
+    | Scope  | Name      | Type              |
+    +========+===========+===================+
+    | Output | fbList    | |ioFB_ListSTRING| |
+    +        +-----------+-------------------+
+    |        | nAssert   | DINT              |
+    +        +-----------+-------------------+
+    |        | nPassed   | DINT              |
+    +        +-----------+-------------------+
+    |        | nSkipped  | DINT              |
+    +        +-----------+-------------------+
+    |        | nFailures | DINT              |
+    +        +-----------+-------------------+
+    |        | nErrors   | DINT              |
+    +--------+-----------+-------------------+
+
+.. |ioFB_ListSTRING| replace:: :ref:`FB_ListSTRING<FB_ListSTRING>`
+
+
+.. <% endmerge  %>
+
+
+.. toctree::
+
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-assert
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-b
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-b1
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-d
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-i
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-l
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-l1
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-array-r
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-bool
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-byte
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-dint
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-int
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-lint
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-lreal
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-real
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-string
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-time
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-udint
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-uint
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-ulint
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-equals-wstring
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-error
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-failure
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-istrue
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-passed
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-reset
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip
+   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror
+
+.. last line of fb-object.rst template
+.. last line of pou-object.rst template
+.. last line of object.rst template
+
+
+

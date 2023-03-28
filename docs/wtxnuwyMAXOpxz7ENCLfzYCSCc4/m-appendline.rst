@@ -1,0 +1,45 @@
+.. first line of object.rst template
+.. first line of pou-object.rst template
+.. first line of meth-object.rst template
+.. <% set key = ".fld-File.FB_File.M_AppendLine" %>
+.. _`.fld-File.FB_File.M_AppendLine`:
+.. <% merge "object.Defines" %>
+.. <% endmerge  %>
+
+
+.. _`FB_File.M_AppendLine`:
+
+FB_File.M_AppendLine (METH)
+---------------------------
+
+METHOD M_AppendLine : BOOL
+
+
+
+.. <% merge "object.Doc" %>
+
+.. todo:: Please add documentation for method: FB_File.M_AppendLine
+
+.. <% endmerge  %>
+
+.. <% merge "object.iotbl" %>
+
+
+
+InOut:
+    +--------+--------------+-------------+
+    | Scope  | Name         | Type        |
+    +========+==============+=============+
+    | Return | M_AppendLine | BOOL        |
+    +--------+--------------+-------------+
+    | Input  | Text         | STRING(255) |
+    +--------+--------------+-------------+
+
+.. <% endmerge  %>
+
+.. last line of meth-object.rst template
+.. last line of pou-object.rst template
+.. last line of object.rst template
+
+
+

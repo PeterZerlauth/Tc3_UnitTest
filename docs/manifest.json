@@ -1,6 +1,6 @@
 {
     "header": {
-        "created": "2023-03-28T19:13:06",
+        "created": "2023-03-28T20:41:37",
         "name": "manifest.json",
         "version": "0.0.0.4"
     },
@@ -130,10 +130,6 @@
                 "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-skip.html",
                 "name": "I_Assert.M_Skip (METH)"
             },
-            "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-tcerror": {
-                "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-tcerror.html",
-                "name": "I_Assert.M_TcError (METH)"
-            },
             "1msHC-ZN7CmczxjvtzwI6a7N8Vs/m-add": {
                 "location": "1msHC-ZN7CmczxjvtzwI6a7N8Vs/m-add.html",
                 "name": "I_ListObject.M_Add (METH)"
@@ -186,9 +182,9 @@
                 "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-warning.html",
                 "name": "I_Logger.M_Warning (METH)"
             },
-            "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-parameter": {
-                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-parameter.html",
-                "name": "I_Logger.P_Parameter (PROP)"
+            "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-settings": {
+                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-settings.html",
+                "name": "I_Logger.P_Settings (PROP)"
             },
             "8zptxnJzUYOKgQuXcHe4iK8TOb8/m-execute": {
                 "location": "8zptxnJzUYOKgQuXcHe4iK8TOb8/m-execute.html",
@@ -422,9 +418,9 @@
                 "location": "YWuI9dYYK_VirQImai6AYkTvnB4/m-warning.html",
                 "name": "FB_Logger.M_Warning (METH)"
             },
-            "YWuI9dYYK_VirQImai6AYkTvnB4/p-parameter": {
-                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-parameter.html",
-                "name": "FB_Logger.P_Parameter (PROP)"
+            "YWuI9dYYK_VirQImai6AYkTvnB4/p-settings": {
+                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-settings.html",
+                "name": "FB_Logger.P_Settings (PROP)"
             },
             "ZI675Lb3LKMdaI7iUX_03RI_9dw/m-aborted": {
                 "location": "ZI675Lb3LKMdaI7iUX_03RI_9dw/m-aborted.html",
@@ -518,9 +514,9 @@
                 "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/i-logger.html",
                 "name": "I_Logger (ITF)"
             },
-            "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-logger": {
-                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-logger.html",
-                "name": "ST_Logger (STRUCT)"
+            "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-loggersetting": {
+                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-loggersetting.html",
+                "name": "ST_LoggerSettings (STRUCT)"
             },
             "iNEnzEhyvW1tuB_NGTNepyCGJ1A/fb-exit": {
                 "location": "iNEnzEhyvW1tuB_NGTNepyCGJ1A/fb-exit.html",
@@ -662,9 +658,9 @@
                 "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/m-warning.html",
                 "name": "FB_TcLogger.M_Warning (METH)"
             },
-            "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-parameter": {
-                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-parameter.html",
-                "name": "FB_TcLogger.P_Parameter (PROP)"
+            "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-settings": {
+                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-settings.html",
+                "name": "FB_TcLogger.P_Settings (PROP)"
             },
             "of_6qvt8yZZoW864KcBTzE995D0/fld-List": {
                 "location": "of_6qvt8yZZoW864KcBTzE995D0/fld-List.html",
@@ -917,10 +913,6 @@
             "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip": {
                 "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip.html",
                 "name": "FB_Assert.M_Skip (METH)"
-            },
-            "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror": {
-                "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror.html",
-                "name": "FB_Assert.M_TcError (METH)"
             }
         },
         "std:label": {
@@ -1052,10 +1044,6 @@
                 "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip.html#fld-assert-fb-assert-m-skip",
                 "name": "-"
             },
-            ".fld-assert.fb_assert.m_tcerror": {
-                "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror.html#fld-assert-fb-assert-m-tcerror",
-                "name": "-"
-            },
             ".fld-assert.i_assert": {
                 "location": "QUGt1FomRZxL05kJOISCMR9v4po/i-assert.html#fld-assert-i-assert",
                 "name": "-"
@@ -1170,10 +1158,6 @@
             },
             ".fld-assert.i_assert.m_skip": {
                 "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-skip.html#fld-assert-i-assert-m-skip",
-                "name": "-"
-            },
-            ".fld-assert.i_assert.m_tcerror": {
-                "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-tcerror.html#fld-assert-i-assert-m-tcerror",
                 "name": "-"
             },
             ".fld-base": {
@@ -1612,8 +1596,8 @@
                 "location": "YWuI9dYYK_VirQImai6AYkTvnB4/m-warning.html#fld-logger-fb-logger-m-warning",
                 "name": "-"
             },
-            ".fld-logger.fb_logger.p_parameter": {
-                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-parameter.html#fld-logger-fb-logger-p-parameter",
+            ".fld-logger.fb_logger.p_settings": {
+                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-settings.html#fld-logger-fb-logger-p-settings",
                 "name": "-"
             },
             ".fld-logger.fb_tclogger": {
@@ -1644,8 +1628,8 @@
                 "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/m-warning.html#fld-logger-fb-tclogger-m-warning",
                 "name": "-"
             },
-            ".fld-logger.fb_tclogger.p_parameter": {
-                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-parameter.html#fld-logger-fb-tclogger-p-parameter",
+            ".fld-logger.fb_tclogger.p_settings": {
+                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-settings.html#fld-logger-fb-tclogger-p-settings",
                 "name": "-"
             },
             ".fld-logger.i_logger": {
@@ -1676,12 +1660,12 @@
                 "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-warning.html#fld-logger-i-logger-m-warning",
                 "name": "-"
             },
-            ".fld-logger.i_logger.p_parameter": {
-                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-parameter.html#fld-logger-i-logger-p-parameter",
+            ".fld-logger.i_logger.p_settings": {
+                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-settings.html#fld-logger-i-logger-p-settings",
                 "name": "-"
             },
-            ".fld-logger.st_logger": {
-                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-logger.html#fld-logger-st-logger",
+            ".fld-logger.st_loggersettings": {
+                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-loggersetting.html#fld-logger-st-loggersettings",
                 "name": "-"
             },
             ".fld-testcase": {
@@ -2356,10 +2340,6 @@
                 "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip.html#fb-assert-m-skip",
                 "name": "FB_Assert.M_Skip (METH)"
             },
-            "fb_assert.m_tcerror": {
-                "location": "xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror.html#fb-assert-m-tcerror",
-                "name": "FB_Assert.M_TcError (METH)"
-            },
             "fb_base": {
                 "location": "B3_pxU7V7Sb6VH9N7T75qbsGbWU/fb-base.html#fb-base",
                 "name": "FB_Base (FB)"
@@ -2548,9 +2528,9 @@
                 "location": "YWuI9dYYK_VirQImai6AYkTvnB4/m-warning.html#fb-logger-m-warning",
                 "name": "FB_Logger.M_Warning (METH)"
             },
-            "fb_logger.p_parameter": {
-                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-parameter.html#fb-logger-p-parameter",
-                "name": "FB_Logger.P_Parameter (PROP)"
+            "fb_logger.p_settings": {
+                "location": "YWuI9dYYK_VirQImai6AYkTvnB4/p-settings.html#fb-logger-p-settings",
+                "name": "FB_Logger.P_Settings (PROP)"
             },
             "fb_stringbuilder": {
                 "location": "tsLFVmuOFxSINL3jWDbAN9C7kdY/fb-stringbuilder.html#fb-stringbuilder",
@@ -2624,9 +2604,9 @@
                 "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/m-warning.html#fb-tclogger-m-warning",
                 "name": "FB_TcLogger.M_Warning (METH)"
             },
-            "fb_tclogger.p_parameter": {
-                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-parameter.html#fb-tclogger-p-parameter",
-                "name": "FB_TcLogger.P_Parameter (PROP)"
+            "fb_tclogger.p_settings": {
+                "location": "mpHCsUjLlzt204ZNeFopm4tS4RQ/p-settings.html#fb-tclogger-p-settings",
+                "name": "FB_TcLogger.P_Settings (PROP)"
             },
             "fb_testsuite": {
                 "location": "Kbramgl5nYvf8Q7yPNCJ6VSfqeE/fb-testsuite.html#fb-testsuite",
@@ -2864,10 +2844,6 @@
                 "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-skip.html#i-assert-m-skip",
                 "name": "I_Assert.M_Skip (METH)"
             },
-            "i_assert.m_tcerror": {
-                "location": "-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-tcerror.html#i-assert-m-tcerror",
-                "name": "I_Assert.M_TcError (METH)"
-            },
             "i_base": {
                 "location": "B3_pxU7V7Sb6VH9N7T75qbsGbWU/i-base.html#i-base",
                 "name": "I_Base (ITF)"
@@ -3020,9 +2996,9 @@
                 "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-warning.html#i-logger-m-warning",
                 "name": "I_Logger.M_Warning (METH)"
             },
-            "i_logger.p_parameter": {
-                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-parameter.html#i-logger-p-parameter",
-                "name": "I_Logger.P_Parameter (PROP)"
+            "i_logger.p_settings": {
+                "location": "4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-settings.html#i-logger-p-settings",
+                "name": "I_Logger.P_Settings (PROP)"
             },
             "i_object": {
                 "location": "h2iUjP2itIZW908JtPeyHhWeMY0/i-object.html#i-object",
@@ -3128,9 +3104,9 @@
                 "location": "search.html",
                 "name": "Search Page"
             },
-            "st_logger": {
-                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-logger.html#st-logger",
-                "name": "ST_Logger (STRUCT)"
+            "st_loggersettings": {
+                "location": "hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-loggersetting.html#st-loggersettings",
+                "name": "ST_LoggerSettings (STRUCT)"
             },
             "st_testcase": {
                 "location": "UAiDZv4Sl3Rupe4DyH3ut_6uycc/st-testcase.html#st-testcase",
@@ -3149,7 +3125,7 @@
     "library": {
         "company": "Zerlauth",
         "title": "Tc3_Testing",
-        "version": "0.0.0.21"
+        "version": "0.0.1.1"
     },
     "mapping": {
         "-HN9sW7jKm_eEfejQtgCZo4N_7k": "Testsuites\\pou-I_Testsuites",

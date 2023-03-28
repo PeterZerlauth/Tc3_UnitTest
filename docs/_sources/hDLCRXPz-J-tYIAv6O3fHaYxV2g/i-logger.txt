@@ -34,7 +34,7 @@ INTERFACE I_Logger EXTENDS \__SYSTEM.IQueryInterface
    /4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-info
    /4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-log
    /4z1a0zI2BaLg9_OyWUQu9lyrAgk/m-warning
-   /4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-parameter
+   /4z1a0zI2BaLg9_OyWUQu9lyrAgk/p-settings
 
 .. last line of itf-object.rst template
 .. last line of object.rst template

@@ -56,7 +56,6 @@ INTERFACE I_Assert
    /-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-passed
    /-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-reset
    /-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-skip
-   /-nAbOhwXzD8ToZlY2gNlNuEpaoc/m-tcerror
 
 .. last line of itf-object.rst template
 .. last line of object.rst template

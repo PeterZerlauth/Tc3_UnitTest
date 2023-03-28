@@ -1,24 +1,24 @@
 .. first line of object.rst template
 .. first line of pou-object.rst template
 .. first line of prop-object.rst template
-.. <% set key = ".fld-Logger.FB_Logger.P_Parameter" %>
-.. _`.fld-Logger.FB_Logger.P_Parameter`:
+.. <% set key = ".fld-Logger.FB_TcLogger.P_Settings" %>
+.. _`.fld-Logger.FB_TcLogger.P_Settings`:
 .. <% merge "object.Defines" %>
 .. <% endmerge  %>
 
 
-.. _`FB_Logger.P_Parameter`:
+.. _`FB_TcLogger.P_Settings`:
 
-FB_Logger.P_Parameter (PROP)
-----------------------------
+FB_TcLogger.P_Settings (PROP)
+-----------------------------
 
-PROPERTY P_Parameter : REFERENCE TO ST_Logger
+PROPERTY P_Settings : REFERENCE TO ST_LoggerSettings
 
 
 
 .. <% merge "object.Doc" %>
 
-.. todo:: Please add documentation for property: FB_Logger.P_Parameter
+.. todo:: Please add documentation for property: FB_TcLogger.P_Settings
 
 .. <% endmerge  %>
 

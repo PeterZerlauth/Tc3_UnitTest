@@ -1,26 +1,26 @@
 .. first line of object.rst template
 .. first line of dut-object.rst template
 .. first line of struct-object.rst template
-.. <% set key = ".fld-Logger.ST_Logger" %>
-.. _`.fld-Logger.ST_Logger`:
+.. <% set key = ".fld-Logger.ST_LoggerSettings" %>
+.. _`.fld-Logger.ST_LoggerSettings`:
 .. <% merge "object.Defines" %>
 .. <% endmerge  %>
 
 
 .. Index::
-   single: ST_Logger
+   single: ST_LoggerSettings
 
-.. _`ST_Logger`:
+.. _`ST_LoggerSettings`:
 
-ST_Logger (STRUCT)
-------------------
+ST_LoggerSettings (STRUCT)
+--------------------------
 
-TYPE ST_Logger : STRUCT
+TYPE ST_LoggerSettings : STRUCT
 
 
 .. <% merge "object.Doc" %>
 
-.. todo:: Please add documentation for struct: ST_Logger
+.. todo:: Please add documentation for struct: ST_LoggerSettings
 
 .. <% endmerge  %>
 

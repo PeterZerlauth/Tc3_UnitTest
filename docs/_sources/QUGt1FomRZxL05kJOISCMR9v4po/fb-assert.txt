@@ -82,7 +82,6 @@ InOut:
    /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-passed
    /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-reset
    /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-skip
-   /xA-QyNUnbXdhKCDrNwwPR8CpymM/m-tcerror
 
 .. last line of fb-object.rst template
 .. last line of pou-object.rst template

@@ -7,12 +7,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>FB_Assert.M_TcError (METH) &mdash; Tc3_Testing V0.0.0.21</title>
+    <title>ST_LoggerSettings (STRUCT) &mdash; Tc3_Testing V0.0.1.1</title>
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '0.0.0.21',
+        VERSION:     '0.0.1.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE: false
@@ -30,39 +30,31 @@
       <div class="documentwrapper">
           <div class="body">
             
-  <span class="target" id="fld-assert-fb-assert-m-tcerror"></span><div class="section" id="fb-assert-m-tcerror-meth">
-<span id="fb-assert-m-tcerror"></span><h1>FB_Assert.M_TcError (METH)<a class="headerlink" href="#fb-assert-m-tcerror-meth" title="Permalink to this headline">¶</a></h1>
-<p>METHOD M_TcError : <a class="reference internal" href="../QUGt1FomRZxL05kJOISCMR9v4po/i-assert.html#i-assert"><span class="std std-ref">I_Assert</span></a></p>
+  <span class="target" id="fld-logger-st-loggersettings"></span><div class="section" id="st-loggersettings-struct">
+<span id="st-loggersettings"></span><span id="index-0"></span><h1>ST_LoggerSettings (STRUCT)<a class="headerlink" href="#st-loggersettings-struct" title="Permalink to this headline">¶</a></h1>
+<p>TYPE ST_LoggerSettings : STRUCT</p>
 <dl class="docutils">
 <dt>InOut:</dt>
 <dd><table border="1" class="first last docutils">
 <colgroup>
-<col width="15%" />
-<col width="21%" />
-<col width="27%" />
-<col width="37%" />
+<col width="33%" />
+<col width="29%" />
+<col width="38%" />
 </colgroup>
 <thead valign="bottom">
-<tr class="row-odd"><th class="head">Scope</th>
-<th class="head">Name</th>
+<tr class="row-odd"><th class="head">Name</th>
 <th class="head">Type</th>
-<th class="head">Comment</th>
+<th class="head">Initial</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>Return</td>
-<td>M_TcError</td>
-<td><a class="reference internal" href="../QUGt1FomRZxL05kJOISCMR9v4po/i-assert.html#i-assert"><span class="std std-ref">I_Assert</span></a></td>
-<td>&nbsp;</td>
+<tr class="row-even"><td>eLogLevelMinimum</td>
+<td><a class="reference internal" href="e-loglevel.html#e-loglevel"><span class="std std-ref">E_LogLevel</span></a></td>
+<td>E_LogLevel.Debug</td>
 </tr>
-<tr class="row-odd"><td rowspan="2">Input</td>
-<td>ErrorId</td>
-<td>UDINT</td>
-<td>ErrorId as UDINT</td>
-</tr>
-<tr class="row-even"><td>Message</td>
-<td>STRING(255)</td>
-<td>Message as string</td>
+<tr class="row-odd"><td>eLogLevelMaximum</td>
+<td><a class="reference internal" href="e-loglevel.html#e-loglevel"><span class="std std-ref">E_LogLevel</span></a></td>
+<td>E_LogLevel.Critical</td>
 </tr>
 </tbody>
 </table>

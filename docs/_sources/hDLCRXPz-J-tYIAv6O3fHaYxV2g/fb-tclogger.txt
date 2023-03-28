@@ -41,7 +41,7 @@ FUNCTION_BLOCK FB_TcLogger EXTENDS |dFB_Logger|
    /mpHCsUjLlzt204ZNeFopm4tS4RQ/m-info
    /mpHCsUjLlzt204ZNeFopm4tS4RQ/m-log
    /mpHCsUjLlzt204ZNeFopm4tS4RQ/m-warning
-   /mpHCsUjLlzt204ZNeFopm4tS4RQ/p-parameter
+   /mpHCsUjLlzt204ZNeFopm4tS4RQ/p-settings
 
 .. last line of fb-object.rst template
 .. last line of pou-object.rst template

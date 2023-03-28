@@ -16,7 +16,7 @@ Tc3_Testing Library Documentation
 
 :Company: Zerlauth
 :Title: Tc3_Testing
-:Version: 0.0.0.21
+:Version: 0.0.1.1
 :Categories: Automaiton
 :Namespace: Tc3_Testing
 :Author: Peter Zerlauth
@@ -77,7 +77,7 @@ Indices and tables
     * :ref:`libraries`
 
 .. <% merge "index.SourceRelation" %>
-.. [1] | Based on tc3_testing.library, last modified 24.03.2023, 22:08:57.
-       | The content file Tc3_Testing.clean.json was generated with TwinCAT PLC Control_Build_4024.42 on 28.03.2023, 21:12:54
+.. [1] | Based on tc3_testing.library, last modified 28.03.2023, 22:39:24.
+       | The content file Tc3_Testing.clean.json was generated with TwinCAT PLC Control_Build_4024.42 on 28.03.2023, 22:41:27
 .. <% endmerge %>
 .. last line of index.rst template

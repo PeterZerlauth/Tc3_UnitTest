@@ -41,7 +41,7 @@ FUNCTION_BLOCK ABSTRACT FB_Logger IMPLEMENTS |dI_Logger|
    /YWuI9dYYK_VirQImai6AYkTvnB4/m-info
    /YWuI9dYYK_VirQImai6AYkTvnB4/m-log
    /YWuI9dYYK_VirQImai6AYkTvnB4/m-warning
-   /YWuI9dYYK_VirQImai6AYkTvnB4/p-parameter
+   /YWuI9dYYK_VirQImai6AYkTvnB4/p-settings
 
 .. last line of fb-object.rst template
 .. last line of pou-object.rst template

@@ -21,6 +21,6 @@ Logger
    /hDLCRXPz-J-tYIAv6O3fHaYxV2g/fb-logger
    /hDLCRXPz-J-tYIAv6O3fHaYxV2g/fb-tclogger
    /hDLCRXPz-J-tYIAv6O3fHaYxV2g/i-logger
-   /hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-logger
+   /hDLCRXPz-J-tYIAv6O3fHaYxV2g/st-loggersetting
 
 .. last line of folder.rst template

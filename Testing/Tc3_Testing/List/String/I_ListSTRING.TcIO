@@ -21,7 +21,7 @@ END_VAR]]></Declaration>
     <Method Name="M_Insert" Id="{8c7c3197-9d8e-024f-2384-b75a17732138}">
       <Declaration><![CDATA[METHOD PUBLIC M_Insert : BOOL
 VAR_INPUT
-	Position:		DINT;
+	Position:		UDINT;
 	Value:			STRING(255);
 END_VAR]]></Declaration>
     </Method>
@@ -33,7 +33,7 @@ END_VAR
 ]]></Declaration>
     </Method>
     <Method Name="M_Remove" Id="{3d146390-4ec0-0a33-08ae-7d967444c553}">
-      <Declaration><![CDATA[METHOD M_Remove : BOOL
+      <Declaration><![CDATA[METHOD M_Remove : bool
 VAR_INPUT
 	Position:			DINT;
 END_VAR]]></Declaration>

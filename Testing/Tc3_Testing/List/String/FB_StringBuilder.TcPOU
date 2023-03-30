@@ -89,14 +89,91 @@ END_VAR]]></Declaration>
 M_AppendREAL:= THIS^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Find" Id="{bdf827ee-cb2f-0b2a-285b-3c9de78c6af6}">
-      <Declaration><![CDATA[METHOD M_Find : UDINT
+    <Method Name="M_Contains" Id="{c67d02ab-f387-0562-19e3-1fdf809d8c84}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Contains : BOOL
 VAR_INPUT
-	sValue: STRING;
+	Value	: STRING(255);
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Find:= FIND2(pList, adr(sValue));]]></ST>
+        <ST><![CDATA[M_Contains:= M_Find(Value) <> 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Find" Id="{bdf827ee-cb2f-0b2a-285b-3c9de78c6af6}">
+      <Declaration><![CDATA[METHOD M_Find : UDINT
+VAR_INPUT
+	Value	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Find:= FIND2(pList, adr(Value));]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Insert" Id="{67f710af-d9b9-0cd0-2ba2-399c2edf9c98}">
+      <Declaration><![CDATA[METHOD M_Insert : I_StringBuilder
+VAR_INPUT
+	Position:	UDINT;
+	Value:		STRING(255);
+END_VAR
+VAR
+	pValue: 	POINTER TO BYTE:=ADR(Value);
+	nValue:		UDINT:= LEN2(pValue);
+	pOldList:	POINTER TO BYTE:= pList;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF nLength > Position AND Position <> 0 THEN
+		// new Length
+	nLength:= nLength + nValue;
+	// new pointer
+	pList:= __NEW(BYTE, (SIZEOF(BYTE) * (nLength + 1)));
+	// Insert
+	INSERT2(pOldList, pValue, pList, nLength, Position -1);
+	// delete old
+	__DELETE(pOldList);
+END_IF
+M_Insert:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Remove" Id="{905801fe-f874-010b-38d6-eca2e2e1ff5c}">
+      <Declaration><![CDATA[METHOD M_Remove : I_StringBuilder
+VAR_INPUT
+	Position:	UDINT;
+	Length:		UDINT;
+END_VAR
+VAR
+	pOldList:	POINTER TO BYTE:= pList;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (nLength - Position) > 0 THEN
+		// new Length
+	nLength:= nLength - Length;
+	// new pointer
+	pList:= __NEW(BYTE, (SIZEOF(BYTE) * (nLength + 1)));
+	// Insert
+	REPLACE2(pOldList, 0, pList, nLength, Length, Position); 
+	// delete old
+	__DELETE(pOldList);
+END_IF
+M_Remove:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Replace" Id="{28608a49-585a-0fb8-13db-3eff3a44fb61}">
+      <Declaration><![CDATA[METHOD M_Replace : I_StringBuilder
+VAR_INPUT
+	Target:		STRING(255);
+	Value:		STRING(255);
+END_VAR
+VAR
+	pOldList:	POINTER TO BYTE:= pList;
+	nPosition: 	UDINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nPosition:= M_Find(Target);
+IF (nPosition <> 0) THEN
+	M_Remove(nPosition, Len2(ADR(Target)));
+	M_Insert(nPosition, Value);
+END_IF
+M_Replace:= THIS^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Reset" Id="{fc3baabb-d4a7-08e7-3d21-7dd7a233d0d0}">
@@ -162,7 +239,36 @@ END_VAR
       <LineId Id="26" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_StringBuilder.M_Contains">
+      <LineId Id="5" Count="0" />
+    </LineIds>
     <LineIds Name="FB_StringBuilder.M_Find">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StringBuilder.M_Insert">
+      <LineId Id="20" Count="0" />
+      <LineId Id="43" Count="3" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StringBuilder.M_Remove">
+      <LineId Id="20" Count="0" />
+      <LineId Id="43" Count="3" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="38" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_StringBuilder.M_Replace">
+      <LineId Id="78" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="75" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_Reset">

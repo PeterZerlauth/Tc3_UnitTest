@@ -88,7 +88,7 @@ END_WHILE]]></ST>
     <Method Name="M_Insert" Id="{6d66fd7b-af1e-0a73-0590-29550cb06d1b}">
       <Declaration><![CDATA[METHOD PUBLIC M_Insert : BOOL
 VAR_INPUT
-	Position:		DINT;
+	Position:		UDINT;
 	Value:			STRING(255);
 END_VAR
 VAR

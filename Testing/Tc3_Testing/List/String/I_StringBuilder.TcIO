@@ -29,6 +29,41 @@ VAR_INPUT
 	Decimals:	SINT;
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_Contains" Id="{74317bae-5e12-0a37-3a16-0b339f34807e}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Contains : BOOL
+VAR_INPUT
+	Value	: STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Find" Id="{1f3e8d49-9a77-09ce-067b-462519976714}">
+      <Declaration><![CDATA[METHOD M_Find : UDINT
+VAR_INPUT
+	Value	: STRING(255);
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="M_Insert" Id="{a5a38218-1f4c-01ff-2b1b-ab5893013608}">
+      <Declaration><![CDATA[METHOD M_Insert : I_StringBuilder
+VAR_INPUT
+	Position:	UDINT;
+	Value:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Remove" Id="{76d21321-4b15-00ee-14ed-3c5f85060525}">
+      <Declaration><![CDATA[METHOD M_Remove : I_StringBuilder
+VAR_INPUT
+	Position:	UDINT;
+	Length:		UDINT;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Replace" Id="{b6703233-b9c6-04c9-1787-fcb0a8311196}">
+      <Declaration><![CDATA[METHOD M_Replace : I_StringBuilder
+VAR_INPUT
+	Target:		STRING(255);
+	Value:		STRING(255);
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Reset" Id="{c51c1de9-e242-0e2e-15b4-007d70478885}">
       <Declaration><![CDATA[METHOD M_Reset : I_StringBuilder
 ]]></Declaration>

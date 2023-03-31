@@ -4,10 +4,6 @@ Unit testing Twincat 3
 A easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
 
-
-### Docs
-https://peterzerlauth.github.io/Testing/
-
 ### Example
 ```pascal
 // Run

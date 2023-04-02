@@ -32,8 +32,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Remove" Id="{3d146390-4ec0-0a33-08ae-7d967444c553}">
-      <Declaration><![CDATA[METHOD M_Remove : bool
+    <Method Name="M_Remove" Id="{4adaef40-cc67-00bf-08be-ccbd7cf4e37a}">
+      <Declaration><![CDATA[METHOD M_Remove : BOOL
 VAR_INPUT
 	Position:			DINT;
 END_VAR]]></Declaration>

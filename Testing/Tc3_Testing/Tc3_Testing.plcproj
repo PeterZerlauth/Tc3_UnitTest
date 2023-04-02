@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.1.1</ProjectVersion>
+    <ProjectVersion>0.0.1.2</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -66,13 +66,13 @@
     <Compile Include="Base\I_Base.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="List\Builder\FB_StringBuilder.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="List\Builder\I_StringBuilder.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="List\Object\I_Object.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\String\FB_StringBuilder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\String\I_StringBuilder.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Logger\E_LogLevel.TcDUT">
@@ -138,6 +138,7 @@
     <Folder Include="Base" />
     <Folder Include="File" />
     <Folder Include="List" />
+    <Folder Include="List\Builder" />
     <Folder Include="List\String" />
     <Folder Include="List\Object" />
     <Folder Include="Logger" />

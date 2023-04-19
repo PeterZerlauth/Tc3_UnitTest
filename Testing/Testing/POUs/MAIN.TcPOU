@@ -37,6 +37,8 @@ fbTestsuites.M_Add(fbTestsuite1);
 {region "fbTestsuite1"}
 // Run
 fbTestsuite1();
+fbTestsuite1.P_File:= 'SomeTcPou';
+	 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
 		// First test case
@@ -171,7 +173,9 @@ END_CASE
       <LineId Id="1082" Count="3" />
       <LineId Id="1416" Count="0" />
       <LineId Id="1089" Count="4" />
-      <LineId Id="1098" Count="50" />
+      <LineId Id="1098" Count="2" />
+      <LineId Id="1529" Count="1" />
+      <LineId Id="1101" Count="47" />
       <LineId Id="1482" Count="0" />
       <LineId Id="1484" Count="0" />
       <LineId Id="1507" Count="0" />

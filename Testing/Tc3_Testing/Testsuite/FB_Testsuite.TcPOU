@@ -7,6 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR
+	stOptions:			ST_TestsuiteOptions;
 	stTestsuite:		ST_Testsuite;
 	stTestcase:			ST_Testcase;
 	nActual:			INT:=  E_Testcase.Init;
@@ -19,7 +20,6 @@ VAR
 	fbList:				FB_ListSTRING;
 	fbAssert:			FB_Assert;
 	iLogger:			I_Logger;
-  bAbortOnFailedAssert : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -128,11 +128,12 @@ IF nActual <> nNext THEN
 			stTestsuite.nAssertions:= stTestsuite.nAssertions + fbAssert.nAssert;
 			stTestcase.fTime:= 0.0;
 			fbTimeout(IN:= FALSE);
-      IF bAbortOnFailedAssert THEN // won't have an effect if the last test. Final line of code would cause normal exit.
-        iLogger.M_Error('Tests halted on failed assert.');
-        nActual := E_Testcase.Done;
-      ELSE
-        nActual := nNext;
+			IF stOptions.bAbortOnError THEN
+				// won't have an effect if the last test. Final line of code would cause normal exit
+				iLogger.M_Error('Tests halted on failed assert');
+				nActual := E_Testcase.Done;
+			ELSE
+				nActual := nNext;
 			END_IF
 		END_IF
 	END_IF
@@ -248,25 +249,6 @@ fbTimeout.PT:= Timeout;
 nNext:= Next;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_AbortOnFailedAssert" Id="{2e5bc501-e4a1-0ec3-32fb-ab288b3ddc76}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_AbortOnFailedAssert : BOOL]]></Declaration>
-      <Get Name="Get" Id="{129b8483-9d51-087d-18e0-daa5f4ada1f3}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_AbortOnFailedAssert := bAbortOnFailedAssert;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{79c57f65-aee5-002c-2013-0cb0fa7cde90}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[bAbortOnFailedAssert := P_AbortOnFailedAssert;]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <Property Name="P_Assert" Id="{e23dc60a-455c-05e0-203b-c87d7f0bf2be}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Assert : I_Assert]]></Declaration>
       <Get Name="Get" Id="{af1ab888-05f6-09a5-0125-87c54b409f9b}">
@@ -327,6 +309,17 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
+    <Property Name="P_Options" Id="{2e5bc501-e4a1-0ec3-32fb-ab288b3ddc76}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
+      <Get Name="Get" Id="{129b8483-9d51-087d-18e0-daa5f4ada1f3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Options ref= stOptions;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="P_Parent" Id="{26b3c1be-b48f-0a73-3f11-669666d67824}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
       <Get Name="Get" Id="{cbeb0dff-5be2-0eeb-3c4b-d2308bd2f226}">
@@ -357,5 +350,54 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <LineIds Name="FB_Testsuite">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.M_Execute">
+      <LineId Id="117" Count="108" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.M_Starting">
+      <LineId Id="3" Count="22" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.M_Stopping">
+      <LineId Id="3" Count="36" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.M_Testcase">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Assert.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_File.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_File.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_List.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Logger.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Logger.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Options.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Parent.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Parent.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Testcase.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

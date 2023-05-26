@@ -27,6 +27,12 @@
         <Declaration><![CDATA[]]></Declaration>
       </Set>
     </Property>
+    <Property Name="P_Options" Id="{95855609-76ef-038e-19f4-6cb57a551cda}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
+      <Get Name="Get" Id="{66a90f66-147e-08b8-06bc-16760d564648}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Property Name="P_Parent" Id="{dec8515c-cb5f-06f1-34a8-4435601bd530}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
       <Get Name="Get" Id="{bf712599-e9a4-0d4b-2139-f66f32ed9d3c}">

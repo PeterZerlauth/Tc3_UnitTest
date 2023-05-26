@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_TestsuiteOptions" Id="{6fbd3cc6-28e8-07e8-0647-7149a51c793f}">
+    <Declaration><![CDATA[TYPE ST_TestsuiteOptions :
+STRUCT
+		bAbortOnError:			BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

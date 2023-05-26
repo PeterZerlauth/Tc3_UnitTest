@@ -66,6 +66,9 @@ xml format from https://github.com/testmoapp/junitxml
 </testsuites>
 ```
 
+![grafik](https://github.com/PeterZerlauth/Testing/assets/48495545/e5bd0a1f-5c42-4650-aa56-1a0818cb9795)
+
+
 
 <a href="https://www.buymeacoffee.com/9wjvwz24g6b"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=9wjvwz24g6b&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
 

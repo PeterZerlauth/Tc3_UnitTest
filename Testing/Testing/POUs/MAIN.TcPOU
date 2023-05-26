@@ -38,6 +38,7 @@ fbTestsuites.M_Add(fbTestsuite1);
 // Run
 fbTestsuite1();
 fbTestsuite1.P_File:= 'SomeTcPou';
+fbTestsuite1.P_AbortOnFailedAssert := TRUE;
 	 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
@@ -45,13 +46,16 @@ CASE fbTestsuite1.P_Testcase OF
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
 //		 fbTestsuite4.P_Assert.M_Skip('Test skipped');
-//		fbTestsuite1.P_Assert.M_IsTRUE(false, 'Test error');
+//    fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);	
 		
 	1:
 		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
 		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
+       
+    
+    fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
 		
 	2:
@@ -168,26 +172,5 @@ CASE fbTestsuite3.P_Testcase OF
 END_CASE
 {endregion}]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="1451" Count="0" />
-      <LineId Id="1082" Count="3" />
-      <LineId Id="1416" Count="0" />
-      <LineId Id="1089" Count="4" />
-      <LineId Id="1098" Count="2" />
-      <LineId Id="1529" Count="1" />
-      <LineId Id="1101" Count="47" />
-      <LineId Id="1482" Count="0" />
-      <LineId Id="1484" Count="0" />
-      <LineId Id="1507" Count="0" />
-      <LineId Id="1485" Count="0" />
-      <LineId Id="1153" Count="3" />
-      <LineId Id="1417" Count="0" />
-      <LineId Id="1419" Count="0" />
-      <LineId Id="1157" Count="23" />
-      <LineId Id="1475" Count="0" />
-      <LineId Id="1182" Count="4" />
-      <LineId Id="1423" Count="0" />
-      <LineId Id="1187" Count="38" />
-    </LineIds>
   </POU>
 </TcPlcObject>

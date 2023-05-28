@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="ST_TestsuitesOptions" Id="{35fe7c25-eb7f-0cbb-248f-108bcdaec583}">
+    <Declaration><![CDATA[TYPE ST_TestsuitesOptions :
+STRUCT
+	sFilePathName:		STRING(255):= 'C:\report.xml';		// as Property
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

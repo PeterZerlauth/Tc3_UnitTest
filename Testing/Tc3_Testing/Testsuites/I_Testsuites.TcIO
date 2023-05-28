@@ -9,18 +9,15 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
-    <Property Name="P_FilePathName" Id="{a0c7ee79-698b-0af7-3e84-03eb51d5de1f}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_FilePathName : String(255)]]></Declaration>
-      <Get Name="Get" Id="{74251be9-7ad7-054a-0e7f-43b5278f941e}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-      <Set Name="Set" Id="{c6a7e466-e815-032b-0afe-fa15a5887f59}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Set>
-    </Property>
     <Property Name="P_List" Id="{2894c1aa-7a7c-0cc9-216c-5c628c5f3c09}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
       <Get Name="Get" Id="{cf580b2f-d72c-0b8a-01bc-4c4ee7bcbb85}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="P_Options" Id="{cac67df2-87b6-04eb-1648-4410cde413cc}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
+      <Get Name="Get" Id="{9f9c64ea-3b7f-00ce-05a0-5c3ad432879f}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>

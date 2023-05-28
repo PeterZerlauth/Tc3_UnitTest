@@ -7,8 +7,7 @@ END_VAR
 VAR_OUTPUT
 END_VAR
 VAR	
-	{attribute 'TcInitSymbol'}
-	sFilePathName:		STRING(255):= 'C:\report.xml';		// as Property or init symbol
+	stOptions:			ST_TestsuitesOptions;
 	stTestsuites:    	ST_Testsuites;
 	nIndex: 			DINT;
 	fbTimeout:			TON:= (PT:= T#300S);
@@ -157,12 +156,12 @@ END_VAR]]></Declaration>
 		nState:= 2;
 			
 	2:
-		IF fbFile.M_Delete(sFilePathName) THEN
+		IF fbFile.M_Delete(stOptions.sFilePathName) THEN
 			nState:= 3;
 		END_IF	
 	
 	3:
-		IF fbFile.M_Create(sFilePathName) THEN
+		IF fbFile.M_Create(stOptions.sFilePathName) THEN
 			nState:= 4;
 			nIndex:= 0;
 		END_IF
@@ -191,25 +190,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="P_FilePathName" Id="{fc679f92-417c-026f-27ab-acefc2a3ef66}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_FilePathName : String(255)]]></Declaration>
-      <Get Name="Get" Id="{31fff3dd-e9db-059c-17a4-8c9a978fed83}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[P_FilePathName:= sFilePathName;]]></ST>
-        </Implementation>
-      </Get>
-      <Set Name="Set" Id="{b8cfbbc6-70e4-05d8-3ad2-fa6b01d9d259}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[sFilePathName:= P_FilePathName;]]></ST>
-        </Implementation>
-      </Set>
-    </Property>
     <Property Name="P_List" Id="{18052295-5436-0cc4-08da-cc28d1b6063a}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
       <Get Name="Get" Id="{2c6d35e0-576a-0ff0-3193-2cb041a9eff0}">
@@ -218,6 +198,17 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[P_List:= fbList;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="P_Options" Id="{b002cd87-c770-09ae-1503-5331f5df2bbd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
+      <Get Name="Get" Id="{6fb98d57-94a8-09a2-3c9d-c10b57979947}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Options ref= stOptions;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -325,13 +316,10 @@ END_VAR
     <LineIds Name="FB_Testsuites.P_Data.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
-    <LineIds Name="FB_Testsuites.P_FilePathName.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.P_FilePathName.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
     <LineIds Name="FB_Testsuites.P_List.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Options.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

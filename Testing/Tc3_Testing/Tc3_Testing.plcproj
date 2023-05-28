@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.1.6</ProjectVersion>
+    <ProjectVersion>0.0.1.7</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -118,6 +118,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuites\I_Testsuites.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Testsuites\ST_TestsuitesOptions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Testsuites\ST_Testsuites.TcDUT">

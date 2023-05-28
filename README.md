@@ -10,7 +10,7 @@ Outputs will be stored in standard JUNIT xml file format
 fbTestsuites();
 
 IF bExecute THEN
-	fbTestsuites.P_FilePathName:= 'C:\test\report.xml';
+	fbTestsuites.P_Options.sFilePathName:= 'C:\test\report.xml';
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 

@@ -4,6 +4,13 @@ Unit testing Twincat 3
 A easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
 
+* Lightweitht
+* Repeatable
+* Easy to Use
+* CI/CD pipeline integratable
+* Remote start
+* runs also on Cx
+
 ### Example
 ```pascal
 // Run

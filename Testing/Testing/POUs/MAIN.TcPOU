@@ -46,7 +46,7 @@ CASE fbTestsuite1.P_Testcase OF
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
 //			fbTestsuite4.P_Assert.M_Skip('Test skipped');
-//    		fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
+//    	fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);	
 		
 	1:

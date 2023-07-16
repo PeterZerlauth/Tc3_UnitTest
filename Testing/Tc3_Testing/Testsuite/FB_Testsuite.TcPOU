@@ -119,8 +119,6 @@ IF nActual <> nNext THEN
 				END_IF
 				nIndex:= nIndex + 1;
 			END_WHILE
-      
-			fbList.M_Add('$T$T</testcase>');
 			stTestsuite.nTests:= stTestsuite.nTests + 1;
 			stTestsuite.nFailures:= stTestsuite.nFailures + fbAssert.nFailures;
 			stTestsuite.nErrors:= stTestsuite.nErrors + fbAssert.nErrors;
@@ -129,12 +127,15 @@ IF nActual <> nNext THEN
 			stTestcase.fTime:= 0.0;
 			fbTimeout(IN:= FALSE);
 			IF stOptions.bAbortOnError THEN
-				// won't have an effect if the last test. Final line of code would cause normal exit
-				iLogger.M_Error('Tests halted on failed assert');
+				// Aborted on error in test results
+				iLogger.M_Error('Aborted on Error');
+				stTestsuite.nFailures:= stTestsuite.nFailures + 1;
+				fbList.M_Add('$T$T$T"Aborted on Error"');
 				nActual := E_Testcase.Done;
 			ELSE
 				nActual := nNext;
 			END_IF
+			fbList.M_Add('$T$T</testcase>');
 		END_IF
 	END_IF
 END_IF
@@ -354,7 +355,15 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Execute">
-      <LineId Id="117" Count="108" />
+      <LineId Id="117" Count="85" />
+      <LineId Id="205" Count="7" />
+      <LineId Id="234" Count="0" />
+      <LineId Id="214" Count="0" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="232" Count="0" />
+      <LineId Id="215" Count="3" />
+      <LineId Id="231" Count="0" />
+      <LineId Id="219" Count="6" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Starting">

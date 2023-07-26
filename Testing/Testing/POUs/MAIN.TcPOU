@@ -40,8 +40,8 @@ fbTestsuite1();
 fbTestsuite1.P_File:= 'Some.TcPou';
 fbTestsuite1.P_Options.bAbortOnError:= FALSE;
 
-fbTestsuite1.P_Property.M_Add('Name', 'Value');
-fbTestsuite1.P_Property.M_Add('Name1', 'Value1');
+//fbTestsuite1.P_Property.M_Add('Name', 'Value');
+//fbTestsuite1.P_Property.M_Add('Name1', 'Value1');
 	 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:

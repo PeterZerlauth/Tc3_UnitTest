@@ -39,6 +39,9 @@ fbTestsuites.M_Add(fbTestsuite1);
 fbTestsuite1();
 fbTestsuite1.P_File:= 'Some.TcPou';
 fbTestsuite1.P_Options.bAbortOnError:= FALSE;
+
+fbTestsuite1.P_Property.M_Add('Name', 'Value');
+fbTestsuite1.P_Property.M_Add('Name1', 'Value1');
 	 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
@@ -86,7 +89,7 @@ CASE fbTestsuite1.P_Testcase OF
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 7);
 		
 	7:
-		fbTestsuite1.P_Assert.M_Equals_UDINT(6 , fbBuilder.M_Reset().M_Append('Test %s Test %s').M_Search('%s'), 'FB_StringBuilder.M_Replace()');
+		fbTestsuite1.P_Assert.M_Equals_UDINT(6 , fbBuilder.M_Reset().M_Append('Test %s Test %s').M_Find('%s'), 'FB_StringBuilder.M_Replace()');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 8);
 			 
 	8:
@@ -170,7 +173,10 @@ END_CASE
 {endregion}]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="29" />
+      <LineId Id="3" Count="15" />
+      <LineId Id="174" Count="0" />
+      <LineId Id="172" Count="1" />
+      <LineId Id="19" Count="13" />
       <LineId Id="36" Count="113" />
       <LineId Id="2" Count="0" />
     </LineIds>

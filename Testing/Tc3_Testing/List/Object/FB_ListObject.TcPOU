@@ -39,7 +39,7 @@ END_VAR
 		pList:= __NEW(POINTER TO I_Object,DINT_TO_UDINT(nLength));
 	ELSE
 		// Item already in List
-		IF M_Search(Object) = -1 THEN
+		IF M_Find(Object) = -1 THEN
 			// backup 
 			pOldList:= pList;
 			// new Length
@@ -71,6 +71,27 @@ END_IF]]></ST>
 	nLength:= 0;
 	__DELETE(pList);
 END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Find" Id="{b4574359-c512-4073-955e-3a3fc1e43b2b}">
+      <Declaration><![CDATA[METHOD M_Find : DINT
+VAR_INPUT
+	Object: 	I_Object;
+END_VAR
+VAR
+	nIndex: 	UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Object already in List
+M_Find := -1;
+WHILE nIndex < nLength DO
+    IF (pList[nIndex] = Object) THEN
+        M_Find := nIndex;
+        RETURN;
+    END_IF
+	nIndex := nIndex + 1;
+END_WHILE
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Get" Id="{d9624459-7fd8-4784-aea6-5c773f6a64a0}">
@@ -120,7 +141,7 @@ END_VAR]]></Declaration>
 	// First Item
 	IF nLength >= 0 THEN
 		// Item already in List
-		nPosition:= M_Search(Object);
+		nPosition:= M_Find(Object);
 		IF nPosition <> -1 THEN
 			// backup 
 			pOldList:= pList;
@@ -148,27 +169,6 @@ ELSE
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Search" Id="{b4574359-c512-4073-955e-3a3fc1e43b2b}">
-      <Declaration><![CDATA[METHOD M_Search : DINT
-VAR_INPUT
-	Object: 	I_Object;
-END_VAR
-VAR
-	nIndex: 	UINT;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[// Object already in List
-M_Search := -1;
-WHILE nIndex < nLength DO
-    IF (pList[nIndex] = Object) THEN
-        M_Search := nIndex;
-        RETURN;
-    END_IF
-	nIndex := nIndex + 1;
-END_WHILE
-]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="P_Length" Id="{0b018640-abb2-489d-958f-1e0d7c39741f}">
       <Declaration><![CDATA[PROPERTY P_Length : DINT
 ]]></Declaration>
@@ -188,11 +188,15 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.M_Add">
-      <LineId Id="129" Count="27" />
+      <LineId Id="164" Count="27" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.M_Clear">
       <LineId Id="3" Count="2" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_ListObject.M_Find">
+      <LineId Id="66" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.M_Get">
@@ -205,10 +209,6 @@ END_VAR
     </LineIds>
     <LineIds Name="FB_ListObject.M_Remove">
       <LineId Id="132" Count="28" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Search">
-      <LineId Id="66" Count="8" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.P_Length.Get">

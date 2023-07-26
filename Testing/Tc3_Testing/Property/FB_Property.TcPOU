@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_Property" Id="{9f663162-7495-088d-0f62-2a9bab2c599e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Property IMPLEMENTS I_Property
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbStringBuilder:	FB_StringBuilder;
+	fbList:				FB_ListSTRING;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="M_Add" Id="{a2860717-79b0-0674-3a4b-10a52016875b}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Add : BOOL
+VAR_INPUT
+	Name:			STRING(255);
+	Value:			STRING(255);
+END_VAR
+VAR
+	nPosition: DINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbStringBuilder.M_Reset();
+fbStringBuilder.M_Append('$T$T$T<property name="');
+fbStringBuilder.M_Append(Name);
+fbStringBuilder.M_Append('" value="');
+fbStringBuilder.M_Append(Value);
+fbStringBuilder.M_Append('" />');
+
+nPosition:= fbList.M_Find(fbStringBuilder.M_ToString());
+IF nPosition = -1 THEN
+	fbList.M_Add(fbStringBuilder.M_ToString());
+	M_Add:= TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Reset" Id="{eddb6b8d-8e19-018a-029c-46c6dc54bfcd}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbList.M_Clear();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="P_List" Id="{9de6c82c-01dc-0311-3188-815453a357f8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
+      <Get Name="Get" Id="{82c776c2-c9a9-06fc-1a5f-e6c70e7b25b9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_List:= fbList;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <LineIds Name="FB_Property">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Property.M_Add">
+      <LineId Id="8" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Property.M_Reset">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Property.P_List.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

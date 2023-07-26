@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <Itf Name="I_Property" Id="{cbdabd9b-e5d6-0a5c-2592-22fbe23807be}">
+    <Declaration><![CDATA[INTERFACE I_Property
+]]></Declaration>
+    <Method Name="M_Add" Id="{536505c6-450b-0c0a-09ad-e54c0e4af995}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Add : BOOL
+VAR_INPUT
+	Name:			STRING(255);
+	Value:			STRING(255);
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Reset" Id="{4633612c-6521-042e-27ef-3f71cf482de3}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Reset]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

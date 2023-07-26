@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.1.8</ProjectVersion>
+    <ProjectVersion>0.0.1.9</ProjectVersion>
     <DefaultNamespace>Tc3_Testing</DefaultNamespace>
     <Placeholder>Tc3_Testing</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -108,6 +108,12 @@
     <Compile Include="List\Object\I_ListObject.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Property\FB_Property.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Property\I_Property.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Testcase\E_Testcase.TcDUT">
       <SubType>Code</SubType>
     </Compile>
@@ -148,6 +154,7 @@
     <Folder Include="List\String" />
     <Folder Include="List\Object" />
     <Folder Include="Logger" />
+    <Folder Include="Property" />
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />

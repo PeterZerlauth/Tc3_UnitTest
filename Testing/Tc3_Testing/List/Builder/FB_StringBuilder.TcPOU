@@ -96,7 +96,17 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Contains:= M_Search(Value) <> 0;]]></ST>
+        <ST><![CDATA[M_Contains:= M_Find(Value) <> 0;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Find" Id="{bdf827ee-cb2f-0b2a-285b-3c9de78c6af6}">
+      <Declaration><![CDATA[METHOD M_Find : UDINT
+VAR_INPUT
+	Value	: STRING(255);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Find:= FIND2(pString, adr(Value));]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Insert" Id="{67f710af-d9b9-0cd0-2ba2-399c2edf9c98}">
@@ -131,16 +141,6 @@ M_Insert:= THIS^;]]></ST>
         <ST><![CDATA[__DELETE(pString);
 nLength:= 0;
 M_Reset:= THIS^;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="M_Search" Id="{bdf827ee-cb2f-0b2a-285b-3c9de78c6af6}">
-      <Declaration><![CDATA[METHOD M_Search : UDINT
-VAR_INPUT
-	Value	: STRING(255);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[M_Search:= FIND2(pString, adr(Value));]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_ToAny" Id="{e82dfe86-f804-0621-2a01-a384fa38ed4a}">
@@ -200,6 +200,9 @@ END_VAR
     <LineIds Name="FB_StringBuilder.M_Contains">
       <LineId Id="5" Count="0" />
     </LineIds>
+    <LineIds Name="FB_StringBuilder.M_Find">
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="FB_StringBuilder.M_Insert">
       <LineId Id="20" Count="0" />
       <LineId Id="43" Count="3" />
@@ -212,9 +215,6 @@ END_VAR
     <LineIds Name="FB_StringBuilder.M_Reset">
       <LineId Id="3" Count="0" />
       <LineId Id="5" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Search">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_StringBuilder.M_ToAny">

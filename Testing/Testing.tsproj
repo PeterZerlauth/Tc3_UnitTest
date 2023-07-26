@@ -66,7 +66,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{57907D54-DAD7-7C4C-8932-E90A2EBB427F}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{4E9D51A1-7E2A-7201-3684-6028A8E66648}">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

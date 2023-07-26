@@ -13,6 +13,12 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD M_Clear
 ]]></Declaration>
     </Method>
+    <Method Name="M_Find" Id="{9664ac8e-a0b9-0c4a-2c05-31740cc2cdc9}">
+      <Declaration><![CDATA[METHOD M_Find : DINT
+VAR_INPUT
+	Object: 	I_Object;
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="M_Get" Id="{69c7a09c-f8ba-07d1-3063-8e31f9cac43e}">
       <Declaration><![CDATA[METHOD M_Get : I_Object
 VAR_INPUT
@@ -28,12 +34,6 @@ END_VAR]]></Declaration>
     </Method>
     <Method Name="M_Remove" Id="{07441ba8-075c-0fa5-0895-940b56f7439a}">
       <Declaration><![CDATA[METHOD M_Remove : BOOL
-VAR_INPUT
-	Object: 	I_Object;
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Search" Id="{9664ac8e-a0b9-0c4a-2c05-31740cc2cdc9}">
-      <Declaration><![CDATA[METHOD M_Search : DINT
 VAR_INPUT
 	Object: 	I_Object;
 END_VAR]]></Declaration>

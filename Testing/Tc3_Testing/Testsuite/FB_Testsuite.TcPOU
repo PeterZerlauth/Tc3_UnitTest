@@ -18,6 +18,7 @@ VAR
 	fbRuntime:			TON:= (PT:= T#300S);
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
+	fbProperty:			FB_Property;
 	fbAssert:			FB_Assert;
 	iLogger:			I_Logger;
 END_VAR
@@ -213,6 +214,18 @@ fbBuilder.M_Append(stTestsuite.sFile);
 fbBuilder.M_Append('">');
 fbBuilder.M_ToAny(sValue);
 fbList.M_Insert(0, sValue);
+
+// add Properties
+IF fbProperty.P_List.P_Length > 0 THEN
+	fbList.M_Insert(1, '$T$T<properties>');
+	nIndex:= 0;
+	WHILE nIndex < fbProperty.P_List.P_Length DO
+		fbList.M_Insert(2 + nIndex, fbProperty.P_List.M_Item(nIndex));
+		nIndex:= nIndex + 1;
+	END_WHILE
+	fbList.M_Insert(2 + nIndex, '$T$T</properties>');
+END_IF
+
 fbList.M_Add('$T</testsuite>');
 IF iParent <> 0 THEN
 	iParent.P_Data.nTests:= iParent.P_Data.nTests + stTestsuite.nTests;
@@ -220,6 +233,7 @@ IF iParent <> 0 THEN
 	iParent.P_Data.nErrors:= iParent.P_Data.nErrors + stTestsuite.nErrors;
 	iParent.P_Data.nSkipped:= iParent.P_Data.nSkipped + stTestsuite.nSkipped;
 	iParent.P_Data.nAssertions:= iParent.P_Data.nAssertions + stTestsuite.nAssertions;
+	nIndex:= 0;
 	WHILE nIndex < fbList.P_Length DO
 		iParent.P_List.M_Add(fbList.M_Item(nIndex));
 		nIndex:= nIndex + 1;
@@ -340,6 +354,17 @@ END_VAR
         </Implementation>
       </Set>
     </Property>
+    <Property Name="P_Property" Id="{a46db9ad-4fab-0fc2-07b5-c5ae0ff4ad08}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Property : I_Property]]></Declaration>
+      <Get Name="Get" Id="{b1ed9464-0054-0f85-1536-c15702869773}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Property:= fbProperty;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="P_Testcase" Id="{3b7b6a2e-6d4a-0f0e-2a1d-3d960844879b}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Testcase : int]]></Declaration>
       <Get Name="Get" Id="{854def52-87cb-03f8-22d6-ee5144597bf5}">
@@ -371,7 +396,16 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Stopping">
-      <LineId Id="3" Count="36" />
+      <LineId Id="3" Count="22" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="60" Count="5" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="26" Count="6" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="33" Count="6" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Testcase">
@@ -403,6 +437,9 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Parent.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuite.P_Property.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.P_Testcase.Get">

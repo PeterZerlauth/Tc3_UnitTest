@@ -65,6 +65,27 @@ M_Add:= TRUE;]]></ST>
 END_IF]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Find" Id="{9af81950-5ba8-0340-3e5f-5b6e67170a1c}">
+      <Declaration><![CDATA[METHOD M_Find : DINT
+VAR_INPUT
+	Value:		STRING(255);
+END_VAR
+VAR
+	nIndex: 	UINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Object already in List
+M_Find := -1;
+WHILE nIndex < nLength DO
+    IF pList[nIndex] = Value THEN
+        M_Find := nIndex;
+        RETURN;
+    END_IF
+	nIndex := nIndex + 1;
+END_WHILE
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Index" Id="{f499fc6d-d45b-0ca4-2495-d9d9df4f4408}">
       <Declaration><![CDATA[METHOD M_Index : DINT
 VAR_INPUT
@@ -158,25 +179,14 @@ END_IF
 M_Remove:= TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Search" Id="{9af81950-5ba8-0340-3e5f-5b6e67170a1c}">
-      <Declaration><![CDATA[METHOD M_Search : DINT
+    <Method Name="M_Set" Id="{cbc5c041-51fe-0879-2b00-d2e13e08e069}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Set : BOOL
 VAR_INPUT
-	Value:		STRING(255);
-END_VAR
-VAR
-	nIndex: 	UINT;
+	Index:			DINT;
+	Value:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[// Object already in List
-M_Search := -1;
-WHILE nIndex < nLength DO
-    IF pList[nIndex] = Value THEN
-        M_Search := nIndex;
-        RETURN;
-    END_IF
-	nIndex := nIndex + 1;
-END_WHILE
-]]></ST>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Length" Id="{4be58bcd-8d3b-06e7-25c0-02f6b9f73cce}">
@@ -208,6 +218,10 @@ END_VAR
       <LineId Id="7" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
+    <LineIds Name="FB_ListSTRING.M_Find">
+      <LineId Id="66" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
     <LineIds Name="FB_ListSTRING.M_Index">
       <LineId Id="45" Count="8" />
     </LineIds>
@@ -227,9 +241,8 @@ END_VAR
       <LineId Id="124" Count="17" />
       <LineId Id="72" Count="0" />
     </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Search">
-      <LineId Id="45" Count="8" />
-      <LineId Id="2" Count="0" />
+    <LineIds Name="FB_ListSTRING.M_Set">
+      <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.P_Length.Get">
       <LineId Id="2" Count="0" />

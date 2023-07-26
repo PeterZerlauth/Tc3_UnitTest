@@ -160,6 +160,7 @@ END_VAR]]></Declaration>
 	0:
 		IF 	SUPER^.M_Starting() THEN
 			fbList.M_Clear();
+			fbProperty.P_List.M_Clear();
 			fCycleTime:= F_GetCycleTime();	
 			stTestsuite.sName:= F_GetName(sInstancePath);
 			stTestsuite.nTests:= 0;
@@ -223,7 +224,6 @@ IF fbProperty.P_List.P_Length > 0 THEN
 		fbList.M_Insert(2 + nIndex, fbProperty.P_List.M_Item(nIndex));
 		nIndex:= nIndex + 1;
 	END_WHILE
-	fbProperty.P_List.M_Clear();
 	fbList.M_Insert(2 + nIndex, '$T$T</properties>');
 END_IF
 
@@ -393,7 +393,9 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Starting">
-      <LineId Id="3" Count="22" />
+      <LineId Id="3" Count="3" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="7" Count="18" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuite.M_Stopping">
@@ -402,7 +404,6 @@ END_VAR
       <LineId Id="66" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="60" Count="5" />
-      <LineId Id="74" Count="0" />
       <LineId Id="58" Count="1" />
       <LineId Id="56" Count="0" />
       <LineId Id="26" Count="6" />

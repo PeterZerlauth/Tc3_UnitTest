@@ -42,7 +42,6 @@ xml format from https://github.com/testmoapp/junitxml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="fbTestsuites" tests="21" failures="0" errors="0" skipped="0" assertions="30" time="0.300" timestamp="2023-07-26T15:09:41.665">
 	<testsuite name="fbTestsuite2" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2023-07-26T15:09:41.705" file="">
 		<testcase name="fbTestsuite2.M_Testcase_0" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />

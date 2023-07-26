@@ -42,15 +42,20 @@ xml format from https://github.com/testmoapp/junitxml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="fbTestsuites" tests="21" failures="0" errors="0" skipped="0" assertions="30" time="0.300" timestamp="2023-03-24T22:37:21.777">
-	<testsuite name="fbTestsuite2" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2023-03-24T22:37:21.817" file="">
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="fbTestsuites" tests="21" failures="0" errors="0" skipped="0" assertions="30" time="0.300" timestamp="2023-07-26T15:09:41.665">
+	<testsuite name="fbTestsuite2" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2023-07-26T15:09:41.705" file="">
 		<testcase name="fbTestsuite2.M_Testcase_0" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite2.M_Testcase_1" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite2.M_Testcase_2" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite2.M_Testcase_3" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
 	</testsuite>
-	<testsuite name="fbTestsuite1" tests="9" failures="0" errors="0" skipped="0" assertions="14" time="0.080" timestamp="2023-03-24T22:37:21.817" file="">
-		<testcase name="fbTestsuite1.M_Testcase_0" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="__POSITION()" />
+	<testsuite name="fbTestsuite1" tests="9" failures="0" errors="0" skipped="0" assertions="14" time="0.080" timestamp="2023-07-26T15:09:41.705" file="Some.TcPou">
+		<properties>
+			<property name="Name" value="Value" />
+			<property name="Name1" value="Value1" />
+		</properties>
+		<testcase name="fbTestsuite1.M_Testcase_0" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite1.M_Testcase_1" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite1.M_Testcase_2" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite1.M_Testcase_3" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
@@ -60,7 +65,7 @@ xml format from https://github.com/testmoapp/junitxml
 		<testcase name="fbTestsuite1.M_Testcase_7" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
 		<testcase name="fbTestsuite1.M_Testcase_8" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
 	</testsuite>
-	<testsuite name="fbTestsuite3" tests="8" failures="0" errors="0" skipped="0" assertions="8" time="0.250" timestamp="2023-03-24T22:37:21.817" file="">
+	<testsuite name="fbTestsuite3" tests="8" failures="0" errors="0" skipped="0" assertions="8" time="0.250" timestamp="2023-07-26T15:09:41.705" file="">
 		<testcase name="fbTestsuite3.M_Testcase_0" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
 		<testcase name="fbTestsuite3.M_Testcase_1" classname="FB_File" assertions="1" time="0.0600" file="" line="" />
 		<testcase name="fbTestsuite3.M_Testcase_2" classname="FB_File" assertions="1" time="0.0300" file="" line="" />

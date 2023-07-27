@@ -1,7 +1,7 @@
 
 # ![check](https://user-images.githubusercontent.com/48495545/228613908-fd86b481-6052-455c-8fd1-57020d1d3b8a.svg) Tc3_Testing.library
-Unit testing Twincat 3
-A easy to use unit testing framework
+Unit testing Twincat 3,
+a easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
 
 * Lightweitht
@@ -41,7 +41,6 @@ END_CASE
 xml format from https://github.com/testmoapp/junitxml
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites name="fbTestsuites" tests="21" failures="0" errors="0" skipped="0" assertions="30" time="0.300" timestamp="2023-07-26T15:09:41.665">
 	<testsuite name="fbTestsuite2" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2023-07-26T15:09:41.705" file="">

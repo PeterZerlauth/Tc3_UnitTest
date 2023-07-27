@@ -41,7 +41,6 @@ fbTestsuite1.P_File:= 'Some.TcPou';
 fbTestsuite1.P_Options.bAbortOnError:= FALSE;
 
 fbTestsuite1.P_Property.M_Add('Name', 'Value');
-fbTestsuite1.P_Property.M_Add('Name', 'Value1');
 fbTestsuite1.P_Property.M_Add('Name1', 'Value1');
 	 
 CASE fbTestsuite1.P_Testcase OF
@@ -50,25 +49,25 @@ CASE fbTestsuite1.P_Testcase OF
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
 //			fbTestsuite4.P_Assert.M_Skip('Test skipped');
-//    	fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
+    	fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);	
 		
 	1:
 		fbBuilder.M_Reset().M_Append('Test').M_Append('-Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test-Test', 'FB_StringBuilder.M_Append().M_Append()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.P_Assert.M_Equals_UDINT(9, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 2);
 		
 	2:
 		fbBuilder.M_Reset().M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = '', 'FB_StringBuilder.M_Reset()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.P_Assert.M_Equals_UDINT(0, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 3);
 	
 	3:
 		fbBuilder.M_Reset().M_AppendBOOL(TRUE).M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'TRUE', 'FB_StringBuilder.M_AppendBOOL()');
-		fbTestsuite1.P_Assert.M_Equals_DINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
+		fbTestsuite1.P_Assert.M_Equals_UDINT(4, fbBuilder.P_Length, 'fbBuilder.P_Length');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 4);
 		
 	4:
@@ -176,7 +175,7 @@ END_CASE
     <LineIds Name="MAIN">
       <LineId Id="3" Count="15" />
       <LineId Id="174" Count="0" />
-      <LineId Id="172" Count="1" />
+      <LineId Id="172" Count="0" />
       <LineId Id="195" Count="0" />
       <LineId Id="19" Count="13" />
       <LineId Id="36" Count="113" />

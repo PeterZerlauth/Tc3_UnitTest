@@ -41,7 +41,7 @@
 			</Hides>
 		</DataType>
 	</DataTypes>
-	<Project ProjectGUID="{7CAAC051-3A3C-4F8D-9039-D7B6F336303B}" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{7CAAC051-3A3C-4F8D-9039-D7B6F336303B}" TargetNetId="192.0.0.10.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Licenses>
 				<Target BkhfOrder="none"/>

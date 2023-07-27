@@ -20,21 +20,27 @@ VAR_INPUT
 	Value:			STRING(255);
 END_VAR
 VAR
-	nPosition: DINT;
+	nIndex: 		INT;
+	sKey:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbStringBuilder.M_Reset();
 fbStringBuilder.M_Append('$T$T$T<property name="');
 fbStringBuilder.M_Append(Name);
+sKey:= fbStringBuilder.M_ToString();
 fbStringBuilder.M_Append('" value="');
 fbStringBuilder.M_Append(Value);
 fbStringBuilder.M_Append('" />');
 
-nPosition:= fbList.M_Find(fbStringBuilder.M_ToString());
-IF nPosition = -1 THEN
-	fbList.M_Add(fbStringBuilder.M_ToString());
-	M_Add:= TRUE;
-END_IF]]></ST>
+WHILE nIndex < fbList.P_Length DO
+	IF FIND(fbList.M_Item(nIndex), sKey) <> 0 THEN
+		fbList.M_Set(nIndex, fbStringBuilder.M_ToString());
+		RETURN;
+	END_IF
+	nIndex:= nIndex +1;
+END_WHILE
+fbList.M_Add(fbStringBuilder.M_ToString());
+M_Add:= TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Reset" Id="{eddb6b8d-8e19-018a-029c-46c6dc54bfcd}">
@@ -61,15 +67,20 @@ END_VAR
       <LineId Id="8" Count="0" />
       <LineId Id="10" Count="0" />
       <LineId Id="24" Count="0" />
+      <LineId Id="33" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="11" Count="0" />
       <LineId Id="9" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="37" Count="0" />
       <LineId Id="17" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
     </LineIds>
     <LineIds Name="FB_Property.M_Reset">
       <LineId Id="2" Count="0" />

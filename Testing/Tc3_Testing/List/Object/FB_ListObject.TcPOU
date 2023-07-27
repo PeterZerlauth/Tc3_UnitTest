@@ -55,6 +55,9 @@ END_VAR
 			RETURN;
 		END_IF
 	END_IF
+	IF pList = 0 THEN
+		RETURN;
+	END_IF
 	// add new Object
 	pList[nLength-1]:= Object;
 	M_Add:= TRUE;
@@ -188,7 +191,10 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.M_Add">
-      <LineId Id="164" Count="27" />
+      <LineId Id="164" Count="22" />
+      <LineId Id="200" Count="1" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="187" Count="4" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListObject.M_Clear">

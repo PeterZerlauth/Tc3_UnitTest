@@ -50,6 +50,9 @@ ELSE
 END_IF
 
 // add new Object
+IF pList = 0 THEN
+	RETURN;
+END_IF
 pList[nLength-1]:= Value;
 M_Add:= TRUE;]]></ST>
       </Implementation>
@@ -186,7 +189,9 @@ VAR_INPUT
 	Value:			STRING(255);
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[IF Index < (nLength) THEN
+	pList[Index]:= Value;
+END_IF]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Length" Id="{4be58bcd-8d3b-06e7-25c0-02f6b9f73cce}">
@@ -211,7 +216,9 @@ END_VAR
       <LineId Id="46" Count="4" />
       <LineId Id="53" Count="9" />
       <LineId Id="85" Count="0" />
-      <LineId Id="67" Count="3" />
+      <LineId Id="67" Count="1" />
+      <LineId Id="93" Count="2" />
+      <LineId Id="69" Count="1" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Clear">
       <LineId Id="3" Count="2" />
@@ -242,6 +249,7 @@ END_VAR
       <LineId Id="72" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.M_Set">
+      <LineId Id="10" Count="1" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="FB_ListSTRING.P_Length.Get">

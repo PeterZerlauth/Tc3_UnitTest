@@ -12,7 +12,7 @@ Outputs will be stored in standard JUNIT xml file format
 * runs also on Cx
 
 ### Example
-```pascal
+```ST    
 // Run
 fbTestsuites();
 

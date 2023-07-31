@@ -21,7 +21,7 @@ IF bExecute THEN
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 
-//// Add Testsuite to Testsuites
+// Add Testsuite to Testsuites
 fbTestsuites.M_Add(fbTestsuite1);
 {region "fbTestsuite1"}
 // Run

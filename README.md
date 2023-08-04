@@ -11,7 +11,7 @@ Outputs will be stored in standard JUNIT xml file format
 * Remote start
 * runs also on Cx
 
-### Example
+### Example 1
 ```ST    
 // Run
 fbTestsuites();
@@ -36,6 +36,10 @@ CASE fbTestsuite1.P_Testcase OF
 	
 END_CASE
 ```
+
+### Example 2
+![grafik](https://github.com/PeterZerlauth/Testing/assets/48495545/a5aa2a5a-661d-4e27-8b67-21b07b98972c)
+
 
 ### Resutls
 xml format from https://github.com/testmoapp/junitxml

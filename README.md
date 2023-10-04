@@ -6,7 +6,7 @@ Outputs will be stored in standard JUNIT xml file format
 
 * Lightweitht
 * Repeatable
-* Easy to Use
+* Easy to use
 * CI/CD pipeline integratable
 * Remote start
 * runs also on Cx

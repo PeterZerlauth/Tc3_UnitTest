@@ -12,6 +12,20 @@ pool: 'Default'    # self-hosted agent
 steps:
 - checkout: self
   displayName: 'Checkout'
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      function Kill-VisualStudio
+      {
+      <#
+      .SYNOPSIS
+        Kills all running 'devenv' instances.
+      #>
+        Get-Process devenv -ErrorAction SilentlyContinue | Stop-Process
+      }
+      
+      Set-Alias killvs Kill-VisualStudio
 
 - task: CmdLine@2
   displayName: Build twincat 3 library / run unit tests 

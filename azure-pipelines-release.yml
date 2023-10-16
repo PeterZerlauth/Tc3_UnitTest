@@ -16,16 +16,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      function Kill-VisualStudio
-      {
-      <#
-      .SYNOPSIS
-        Kills all running 'devenv' instances.
-      #>
-        Get-Process devenv -ErrorAction SilentlyContinue | Stop-Process
-      }
-      
-      Set-Alias killvs Kill-VisualStudio
+        Get-Process TcXaeShell -ErrorAction SilentlyContinue | Stop-Process
+
 
 - task: CmdLine@2
   displayName: Build twincat 3 library / run unit tests 

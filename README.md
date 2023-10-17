@@ -1,15 +1,13 @@
 
 # ![check](https://user-images.githubusercontent.com/48495545/228613908-fd86b481-6052-455c-8fd1-57020d1d3b8a.svg) Tc3_Testing.library
-Unit test Twincat 3, a easy to use unit testing framework 
-
+Unit test Twincat 3, a easy to use unit testing framework
 Outputs will be stored in standard JUNIT xml file format
-
-* Lightweitht
-* Repeatable
-* Easy to use
-* CI/CD pipeline integratable
-* Remote start
-* runs also on Cx
+•	Lightweight
+•	Repeatable
+•	Easy to use
+•	Remote start
+•	CI/CD pipeline supported
+•	small devices supported
 
 ### Example 1
 ```ST    

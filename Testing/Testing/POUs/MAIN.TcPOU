@@ -3,32 +3,32 @@
   <POU Name="MAIN" Id="{433aef42-481d-09d7-2a0d-9f4eb2c45d04}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	bExecute:		BOOL;
-	fbTestsuites:	FB_Testsuites;				// Testsuites
-	fbTestsuite1:	FB_Testsuite;				// Testsuite	FB_StringBuilder
-	fbTestsuite2:	FB_Testsuite;				// Testsuite	FB_ListSTRING
-	fbTestsuite3:	FB_Testsuite;				// Testsuite	FB_File
-
-	nIndex: 		INT;						// Test-vars
-	sValue:			STRING(255);				// Test-vars
-	sValue2:		STRING(255);				// Test-vars
-	sValue3:		STRING(255);				// Test-vars
-	fbFile:			FB_File;					// Test-vars	
-	fbList:			FB_ListSTRING;				// Test-vars
-	fbBuilder:		FB_StringBuilder;			// Test-vars
-	ARRAY1:			ARRAY [0..10] OF LREAL;
-	ARRAY2:			ARRAY [0..10] OF LREAL;
-	ARRAY3:			ARRAY [0..10] OF REAL;
-	ARRAY4:			ARRAY [0..10] OF REAL;
+	bExecute:				BOOL;
+	fbTestsuites:			FB_Testsuites;				// Testsuites
+	fbTestsuite1:			FB_Testsuite;				// Testsuite	FB_StringBuilder
+	fbTestsuite2:			FB_Testsuite;				// Testsuite	FB_ListSTRING
+	fbTestsuite3:			FB_Testsuite;				// Testsuite	FB_File
+	fbTestsuite4:			FB_Testsuite;				// Testsuite	Arrays
+                    		
+	nIndex: 				INT;						// Test-vars
+	sValue:					STRING(255);				// Test-vars
+	sValue2:				STRING(255);				// Test-vars
+	sValue3:				STRING(255);				// Test-vars
+	fbFile:					FB_File;					// Test-vars	
+	fbList:					FB_ListSTRING;				// Test-vars
+	fbBuilder:				FB_StringBuilder;			// Test-vars
+	fbAssert:				FB_Assert;
+	LREAL_ARRAY1:			ARRAY [0..10] OF LREAL;
+	LREAL_ARRAY2:			ARRAY [0..10] OF LREAL;
+	REAL_ARRAY3:			ARRAY [0..10] OF REAL;
+	REAL_ARRAY4:			ARRAY [0..10] OF REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-// Run
+      <ST><![CDATA[// Run
 fbTestsuites();
 
 IF bExecute THEN
-	fbTestsuites.P_Options.sFilePathName:= 'C:\test\report.xml';
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
 END_IF
 
@@ -37,19 +37,16 @@ fbTestsuites.M_Add(fbTestsuite1);
 {region "fbTestsuite1"}
 // Run
 fbTestsuite1();
-fbTestsuite1.P_File:= 'Some.TcPou';
-fbTestsuite1.P_Options.bAbortOnError:= FALSE;
+fbTestsuite1.P_File:= 'FB_StringBuilder';
 
-fbTestsuite1.P_Property.M_Add('Name', 'Value');
-fbTestsuite1.P_Property.M_Add('Name1', 'Value1');
+fbTestsuite1.P_Property.M_Add('Property1', 'Value1');
+fbTestsuite1.P_Property.M_Add('Property2', 'Value2');
 	 
 CASE fbTestsuite1.P_Testcase OF
 	E_Testcase.Start:
 		// First test case
 		fbBuilder.M_Reset().M_Append('Test').M_ToAny(sValue);
 		fbTestsuite1.P_Assert.M_IsTRUE(sValue = 'Test', 'FB_StringBuilder.M_Append()');
-//			fbTestsuite4.P_Assert.M_Skip('Test skipped');
-//	   		fbTestsuite1.P_Assert.M_IsTRUE(FALSE, 'Test error');
 		fbTestsuite1.M_Testcase('FB_StringBuilder', T#1S, '', '', 1);	
 		
 	1:
@@ -170,16 +167,50 @@ CASE fbTestsuite3.P_Testcase OF
 	E_Testcase.Done:;
 	
 END_CASE
-{endregion}]]></ST>
+{endregion}
+	 
+fbTestsuites.M_Add(fbTestsuite4);
+{region "fbTestsuite4"}
+fbTestsuite4();
+fbAssert.M_Reset();
+CASE fbTestsuite2.P_Testcase OF
+	E_Testcase.Start:
+		 	memset(ADR(LREAL_ARRAY2), 0, SIZEOF(LREAL_ARRAY2));
+		 	fbAssert.M_Equals_Array_LREAL(LREAL_ARRAY1, LREAL_ARRAY2, 0.0, 'LREAL Array passed');
+		 	fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nPassed, 'M_Equals_Array_LREAL');
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 1);
+				 
+		1:
+			LREAL_ARRAY2[0]:= 1.1;
+			fbAssert.M_Equals_Array_LREAL(LREAL_ARRAY1, LREAL_ARRAY2, 0.0, 'LREAL Array Faied');
+			fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nFailures, 'M_Equals_Array_LREAL');
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 2);		 
+					  
+		2:
+		 	memset(ADR(REAL_ARRAY4), 0, SIZEOF(REAL_ARRAY4));
+		 	fbAssert.M_Equals_Array_REAL(REAL_ARRAY3, REAL_ARRAY4, 0.0, 'REAL Array passed');
+		 	fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nPassed, 'M_Equals_Array_REAL');
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 3);
+				 
+		3:
+			REAL_ARRAY4[0]:= 1.1;
+			fbAssert.M_Equals_Array_REAL(REAL_ARRAY3, REAL_ARRAY4, 0.0, 'REAL Array Faied');
+			fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nFailures, 'M_Equals_Array_REAL');
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
+
+					   
+		
+	E_Testcase.Done:;
+	
+END_CASE
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
-      <LineId Id="3" Count="15" />
-      <LineId Id="174" Count="0" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="195" Count="0" />
-      <LineId Id="19" Count="13" />
-      <LineId Id="36" Count="113" />
-      <LineId Id="2" Count="0" />
+      <LineId Id="888" Count="146" />
+      <LineId Id="1069" Count="0" />
+      <LineId Id="1035" Count="26" />
+      <LineId Id="1064" Count="2" />
+      <LineId Id="233" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

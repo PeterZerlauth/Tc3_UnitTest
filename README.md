@@ -10,6 +10,7 @@ Outputs will be stored in standard JUNIT xml file format
 - Remote start
 - CI/CD pipeline supported
 - Small devices supported
+- Test and build tool (https://github.com/PeterZerlauth/TcBuild)
 
 
 ### Example 1

@@ -9,7 +9,7 @@ Outputs will be stored in standard JUNIT xml file format
 - Easy to use
 - Remote start
 - CI/CD pipeline supported
-- small devices supported
+- Small devices supported
 
 
 ### Example 1

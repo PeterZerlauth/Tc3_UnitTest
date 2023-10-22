@@ -189,6 +189,14 @@ VAR_INPUT
 	Message:			STRING(255);    // Message as string
 END_VAR]]></Declaration>
     </Method>
+    <Method Name="M_Equals_UXINT" Id="{42a32ff5-e95e-0acb-201f-22f3e06fd5e8}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UXINT : I_Assert
+VAR_INPUT
+	Expected:			UXINT;			// Expected as udint
+    Actual:				UXINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+    </Method>
     <Method Name="M_Equals_WSTRING" Id="{b67576ba-db17-0aaf-103d-b9281476ad75}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
 VAR_INPUT
@@ -196,6 +204,22 @@ VAR_INPUT
     Actual:				WSTRING(255);       // Actual as wstring
 	Message:			STRING(255);        // Message as string
 END_VAR]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_XINT" Id="{fe71f855-65ff-0e74-293c-f678aa85d8de}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_XINT : I_Assert
+VAR_INPUT
+	Expected:			XINT;			// Expected as udint
+    Actual:				XINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_XWORD" Id="{e49721e1-d752-04f4-283c-d678d339f1ff}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_XWORD : I_Assert
+VAR_INPUT
+	Expected:			XWORD;			// Expected as udint
+    Actual:				XWORD;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
     </Method>
     <Method Name="M_Error" Id="{f0e7a2f9-c312-0edc-2379-fc7ed26dd080}">
       <Declaration><![CDATA[METHOD PUBLIC M_Error

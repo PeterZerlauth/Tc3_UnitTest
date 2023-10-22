@@ -651,6 +651,30 @@ M_Equals_ULINT:= THIS^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="M_Equals_UXINT" Id="{9ad6b90f-546b-059c-11ae-1d602d76ab79}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_UXINT : I_Assert
+VAR_INPUT
+	Expected:			UXINT;			// Expected as udint
+    Actual:				UXINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+IF Expected = Actual THEN
+	M_Passed();
+ELSE
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
+END_IF
+M_Equals_UXINT:= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="M_Equals_WSTRING" Id="{d57eeb77-552a-03e8-31d9-648afdaf68b1}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_WSTRING : I_Assert
 VAR_INPUT
@@ -672,6 +696,54 @@ ELSE
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_WSTRING:= THIS^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_XINT" Id="{c5bc8c09-efe4-007f-174c-3880dc641861}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_XINT : I_Assert
+VAR_INPUT
+	Expected:			XINT;			// Expected as udint
+    Actual:				XINT;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+IF Expected = Actual THEN
+	M_Passed();
+ELSE
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
+END_IF
+M_Equals_XINT:= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_XWORD" Id="{3e7a48b1-bf26-0599-1212-743a1c4b8999}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_XWORD : I_Assert
+VAR_INPUT
+	Expected:			XWORD;			// Expected as udint
+    Actual:				XWORD;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+IF Expected = Actual THEN
+	M_Passed();
+ELSE
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append(TO_STRING(Expected));
+	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append(TO_STRING(Actual));
+	fbBuilder.M_Append('"');
+	M_Failure(fbBuilder.M_ToString(), Message);
+END_IF
+M_Equals_XWORD:= THIS^;
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="M_Error" Id="{8fb01682-0d3e-09d1-1052-e80c2a25c45c}">
@@ -1025,6 +1097,16 @@ nSkipped:= nSkipped + 1;
       <LineId Id="21" Count="0" />
       <LineId Id="40" Count="0" />
     </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_UXINT">
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="4" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
     <LineIds Name="FB_Assert.M_Equals_WSTRING">
       <LineId Id="112" Count="0" />
       <LineId Id="65" Count="0" />
@@ -1034,6 +1116,26 @@ nSkipped:= nSkipped + 1;
       <LineId Id="128" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_XINT">
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="4" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_XWORD">
+      <LineId Id="134" Count="0" />
+      <LineId Id="111" Count="2" />
+      <LineId Id="140" Count="4" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="40" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Error">
       <LineId Id="31" Count="0" />

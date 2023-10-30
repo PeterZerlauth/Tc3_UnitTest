@@ -7,7 +7,7 @@
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Tc3_UnitTest</Name>
+    <Name>UnitTest</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
     <Application>{fc6bb9fe-6961-44ee-8008-9a0b3e887280}</Application>
     <TypeSystem>{fd422f93-f68b-4169-b1a3-83b77ba2609e}</TypeSystem>
@@ -195,7 +195,7 @@
     <SubObject Include="FB_Assert.M_Passed" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tc3_UnitTest.tmc">
+    <None Include="UnitTest.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>

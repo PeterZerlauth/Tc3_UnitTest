@@ -37,7 +37,7 @@ steps:
 
 - task: GitHubRelease@1
   inputs:
-    gitHubConnection: 'github.com_PeterZerlauth'
+    gitHubConnection: 'Github'
     repositoryName: 'PeterZerlauth/Tc3_UnitTest'
     action: 'create'
     target: '$(Build.SourceVersion)'

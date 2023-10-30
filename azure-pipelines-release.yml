@@ -24,7 +24,7 @@ steps:
   condition: succeeded()
   inputs:
         failOnStderr: true
-        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Testing.sln" -p Testing -l Tc3_Testing -o "$(Build.ArtifactStagingDirectory)"'
+        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Tc3_UnitTest.sln" -p Testing -l Tc3_UnitTest -o "$(Build.ArtifactStagingDirectory)"'
         
 - task: PublishTestResults@2
   displayName: Publish results
@@ -38,7 +38,7 @@ steps:
 - task: GitHubRelease@1
   inputs:
     gitHubConnection: 'github.com_PeterZerlauth'
-    repositoryName: 'PeterZerlauth/Testing'
+    repositoryName: 'PeterZerlauth/Tc3_UnitTest'
     action: 'create'
     target: '$(Build.SourceVersion)'
     tagSource: 'userSpecifiedTag'

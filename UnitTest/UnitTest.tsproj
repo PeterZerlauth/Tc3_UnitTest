@@ -53,9 +53,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="UnitTest" PrjFilePath="UnitTest\UnitTest.plcproj" TmcFilePath="UnitTest\UnitTest.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Tc3_UnitTest\Tc3_UnitTest.tmc" TmcHash="{86E22430-5409-3A2F-D491-3FE4B544A456}">
-					<Name>UnitTest Instance</Name>
+			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="Tc3_UnitTest" PrjFilePath="Tc3_UnitTest\Tc3_UnitTest.plcproj" TmcFilePath="Tc3_UnitTest\Tc3_UnitTest.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="UnitTest\UnitTest.tmc" TmcHash="{86E22430-5409-3A2F-D491-3FE4B544A456}">
+					<Name>Tc3_UnitTest Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>

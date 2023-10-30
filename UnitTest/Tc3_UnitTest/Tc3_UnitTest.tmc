@@ -287,7 +287,7 @@
   </DataTypes>
   <Modules>
     <Module GUID="{FC6BB9FE-6961-44EE-8008-9A0B3E887280}" TcSmClass="TComPlcObjDef" TargetPlatform="TwinCAT RT (x64)">
-      <Name>UnitTest</Name>
+      <Name>Tc3_UnitTest</Name>
       <CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
       <Licenses />
       <Contexts />

@@ -36,6 +36,7 @@
   <ItemGroup>
     <PlaceholderReference Include="Tc2_MC2">
       <DefaultResolution>Tc2_MC2, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_MC2</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc2_Standard">
       <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
@@ -49,9 +50,8 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc3_Testing">
-      <DefaultResolution>Tc3_Testing, * (Zerlauth)</DefaultResolution>
-      <Namespace>Tc3_Testing</Namespace>
+    <PlaceholderReference Include="Tc3_UnitTest">
+      <DefaultResolution>Tc3_UnitTest, * (Zerlauth)</DefaultResolution>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
@@ -68,9 +68,6 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc3_Testing">
-      <Resolution>Tc3_Testing, * (Zerlauth)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

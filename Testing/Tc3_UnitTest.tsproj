@@ -53,9 +53,9 @@
 			</Tasks>
 		</System>
 		<Plc>
-			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="Tc3_Testing" PrjFilePath="Tc3_Testing\Tc3_Testing.plcproj" TmcFilePath="Tc3_Testing\Tc3_Testing.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Tc3_Testing\Tc3_Testing.tmc" TmcHash="{D344ACCF-EA76-CA79-398D-BA0EA9EFB68B}">
-					<Name>Tc3_Testing Instance</Name>
+			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="Tc3_UnitTest" PrjFilePath="Tc3_UnitTest\Tc3_UnitTest.plcproj" TmcFilePath="Tc3_UnitTest\Tc3_UnitTest.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Tc3_Testing\Tc3_Testing.tmc" TmcHash="{86E22430-5409-3A2F-D491-3FE4B544A456}">
+					<Name>Tc3_UnitTest Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
@@ -66,7 +66,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{3DD56D3C-9392-CDF7-A724-37B779D1E302}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{62E34987-D977-885F-D14A-90FB7AA03468}">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

@@ -7,7 +7,7 @@
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
     <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Tc3_Testing</Name>
+    <Name>Tc3_UnitTest</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
     <Application>{fc6bb9fe-6961-44ee-8008-9a0b3e887280}</Application>
     <TypeSystem>{fd422f93-f68b-4169-b1a3-83b77ba2609e}</TypeSystem>
@@ -17,10 +17,10 @@
     <LibraryReferences>{17994297-2ff5-475a-b56c-6c167214dcac}</LibraryReferences>
     <Company>Zerlauth</Company>
     <Released>false</Released>
-    <Title>Tc3_Testing</Title>
-    <ProjectVersion>0.0.2.7</ProjectVersion>
-    <DefaultNamespace>Tc3_Testing</DefaultNamespace>
-    <Placeholder>Tc3_Testing</Placeholder>
+    <Title>Tc3_UnitTest</Title>
+    <ProjectVersion>0.0.2.8</ProjectVersion>
+    <DefaultNamespace>Tc3_UnitTest</DefaultNamespace>
+    <Placeholder>Tc3_UnitTest</Placeholder>
     <Author>Peter Zerlauth</Author>
     <Description>Twincat 3 unit test library</Description>
     <ObjectRepresentation>base64</ObjectRepresentation>
@@ -195,7 +195,7 @@
     <SubObject Include="FB_Assert.M_Passed" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tc3_Testing.tmc">
+    <None Include="Tc3_UnitTest.tmc">
       <SubType>Content</SubType>
     </None>
   </ItemGroup>

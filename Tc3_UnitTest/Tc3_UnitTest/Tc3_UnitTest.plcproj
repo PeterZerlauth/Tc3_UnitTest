@@ -192,12 +192,53 @@
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
+    <SubObject Include="FB_Assert.M_Equals_ANY_Old">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_Assert.M_Equals_Array_BOOL">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_Assert.M_Equals_Array_BYTE">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_Assert.M_Equals_Array_DINT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_Assert.M_Equals_Array_INT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="FB_Assert.M_Equals_Array_LINT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
     <SubObject Include="FB_Assert.M_Passed" />
+    <SubObject Include="I_Assert.M_Equals_ANY_Old">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_Assert.M_Equals_Array_BOOL">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_Assert.M_Equals_Array_BYTE">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_Assert.M_Equals_Array_DINT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_Assert.M_Equals_Array_INT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
+    <SubObject Include="I_Assert.M_Equals_Array_LINT">
+      <ExcludeFromBuild>true</ExcludeFromBuild>
+    </SubObject>
   </ItemGroup>
   <ItemGroup>
     <None Include="Tc3_UnitTest.tmc">
       <SubType>Content</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="Tc3_JsonXml,3.3.19.0,Beckhoff Automation GmbH">
+      <Namespace>Tc3_JsonXml</Namespace>
+    </LibraryReference>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

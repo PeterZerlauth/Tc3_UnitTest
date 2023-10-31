@@ -13,6 +13,8 @@ VAR_OUTPUT
 	nErrors:				DINT;
 END_VAR
 VAR
+	fbJson:					FB_JsonSaxWriter;
+  	fbJsonDataType:			FB_JsonReadWriteDataType;
 	fbBuilder:				FB_StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
@@ -29,15 +31,61 @@ END_VAR
 END_IF]]></ST>
       </Implementation>
     </Method>
-    <Method Name="M_Equals" Id="{d6bff329-0902-018a-3953-76060d68264d}">
+    <Method Name="M_Equals" Id="{3c2618ac-fc8f-0172-07dd-058342c6439f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
+VAR_INPUT
+	Expected:			ANY;			// Expected as udint
+    Actual:				ANY;          	// Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR
+VAR
+	sJsonExpected:			STRING(2000);
+	sJsonActual:			STRING(2000); 
+	sDatatypeExpected:		STRING(255); 
+	sDatatypeActual:		STRING(255);
+END_VAR
+                          ]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[M_Assert();
+
+fbJson.ResetDocument();
+sDatatypeExpected:= fbJsonDataType.GetDatatypeNameByAddress(nData:= DINT_TO_UDINT(Expected.diSize), pData:= Expected.pValue);
+fbJsonDataType.AddJsonValueFromSymbol(fbJson, sDatatypeExpected, DINT_TO_UDINT(Expected.diSize), Expected.pValue);
+fbJson.CopyDocument(sJsonExpected, SIZEOF(sJsonExpected));
+
+fbJson.ResetDocument();
+sDatatypeActual:= fbJsonDataType.GetDatatypeNameByAddress(nData:= DINT_TO_UDINT(Actual.diSize), pData:= Actual.pValue);
+fbJsonDataType.AddJsonValueFromSymbol(fbJson, sDatatypeActual, DINT_TO_UDINT(Actual.diSize), Actual.pValue);
+fbJson.CopyDocument(sJsonActual, SIZEOF(sJsonActual));
+
+IF sDatatypeExpected <> sDatatypeActual THEN
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = ');
+	fbBuilder.M_Append(sDatatypeExpected);
+	fbBuilder.M_Append(' Actual = ');
+	fbBuilder.M_Append(sDatatypeActual);
+	M_Failure(fbBuilder.M_ToString(), Message);
+ELSIF sJsonExpected <> sJsonActual THEN
+	fbBuilder.M_Reset();
+	fbBuilder.M_Append('Expected = ');
+	fbBuilder.M_Append(sJsonExpected);
+	fbBuilder.M_Append(' Actual = ');
+	fbBuilder.M_Append(sJsonActual);
+	M_Failure(fbBuilder.M_ToString(), Message);
+END_IF
+M_Equals:= THIS^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="M_Equals_ANY_Old" Id="{d6bff329-0902-018a-3953-76060d68264d}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY_Old : I_Assert
 VAR_INPUT
 	Expected:			ANY;					// Expected
 	Actual:				ANY;					// Actual
 	Message:			STRING(255);			// Message as string
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[M_Equals:= THIS^;
+        <ST><![CDATA[M_Equals_ANY_Old:= THIS^;
 M_Assert();
 IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Reset();
@@ -858,7 +906,12 @@ nSkipped:= nSkipped + 1;
       <LineId Id="7" Count="2" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals">
-      <LineId Id="738" Count="26" />
+      <LineId Id="224" Count="24" />
+      <LineId Id="250" Count="2" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Assert.M_Equals_ANY_Old">
+      <LineId Id="775" Count="26" />
       <LineId Id="655" Count="0" />
     </LineIds>
     <LineIds Name="FB_Assert.M_Equals_Array_BOOL">

@@ -52,6 +52,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_UnitTest">
       <DefaultResolution>Tc3_UnitTest, * (Zerlauth)</DefaultResolution>
+      <Namespace>Tc3_UnitTest</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>

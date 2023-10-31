@@ -27,7 +27,7 @@ END_VAR]]></Declaration>
     <Method Name="M_Insert" Id="{8c7c3197-9d8e-024f-2384-b75a17732138}">
       <Declaration><![CDATA[METHOD PUBLIC M_Insert : BOOL
 VAR_INPUT
-	Position:		UDINT;
+	Position:		DINT;
 	Value:			STRING(255);
 END_VAR]]></Declaration>
     </Method>

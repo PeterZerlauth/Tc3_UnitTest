@@ -22,6 +22,8 @@ VAR
 	LREAL_ARRAY2:			ARRAY [0..10] OF LREAL;
 	REAL_ARRAY3:			ARRAY [0..10] OF REAL;
 	REAL_ARRAY4:			ARRAY [0..10] OF REAL;
+	BOOL_ARRAY1:			ARRAY [0..10] OF BOOL;
+	BOOL_ARRAY2:			ARRAY [0..10] OF BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -173,7 +175,7 @@ fbTestsuites.M_Add(fbTestsuite4);
 {region "fbTestsuite4"}
 fbTestsuite4();
 fbAssert.M_Reset();
-CASE fbTestsuite2.P_Testcase OF
+CASE fbTestsuite4.P_Testcase OF
 	E_Testcase.Start:
 		 	memset(ADR(LREAL_ARRAY2), 0, SIZEOF(LREAL_ARRAY2));
 		 	fbAssert.M_Equals_Array_LREAL(LREAL_ARRAY1, LREAL_ARRAY2, 0.0, 'LREAL Array passed');
@@ -191,11 +193,15 @@ CASE fbTestsuite2.P_Testcase OF
 		 	fbAssert.M_Equals_Array_REAL(REAL_ARRAY3, REAL_ARRAY4, 0.0, 'REAL Array passed');
 		 	fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nPassed, 'M_Equals_Array_REAL');
 			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 3);
-				 
+		
 		3:
 			REAL_ARRAY4[0]:= 1.1;
-			fbAssert.M_Equals_Array_REAL(REAL_ARRAY3, REAL_ARRAY4, 0.0, 'REAL Array Faied');
-			fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nFailures, 'M_Equals_Array_REAL');
+			fbTestsuite4.P_Assert.M_Equals(REAL_ARRAY3, REAL_ARRAY4, 'REAL Array Faied');
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 4);
+				 
+		4:
+			BOOL_ARRAY1[0]:= TRUE;
+			fbTestsuite4.P_Assert.M_Equals(BOOL_ARRAY1, BOOL_ARRAY2, 'REAL Array Faied');
 			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
 
 					   
@@ -208,7 +214,13 @@ END_CASE
     <LineIds Name="MAIN">
       <LineId Id="888" Count="146" />
       <LineId Id="1069" Count="0" />
-      <LineId Id="1035" Count="26" />
+      <LineId Id="1035" Count="17" />
+      <LineId Id="1093" Count="0" />
+      <LineId Id="1097" Count="0" />
+      <LineId Id="1094" Count="1" />
+      <LineId Id="1092" Count="0" />
+      <LineId Id="1053" Count="2" />
+      <LineId Id="1057" Count="4" />
       <LineId Id="1064" Count="2" />
       <LineId Id="233" Count="0" />
     </LineIds>

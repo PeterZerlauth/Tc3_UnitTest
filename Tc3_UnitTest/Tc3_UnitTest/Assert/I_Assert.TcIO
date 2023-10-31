@@ -9,8 +9,16 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
+    <Method Name="M_Equals" Id="{f5484c1a-2f74-09b3-2fea-dcee23f7da1f}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals : I_Assert
+VAR_INPUT
+	Expected:			ANY;			// Expected as udint
+    Actual:				ANY;          // Actual as udint
+	Message:			STRING(255);   	// Message as string
+END_VAR                                 ]]></Declaration>
+    </Method>
+    <Method Name="M_Equals_ANY_Old" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
+      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY_Old : I_Assert
 VAR_INPUT
 	Expected:			ANY;		// Expected
 	Actual:				ANY;		// Actual

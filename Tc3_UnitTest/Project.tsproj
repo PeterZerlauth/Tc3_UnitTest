@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.50">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{427A1465-87E0-4691-A39C-8293BABC5652}" PersistentType="true">TcLogger</Name>
+			<DisplayName TxtId=""><![CDATA[TcLogger]]></DisplayName>
+			<EventId>
+				<Name Id="1">Debug</Name>
+				<DisplayName TxtId=""><![CDATA[Debug: {0}]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Info</Name>
+				<DisplayName TxtId=""><![CDATA[Debug: {0}]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">Warning</Name>
+				<DisplayName TxtId=""><![CDATA[Warning: {0}]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="4">Error</Name>
+				<DisplayName TxtId=""><![CDATA[Error: {0}]]></DisplayName>
+				<Severity>Error</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="5">Critical</Name>
+				<DisplayName TxtId=""><![CDATA[Critical: {0}]]></DisplayName>
+				<Severity>Critical</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="0">None</Name>
+				<DisplayName TxtId=""><![CDATA[None: {0}]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{5EE7B516-2030-4A82-BFF4-3E9C357A9E94}"/>
+				<Hide GUID="{F8815DEA-7C94-40C5-92B7-015F40755514}"/>
+				<Hide GUID="{496093AC-94D3-443B-92D9-C7BE9982F65A}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{7CAAC051-3A3C-4F8D-9039-D7B6F336303B}" TargetNetId="192.0.0.10.1.1" ShowHideConfigurations="#x106">
+		<System>
+			<Licenses>
+				<Target BkhfOrder="none"/>
+			</Licenses>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="Tc3_UnitTest" PrjFilePath="Tc3_UnitTest\Tc3_UnitTest.plcproj" TmcFilePath="Tc3_UnitTest\Tc3_UnitTest.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Tc3_UnitTest\Tc3_UnitTest.tmc" TmcHash="{86E22430-5409-3A2F-D491-3FE4B544A456}">
+					<Name>Tc3_UnitTest Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id>1</Id>
+							<Name>Default</Name>
+						</Context>
+					</Contexts>
+				</Instance>
+			</Project>
+			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{62E34987-D977-885F-D14A-90FB7AA03468}">
+					<Name>Testing Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

@@ -24,7 +24,7 @@ steps:
   condition: succeeded()
   inputs:
         failOnStderr: true
-        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\Tc3_UnitTest.sln" -p Tc3_UnitTest -l Tc3_UnitTest -o "$(Build.ArtifactStagingDirectory)"'
+        script: '"C:\source\repos\TcRelease\TcBuild.exe" -v "$(System.DefaultWorkingDirectory)\UnitTest.sln" -p UnitTest -l Tc3_UnitTest -o "$(Build.ArtifactStagingDirectory)"'
         
 - task: PublishTestResults@2
   displayName: Publish results

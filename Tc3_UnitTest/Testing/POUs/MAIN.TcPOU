@@ -192,7 +192,7 @@ CASE fbTestsuite4.P_Testcase OF
 		 	memset(ADR(REAL_ARRAY4), 0, SIZEOF(REAL_ARRAY4));
 		 	fbAssert.M_Equals_Array_REAL(REAL_ARRAY3, REAL_ARRAY4, 0.0, 'REAL Array passed');
 		 	fbTestsuite4.P_Assert.M_Equals_DINT(1, fbAssert.nPassed, 'M_Equals_Array_REAL');
-			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', 3);
+			fbTestsuite4.M_Testcase('FB_Assert', T#1S, '', '', E_Testcase.Done);
 		
 		3:
 			REAL_ARRAY4[0]:= 1.1;

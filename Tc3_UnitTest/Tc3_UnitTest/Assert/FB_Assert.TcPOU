@@ -93,7 +93,7 @@ IF Expected.diSize <> Actual.diSize THEN
 	fbBuilder.M_Append(DINT_TO_STRING(Expected.diSize));
 	fbBuilder.M_Append('" Actual size = "');
 	fbBuilder.M_Append(DINT_TO_STRING(Actual.diSize));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 	RETURN;
 ELSIF Expected.TypeClass <> Actual.TypeClass THEN
@@ -102,7 +102,7 @@ ELSIF Expected.TypeClass <> Actual.TypeClass THEN
 	fbBuilder.M_Append(TO_STRING(Expected.TypeClass));
 	fbBuilder.M_Append('" Actual typeclass = "');
 	fbBuilder.M_Append(TO_STRING(Actual.TypeClass));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 	RETURN;
 ELSIF MEMCMP(Expected.pValue, Actual.pValue, DINT_TO_UDINT( Expected.diSize)) <> 0 THEN
@@ -143,9 +143,9 @@ ELSE
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
 			fbBuilder.M_Append(BOOL_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(BOOL_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -182,9 +182,9 @@ ELSE
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
 			fbBuilder.M_Append(BYTE_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(BYTE_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -221,9 +221,9 @@ ELSE
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
 			fbBuilder.M_Append(DINT_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(DINT_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -260,9 +260,9 @@ ELSE
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
 			fbBuilder.M_Append(INT_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(INT_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -299,9 +299,9 @@ ELSE
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
 			fbBuilder.M_Append('" Expected = "');
 			fbBuilder.M_Append(LINT_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(LINT_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -335,15 +335,15 @@ ELSE
 	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
 		IF ABS(Expected[nIndex] - Actual[nIndex]) > ABS(Tolerance) THEN	
 			fbBuilder.M_Reset();
-			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append('Index = [');
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
-			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append('] Expected = ]');
 			fbBuilder.M_Append(LREAL_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = [');
 			fbBuilder.M_Append(LREAL_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('" Tolerance = "');
+			fbBuilder.M_Append('] Tolerance = ]');
 			fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -378,15 +378,15 @@ ELSE
 	FOR nIndex:= LOWER_BOUND(Expected, 1) TO UPPER_BOUND(Expected, 1) DO
 		IF ABS(Expected[nIndex] - Actual[nIndex]) > ABS(Tolerance) THEN	
 			fbBuilder.M_Reset();
-			fbBuilder.M_Append('Index = "');
+			fbBuilder.M_Append('Index = [');
 			fbBuilder.M_Append(DINT_TO_STRING(nIndex));
-			fbBuilder.M_Append('" Expected = "');
+			fbBuilder.M_Append('] Expected = ]');
 			fbBuilder.M_Append(REAL_TO_STRING(Expected[nIndex]));
-			fbBuilder.M_Append('" Actual = "');
+			fbBuilder.M_Append('] Actual = "');
 			fbBuilder.M_Append(REAL_TO_STRING(Actual[nIndex]));
-			fbBuilder.M_Append('" Tolerance = "');
+			fbBuilder.M_Append('] Tolerance = [');
 			fbBuilder.M_Append(REAL_TO_STRING(Tolerance));
-			fbBuilder.M_Append('"');
+			fbBuilder.M_Append(']');
 			M_Failure(fbBuilder.M_ToString(), Message);
 			RETURN;
 		END_IF
@@ -409,11 +409,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(BOOL_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(BOOL_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_BOOL:= THIS^;]]></ST>
@@ -432,11 +432,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(BYTE_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(BYTE_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_BYTE:= THIS^;]]></ST>
@@ -455,11 +455,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(DINT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(DINT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_DINT:= THIS^;
@@ -479,11 +479,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(INT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(INT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_INT:= THIS^;]]></ST>
@@ -502,11 +502,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(LINT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(LINT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_LINT:= THIS^;
@@ -524,22 +524,22 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF LrealIsNaN(Expected) THEN
-	M_Failure('', Concat('Expected is NaN ', Message));
+	M_Failure('', Concat('Expected is NaN', Message));
 ELSIF LrealIsNaN(Actual) THEN
-	M_Failure('', Concat('Actual is NaN ', Message));	
+	M_Failure('', Concat('Actual is NaN', Message));	
 ELSIF LrealIsNaN(Tolerance) THEN
-	M_Failure('', Concat('Tolerance is NaN ', Message));	
+	M_Failure('', Concat('Tolerance is NaN', Message));	
 ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Actual));
-	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append('] Tolerance = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_LREAL:= THIS^;
@@ -557,22 +557,22 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[M_Assert();
 IF RealIsNaN(Expected) THEN
-	M_Failure('', Concat('Expected is NaN ', Message));
+	M_Failure('', Concat('Expected is NaN', Message));
 ELSIF RealIsNaN(Actual) THEN
-	M_Failure('', Concat('Actual is NaN ', Message));	
+	M_Failure('', Concat('Actual is NaN', Message));	
 ELSIF RealIsNaN(Tolerance) THEN
-	M_Failure('', Concat('Tolerance is NaN ', Message));	
+	M_Failure('', Concat('Tolerance is NaN', Message));	
 ELSIF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Actual));
-	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append('] Tolerance = [');
 	fbBuilder.M_Append(LREAL_TO_STRING(Tolerance));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_REAL:= THIS^;]]></ST>
@@ -591,11 +591,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(Expected);
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(Actual);
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_STRING:= THIS^;]]></ST>
@@ -615,13 +615,13 @@ IF ABS(Expected - Actual) <= ABS(Tolerance) THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(TIME_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(TIME_TO_STRING(Actual));
-	fbBuilder.M_Append('" Tolerance = "');
+	fbBuilder.M_Append('] Tolerance = [');
 	fbBuilder.M_Append(TIME_TO_STRING(Tolerance));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_TIME:= THIS^;
@@ -641,11 +641,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(UDINT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(UDINT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_UDINT:= THIS^;
@@ -665,11 +665,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(UINT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(UINT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_UINT:= THIS^;]]></ST>
@@ -688,11 +688,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(ULINT_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(ULINT_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_ULINT:= THIS^;
@@ -712,11 +712,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_UXINT:= THIS^;
@@ -736,11 +736,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(WSTRING_TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(WSTRING_TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_WSTRING:= THIS^;]]></ST>
@@ -759,11 +759,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_XINT:= THIS^;
@@ -783,11 +783,11 @@ IF Expected = Actual THEN
 	M_Passed();
 ELSE
 	fbBuilder.M_Reset();
-	fbBuilder.M_Append('Expected = "');
+	fbBuilder.M_Append('Expected = [');
 	fbBuilder.M_Append(TO_STRING(Expected));
-	fbBuilder.M_Append('" Actual = "');
+	fbBuilder.M_Append('] Actual = [');
 	fbBuilder.M_Append(TO_STRING(Actual));
-	fbBuilder.M_Append('"');
+	fbBuilder.M_Append(']');
 	M_Failure(fbBuilder.M_ToString(), Message);
 END_IF
 M_Equals_XWORD:= THIS^;

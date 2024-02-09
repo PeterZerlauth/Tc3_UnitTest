@@ -18,7 +18,7 @@ IF nPosition > 0 THEN
     F_GetName:= DELETE(InstancePath, nPosition-1 + LEN(sName), 1);
 END_IF
 
-nPosition := FIND(InstancePath, sName);
+nPosition := FIND(F_GetName, sName);
 
 IF nPosition > 0 THEN
     F_GetName:= DELETE(F_GetName, nPosition - 1 + LEN(sName), 1);

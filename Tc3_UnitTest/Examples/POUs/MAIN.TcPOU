@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{b940f57f-5717-4eac-b98f-4ae3eec6571c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bExecute:					BOOL;
+	fbFunctionBlock01:		FB_UnitTestTarget01;
+	fbFunctionBlock02:		FB_UnitTestTarget02;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Run
+fbTestsuites();
+
+IF bExecute THEN
+	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
+END_IF
+
+fbFunctionBlock01();
+fbFunctionBlock02();]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="7" Count="4" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,163 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <FileVersion>1.0.0.0</FileVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{17f8c168-fdaa-47d9-ab36-f3a3e36d86d0}</ProjectGuid>
+    <ProjectGuid>{24d36c1c-673b-4b9b-be9d-7f888f34dec9}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>false</WriteProductVersion>
+    <WriteProductVersion>true</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
-    <Name>Tc3_UnitTest</Name>
+    <Name>Examples</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
-    <Application>{fc6bb9fe-6961-44ee-8008-9a0b3e887280}</Application>
-    <TypeSystem>{fd422f93-f68b-4169-b1a3-83b77ba2609e}</TypeSystem>
-    <Implicit_Task_Info>{0e72e178-ed6c-4444-b017-632c629673c6}</Implicit_Task_Info>
-    <Implicit_KindOfTask>{03e251af-9ad4-44ce-a92a-dee07f65e165}</Implicit_KindOfTask>
-    <Implicit_Jitter_Distribution>{1fcdc951-67a5-45ea-a49f-d7042d174791}</Implicit_Jitter_Distribution>
-    <LibraryReferences>{17994297-2ff5-475a-b56c-6c167214dcac}</LibraryReferences>
-    <Company>Zerlauth</Company>
-    <Released>false</Released>
-    <Title>Tc3_UnitTest</Title>
-    <ProjectVersion>0.0.3.3</ProjectVersion>
-    <DefaultNamespace>Tc3_UnitTest</DefaultNamespace>
-    <Placeholder>Tc3_UnitTest</Placeholder>
-    <Author>Peter Zerlauth</Author>
-    <Description>Twincat 3 unit test library</Description>
-    <ObjectRepresentation>base64</ObjectRepresentation>
-    <CombineIds>true</CombineIds>
-    <DocFormat>reStructuredText</DocFormat>
-    <LibraryCategories>
-      <LibraryCategory xmlns="">
-        <Id>{54581c00-a61d-4d50-81cd-05af51b2074d}</Id>
-        <Version>1.0.0.0</Version>
-        <DefaultName>Automaiton</DefaultName>
-      </LibraryCategory>
-    </LibraryCategories>
-    <SelectedLibraryCategories>
-      <Id xmlns="">{54581c00-a61d-4d50-81cd-05af51b2074d}</Id>
-    </SelectedLibraryCategories>
-    <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
+    <Application>{5f3bbb97-bcb9-4532-b6bb-d3461a9b02a5}</Application>
+    <TypeSystem>{acc1677c-d090-48ac-a701-e5cbbafd3c22}</TypeSystem>
+    <Implicit_Task_Info>{848496e2-fbfb-4eb8-b317-676d9221cec3}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{cdff1380-08cb-40e1-830f-d910cc2f8c64}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{68566e01-c739-4e3b-a7da-91cbda0f565d}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{f8c1da1a-7caa-47ad-99f1-dcf03299f857}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assert\E_AdsError.TcDUT">
+    <Compile Include="GVLs\FB_Target.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assert\E_Assert.TcDUT">
+    <Compile Include="GVLs\FB_UnitTestTarget01.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assert\FB_Assert.TcPOU">
+    <Compile Include="GVLs\FB_UnitTestTarget02.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Assert\I_Assert.TcIO">
+    <Compile Include="GVLs\GVL.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Base\E_Base.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\FB_Base.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\F_GetCycleTime.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\F_GetName.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Base\I_Base.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\Builder\FB_StringBuilder.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\Builder\I_StringBuilder.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\Object\I_Object.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\E_LogLevel.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\FB_TcLogger.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\FB_Logger.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\I_Logger.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Logger\ST_LoggerSettings.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="File\FB_File.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="File\I_File.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\String\FB_ListSTRING.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\String\I_ListSTRING.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\Object\FB_ListObject.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="List\Object\I_ListObject.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Property\FB_Property.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Property\I_Property.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testcase\E_Testcase.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testcase\ST_Testcase.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuites\FB_Testsuites.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuites\I_Testsuites.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuites\ST_TestsuitesOptions.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuites\ST_Testsuites.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuite\FB_Testsuite.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuite\I_Testsuite.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuite\ST_Testsuite.TcDUT">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Testsuite\ST_TestsuiteOptions.TcDUT">
+    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assert" />
-    <Folder Include="Base" />
-    <Folder Include="File" />
-    <Folder Include="List" />
-    <Folder Include="List\Builder" />
-    <Folder Include="List\String" />
-    <Folder Include="List\Object" />
-    <Folder Include="Logger" />
-    <Folder Include="Property" />
-    <Folder Include="Testsuite" />
-    <Folder Include="Testcase" />
-    <Folder Include="Testsuites" />
+    <Folder Include="DUTs" />
+    <Folder Include="GVLs" />
+    <Folder Include="VISUs" />
+    <Folder Include="POUs" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -168,83 +53,24 @@
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
     </PlaceholderReference>
-    <PlaceholderReference Include="Tc2_Utilities">
-      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
-      <Namespace>Tc2_Utilities</Namespace>
-    </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_UnitTest">
+      <DefaultResolution>Tc3_UnitTest, * (Zerlauth)</DefaultResolution>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
-    <PlaceholderResolution Include="Tc2_Standard">
-      <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_System">
-      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc2_Utilities">
-      <Resolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-    <PlaceholderResolution Include="Tc3_Module">
-      <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
-    </PlaceholderResolution>
-  </ItemGroup>
-  <ItemGroup>
-    <SubObject Include="FB_Assert.M_Equals_ANY_Old">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_BOOL">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_BYTE">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_DINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_INT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_LINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Passed" />
-    <SubObject Include="I_Assert.M_Equals_ANY_Old">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="I_Assert.M_Equals_Array_BOOL">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="I_Assert.M_Equals_Array_BYTE">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="I_Assert.M_Equals_Array_DINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="I_Assert.M_Equals_Array_INT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="I_Assert.M_Equals_Array_LINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Tc3_UnitTest.tmc">
+    <None Include="Examples.tmc">
       <SubType>Content</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <LibraryReference Include="Tc3_JsonXml,3.3.19.0,Beckhoff Automation GmbH">
-      <Namespace>Tc3_JsonXml</Namespace>
-    </LibraryReference>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-        <Data>
-          <o xml:space="preserve" t="OptionKey">
+  <Data>
+    <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -339,14 +165,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-        </Data>
-        <TypeList>
-          <Type n="Boolean">System.Boolean</Type>
-          <Type n="Hashtable">System.Collections.Hashtable</Type>
-          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-          <Type n="String">System.String</Type>
-        </TypeList>
-      </XmlArchive>
+  </Data>
+  <TypeList>
+    <Type n="Boolean">System.Boolean</Type>
+    <Type n="Hashtable">System.Collections.Hashtable</Type>
+    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+    <Type n="String">System.String</Type>
+  </TypeList>
+</XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

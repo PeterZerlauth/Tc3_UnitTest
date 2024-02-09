@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_UnitTestTarget02" Id="{8cae36d2-7866-0e80-1aad-bec70b8a78bb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_UnitTestTarget02 EXTENDS FB_Target
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	fbTestsuite:			FB_Testsuite;				// Testsuite
+	sValue:					STRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SUPER^();
+
+fbTestsuite();
+
+
+CASE fbTestsuite.P_Testcase OF
+	E_Testcase.Init:
+		sValue:= 'Test';
+
+	E_Testcase.Start:
+		// First test case
+		fbTestsuite.P_Assert.M_Equals_STRING('Test', sValue, 'Check string value "Test"');
+		fbTestsuite.M_Testcase('FB_Target', T#1S, '', '', 1);
+		
+	// secound test case
+	1:
+		fbTestsuite.P_Assert.M_IsTRUE('Test2' <> sValue, 'Check string value "Test2"');
+		fbTestsuite.M_Testcase('FB_Target', T#1S, '', '', E_Testcase.Done);
+		
+	E_Testcase.Done:
+		
+END_CASE]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{4878ff08-e607-0b76-3564-1b9a2e778b95}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//// Add Testsuite to Testsuites
+fbTestsuites.M_Add(fbTestsuite);
+fbTestsuite.P_File:= 'FB_Target';]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_UnitTestTarget02">
+      <LineId Id="9" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="14" Count="2" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="22" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_UnitTestTarget02.FB_init">
+      <LineId Id="8" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

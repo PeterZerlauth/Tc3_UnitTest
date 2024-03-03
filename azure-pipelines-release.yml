@@ -47,10 +47,20 @@ steps:
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
-- task: DeleteFiles@1
- displayName: 'clean *'
- inputs:
-   SourceFolder: '$(Pipeline.Workspace)'
-   Contents: '*/**'
-   RemoveDotFiles: true
- condition: always()
+  # Delete all files of build directory
+  - task: DeleteFiles@1
+    displayName: 'Delete Binaries'
+    condition: 'succeeded()'
+    inputs:
+      SourceFolder: '$(Build.BinariesDirectory)'
+      Contents: '**/*'
+
+  # Delete all files of source directory
+  - task: DeleteFiles@1
+    displayName: 'Delete Sources'
+    condition: 'succeeded()'
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: |
+        **/* 
+        .gitignore

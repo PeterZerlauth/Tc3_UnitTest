@@ -17,75 +17,81 @@ VAR
 	nState: 			INT;
 	{attribute 'hide'} 
 	fbGetTime:			NT_GetTime;
+	nCycleCount: 		UDINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbGetTime();
-
-CASE eState OF
-	E_Base.Init:
-		IF M_Init() THEN
-			eState:= E_Base.Stopped;
-			nState:= 0;
-		END_IF
-		
-	E_Base.Stopped:
-		IF M_Stopped() THEN
-			eState:= E_Base.Starting;
-			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Starting, E_Base.Execute:
-					eState:= E_Base.Starting;
-					nState:= 0;
-			END_CASE
-		END_IF
-		
-	E_Base.Starting:
-		IF M_Starting() THEN
-			eState:= E_Base.Execute;
-			nState:= 0;
-		END_IF
-		
-	E_Base.Execute:
-		IF M_Execute() THEN
-			eState:= E_Base.Stopping;
-			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Stopping, E_Base.Stopped:
-					eState:= E_Base.Stopping;
-					nState:= 0;
-			END_CASE
-		END_IF
-		
-	E_Base.Stopping:
-		IF M_Stopping() THEN
-			eState:= E_Base.Stopped;
-			nState:= 0;
-		END_IF
-
-	E_Base.Aborting:
-		IF M_Aborting() THEN
-			eState:= E_Base.Aborted;
-			nState:= 0;
-		END_IF
+      <ST><![CDATA[// Prevent double calls
+IF nCycleCount <> TwinCAT_SystemInfoVarList._TaskInfo[1].CycleCount THEN
+	nCycleCount:= TwinCAT_SystemInfoVarList._TaskInfo[1].CycleCount;
 	
-	E_Base.Aborted:
-		IF M_Aborted() THEN
-			eState:= E_Base.Aborted;
-			nState:= 0;
-		ELSE
-			CASE eRequest OF
-				E_Base.Reset:
-					eState:= E_Base.Starting;
-					nState:= 0;
-			END_CASE
-		END_IF
+	fbGetTime();
+	
+	CASE eState OF
+		E_Base.Init:
+			IF M_Init() THEN
+				eState:= E_Base.Stopped;
+				nState:= 0;
+			END_IF
+			
+		E_Base.Stopped:
+			IF M_Stopped() THEN
+				eState:= E_Base.Starting;
+				nState:= 0;
+			ELSE
+				CASE eRequest OF
+					E_Base.Starting, E_Base.Execute:
+						eState:= E_Base.Starting;
+						nState:= 0;
+				END_CASE
+			END_IF
+			
+		E_Base.Starting:
+			IF M_Starting() THEN
+				eState:= E_Base.Execute;
+				nState:= 0;
+			END_IF
+			
+		E_Base.Execute:
+			IF M_Execute() THEN
+				eState:= E_Base.Stopping;
+				nState:= 0;
+			ELSE
+				CASE eRequest OF
+					E_Base.Stopping, E_Base.Stopped:
+						eState:= E_Base.Stopping;
+						nState:= 0;
+				END_CASE
+			END_IF
+			
+		E_Base.Stopping:
+			IF M_Stopping() THEN
+				eState:= E_Base.Stopped;
+				nState:= 0;
+			END_IF
+	
+		E_Base.Aborting:
+			IF M_Aborting() THEN
+				eState:= E_Base.Aborted;
+				nState:= 0;
+			END_IF
 		
-END_CASE
-
-eRequest:= eState;]]></ST>
+		E_Base.Aborted:
+			IF M_Aborted() THEN
+				eState:= E_Base.Aborted;
+				nState:= 0;
+			ELSE
+				CASE eRequest OF
+					E_Base.Reset:
+						eState:= E_Base.Starting;
+						nState:= 0;
+				END_CASE
+			END_IF
+			
+	END_CASE
+	
+	eRequest:= eState;
+END_IF]]></ST>
     </Implementation>
     <Method Name="M_Aborted" Id="{853b7e8a-707d-0f29-16ef-38945d49be0d}">
       <Declaration><![CDATA[METHOD PROTECTED M_Aborted : BOOL
@@ -181,11 +187,15 @@ END_VAR]]></Declaration>
       </Get>
     </Property>
     <LineIds Name="FB_Base">
+      <LineId Id="339" Count="0" />
+      <LineId Id="335" Count="0" />
+      <LineId Id="332" Count="1" />
       <LineId Id="232" Count="24" />
       <LineId Id="263" Count="17" />
       <LineId Id="287" Count="5" />
       <LineId Id="299" Count="15" />
       <LineId Id="98" Count="0" />
+      <LineId Id="338" Count="0" />
     </LineIds>
     <LineIds Name="FB_Base.M_Aborted">
       <LineId Id="5" Count="0" />

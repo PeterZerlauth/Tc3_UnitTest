@@ -22,8 +22,8 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Prevent double calls
-IF nCycleCount <> TwinCAT_SystemInfoVarList._TaskInfo[1].CycleCount THEN
-	nCycleCount:= TwinCAT_SystemInfoVarList._TaskInfo[1].CycleCount;
+IF nCycleCount <> TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount THEN
+	nCycleCount:= TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount;
 	
 	fbGetTime();
 	

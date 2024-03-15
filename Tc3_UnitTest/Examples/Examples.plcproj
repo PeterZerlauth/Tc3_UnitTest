@@ -6,7 +6,7 @@
     <ProjectGuid>{24d36c1c-673b-4b9b-be9d-7f888f34dec9}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
     <DownloadApplicationInfo>true</DownloadApplicationInfo>
-    <WriteProductVersion>true</WriteProductVersion>
+    <WriteProductVersion>false</WriteProductVersion>
     <GenerateTpy>false</GenerateTpy>
     <Name>Examples</Name>
     <ProgramVersion>3.1.4024.0</ProgramVersion>
@@ -16,6 +16,10 @@
     <Implicit_KindOfTask>{cdff1380-08cb-40e1-830f-d910cc2f8c64}</Implicit_KindOfTask>
     <Implicit_Jitter_Distribution>{68566e01-c739-4e3b-a7da-91cbda0f565d}</Implicit_Jitter_Distribution>
     <LibraryReferences>{f8c1da1a-7caa-47ad-99f1-dcf03299f857}</LibraryReferences>
+    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
+    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
+    <Released>false</Released>
+    <CombineIds>true</CombineIds>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GVLs\FB_Target.TcPOU">
@@ -59,6 +63,7 @@
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_UnitTest">
       <DefaultResolution>Tc3_UnitTest, * (Zerlauth)</DefaultResolution>
+      <Namespace>Tc3_UnitTest</Namespace>
     </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
@@ -66,11 +71,25 @@
       <SubType>Content</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <PlaceholderResolution Include="Tc2_Standard">
+      <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc2_System">
+      <Resolution>Tc2_System, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_Module">
+      <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_UnitTest">
+      <Resolution>Tc3_UnitTest, * (Zerlauth)</Resolution>
+    </PlaceholderResolution>
+  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -165,14 +184,14 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Boolean">System.Boolean</Type>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Boolean">System.Boolean</Type>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

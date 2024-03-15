@@ -18,6 +18,8 @@
     <ObjectRepresentation>base64</ObjectRepresentation>
     <Released>false</Released>
     <CombineIds>true</CombineIds>
+    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
+    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="PlcTask.TcTTO">
@@ -61,6 +63,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderResolution Include="Tc2_MC2">
+      <Resolution>Tc2_MC2, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
     <PlaceholderResolution Include="Tc2_Standard">
       <Resolution>Tc2_Standard, * (Beckhoff Automation GmbH)</Resolution>
     </PlaceholderResolution>
@@ -69,6 +74,9 @@
     </PlaceholderResolution>
     <PlaceholderResolution Include="Tc3_Module">
       <Resolution>Tc3_Module, * (Beckhoff Automation GmbH)</Resolution>
+    </PlaceholderResolution>
+    <PlaceholderResolution Include="Tc3_UnitTest">
+      <Resolution>Tc3_UnitTest, * (Zerlauth)</Resolution>
     </PlaceholderResolution>
   </ItemGroup>
   <ProjectExtensions>

@@ -18,7 +18,7 @@
     <Company>Zerlauth</Company>
     <Released>false</Released>
     <Title>Tc3_UnitTest</Title>
-    <ProjectVersion>1.0.0.0</ProjectVersion>
+    <ProjectVersion>1.0.0.1</ProjectVersion>
     <DefaultNamespace>Tc3_UnitTest</DefaultNamespace>
     <Placeholder>Tc3_UnitTest</Placeholder>
     <Author>Peter Zerlauth</Author>
@@ -37,6 +37,8 @@
       <Id xmlns="">{54581c00-a61d-4d50-81cd-05af51b2074d}</Id>
     </SelectedLibraryCategories>
     <PreserveCompiledLibComments>true</PreserveCompiledLibComments>
+    <AutoUpdateUmlProfile>true</AutoUpdateUmlProfile>
+    <AutoUpdateVisuProfile>true</AutoUpdateVisuProfile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assert\E_AdsError.TcDUT">
@@ -144,6 +146,9 @@
     <Compile Include="Testsuite\ST_TestsuiteOptions.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Version\Global_Version.TcGVL">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assert" />
@@ -158,6 +163,7 @@
     <Folder Include="Testsuite" />
     <Folder Include="Testcase" />
     <Folder Include="Testsuites" />
+    <Folder Include="Version" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -236,7 +242,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="Tc3_JsonXml,3.3.19.0,Beckhoff Automation GmbH">
+    <LibraryReference Include="Tc3_JsonXml,newest,Beckhoff Automation GmbH">
       <Namespace>Tc3_JsonXml</Namespace>
     </LibraryReference>
   </ItemGroup>

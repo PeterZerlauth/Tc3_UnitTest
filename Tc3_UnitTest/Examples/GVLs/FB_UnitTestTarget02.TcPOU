@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+<TcPlcObject Version="1.1.0.1">
   <POU Name="FB_UnitTestTarget02" Id="{8cae36d2-7866-0e80-1aad-bec70b8a78bb}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_UnitTestTarget02 EXTENDS FB_Target
 VAR_INPUT

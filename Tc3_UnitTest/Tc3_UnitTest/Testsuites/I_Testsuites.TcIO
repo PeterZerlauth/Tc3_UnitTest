@@ -21,5 +21,11 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Property Name="P_Property" Id="{023c0eb3-aada-0fe9-1b91-9978fa99cf0c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Property : I_Property]]></Declaration>
+      <Get Name="Get" Id="{7e7c80b7-514c-018f-3d1b-5453ee6cdff5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

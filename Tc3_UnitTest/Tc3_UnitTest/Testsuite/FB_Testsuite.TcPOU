@@ -160,7 +160,7 @@ END_VAR]]></Declaration>
 	0:
 		IF 	SUPER^.M_Starting() THEN
 			fbList.M_Clear();
-			fbProperty.P_List.M_Clear();
+			fbProperty.M_Reset();
 			fCycleTime:= F_GetCycleTime();	
 			stTestsuite.sName:= F_GetName(sInstancePath);
 			stTestsuite.nTests:= 0;
@@ -221,7 +221,7 @@ IF fbProperty.P_List.P_Length > 0 THEN
 	fbList.M_Insert(1, '$T$T<properties>');
 	nIndex:= 0;
 	WHILE nIndex < fbProperty.P_List.P_Length DO
-		fbList.M_Insert(2 + nIndex, fbProperty.P_List.M_Item(nIndex));
+		fbList.M_Insert(2 + nIndex, Concat('$T$T$T', fbProperty.P_List.M_Item(nIndex)));
 		nIndex:= nIndex + 1;
 	END_WHILE
 	fbList.M_Insert(2 + nIndex, '$T$T</properties>');

@@ -25,7 +25,7 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[fbStringBuilder.M_Reset();
-fbStringBuilder.M_Append('$T$T$T<property name="');
+fbStringBuilder.M_Append('<property name="');
 fbStringBuilder.M_Append(Name);
 sKey:= fbStringBuilder.M_ToString();
 fbStringBuilder.M_Append('" value="');
@@ -46,7 +46,8 @@ M_Add:= TRUE;]]></ST>
     <Method Name="M_Reset" Id="{eddb6b8d-8e19-018a-029c-46c6dc54bfcd}">
       <Declaration><![CDATA[METHOD PUBLIC M_Reset]]></Declaration>
       <Implementation>
-        <ST><![CDATA[fbList.M_Clear();]]></ST>
+        <ST><![CDATA[fbStringBuilder.M_Reset();
+fbList.M_Clear();]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_List" Id="{9de6c82c-01dc-0311-3188-815453a357f8}">
@@ -83,6 +84,7 @@ END_VAR
       <LineId Id="17" Count="0" />
     </LineIds>
     <LineIds Name="FB_Property.M_Reset">
+      <LineId Id="3" Count="0" />
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Property.P_List.Get">

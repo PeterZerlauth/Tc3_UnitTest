@@ -15,6 +15,7 @@ VAR
 	fbBuilder:			FB_StringBuilder;
 	fbList:				FB_ListSTRING;
 	fbListTestsuite:	FB_ListObject;
+	fbProperty:			FB_Property;
 	fbLogger:			FB_TcLogger;
 END_VAR]]></Declaration>
     <Implementation>
@@ -71,6 +72,7 @@ END_VAR]]></Declaration>
 	0:
 		IF 	SUPER^.M_Starting() THEN
 			fbList.M_Clear();
+			fbProperty.M_Reset();
 			stTestsuites.sName:= F_GetName(sInstancePath);
 			stTestsuites.nTests:= 0;
 			stTestsuites.nFailures:= 0;
@@ -132,7 +134,20 @@ END_VAR]]></Declaration>
 		fbList.M_Insert(1, sValue);
 		fbList.M_Add('</testsuites>');
 		nState:= 1;
-	1:
+	1:	
+		// add Properties
+		IF fbProperty.P_List.P_Length > 0 THEN
+			fbList.M_Insert(2, '$T<properties>');
+			nIndex:= 0;
+			WHILE nIndex < fbProperty.P_List.P_Length DO
+				fbList.M_Insert(3 + nIndex, Concat('$T$T', fbProperty.P_List.M_Item(nIndex)));
+				nIndex:= nIndex + 1;
+			END_WHILE
+			fbList.M_Insert(3 + nIndex, '$T</properties>');
+		END_IF
+		nState:= 2;
+		
+	2:
 		fbBuilder.M_Reset();
 		fbBuilder.M_Append(stTestsuites.sName);		
 		fbBuilder.M_Append(': tests= ');
@@ -153,27 +168,27 @@ END_VAR]]></Declaration>
 		ELSE
 			fbLogger.M_Info(sValue);
 		END_IF
-		nState:= 2;
+		nState:= 3;
 			
-	2:
+	3:
 		IF fbFile.M_Delete(stOptions.sFilePathName) THEN
-			nState:= 3;
+			nState:= 4;
 		END_IF	
 	
-	3:
+	4:
 		IF fbFile.M_Create(stOptions.sFilePathName) THEN
-			nState:= 4;
+			nState:= 5;
 			nIndex:= 0;
 		END_IF
 	
-	4:
+	5:
 			IF fbFile.M_AppendLine(fbList.M_Item(nIndex)) THEN
 				IF nIndex > fbList.P_Length THEN
-					nState:= 5;
+					nState:= 6;
 				END_IF
 				nIndex:= nIndex +1;
 			END_IF	
-	5:
+	6:
 		M_Stopping:= fbFile.M_Close();	
 		
 END_CASE]]></ST>
@@ -212,6 +227,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="P_Property" Id="{919d00f3-5938-0aaa-14d2-c8a498ee4e71}">
+      <Declaration><![CDATA[PROPERTY PUBLIC P_Property : I_Property]]></Declaration>
+      <Get Name="Get" Id="{084f4568-883f-03e7-203d-e8e6525f6df0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Property:= fbProperty;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <LineIds Name="FB_Testsuites">
       <LineId Id="9" Count="0" />
     </LineIds>
@@ -239,6 +265,7 @@ END_VAR
       <LineId Id="37" Count="0" />
       <LineId Id="76" Count="0" />
       <LineId Id="108" Count="0" />
+      <LineId Id="152" Count="0" />
       <LineId Id="94" Count="0" />
       <LineId Id="83" Count="3" />
       <LineId Id="41" Count="0" />
@@ -281,7 +308,13 @@ END_VAR
       <LineId Id="186" Count="1" />
       <LineId Id="201" Count="0" />
       <LineId Id="190" Count="0" />
-      <LineId Id="212" Count="1" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="278" Count="0" />
+      <LineId Id="282" Count="8" />
+      <LineId Id="279" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="213" Count="0" />
       <LineId Id="245" Count="0" />
       <LineId Id="270" Count="0" />
       <LineId Id="246" Count="0" />
@@ -320,6 +353,9 @@ END_VAR
       <LineId Id="2" Count="0" />
     </LineIds>
     <LineIds Name="FB_Testsuites.P_Options.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Testsuites.P_Property.Get">
       <LineId Id="2" Count="0" />
     </LineIds>
   </POU>

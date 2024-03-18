@@ -21,7 +21,7 @@
     <ProjectVersion>1.0.0.3</ProjectVersion>
     <DefaultNamespace>Tc3_UnitTest</DefaultNamespace>
     <Placeholder>Tc3_UnitTest</Placeholder>
-    <Author>Peter Zerlauth</Author>
+    <Author>www.peterzerlauth.com</Author>
     <Description>Twincat 3 unit test library</Description>
     <ObjectRepresentation>base64</ObjectRepresentation>
     <CombineIds>true</CombineIds>
@@ -198,24 +198,6 @@
     </PlaceholderResolution>
   </ItemGroup>
   <ItemGroup>
-    <SubObject Include="FB_Assert.M_Equals_ANY_Old">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_BOOL">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_BYTE">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_DINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_INT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
-    <SubObject Include="FB_Assert.M_Equals_Array_LINT">
-      <ExcludeFromBuild>true</ExcludeFromBuild>
-    </SubObject>
     <SubObject Include="FB_Assert.M_Passed" />
     <SubObject Include="I_Assert.M_Equals_ANY_Old">
       <ExcludeFromBuild>true</ExcludeFromBuild>

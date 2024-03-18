@@ -48,48 +48,45 @@ xml format from https://github.com/testmoapp/junitxml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="" tests="26" failures="2" errors="0" skipped="0" assertions="35" time="2.090" timestamp="2023-10-31T23:43:19.913">
-	<testsuite name="" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2023-10-31T23:43:19.953" file="">
-		<testcase name=".M_Testcase_0" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_1" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_2" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_3" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
+<testsuites name="fbTestsuites" tests="24" failures="0" errors="0" skipped="0" assertions="33" time="0.300" timestamp="2024-03-15T12:44:54.735">
+	<properties>
+		<property name="Version" value="1.0.0.3" />
+	</properties>
+	<testsuite name="fbTestsuite4" tests="3" failures="0" errors="0" skipped="0" assertions="3" time="0.020" timestamp="2024-03-15T12:44:54.775" file="">
+		<testcase name="fbTestsuite4.M_Testcase_0" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite4.M_Testcase_1" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite4.M_Testcase_2" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
 	</testsuite>
-	<testsuite name="" tests="9" failures="0" errors="0" skipped="0" assertions="14" time="0.080" timestamp="2023-10-31T23:43:19.953" file="FB_StringBuilder">
+	<testsuite name="fbTestsuite2" tests="4" failures="0" errors="0" skipped="0" assertions="8" time="0.030" timestamp="2024-03-15T12:44:54.775" file="">
+		<testcase name="fbTestsuite2.M_Testcase_0" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite2.M_Testcase_1" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite2.M_Testcase_2" classname="FB_ListSTRING" assertions="3" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite2.M_Testcase_3" classname="FB_ListSTRING" assertions="1" time="0.0100" file="" line="" />
+	</testsuite>
+	<testsuite name="fbTestsuite1" tests="9" failures="0" errors="0" skipped="0" assertions="14" time="0.080" timestamp="2024-03-15T12:44:54.775" file="FB_StringBuilder">
 		<properties>
 			<property name="Property1" value="Value1" />
 			<property name="Property2" value="Value2" />
 		</properties>
-		<testcase name=".M_Testcase_0" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_1" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_2" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_3" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_4" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_5" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_6" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_7" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_8" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_0" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_1" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_2" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_3" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_4" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_5" classname="FB_StringBuilder" assertions="2" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_6" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_7" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite1.M_Testcase_8" classname="FB_StringBuilder" assertions="1" time="0.0100" file="" line="" />
 	</testsuite>
-	<testsuite name="" tests="8" failures="0" errors="0" skipped="0" assertions="8" time="0.250" timestamp="2023-10-31T23:43:19.953" file="">
-		<testcase name=".M_Testcase_0" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
-		<testcase name=".M_Testcase_1" classname="FB_File" assertions="1" time="0.0600" file="" line="" />
-		<testcase name=".M_Testcase_2" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
-		<testcase name=".M_Testcase_3" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
-		<testcase name=".M_Testcase_4" classname="FB_File" assertions="1" time="0.0500" file="" line="" />
-		<testcase name=".M_Testcase_5" classname="FB_File" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_6" classname="FB_File" assertions="1" time="0.0200" file="" line="" />
-		<testcase name=".M_Testcase_7" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
-	</testsuite>
-	<testsuite name="" tests="5" failures="2" errors="0" skipped="0" assertions="5" time="2.040" timestamp="2023-10-31T23:43:19.953" file="">
-		<testcase name=".M_Testcase_0" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_1" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_2" classname="FB_Assert" assertions="1" time="0.0100" file="" line="" />
-		<testcase name=".M_Testcase_3" classname="FB_Assert" assertions="1" time="1.0100" file="" line="" >
-			<failure message="REAL Array Faied" type="AssertionError">Expected = [0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.] Actual = [1.1,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.]</failure>
-		</testcase>
-		<testcase name=".M_Testcase_4" classname="FB_Assert" assertions="1" time="1.0100" file="" line="" >
-			<failure message="REAL Array Faied" type="AssertionError">Expected = [true,false,false,false,false,false,false,false,false,false,false] Actual = [false,false,false,false,false,false,false,false,false,false,false]</failure>
-		</testcase>
+	<testsuite name="fbTestsuite3" tests="8" failures="0" errors="0" skipped="0" assertions="8" time="0.250" timestamp="2024-03-15T12:44:54.775" file="">
+		<testcase name="fbTestsuite3.M_Testcase_0" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_1" classname="FB_File" assertions="1" time="0.0600" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_2" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_3" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_4" classname="FB_File" assertions="1" time="0.0500" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_5" classname="FB_File" assertions="1" time="0.0100" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_6" classname="FB_File" assertions="1" time="0.0200" file="" line="" />
+		<testcase name="fbTestsuite3.M_Testcase_7" classname="FB_File" assertions="1" time="0.0300" file="" line="" />
 	</testsuite>
 </testsuites>
 ```

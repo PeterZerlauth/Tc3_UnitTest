@@ -185,14 +185,14 @@
     <SubObject Include="FB_Assert.M_Passed" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Tc3_UnitTest.tmc">
-      <SubType>Content</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <LibraryReference Include="Tc3_JsonXml,newest,Beckhoff Automation GmbH">
       <Namespace>Tc3_JsonXml</Namespace>
     </LibraryReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Tc3_UnitTest.tmc">
+      <SubType>Content</SubType>
+    </None>
   </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>

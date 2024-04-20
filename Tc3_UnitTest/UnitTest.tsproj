@@ -67,7 +67,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcHash="{32B7A1F0-D187-5655-0FCE-BF1813C8C860}" TmcPath="Testing\Testing.tmc">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcHash="{8A6E6976-22FD-CD5E-97D3-C769093E65A1}" TmcPath="Testing\Testing.tmc">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -87,7 +87,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{24D36C1C-673B-4B9B-BE9D-7F888F34DEC9}" Name="Examples" PrjFilePath="Examples\Examples.plcproj" TmcFilePath="Examples\Examples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C4EE8688-918D-DCC9-8FFA-2CC5222CDE6C}" TmcPath="Examples\Examples.tmc">
+				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{3E30C16C-DCDD-2155-E6DE-E2971ED8381F}" TmcPath="Examples\Examples.tmc">
 					<Name>Examples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

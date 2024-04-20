@@ -4,10 +4,16 @@
     <Declaration><![CDATA[INTERFACE I_Testsuites EXTENDS I_Base
 ]]></Declaration>
     <Property Name="P_Data" Id="{85c32222-d556-0312-20e5-4473baafbb98}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Data : reference to ST_Testsuites]]></Declaration>
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Data : reference to ST_Testsuites]]></Declaration>
       <Get Name="Get" Id="{50c617ac-7957-0d8c-29c1-501d545160bb}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
+      <Set Name="Set" Id="{5a1f0b36-a5cd-0372-370c-2aa8bbe3f63f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Set>
     </Property>
     <Property Name="P_List" Id="{2894c1aa-7a7c-0cc9-216c-5c628c5f3c09}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
@@ -16,10 +22,16 @@
       </Get>
     </Property>
     <Property Name="P_Options" Id="{cac67df2-87b6-04eb-1648-4410cde413cc}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
       <Get Name="Get" Id="{9f9c64ea-3b7f-00ce-05a0-5c3ad432879f}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
+      <Set Name="Set" Id="{8b8975f4-45b0-0f42-3269-441cf11ab577}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Set>
     </Property>
     <Property Name="P_Property" Id="{023c0eb3-aada-0fe9-1b91-9978fa99cf0c}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Property : I_Property]]></Declaration>

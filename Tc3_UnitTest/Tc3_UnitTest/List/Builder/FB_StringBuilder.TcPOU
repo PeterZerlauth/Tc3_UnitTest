@@ -174,58 +174,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_StringBuilder">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.FB_exit">
-      <LineId Id="6" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Append">
-      <LineId Id="67" Count="15" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendBOOL">
-      <LineId Id="17" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendINT">
-      <LineId Id="14" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_AppendREAL">
-      <LineId Id="26" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Contains">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Find">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Insert">
-      <LineId Id="20" Count="0" />
-      <LineId Id="43" Count="3" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="49" Count="0" />
-      <LineId Id="38" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_Reset">
-      <LineId Id="3" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_ToAny">
-      <LineId Id="7" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.M_ToString">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_StringBuilder.P_Length.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

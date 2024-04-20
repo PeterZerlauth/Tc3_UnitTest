@@ -186,52 +186,5 @@ END_VAR]]></Declaration>
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_Base">
-      <LineId Id="339" Count="0" />
-      <LineId Id="335" Count="0" />
-      <LineId Id="332" Count="1" />
-      <LineId Id="232" Count="24" />
-      <LineId Id="263" Count="17" />
-      <LineId Id="287" Count="5" />
-      <LineId Id="299" Count="15" />
-      <LineId Id="98" Count="0" />
-      <LineId Id="338" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Aborted">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Aborting">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Execute">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Init">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Request">
-      <LineId Id="5" Count="0" />
-      <LineId Id="8" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Starting">
-      <LineId Id="15" Count="0" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="29" Count="0" />
-      <LineId Id="31" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="25" Count="1" />
-      <LineId Id="24" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Stopped">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.M_Stopping">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Base.P_State.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

@@ -40,11 +40,15 @@ VAR_INPUT
 	Message:		STRING(255);
 END_VAR]]></Declaration>
     </Method>
-    <Property Name="P_Settings" Id="{d3a3f5e2-09f0-040b-30a7-ddf7d63d21a7}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
-      <Get Name="Get" Id="{7014e2a1-dc1b-0612-3281-09945aee9943}">
+    <Property Name="P_Settings" Id="{a6c92e72-e023-08ae-10f7-6016a8a854dd}">
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
+      <Get Name="Get" Id="{bca7d75a-4214-004b-33e0-970a758ec3c3}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
+      <Set Name="Set" Id="{455860a4-8401-0cab-12ba-856f26c7d223}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
     </Property>
   </Itf>
 </TcPlcObject>

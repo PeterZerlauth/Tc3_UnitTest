@@ -27,11 +27,15 @@
         <Declaration><![CDATA[]]></Declaration>
       </Set>
     </Property>
-    <Property Name="P_Options" Id="{95855609-76ef-038e-19f4-6cb57a551cda}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
-      <Get Name="Get" Id="{66a90f66-147e-08b8-06bc-16760d564648}">
+    <Property Name="P_Options" Id="{79bd38e2-c43e-0069-2ff0-807fbe603fa6}">
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
+      <Get Name="Get" Id="{2fee6922-591e-02b7-159f-149c8d0f0cef}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
+      <Set Name="Set" Id="{b01ffdf3-1cbd-0ee6-3f0f-ebac22e90253}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
     </Property>
     <Property Name="P_Parent" Id="{dec8515c-cb5f-06f1-34a8-4435601bd530}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>

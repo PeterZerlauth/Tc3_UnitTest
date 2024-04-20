@@ -326,7 +326,8 @@ END_VAR
       </Set>
     </Property>
     <Property Name="P_Options" Id="{2e5bc501-e4a1-0ec3-32fb-ab288b3ddc76}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Options : reference to ST_TestsuiteOptions]]></Declaration>
       <Get Name="Get" Id="{129b8483-9d51-087d-18e0-daa5f4ada1f3}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -335,6 +336,15 @@ END_VAR
           <ST><![CDATA[P_Options ref= stOptions;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{37c22197-b510-0fc7-1c43-f8875b6f7161}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Options ref= stOptions;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Property Name="P_Parent" Id="{26b3c1be-b48f-0a73-3f11-669666d67824}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Parent : I_Testsuites]]></Declaration>
@@ -377,76 +387,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_Testsuite">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.M_Execute">
-      <LineId Id="117" Count="85" />
-      <LineId Id="205" Count="7" />
-      <LineId Id="234" Count="0" />
-      <LineId Id="214" Count="0" />
-      <LineId Id="233" Count="0" />
-      <LineId Id="232" Count="0" />
-      <LineId Id="215" Count="3" />
-      <LineId Id="231" Count="0" />
-      <LineId Id="219" Count="6" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.M_Starting">
-      <LineId Id="3" Count="3" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="7" Count="18" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.M_Stopping">
-      <LineId Id="3" Count="22" />
-      <LineId Id="67" Count="0" />
-      <LineId Id="66" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="60" Count="5" />
-      <LineId Id="58" Count="1" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="26" Count="6" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="33" Count="6" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.M_Testcase">
-      <LineId Id="3" Count="6" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Assert.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_File.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_File.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_List.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Logger.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Logger.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Options.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Parent.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Parent.Set">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Property.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuite.P_Testcase.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

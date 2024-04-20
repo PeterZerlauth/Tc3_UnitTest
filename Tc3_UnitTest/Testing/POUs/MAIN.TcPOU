@@ -29,7 +29,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[// Run
 fbTestsuites();
-fbTestsuites.P_Property.M_Add('Version', Tc3_UnitTest.Global_Version.stLibVersion_Tc3_UnitTest.sVersion);
+fbTestsuites.P_Property.M_Add('Version', '1.0.0.4');
 
 IF bExecute THEN
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);
@@ -212,20 +212,5 @@ CASE fbTestsuite4.P_Testcase OF
 END_CASE
 ]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="888" Count="1" />
-      <LineId Id="1125" Count="0" />
-      <LineId Id="890" Count="144" />
-      <LineId Id="1069" Count="0" />
-      <LineId Id="1035" Count="17" />
-      <LineId Id="1093" Count="0" />
-      <LineId Id="1097" Count="0" />
-      <LineId Id="1094" Count="1" />
-      <LineId Id="1092" Count="0" />
-      <LineId Id="1053" Count="2" />
-      <LineId Id="1057" Count="4" />
-      <LineId Id="1064" Count="2" />
-      <LineId Id="233" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

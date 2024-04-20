@@ -206,54 +206,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_ListSTRING">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.FB_exit">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Add">
-      <LineId Id="46" Count="4" />
-      <LineId Id="53" Count="9" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="67" Count="1" />
-      <LineId Id="93" Count="2" />
-      <LineId Id="69" Count="1" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Clear">
-      <LineId Id="3" Count="2" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Find">
-      <LineId Id="66" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Index">
-      <LineId Id="45" Count="8" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Insert">
-      <LineId Id="15" Count="0" />
-      <LineId Id="18" Count="7" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="26" Count="5" />
-      <LineId Id="34" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Item">
-      <LineId Id="30" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Remove">
-      <LineId Id="124" Count="17" />
-      <LineId Id="72" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.M_Set">
-      <LineId Id="10" Count="1" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListSTRING.P_Length.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

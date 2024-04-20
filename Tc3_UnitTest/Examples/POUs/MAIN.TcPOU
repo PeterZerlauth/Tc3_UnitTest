@@ -19,12 +19,5 @@ END_IF
 fbFunctionBlock01();
 fbFunctionBlock02();]]></ST>
     </Implementation>
-    <LineIds Name="MAIN">
-      <LineId Id="7" Count="4" />
-      <LineId Id="2" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="18" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

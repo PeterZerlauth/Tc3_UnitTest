@@ -48,29 +48,5 @@ fbTestsuites.M_Add(fbTestsuite);
 fbTestsuite.P_File:= 'FB_Target';]]></ST>
       </Implementation>
     </Method>
-    <LineIds Name="FB_UnitTestTarget02">
-      <LineId Id="9" Count="0" />
-      <LineId Id="12" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="14" Count="2" />
-      <LineId Id="26" Count="0" />
-      <LineId Id="28" Count="0" />
-      <LineId Id="27" Count="0" />
-      <LineId Id="17" Count="1" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="24" Count="1" />
-      <LineId Id="22" Count="1" />
-    </LineIds>
-    <LineIds Name="FB_UnitTestTarget02.FB_init">
-      <LineId Id="8" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="9" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

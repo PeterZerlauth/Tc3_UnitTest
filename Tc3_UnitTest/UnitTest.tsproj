@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.55">
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.5">
 	<DataTypes>
 		<DataType>
 			<Name GUID="{427A1465-87E0-4691-A39C-8293BABC5652}" PersistentType="true">TcLogger</Name>
@@ -55,7 +55,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{17F8C168-FDAA-47D9-AB36-F3A3E36D86D0}" Name="Tc3_UnitTest" PrjFilePath="Tc3_UnitTest\Tc3_UnitTest.plcproj" TmcFilePath="Tc3_UnitTest\Tc3_UnitTest.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Tc3_UnitTest\Tc3_UnitTest.tmc" TmcHash="{191B3D90-04C4-2DA6-5CA4-2C9EE64B7FE6}">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{4B8BEBED-EF3F-BA0D-4AF6-659837BB1360}" TmcPath="Tc3_UnitTest\Tc3_UnitTest.tmc">
 					<Name>Tc3_UnitTest Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -67,7 +67,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{B3EB4A32-4BD3-4997-92F6-694EC306D617}" Name="Testing" PrjFilePath="Testing\Testing.plcproj" TmcFilePath="Testing\Testing.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcPath="Testing\Testing.tmc" TmcHash="{9CA627F8-42D2-0593-0633-95A75BAAB0D2}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" AutoReloadTmc="true" TmcHash="{32B7A1F0-D187-5655-0FCE-BF1813C8C860}" TmcPath="Testing\Testing.tmc">
 					<Name>Testing Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
@@ -87,7 +87,7 @@
 				</Instance>
 			</Project>
 			<Project GUID="{24D36C1C-673B-4B9B-BE9D-7F888F34DEC9}" Name="Examples" PrjFilePath="Examples\Examples.plcproj" TmcFilePath="Examples\Examples.tmc" ReloadTmc="true" AmsPort="853" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Examples\Examples.tmc" TmcHash="{524AD18A-7533-F266-3AAC-59AC2E6D9B61}">
+				<Instance Id="#x08502080" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{C4EE8688-918D-DCC9-8FFA-2CC5222CDE6C}" TmcPath="Examples\Examples.tmc">
 					<Name>Examples Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>

@@ -12,9 +12,5 @@ END_VAR
       <ST><![CDATA[fbTask();
 F_GetCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;]]></ST>
     </Implementation>
-    <LineIds Name="F_GetCycleTime">
-      <LineId Id="14" Count="0" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

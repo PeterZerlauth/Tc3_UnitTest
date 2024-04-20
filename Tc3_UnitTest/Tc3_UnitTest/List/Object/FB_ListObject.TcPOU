@@ -184,41 +184,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_ListObject">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.FB_exit">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Add">
-      <LineId Id="164" Count="22" />
-      <LineId Id="200" Count="1" />
-      <LineId Id="199" Count="0" />
-      <LineId Id="187" Count="4" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Clear">
-      <LineId Id="3" Count="2" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Find">
-      <LineId Id="66" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Get">
-      <LineId Id="13" Count="1" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Index">
-      <LineId Id="66" Count="8" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.M_Remove">
-      <LineId Id="132" Count="28" />
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_ListObject.P_Length.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

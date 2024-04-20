@@ -94,9 +94,10 @@ END_VAR]]></Declaration>
         <ST><![CDATA[M_Log(E_LogLevel.Warning, Message);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Settings" Id="{4e533074-8c0b-038d-0852-ee1041ac284d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
-      <Get Name="Get" Id="{10b9215a-2d65-0764-10de-3ee1463207f3}">
+    <Property Name="P_Settings" Id="{01dd4810-8f37-0c4a-3c92-76d701892bf0}">
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
+      <Get Name="Get" Id="{bf3b7823-3d52-086a-3df0-38d0383f978b}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -104,48 +105,14 @@ END_VAR
           <ST><![CDATA[P_Settings ref= stSettings;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{9c539151-e1cf-0117-1143-0dee1b6c393c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Settings ref= stSettings;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
-    <LineIds Name="FB_TcLogger">
-      <LineId Id="42" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Critical">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Debug">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Error">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Info">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Log">
-      <LineId Id="8" Count="0" />
-      <LineId Id="11" Count="0" />
-      <LineId Id="27" Count="2" />
-      <LineId Id="33" Count="0" />
-      <LineId Id="16" Count="0" />
-      <LineId Id="30" Count="2" />
-      <LineId Id="18" Count="0" />
-      <LineId Id="14" Count="0" />
-      <LineId Id="35" Count="1" />
-      <LineId Id="34" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="38" Count="1" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="20" Count="0" />
-      <LineId Id="13" Count="0" />
-      <LineId Id="40" Count="2" />
-      <LineId Id="21" Count="0" />
-      <LineId Id="12" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.M_Warning">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_TcLogger.P_Settings.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

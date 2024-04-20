@@ -27,9 +27,5 @@ END_IF
 nPosition:= FIND(STR1 := F_GetName, '.');
 F_GetName:= RIGHT(STR := F_GetName, LEN(STR := F_GetName) - nPosition);]]></ST>
     </Implementation>
-    <LineIds Name="F_GetName">
-      <LineId Id="44" Count="14" />
-      <LineId Id="7" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

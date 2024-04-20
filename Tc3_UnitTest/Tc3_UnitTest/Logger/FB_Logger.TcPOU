@@ -74,40 +74,25 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="P_Settings" Id="{c3786a2f-91e3-0ec1-3f7a-a85190472496}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
-      <Get Name="Get" Id="{5db43e1f-632d-0054-2947-dbccd362cd17}">
+    <Property Name="P_Settings" Id="{5e4581b5-fd00-038d-0acd-5f616a88193b}">
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Settings : reference to ST_LoggerSettings]]></Declaration>
+      <Get Name="Get" Id="{f971d380-5501-072f-309e-ea23dbbab652}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[]]></ST>
+          <ST><![CDATA[P_Settings ref= stSettings;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{d8f12c65-db54-0766-3ded-457a5d3a2ae7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Settings ref= stSettings;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
-    <LineIds Name="FB_Logger">
-      <LineId Id="16" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Critical">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Debug">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Error">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Info">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Log">
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.M_Warning">
-      <LineId Id="7" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Logger.P_Settings.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

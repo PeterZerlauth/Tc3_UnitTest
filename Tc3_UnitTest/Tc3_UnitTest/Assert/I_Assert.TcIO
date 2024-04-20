@@ -17,65 +17,6 @@ VAR_INPUT
 	Message:			STRING(255);   	// Message as string
 END_VAR                                 ]]></Declaration>
     </Method>
-    <Method Name="M_Equals_ANY_Old" Id="{33a6afd8-a7e0-04e1-2e1d-5cc34fc8740f}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_ANY_Old : I_Assert
-VAR_INPUT
-	Expected:			ANY;		// Expected
-	Actual:				ANY;		// Actual
-	Message:			STRING(255);			// Message as string
-END_VAR
-]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array_BOOL" Id="{8558398b-7346-0449-24be-1428458a8698}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BOOL : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF BOOL;		// Expected as array of bool
-	Actual:				ARRAY [*] OF BOOL;		// Actual as array of bool
-END_VAR
-VAR_INPUT
-	Message:			STRING(255);			// Message as string
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array_BYTE" Id="{4cbef9b0-27bd-0b86-2715-ece5f55cbd4c}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_BYTE : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF BYTE;	// Expected as array of byte
-	Actual:				ARRAY [*] OF BYTE;	// Actual as array of byte
-END_VAR                                   
-VAR_INPUT                                 
-	Message:			STRING(255);     	 // Message as string
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array_DINT" Id="{e1608178-4a53-0991-0a31-43f80571e6c9}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_DINT : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF DINT;	// Expected as array of dint
-	Actual:				ARRAY [*] OF DINT;	// Actual as array of dint
-END_VAR                                   
-VAR_INPUT                                 
-	Message:			STRING(255);       // Message as string
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array_INT" Id="{191e8d60-e80d-03ab-03b2-1a89c8fd7b87}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_INT : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF INT;	// Expected as array of int
-	Actual:				ARRAY [*] OF INT;	// Actual as array of int
-END_VAR                                  
-VAR_INPUT                                
-	Message:			STRING(255);      // Message as string
-END_VAR]]></Declaration>
-    </Method>
-    <Method Name="M_Equals_Array_LINT" Id="{d3908072-8108-068b-278f-3270abe1ec00}">
-      <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LINT : I_Assert
-VAR_IN_OUT
-	Expected:			ARRAY [*] OF LINT;	// Expected as array of lint
-	Actual:				ARRAY [*] OF LINT;	// Actual as array of lint
-END_VAR                                   
-VAR_INPUT                                 
-	Message:			STRING(255);       // Message as string
-END_VAR]]></Declaration>
-    </Method>
     <Method Name="M_Equals_Array_LREAL" Id="{774d23e5-1a54-0df4-0ca6-9307963084b9}">
       <Declaration><![CDATA[METHOD PUBLIC M_Equals_Array_LREAL : I_Assert
 VAR_IN_OUT

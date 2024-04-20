@@ -195,7 +195,8 @@ END_CASE]]></ST>
       </Implementation>
     </Method>
     <Property Name="P_Data" Id="{185d0565-b6b7-0d45-1303-8b4f2b4c3186}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Data : reference to ST_Testsuites]]></Declaration>
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Data : reference to ST_Testsuites]]></Declaration>
       <Get Name="Get" Id="{b4d22e3a-4d8e-0c3f-0f30-74401271467a}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -204,6 +205,15 @@ END_VAR
           <ST><![CDATA[P_Data ref= stTestsuites;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{16b7aa7a-3f6b-0f81-16e0-f7d078d1f7c5}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Data ref= stTestsuites;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Property Name="P_List" Id="{18052295-5436-0cc4-08da-cc28d1b6063a}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_List : I_ListSTRING]]></Declaration>
@@ -217,7 +227,8 @@ END_VAR
       </Get>
     </Property>
     <Property Name="P_Options" Id="{b002cd87-c770-09ae-1503-5331f5df2bbd}">
-      <Declaration><![CDATA[PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
+      <Declaration><![CDATA[{attribute 'suppress_wrn_C0410'}
+PROPERTY PUBLIC P_Options : REFERENCE TO ST_TestsuitesOptions]]></Declaration>
       <Get Name="Get" Id="{6fb98d57-94a8-09a2-3c9d-c10b57979947}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -226,6 +237,15 @@ END_VAR
           <ST><![CDATA[P_Options ref= stOptions;]]></ST>
         </Implementation>
       </Get>
+      <Set Name="Set" Id="{ee8e5433-0cc1-0f6b-37f9-5be6303a9d11}">
+        <Declaration><![CDATA[
+VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[P_Options ref= stOptions;]]></ST>
+        </Implementation>
+      </Set>
     </Property>
     <Property Name="P_Property" Id="{919d00f3-5938-0aaa-14d2-c8a498ee4e71}">
       <Declaration><![CDATA[PROPERTY PUBLIC P_Property : I_Property]]></Declaration>
@@ -238,125 +258,5 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <LineIds Name="FB_Testsuites">
-      <LineId Id="9" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.M_Add">
-      <LineId Id="16" Count="0" />
-      <LineId Id="7" Count="0" />
-      <LineId Id="21" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.M_Execute">
-      <LineId Id="12" Count="0" />
-      <LineId Id="19" Count="0" />
-      <LineId Id="6" Count="0" />
-      <LineId Id="30" Count="0" />
-      <LineId Id="33" Count="1" />
-      <LineId Id="8" Count="0" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="20" Count="1" />
-      <LineId Id="23" Count="0" />
-      <LineId Id="22" Count="0" />
-      <LineId Id="36" Count="0" />
-      <LineId Id="35" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.M_Starting">
-      <LineId Id="34" Count="0" />
-      <LineId Id="37" Count="0" />
-      <LineId Id="76" Count="0" />
-      <LineId Id="108" Count="0" />
-      <LineId Id="152" Count="0" />
-      <LineId Id="94" Count="0" />
-      <LineId Id="83" Count="3" />
-      <LineId Id="41" Count="0" />
-      <LineId Id="87" Count="0" />
-      <LineId Id="115" Count="0" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="77" Count="0" />
-      <LineId Id="42" Count="1" />
-      <LineId Id="56" Count="0" />
-      <LineId Id="58" Count="0" />
-      <LineId Id="131" Count="1" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="60" Count="0" />
-      <LineId Id="68" Count="0" />
-      <LineId Id="70" Count="0" />
-      <LineId Id="66" Count="1" />
-      <LineId Id="69" Count="0" />
-      <LineId Id="38" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.M_Stopping">
-      <LineId Id="141" Count="1" />
-      <LineId Id="172" Count="0" />
-      <LineId Id="202" Count="0" />
-      <LineId Id="168" Count="2" />
-      <LineId Id="173" Count="0" />
-      <LineId Id="171" Count="0" />
-      <LineId Id="175" Count="0" />
-      <LineId Id="174" Count="0" />
-      <LineId Id="177" Count="0" />
-      <LineId Id="176" Count="0" />
-      <LineId Id="179" Count="0" />
-      <LineId Id="178" Count="0" />
-      <LineId Id="181" Count="0" />
-      <LineId Id="180" Count="0" />
-      <LineId Id="183" Count="0" />
-      <LineId Id="182" Count="0" />
-      <LineId Id="185" Count="0" />
-      <LineId Id="184" Count="0" />
-      <LineId Id="186" Count="1" />
-      <LineId Id="201" Count="0" />
-      <LineId Id="190" Count="0" />
-      <LineId Id="212" Count="0" />
-      <LineId Id="278" Count="0" />
-      <LineId Id="282" Count="8" />
-      <LineId Id="279" Count="0" />
-      <LineId Id="296" Count="0" />
-      <LineId Id="281" Count="0" />
-      <LineId Id="213" Count="0" />
-      <LineId Id="245" Count="0" />
-      <LineId Id="270" Count="0" />
-      <LineId Id="246" Count="0" />
-      <LineId Id="269" Count="0" />
-      <LineId Id="248" Count="5" />
-      <LineId Id="247" Count="0" />
-      <LineId Id="254" Count="0" />
-      <LineId Id="260" Count="0" />
-      <LineId Id="264" Count="2" />
-      <LineId Id="271" Count="1" />
-      <LineId Id="268" Count="0" />
-      <LineId Id="267" Count="0" />
-      <LineId Id="257" Count="0" />
-      <LineId Id="244" Count="0" />
-      <LineId Id="211" Count="0" />
-      <LineId Id="237" Count="1" />
-      <LineId Id="233" Count="2" />
-      <LineId Id="214" Count="0" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="224" Count="0" />
-      <LineId Id="219" Count="0" />
-      <LineId Id="215" Count="0" />
-      <LineId Id="220" Count="0" />
-      <LineId Id="216" Count="0" />
-      <LineId Id="229" Count="2" />
-      <LineId Id="225" Count="1" />
-      <LineId Id="228" Count="0" />
-      <LineId Id="232" Count="0" />
-      <LineId Id="166" Count="0" />
-      <LineId Id="5" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.P_Data.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.P_List.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.P_Options.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
-    <LineIds Name="FB_Testsuites.P_Property.Get">
-      <LineId Id="2" Count="0" />
-    </LineIds>
   </POU>
 </TcPlcObject>

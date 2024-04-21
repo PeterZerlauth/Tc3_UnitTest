@@ -67,6 +67,11 @@
       <ResolverGuid>d9a6b70a-92f0-4827-8ca3-8ce8a61652d9</ResolverGuid>
     </PlaceholderReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Examples.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>

@@ -29,7 +29,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[// Run
 fbTestsuites();
-fbTestsuites.P_Property.M_Add('Version', '1.0.0.4');
+fbTestsuites.P_Property.M_Add('Version', Tc3_UnitTest.Global_Version.stLibVersion_Tc3_UnitTest.sVersion);
 
 IF bExecute THEN
 	bExecute:= NOT fbTestsuites.M_Request(E_Base.Execute);

@@ -12,7 +12,6 @@ Outputs will be stored in standard JUNIT xml file format
 - Small devices supported
 - Test and build tool (https://github.com/PeterZerlauth/TcBuild for self hosted agent)
 
-
 ### Example 1
 ```ST    
 // Run

@@ -21,7 +21,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Prevent double calls
+      <ST><![CDATA[// https://peterzerlauth.com/
+// Prevent double calls
 IF nCycleCount <> TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount THEN
 	nCycleCount:= TwinCAT_SystemInfoVarList._TaskInfo[GETCURTASKINDEXEX()].CycleCount;
 	

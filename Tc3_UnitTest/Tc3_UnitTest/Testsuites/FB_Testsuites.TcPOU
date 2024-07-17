@@ -19,7 +19,8 @@ VAR
 	fbLogger:			FB_TcLogger;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/
+SUPER^();]]></ST>
     </Implementation>
     <Method Name="M_Add" Id="{341dc9d1-6013-01b3-2ca0-fe24c585f169}">
       <Declaration><![CDATA[METHOD PUBLIC M_Add : BOOL

@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/]]></ST>
     </Implementation>
     <Method Name="M_Critical" Id="{2982efed-966c-01d1-1cd8-85c5858fe88f}">
       <Declaration><![CDATA[METHOD M_Critical

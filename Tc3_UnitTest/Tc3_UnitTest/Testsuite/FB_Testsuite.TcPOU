@@ -24,7 +24,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[SUPER^();]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/
+SUPER^();]]></ST>
     </Implementation>
     <Method Name="M_Execute" Id="{78e3f5cf-1c2d-00e7-2cad-335430cad839}">
       <Declaration><![CDATA[METHOD PROTECTED M_Execute : BOOL

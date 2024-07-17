@@ -10,7 +10,8 @@ VAR
     nPosition:			INT;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[sName := CONCAT(TwinCAT_SystemInfoVarList._AppInfo.ProjectName, '.');
+      <ST><![CDATA[// https://peterzerlauth.com/
+sName := CONCAT(TwinCAT_SystemInfoVarList._AppInfo.ProjectName, '.');
 
 nPosition := FIND(InstancePath, sName);
 

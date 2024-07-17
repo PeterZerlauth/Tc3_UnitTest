@@ -17,7 +17,7 @@ VAR_OUTPUT
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/]]></ST>
     </Implementation>
     <Method Name="M_Append" Id="{1e5af4d0-f329-067d-0bf2-a3973278c0e5}">
       <Declaration><![CDATA[METHOD PUBLIC M_Append : BOOL

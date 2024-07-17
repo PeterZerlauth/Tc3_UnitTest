@@ -10,7 +10,7 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/]]></ST>
     </Implementation>
     <Method Name="FB_exit" Id="{206ba99c-f43a-4ef7-9ab3-3aa10406299c}">
       <Declaration><![CDATA[METHOD FB_exit : BOOL

@@ -9,7 +9,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[fbTask();
+      <ST><![CDATA[// https://peterzerlauth.com/
+fbTask();
 F_GetCycleTime:= UDINT_TO_LREAL(TwinCAT_SystemInfoVarList._TaskInfo[fbTask.index].CycleTime) / 10000000;]]></ST>
     </Implementation>
   </POU>

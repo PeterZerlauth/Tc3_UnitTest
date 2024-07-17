@@ -18,7 +18,7 @@ VAR
 	fbBuilder:				FB_StringBuilder;
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[// https://peterzerlauth.com/]]></ST>
     </Implementation>
     <Method Name="M_Assert" Id="{20d02a5f-db58-0c6c-14cd-0b5cd69f1cdb}">
       <Declaration><![CDATA[METHOD PUBLIC M_Assert

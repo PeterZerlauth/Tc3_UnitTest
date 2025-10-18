@@ -16,7 +16,7 @@ Outputs will be stored in standard JUNIT xml file format
 - Test and build tool (https://github.com/PeterZerlauth/TcBuild for self hosted agent)
 
 ### Example 1
-```st    
+```pascal
 // Run
 fbTestsuites();
 
